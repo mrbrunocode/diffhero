@@ -1,16 +1,12 @@
 {
-  "name": "boring-app-factory",
+  "name": "diffhero",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A reusable system for building small single-purpose consumer utility ('boring') web apps fast: shared design system, programmatic-SEO page engine, and monetization/outreach scaffolding.",
+  "description": "A free, private, client-side diff checker for text and code.",
   "scripts": {
     "build": "node engine/build.mjs",
-    "dev": "node engine/build.mjs && node scripts/dev-server.mjs",
-    "new-app": "node scripts/new-app.mjs",
-    "rename": "node scripts/rename-brand.mjs",
-    "enable-adsense": "node scripts/enable-adsense.mjs",
-    "submit-indexnow": "node scripts/submit-indexnow.mjs"
+    "dev": "node engine/build.mjs && node scripts/dev-server.mjs"
   },
   "engines": {
     "node": ">=18"

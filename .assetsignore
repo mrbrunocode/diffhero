@@ -1,0 +1,18 @@
+# Keep everything that isn't the built static site out of the deployed assets.
+# (Cloudflare Workers static-assets upload reads this file, gitignore-style.)
+# The critical one is node_modules — `npx wrangler` installs a ~122 MiB workerd
+# binary there, which exceeds the 25 MiB per-asset limit and fails the deploy.
+node_modules
+.git
+.github
+.gitignore
+.assetsignore
+wrangler.jsonc
+package.json
+package-lock.json
+bun.lockb
+README.md
+netlify.toml
+engine
+scripts
+*.mjs

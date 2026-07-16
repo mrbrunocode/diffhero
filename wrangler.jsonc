@@ -1,0 +1,10 @@
+{
+  // Static-assets-only deploy: no Worker script, just serve the built site from
+  // the repo root. `.assetsignore` keeps node_modules and source out of the
+  // upload. `_headers` is applied automatically by Cloudflare's asset server.
+  "name": "diffhero",
+  "compatibility_date": "2026-07-16",
+  "assets": {
+    "directory": "."
+  }
+}
