@@ -55,9 +55,39 @@ Everything else — `index.html`, the `diff/` pages, `sitemap.xml`, `robots.txt`
 
 ## Deploy
 
-It's a static site: deploy the repository to any static host (e.g. Cloudflare
-Pages, Netlify, GitHub Pages). To turn on ads/analytics, set `GA_ID` /
-`ADSENSE_PUB` / `ADSENSE_SLOT` in `site.config.mjs` and rebuild.
+The site is **pre-built** — the static HTML is committed, so there is **no build
+step**. Just point a static host at the repo root. Config for the two hosts that
+serve the extensionless clean URLs the canonicals use (`/diff/text-compare`) is
+included: `_headers` (Cloudflare Pages **and** Netlify) and `netlify.toml`.
+
+### Cloudflare Pages (recommended)
+
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
+   **Connect to Git** → pick this repository.
+2. Build settings: **Framework preset: None**, **Build command: _(leave empty)_**,
+   **Build output directory: `/`**. Save and deploy.
+3. **Custom domains** → add `diffhero.app` (and `www` if you want it), and
+   Cloudflare provisions HTTPS automatically.
+
+Cloudflare Pages serves `text-compare.html` at `/diff/text-compare` and
+redirects the `.html` form to it, matching the canonicals with no extra config.
+
+### Netlify (alternative)
+
+Add new site → import this repo. `netlify.toml` sets publish = repo root and no
+build command; "Pretty URLs" handles the clean paths. Add the domain under
+**Domain management**.
+
+### Ads / analytics
+
+To turn them on, set `GA_ID` / `ADSENSE_PUB` / `ADSENSE_SLOT` in
+`site.config.mjs`, run `node engine/build.mjs`, and commit the regenerated files.
+The single ad slot then renders (it's a reserved placeholder until configured, so
+turning it on causes no layout shift).
+
+> If you edit `site.config.mjs`, `pages.mjs`, or `content.mjs`, run
+> `node engine/build.mjs` and commit the regenerated HTML — the host does not
+> build for you.
 
 ## License
 

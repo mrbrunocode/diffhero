@@ -1,0 +1,22 @@
+# Netlify deploy config. The site is pre-built (static HTML is committed), so
+# there is no build step — Netlify just publishes the repo root. "Pretty URLs"
+# (on by default) serves the extensionless paths the canonicals use, e.g.
+# /diff/text-compare → diff/text-compare.html.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), browsing-topics=()"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
