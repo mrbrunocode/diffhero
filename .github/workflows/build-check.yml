@@ -1,0 +1,31 @@
+name: build-check
+
+# Diffhero ships pre-built static HTML (Cloudflare Pages serves it with no build
+# step). This workflow guards against the built output drifting from the source
+# in site.config.mjs / pages.mjs / content.mjs: it regenerates the site and fails
+# if anything committed is out of date. Read-only — it never pushes.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Regenerate the static site
+        run: node engine/build.mjs
+      - name: Ensure committed output matches source
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Built output is out of date. Run 'node engine/build.mjs' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "Static site is up to date with source."
