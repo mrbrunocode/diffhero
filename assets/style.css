@@ -99,13 +99,17 @@ header {
 }
 .logo { font-weight: 800; font-size: var(--text-lg); color: var(--text-primary); letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: var(--space-2); }
 .logo:hover { text-decoration: none; }
-.logo::before { content: "⇄"; color: var(--accent); font-weight: 700; }
+.logo-mark { color: var(--accent); flex: 0 0 auto; }
 .theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
   background: var(--surface-elevated); border: 1px solid var(--border-subtle); color: var(--text-secondary);
-  width: 36px; height: 36px; border-radius: var(--radius-full); cursor: pointer; font-size: 16px;
-  transition: background var(--duration-fast) var(--ease-out);
+  width: 36px; height: 36px; border-radius: var(--radius-full); cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
-.theme-toggle:hover { background: var(--surface-hover); }
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text-primary); }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .main-nav {
   display: flex; gap: var(--space-5); flex-wrap: wrap;
   max-width: var(--container-max); margin: 0 auto; width: 100%; padding: 0 var(--space-5) var(--space-4); font-size: var(--text-sm);
@@ -156,10 +160,11 @@ main.wrap { flex: 1; padding-top: var(--space-6); padding-bottom: var(--space-16
 
 /* ---- Related / internal links (the crawl engine) ---- */
 .related { margin-top: var(--space-12); }
-.related-grid { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4); }
+.related-grid { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
 .related-grid a {
-  font-size: var(--text-sm); padding: var(--space-2) var(--space-4); border: 1px solid var(--border-subtle);
+  font-size: var(--text-xs); padding: var(--space-1) var(--space-3); border: 1px solid transparent;
   border-radius: var(--radius-full); color: var(--text-secondary); background: var(--surface-elevated);
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 .related-grid a:hover { text-decoration: none; border-color: var(--accent); color: var(--accent); }
 
@@ -274,10 +279,17 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
 
 /* ═══ Homepage extras ════════════════════════════════════════════════════ */
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); margin-top: var(--space-10); }
-.feature { background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-5); }
+.feature {
+  background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  padding: var(--space-5); transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.feature:hover { border-color: var(--border); transform: translateY(-1px); }
 .feature h3 { margin-bottom: var(--space-2); font-size: var(--text-base); }
 .feature p { color: var(--text-secondary); font-size: var(--text-sm); }
-.feature .ficon { font-size: 20px; color: var(--accent); display: block; margin-bottom: var(--space-2); }
+.feature .ficon {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent); border-radius: var(--radius-sm); margin-bottom: var(--space-3);
+}
 
 .howto { margin-top: var(--space-12); }
 .howto ol { list-style: none; counter-reset: step; display: grid; gap: var(--space-3); margin-top: var(--space-4); max-width: 68ch; }

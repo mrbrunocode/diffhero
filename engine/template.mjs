@@ -170,8 +170,14 @@ ${headExtra}
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
 <a class="skip-link" href="#main">Skip to content</a>
 <header>
-  <a class="logo" href="/">${esc(C.NAME)}</a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">◐</button>
+  <a class="logo" href="/">
+    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" rx="2.5" fill="currentColor"/><rect x="13" y="7" width="7" height="12" rx="2.5" fill="currentColor" opacity="0.45"/></svg>
+    ${esc(C.NAME)}
+  </a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+  </button>
 </header>
 <nav class="main-nav" aria-label="Site">
   ${C.NAV.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("\n  ")}
