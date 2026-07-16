@@ -26,7 +26,7 @@ export const LAST_UPDATED = "July 15, 2026";
 export const CONTENT_DATE = "2026-07-15";
 
 // ── Monetization / analytics IDs (empty until wired up) ────────────────────
-export const GA_ID = "";
+export const GA_ID = "G-Q907KGWEP4";
 export const ADSENSE_PUB = "";
 export const ADSENSE_SLOT = "";
 
