@@ -289,6 +289,276 @@ export const PAGES = [
       { q: "Is my PHP uploaded?", a: "No — everything runs in your browser, so proprietary or client PHP never leaves your device." },
     ],
   },
+  {
+    slug: "csharp-diff",
+    eyebrow: "C# Diff",
+    title: "C# Diff — Compare Two C# Files",
+    description:
+      "Compare two C# files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic, nothing uploaded.",
+    intro:
+      "Paste two versions of a C# file to see inserted, deleted and modified lines clearly marked, with changed tokens highlighted inline. Works for .cs files, Razor components, or a single method you're reviewing before a PR.",
+    format: "text",
+    faq: [
+      { q: "Does it work for Razor or .cshtml too?", a: "Yes — it compares raw text, so mixed C#/HTML in Razor files diffs the same way as plain .cs files." },
+      { q: "Can it ignore using-directive reordering?", a: "Not automatically — reordered \"using\" statements show as changes. Sort them consistently first if you don't want to see those." },
+      { q: "Is my C# code uploaded?", a: "No — the comparison runs entirely in your browser, so proprietary or enterprise C# stays on your device." },
+    ],
+  },
+  {
+    slug: "rust-diff",
+    eyebrow: "Rust Diff",
+    title: "Rust Diff — Compare Two Rust Files",
+    description:
+      "Compare two Rust files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.",
+    intro:
+      "Paste two versions of a .rs file to see exactly what changed — a signature, a lifetime, a match arm — with the changed tokens highlighted inline. Handy for reviewing a diff before rustfmt and CI see it.",
+    format: "text",
+    faq: [
+      { q: "Will rustfmt changes clutter the diff?", a: "If both files are already rustfmt-formatted, the diff stays clean. If not, turn on \"Ignore whitespace\" to focus on substantive changes." },
+      { q: "Does it understand borrow-checker semantics?", a: "No — it's a text diff, not a compiler. That's exactly what you want for reviewing what a change touches, before you run cargo check." },
+      { q: "Is my Rust code uploaded?", a: "No. Everything runs locally in your browser, so private crates and proprietary code never leave your device." },
+    ],
+  },
+  {
+    slug: "ruby-diff",
+    eyebrow: "Ruby Diff",
+    title: "Ruby Diff — Compare Two Ruby Files",
+    description:
+      "Compare two Ruby files or snippets and see exactly what changed, with changed tokens highlighted. Client-side, nothing uploaded.",
+    intro:
+      "Paste two versions of a .rb file to see added, removed and modified lines clearly marked, with the changed tokens highlighted. Because Ruby is indentation-flexible, the line-by-line view lines up with what actually changed in the logic.",
+    format: "text",
+    faq: [
+      { q: "Does it work for Rails files too?", a: "Yes — models, controllers, views (including ERB) and config files all diff the same way, since it compares raw text." },
+      { q: "Can it ignore RuboCop-style reformatting?", a: "Turn on \"Ignore whitespace\" so re-indentation and spacing changes from an autoformatter don't obscure the real edits." },
+      { q: "Is my Ruby code uploaded?", a: "No — the comparison happens entirely in your browser, so private gems and app code stay on your device." },
+    ],
+  },
+  {
+    slug: "css-diff",
+    eyebrow: "CSS Diff",
+    title: "CSS Diff — Compare Two Stylesheets",
+    description:
+      "Compare two CSS files or snippets and see exactly which selectors, properties or values changed. Client-side, nothing uploaded.",
+    intro:
+      "Paste two versions of a stylesheet to see which rules were added, removed or edited — a changed color, a new breakpoint, a reordered selector — with the changed tokens highlighted inline.",
+    format: "text",
+    faq: [
+      { q: "Does it work for SCSS or LESS too?", a: "Yes — it compares raw text, so SCSS, LESS and plain CSS all diff the same way, including variables and nesting." },
+      { q: "Can it ignore vendor-prefix changes?", a: "Not automatically — an added or removed -webkit-/-moz- prefix shows as a change, since that can be a meaningful edit. Turn on \"Ignore whitespace\" for formatting-only noise." },
+      { q: "Is my stylesheet uploaded?", a: "No. Everything runs in your browser, so proprietary design tokens and brand colors never leave your device." },
+    ],
+  },
+  {
+    slug: "kotlin-diff",
+    eyebrow: "Kotlin Diff",
+    title: "Kotlin Diff — Compare Two Kotlin Files",
+    description:
+      "Compare two Kotlin files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.",
+    intro:
+      "Paste two versions of a .kt file to see exactly what changed — a data class, a coroutine, a null-safety check — with the changed tokens highlighted inline. Works for plain Kotlin or Android/Compose source.",
+    format: "text",
+    faq: [
+      { q: "Does it work for Jetpack Compose files?", a: "Yes — Compose is just Kotlin, so .kt files with composables diff exactly the same way as any other Kotlin source." },
+      { q: "Can it ignore ktlint-style reformatting?", a: "Turn on \"Ignore whitespace\" if one file has been run through a formatter and the other hasn't, so you see the substantive edits only." },
+      { q: "Is my Kotlin code uploaded?", a: "No — the comparison runs entirely client-side, so private Android or backend source stays on your device." },
+    ],
+  },
+  {
+    slug: "dockerfile-diff",
+    eyebrow: "Dockerfile Diff",
+    title: "Dockerfile Diff — Compare Two Dockerfiles",
+    description:
+      "Compare two Dockerfiles and see exactly which instructions, base images or layers changed, line by line. Free, client-side, nothing uploaded.",
+    intro:
+      "Paste the old and new Dockerfile to see precisely which FROM, RUN, COPY or ENV lines changed before you rebuild. Useful for reviewing a base-image bump or a multi-stage build refactor without pulling the branch locally.",
+    format: "text",
+    faq: [
+      { q: "Does it understand Dockerfile syntax?", a: "No — it's a text diff, so it doesn't parse instructions. That's enough for reviewing a change: added, removed and changed lines are exactly what a Dockerfile review needs." },
+      { q: "Is my Dockerfile uploaded?", a: "No. The comparison runs entirely in your browser, so internal build configs and private image names stay on your device." },
+      { q: "Can it ignore reformatted comments?", a: "Turn on \"Ignore whitespace\" if reformatted comments or re-indented instructions are cluttering the diff." },
+    ],
+  },
+  {
+    slug: "docker-compose-diff",
+    eyebrow: "docker-compose Diff",
+    title: "docker-compose.yml Diff — Compare Two Compose Files",
+    description:
+      "Compare two docker-compose.yml files and see exactly which services, ports or volumes changed. Free, browser-only, nothing uploaded.",
+    intro:
+      "Paste the old and new docker-compose.yml to see precisely which service definitions, ports, volumes or environment blocks changed before you redeploy. Because it's YAML, indentation carries meaning — the line-by-line view maps directly onto that.",
+    format: "text",
+    faq: [
+      { q: "Is this different from the general YAML diff?", a: "Same engine, tuned for the docker-compose use case — reviewing a service, port or volume change before a redeploy — rather than generic YAML." },
+      { q: "Does it validate the compose file?", a: "No — it's a text diff and doesn't check compose schema. Run \"docker compose config\" for validation; use this to review what changed." },
+      { q: "Is my compose file uploaded?", a: "No. Everything runs in your browser, so internal service names, image tags and volume paths never leave your device." },
+    ],
+  },
+  {
+    slug: "env-diff",
+    eyebrow: "ENV Diff",
+    title: ".env File Diff — Compare Two Environment Files",
+    description:
+      "Compare two .env files and see exactly which variables were added, removed or changed — without ever uploading real secrets. Free, browser-only.",
+    intro:
+      "Paste two .env files to see which keys were added, dropped or given a new value. Because everything runs locally, it's safe to compare files containing real credentials — nothing is sent anywhere, ever.",
+    format: "text",
+    faq: [
+      { q: "Is it safe to paste real secrets?", a: "The comparison runs entirely client-side with no network request, so pasted values never leave your browser. For maximum caution, you can still redact values and compare just the variable names." },
+      { q: "Does it show only the changed keys?", a: "Switch to Unified view and use the change navigator to jump straight between added, removed and edited lines, skipping the variables that are identical on both sides." },
+      { q: "Can it ignore quoting differences?", a: "Not automatically — a value that gained or lost quotes shows as changed, since that can matter for how it's parsed. Keep quoting consistent between the two files for the cleanest diff." },
+    ],
+  },
+  {
+    slug: "package-json-diff",
+    eyebrow: "package.json Diff",
+    title: "package.json Diff — Compare Two package.json Files",
+    description:
+      "Compare two package.json files and see exactly which dependencies, scripts or fields changed. Formatting-aware, free, nothing uploaded.",
+    intro:
+      "Paste two package.json files to see which dependencies were bumped, added or removed, and which scripts or fields changed — pretty-printed first so formatting noise doesn't hide the real diff.",
+    format: "json",
+    faq: [
+      { q: "Does it flag version bumps clearly?", a: "Yes — a version string change on a dependency line shows up as a word-level highlight, so a patch bump versus a major bump is easy to spot at a glance." },
+      { q: "Will key reordering show as a change?", a: "Diffhero pretty-prints both sides with the same formatting before comparing, so inconsistent indentation is normalised — but it preserves key order, so a genuine reorder still shows as changed." },
+      { q: "Is my package.json uploaded?", a: "No. Everything runs in your browser, so private dependency names and internal package scopes never leave your device." },
+    ],
+  },
+  {
+    slug: "terraform-diff",
+    eyebrow: "Terraform Diff",
+    title: "Terraform Diff — Compare Two .tf Files",
+    description:
+      "Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.",
+    intro:
+      "Paste the old and new version of a .tf file to review what changed — a resource block, a variable default, a provider version — before running terraform plan. Nothing is uploaded, so private module and resource names stay local.",
+    format: "text",
+    faq: [
+      { q: "Does this replace terraform plan?", a: "No — this diffs the source files themselves, not the planned infrastructure changes. Use it for a quick source review before you run plan, not as a substitute for it." },
+      { q: "Can it ignore HCL formatting differences?", a: "Turn on \"Ignore whitespace\" if one file was run through terraform fmt and the other wasn't, so re-alignment doesn't obscure the real changes." },
+      { q: "Is my Terraform code uploaded?", a: "No — the comparison runs entirely client-side, so internal module names, resource IDs and provider configs never leave your browser." },
+    ],
+  },
+  {
+    slug: "nginx-config-diff",
+    eyebrow: "Nginx Config Diff",
+    title: "Nginx Config Diff — Compare Two nginx.conf Files",
+    description:
+      "Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.",
+    intro:
+      "Paste the old and new nginx.conf (or a single server block) to see precisely which directives changed before you reload. A fast way to review a proxy, TLS or routing change without diffing on the server itself.",
+    format: "text",
+    faq: [
+      { q: "Does it validate Nginx syntax?", a: "No — it's a text diff, so it won't catch a syntax error. Run nginx -t on the actual file for that; use this to review what changed between two versions." },
+      { q: "Can I compare a single server block?", a: "Yes — paste just the block you care about on each side rather than the whole file, if that's a cleaner comparison for your use case." },
+      { q: "Is my config uploaded?", a: "No. Everything runs in your browser, so internal hostnames, upstream addresses and TLS paths never leave your device." },
+    ],
+  },
+  {
+    slug: "ini-diff",
+    eyebrow: "INI Diff",
+    title: "INI / Config File Diff — Compare Two Config Files",
+    description:
+      "Compare two INI or config files and see exactly which sections and key-value pairs changed. Free, line-based, nothing uploaded.",
+    intro:
+      "Paste two .ini, .conf or .cfg files to see which sections were added, removed, or had a value changed. Works for any key=value or [section]-style config, from app settings to service files.",
+    format: "text",
+    faq: [
+      { q: "What config formats does it work with?", a: "Any line-based key-value or bracketed-section format — INI, .conf, .cfg, Windows-style config, systemd unit files and similar all diff cleanly as text." },
+      { q: "Can it ignore comment-line changes?", a: "Not automatically — a changed comment shows as a changed line, which is usually useful when reviewing what someone actually edited." },
+      { q: "Is my config file uploaded?", a: "No — the comparison happens entirely in your browser, so internal service names, ports and credentials in the file never leave your device." },
+    ],
+  },
+  {
+    slug: "contract-diff",
+    eyebrow: "Contract Diff",
+    title: "Contract Diff — Compare Two Versions of a Contract",
+    description:
+      "Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.",
+    intro:
+      "Paste the original and the redlined or renegotiated version of a contract to see exactly which clauses changed, word by word — without emailing a sensitive document to a third-party service.",
+    format: "text",
+    faq: [
+      { q: "Is this a substitute for legal review?", a: "No — it's a text-comparison tool, not legal advice. Use it to quickly spot exactly which clauses changed so a reviewer can focus their attention, not to replace their judgment." },
+      { q: "Is my contract uploaded anywhere?", a: "No. The whole comparison runs client-side in your browser — nothing is sent to a server, which matters for confidential or privileged documents." },
+      { q: "Can it handle a long document?", a: "Yes — paste the full text of both versions. For very long contracts, comparing one section at a time can make the highlighted changes easier to review." },
+    ],
+  },
+  {
+    slug: "resume-diff",
+    eyebrow: "Resume Diff",
+    title: "Resume Diff — Compare Two Versions of a Resume",
+    description:
+      "Paste two versions of a resume or CV and see exactly what changed — wording, dates, bullet points — highlighted word by word. Free, nothing uploaded.",
+    intro:
+      "Paste an old and a revised version of your resume to see precisely what changed between drafts — a reworded bullet, an updated date range, a trimmed section — so you can track edits across revisions or compare notes with a reviewer.",
+    format: "text",
+    faq: [
+      { q: "Does it work if I paste from a PDF or Word doc?", a: "Yes — copy the text out of your PDF or Word resume and paste it in; the tool compares the text content, not the file format or layout." },
+      { q: "Will formatting differences show as changes?", a: "Line breaks and spacing from copy-pasting can show as differences. Turn on \"Ignore whitespace\" to focus on actual wording changes instead." },
+      { q: "Is my resume uploaded?", a: "No — everything runs in your browser, so personal and contact details never leave your device." },
+    ],
+  },
+  {
+    slug: "essay-diff",
+    eyebrow: "Essay Diff",
+    title: "Essay Diff — Compare Two Drafts of an Essay",
+    description:
+      "Paste two drafts of an essay or article and see exactly which sentences and words changed between them. Free, browser-only, nothing uploaded.",
+    intro:
+      "Paste an earlier draft and a revised one to see exactly what changed — a reworded sentence, a cut paragraph, a tightened argument — highlighted word by word, so you can track your own revisions or review someone else's edit.",
+    format: "text",
+    faq: [
+      { q: "Does it work for any length of writing?", a: "Yes — a paragraph, a full essay, or a long article all work the same way; very long drafts may take a moment longer to render." },
+      { q: "Will a reflowed paragraph show as fully changed?", a: "Line-based diffing can flag a re-wrapped paragraph as changed even if only a few words moved — the inline word highlighting still shows exactly which words differ within it." },
+      { q: "Is my writing uploaded?", a: "No. The comparison runs entirely in your browser, so unpublished drafts stay private." },
+    ],
+  },
+  {
+    slug: "private-diff-checker",
+    eyebrow: "Private Diff Checker",
+    title: "Private Diff Checker — Compare Text With Nothing Uploaded",
+    description:
+      "A diff checker that never uploads what you paste — the entire comparison runs client-side in your browser. Free, no signup, no server round-trip.",
+    intro:
+      "Built for text you can't paste into a random website — client code, internal docs, contracts, credentials. Diffhero runs the whole comparison in JavaScript in your browser; nothing is sent to a server, ever. Check your browser's Network tab to confirm it yourself.",
+    format: "text",
+    faq: [
+      { q: "How can I verify nothing is uploaded?", a: "Open your browser's DevTools → Network tab before pasting, then run a comparison. You'll see no request carrying your text — the whole diff happens locally in JavaScript." },
+      { q: "Does it work offline?", a: "Yes, once the page has loaded. Since the comparison logic runs entirely client-side, you can disconnect from the internet and it still works." },
+      { q: "Is there a paid \"private\" tier?", a: "No — every comparison on Diffhero works this way. There's no free tier that phones home and a paid tier that doesn't; it's all local, always." },
+    ],
+  },
+  {
+    slug: "log-diff",
+    eyebrow: "Log Diff",
+    title: "Log Diff — Compare Two Log Files",
+    description:
+      "Compare two log files and see exactly which lines were added, removed or changed between them. Free, line-based, nothing uploaded.",
+    intro:
+      "Paste two log exports — before and after a deploy, or two runs of the same job — to see exactly which lines differ. Useful for spotting a new error, a missing line, or a changed pattern without scrolling through both by eye.",
+    format: "text",
+    faq: [
+      { q: "Can it ignore timestamp differences?", a: "Not automatically, since timestamps are usually meaningful. If every line has a unique timestamp prefix and that's cluttering the diff, strip the timestamp column from both files first." },
+      { q: "How large a log can I compare?", a: "Thousands of lines work smoothly. Very large logs (hundreds of thousands of lines) may pause briefly, since the whole comparison runs in your browser." },
+      { q: "Is my log data uploaded?", a: "No — the comparison runs entirely client-side, so logs containing internal hostnames, IPs or stack traces never leave your device." },
+    ],
+  },
+  {
+    slug: "subtitle-diff",
+    eyebrow: "Subtitle Diff",
+    title: "Subtitle Diff — Compare Two SRT or VTT Files",
+    description:
+      "Compare two subtitle files and see exactly which lines, timings or text changed between them. Free, browser-only, nothing uploaded.",
+    intro:
+      "Paste two .srt or .vtt subtitle files to see which timestamps or caption text changed between them — useful for reviewing a translation pass, a re-sync, or a captioning edit.",
+    format: "text",
+    faq: [
+      { q: "Does it work for both SRT and VTT?", a: "Yes — both are line-based text formats, so they compare the same way." },
+      { q: "Can it ignore timestamp-only changes?", a: "Not automatically — a re-synced timestamp shows as a changed line even if the caption text is identical. Compare just the caption text (stripped of timestamps) if you only care about wording." },
+      { q: "Is my subtitle file uploaded?", a: "No. Everything runs in your browser, so unreleased scripts and captions stay private." },
+    ],
+  },
 ];
 
 /**
@@ -302,12 +572,18 @@ const LANG_BY_SLUG = {
   "code-diff": "clike", "json-diff": "json", "xml-diff": "xml", "yaml-diff": "yaml",
   "sql-diff": "sql", "html-diff": "html", "python-diff": "python", "javascript-diff": "javascript",
   "typescript-diff": "typescript", "go-diff": "go", "java-diff": "java", "php-diff": "php",
+  "csharp-diff": "csharp", "rust-diff": "rust", "kotlin-diff": "kotlin", "css-diff": "css",
+  "package-json-diff": "json", "docker-compose-diff": "yaml",
 };
 
+// Every value here must have a matching <option> below — app.js falls back to
+// "plain" for any data-lang value that isn't a real dropdown option (the
+// browser can't select a <select> to a value with no matching <option>).
 const LANG_OPTIONS = [
   ["plain", "Plain text"], ["clike", "Code (C-like)"], ["javascript", "JavaScript / TS"],
-  ["python", "Python"], ["json", "JSON"], ["html", "HTML / XML"], ["css", "CSS"],
+  ["python", "Python"], ["json", "JSON"], ["html", "HTML / XML"], ["xml", "XML"], ["css", "CSS"],
   ["sql", "SQL"], ["yaml", "YAML"], ["go", "Go"], ["java", "Java"], ["php", "PHP"],
+  ["csharp", "C#"], ["rust", "Rust"], ["kotlin", "Kotlin"], ["swift", "Swift"],
 ];
 
 export function renderTool(p = {}) {

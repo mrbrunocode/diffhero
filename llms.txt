@@ -30,3 +30,21 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Go Diff](https://diffhero.app/diff/go-diff): Compare two Go source files and highlight every changed line and token. Client-side and language-agnostic — your code never leaves the browser.
 - [Java Diff](https://diffhero.app/diff/java-diff): Compare two Java source files and highlight every changed line and token. Free, browser-only, works for Kotlin and other JVM languages too. Nothing uploaded.
 - [PHP Diff](https://diffhero.app/diff/php-diff): Compare two PHP files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic — nothing uploaded.
+- [C# Diff](https://diffhero.app/diff/csharp-diff): Compare two C# files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic, nothing uploaded.
+- [Rust Diff](https://diffhero.app/diff/rust-diff): Compare two Rust files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.
+- [Ruby Diff](https://diffhero.app/diff/ruby-diff): Compare two Ruby files or snippets and see exactly what changed, with changed tokens highlighted. Client-side, nothing uploaded.
+- [CSS Diff](https://diffhero.app/diff/css-diff): Compare two CSS files or snippets and see exactly which selectors, properties or values changed. Client-side, nothing uploaded.
+- [Kotlin Diff](https://diffhero.app/diff/kotlin-diff): Compare two Kotlin files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.
+- [Dockerfile Diff](https://diffhero.app/diff/dockerfile-diff): Compare two Dockerfiles and see exactly which instructions, base images or layers changed, line by line. Free, client-side, nothing uploaded.
+- [docker-compose Diff](https://diffhero.app/diff/docker-compose-diff): Compare two docker-compose.yml files and see exactly which services, ports or volumes changed. Free, browser-only, nothing uploaded.
+- [ENV Diff](https://diffhero.app/diff/env-diff): Compare two .env files and see exactly which variables were added, removed or changed — without ever uploading real secrets. Free, browser-only.
+- [package.json Diff](https://diffhero.app/diff/package-json-diff): Compare two package.json files and see exactly which dependencies, scripts or fields changed. Formatting-aware, free, nothing uploaded.
+- [Terraform Diff](https://diffhero.app/diff/terraform-diff): Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.
+- [Nginx Config Diff](https://diffhero.app/diff/nginx-config-diff): Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.
+- [INI Diff](https://diffhero.app/diff/ini-diff): Compare two INI or config files and see exactly which sections and key-value pairs changed. Free, line-based, nothing uploaded.
+- [Contract Diff](https://diffhero.app/diff/contract-diff): Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.
+- [Resume Diff](https://diffhero.app/diff/resume-diff): Paste two versions of a resume or CV and see exactly what changed — wording, dates, bullet points — highlighted word by word. Free, nothing uploaded.
+- [Essay Diff](https://diffhero.app/diff/essay-diff): Paste two drafts of an essay or article and see exactly which sentences and words changed between them. Free, browser-only, nothing uploaded.
+- [Private Diff Checker](https://diffhero.app/diff/private-diff-checker): A diff checker that never uploads what you paste — the entire comparison runs client-side in your browser. Free, no signup, no server round-trip.
+- [Log Diff](https://diffhero.app/diff/log-diff): Compare two log files and see exactly which lines were added, removed or changed between them. Free, line-based, nothing uploaded.
+- [Subtitle Diff](https://diffhero.app/diff/subtitle-diff): Compare two subtitle files and see exactly which lines, timings or text changed between them. Free, browser-only, nothing uploaded.
