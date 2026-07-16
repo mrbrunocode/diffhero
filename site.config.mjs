@@ -30,6 +30,9 @@ export const GA_ID = "G-Q907KGWEP4";
 export const ADSENSE_PUB = "ca-pub-2653891546345771";
 export const ADSENSE_SLOT = "";
 
+// Bing Webmaster Tools site-ownership verification (empty until wired up).
+export const BING_VERIFY = "5A4EFD6B7BD09C4C115B7ACCF3688E1C";
+
 export const FONT_HREF =
   "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap";
 

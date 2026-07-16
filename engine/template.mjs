@@ -156,6 +156,7 @@ export function renderDocument(o) {
 <meta name="twitter:image" content="${ogImage}">
 <link rel="icon" type="image/svg+xml" href="${r}assets/favicon.svg">
 <meta name="theme-color" content="${themeColor}">
+${C.BING_VERIFY ? `<meta name="msvalidate.01" content="${C.BING_VERIFY}">\n` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${C.FONT_HREF}" rel="stylesheet">
