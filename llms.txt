@@ -1,0 +1,32 @@
+# Diffhero
+
+> A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.
+
+Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everything runs client-side.
+
+## Primary pages
+- [Home / the tool](https://diffhero.app/)
+- [About](https://diffhero.app/about)
+- [Privacy policy](https://diffhero.app/privacy)
+- [Terms of Service](https://diffhero.app/terms)
+- [Contact](https://diffhero.app/contact)
+
+## diff
+- [Text Compare](https://diffhero.app/diff/text-compare): Paste two versions of any text and see every added, removed and changed line — with the exact words highlighted — instantly. Free, browser-only, nothing uploaded.
+- [Compare Two Files](https://diffhero.app/diff/compare-two-text-files): Compare two text files in your browser — drag and drop both files and see every difference highlighted. Nothing is uploaded; the files never leave your device.
+- [Diff Checker](https://diffhero.app/diff/online-diff-checker): A free online diff checker: paste two versions of text or code and instantly see the differences, with word-level highlighting, split and unified views. No signup.
+- [Code Diff](https://diffhero.app/diff/code-diff): Compare two versions of a code snippet and see inserted, deleted and modified lines — with changed tokens highlighted. No signup, runs client-side, any language.
+- [JSON Diff](https://diffhero.app/diff/json-diff): Compare two JSON documents without formatting noise. Diffhero pretty-prints both sides first, so only real value changes show up — not whitespace or key spacing.
+- [Compare Lists](https://diffhero.app/diff/compare-two-lists): Paste two lists and instantly see which items were added, which were removed, and which appear in both. Line-based, browser-only, nothing uploaded.
+- [CSV Diff](https://diffhero.app/diff/csv-diff): Spot added, removed and changed rows between two CSV files, with the changed cells highlighted. Line-based comparison, entirely in your browser.
+- [XML Diff](https://diffhero.app/diff/xml-diff): Compare two XML files line by line and see exactly what changed, with changed values highlighted. Free, no upload, runs in your browser.
+- [YAML Diff](https://diffhero.app/diff/yaml-diff): Compare two YAML files and highlight every changed line and value. Ideal for Kubernetes manifests, CI configs and app settings. Browser-only, nothing uploaded.
+- [SQL Diff](https://diffhero.app/diff/sql-diff): Compare two SQL scripts or schema dumps and see what changed line by line, with changed clauses highlighted. Free, client-side — nothing leaves your browser.
+- [Markdown Diff](https://diffhero.app/diff/markdown-diff): Compare two Markdown documents and see every changed line and word. Perfect for docs, READMEs and drafts. Runs in your browser with nothing uploaded.
+- [HTML Diff](https://diffhero.app/diff/html-diff): Compare two pieces of HTML and see exactly what changed in the markup, with changed tags and attributes highlighted. Client-side, nothing uploaded.
+- [Python Diff](https://diffhero.app/diff/python-diff): Compare two Python files or snippets and highlight every changed line and token. Client-side and language-agnostic — your code never leaves the browser.
+- [JavaScript Diff](https://diffhero.app/diff/javascript-diff): Compare two JavaScript files or snippets and see exactly what changed, with changed tokens highlighted. Works for TypeScript and JSX too. Nothing uploaded.
+- [TypeScript Diff](https://diffhero.app/diff/typescript-diff): Compare two TypeScript files and highlight every changed line and token, including types and generics. Works for TSX. Client-side, nothing uploaded.
+- [Go Diff](https://diffhero.app/diff/go-diff): Compare two Go source files and highlight every changed line and token. Client-side and language-agnostic — your code never leaves the browser.
+- [Java Diff](https://diffhero.app/diff/java-diff): Compare two Java source files and highlight every changed line and token. Free, browser-only, works for Kotlin and other JVM languages too. Nothing uploaded.
+- [PHP Diff](https://diffhero.app/diff/php-diff): Compare two PHP files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic — nothing uploaded.

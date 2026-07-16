@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript Diff — Compare Two TS or TSX Files | Diffhero</title>
+<meta name="description" content="Compare two TypeScript files and highlight every changed line and token, including types and generics. Works for TSX. Client-side, nothing uploaded.">
+<link rel="canonical" href="https://diffhero.app/diff/typescript-diff">
+<meta property="og:title" content="TypeScript Diff — Compare Two TS or TSX Files">
+<meta property="og:description" content="Compare two TypeScript files and highlight every changed line and token, including types and generics. Works for TSX. Client-side, nothing uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diffhero.app/diff/typescript-diff">
+<meta property="og:image" content="https://diffhero.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#0a0d12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/typescript-diff","description":"Compare two TypeScript files and highlight every changed line and token, including types and generics. Works for TSX. Client-side, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-15","dateModified":"2026-07-15"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"TypeScript Diff","item":"https://diffhero.app/diff/typescript-diff"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it handle type annotations and generics?","acceptedAnswer":{"@type":"Answer","text":"Yes — they're just text to the diff, so a changed type, a new generic parameter or an edited interface all show up like any other change, with the specific tokens highlighted."}},{"@type":"Question","name":"Is TSX supported?","acceptedAnswer":{"@type":"Answer","text":"Yes. TSX, JSX, TS and JS all diff identically because Diffhero compares the source text rather than parsing the language."}},{"@type":"Question","name":"Is my code private?","acceptedAnswer":{"@type":"Answer","text":"Completely — the comparison runs in your browser and nothing is uploaded, so work or client code is safe to paste."}}]}</script>
+
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <a class="logo" href="/">Diffhero</a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">◐</button>
+</header>
+<nav class="main-nav" aria-label="Site">
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/contact">Contact</a>
+</nav>
+<main class="wrap" id="main">
+
+  <section class="hero">
+    <span class="eyebrow">TypeScript Diff</span>
+    <h1>TypeScript Diff — Compare Two TS or TSX Files</h1>
+    <p class="lede">Paste two versions of a TypeScript file to see exactly what changed — type annotations, generics, interfaces and logic — with the changed tokens highlighted inline. TSX works the same way, since the diff is on the text.</p>
+  </section>
+  
+  <section class="tool difftool" data-format="text" data-lang="typescript">
+    <div class="diff-inputs">
+      <div class="diff-pane" data-side="a">
+        <div class="diff-pane-head">
+          <label class="diff-label" for="original">Original</label>
+          <span class="diff-drop-hint">paste, type, or drop a file</span>
+        </div>
+        <textarea id="original" class="editor code" placeholder="Paste the original version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="b">
+        <div class="diff-pane-head">
+          <label class="diff-label" for="changed">Changed</label>
+          <span class="diff-drop-hint">paste, type, or drop a file</span>
+        </div>
+        <textarea id="changed" class="editor code" placeholder="Paste the changed version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+    <div class="tool-bar">
+      <div class="view-toggle" role="group" aria-label="Diff view">
+        <button type="button" class="seg is-active" id="viewSplit" data-view="split" aria-pressed="true">Split</button>
+        <button type="button" class="seg" id="viewUnified" data-view="unified" aria-pressed="false">Unified</button>
+      </div>
+      <label class="opt lang-opt"><span class="sr-only">Syntax language</span><select id="langSel" class="lang-sel" aria-label="Syntax highlighting language"><option value="plain">Plain text</option><option value="clike">Code (C-like)</option><option value="javascript">JavaScript / TS</option><option value="python">Python</option><option value="json">JSON</option><option value="html">HTML / XML</option><option value="css">CSS</option><option value="sql">SQL</option><option value="yaml">YAML</option><option value="go">Go</option><option value="java">Java</option><option value="php">PHP</option></select></label>
+      <label class="opt"><input type="checkbox" id="optWhitespace"> Ignore whitespace</label>
+      <label class="opt"><input type="checkbox" id="optCase"> Ignore case</label>
+      <label class="opt"><input type="checkbox" id="optCollapse" checked> Collapse unchanged</label>
+      <label class="opt"><input type="checkbox" id="optWrap" checked> Wrap</label>
+      <div class="change-nav" id="changeNav" hidden>
+        <button type="button" class="btn-icon" id="prevChange" aria-label="Previous change" title="Previous change (Alt+↑)">↑</button>
+        <button type="button" class="btn-icon" id="nextChange" aria-label="Next change" title="Next change (Alt+↓)">↓</button>
+      </div>
+      <span class="diff-summary" id="diffSummary" role="status" aria-live="polite"></span>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn primary" id="swapBtn">Swap sides</button>
+      <button type="button" class="btn" id="exampleBtn">Load example</button>
+      <button type="button" class="btn" id="shareBtn">Copy share link</button>
+      <button type="button" class="btn" id="copyBtn">Copy result</button>
+      <button type="button" class="btn" id="downloadBtn">Download .diff</button>
+      <button type="button" class="btn" id="clearBtn">Clear</button>
+    </div>
+    <div class="diff-output" id="diffOutput" aria-live="polite"></div>
+  </section>
+  <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
+  
+  
+  
+  <section class="faq">
+    <h2>Common questions</h2>
+    <dl class="faq-grid">
+      <div class="faq-item"><h3>Does it handle type annotations and generics?</h3><dd>Yes — they're just text to the diff, so a changed type, a new generic parameter or an edited interface all show up like any other change, with the specific tokens highlighted.</dd></div>
+      <div class="faq-item"><h3>Is TSX supported?</h3><dd>Yes. TSX, JSX, TS and JS all diff identically because Diffhero compares the source text rather than parsing the language.</dd></div>
+      <div class="faq-item"><h3>Is my code private?</h3><dd>Completely — the comparison runs in your browser and nothing is uploaded, so work or client code is safe to paste.</dd></div>
+    </dl>
+  </section>
+  
+  <nav class="related" aria-label="More tools">
+    <h2>More tools</h2>
+    <div class="related-grid">
+      <a href="/diff/text-compare">Text Compare</a>
+      <a href="/diff/compare-two-text-files">Compare Two Files</a>
+      <a href="/diff/online-diff-checker">Diff Checker</a>
+      <a href="/diff/code-diff">Code Diff</a>
+      <a href="/diff/json-diff">JSON Diff</a>
+      <a href="/diff/compare-two-lists">Compare Lists</a>
+      <a href="/diff/csv-diff">CSV Diff</a>
+      <a href="/diff/xml-diff">XML Diff</a>
+      <a href="/diff/yaml-diff">YAML Diff</a>
+      <a href="/diff/sql-diff">SQL Diff</a>
+      <a href="/diff/markdown-diff">Markdown Diff</a>
+      <a href="/diff/html-diff">HTML Diff</a>
+      <a href="/diff/python-diff">Python Diff</a>
+      <a href="/diff/javascript-diff">JavaScript Diff</a>
+      <a href="/diff/go-diff">Go Diff</a>
+      <a href="/diff/java-diff">Java Diff</a>
+      <a href="/diff/php-diff">PHP Diff</a>
+    </div>
+  </nav>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+      <div>Free. No signup, no upload — everything runs in your browser.</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
