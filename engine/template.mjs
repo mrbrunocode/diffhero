@@ -20,6 +20,25 @@
  * one-line config change (see scripts/enable-adsense.mjs), not an HTML edit.
  */
 import * as C from "../site.config.mjs";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+
+// Content-hash version stamp for asset URLs. _headers caches /assets/* for
+// 24h while HTML revalidates hourly — without a version query, a deploy can
+// pair fresh HTML with day-old JS/CSS (new controls present but dead). The
+// hash changes only when the file does, so unchanged assets stay cached.
+const assetV = (name) => {
+  try {
+    return createHash("md5")
+      .update(readFileSync(new URL("../assets/" + name, import.meta.url)))
+      .digest("hex")
+      .slice(0, 8);
+  } catch {
+    return "0";
+  }
+};
+const CSS_V = assetV("style.css");
+const JS_V = assetV("app.js");
 
 const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -160,7 +179,7 @@ ${C.BING_VERIFY ? `<meta name="msvalidate.01" content="${C.BING_VERIFY}">\n` : "
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${C.FONT_HREF}" rel="stylesheet">
-<link rel="stylesheet" href="${r}assets/style.css">
+<link rel="stylesheet" href="${r}assets/style.css?v=${CSS_V}">
 ${analytics()}
 <script type="application/ld+json">${JSON.stringify(webApp)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>
@@ -194,7 +213,7 @@ ${bodyHtml}
     </div>
   </div>
 </footer>
-<script src="${r}assets/app.js" defer></script>
+<script src="${r}assets/app.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
