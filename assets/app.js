@@ -536,6 +536,10 @@
     }
     window.print();
   });
+  // Restores the on-screen collapsed view after the print dialog closes (or
+  // the browser cancels/finishes print-to-PDF) — without this, expanding for
+  // print was permanent even though "Collapse unchanged" still shows checked.
+  window.addEventListener("afterprint", render);
 
   // Find & replace (literal text, not regex — predictability over power).
   var frFind = document.getElementById("frFind");
