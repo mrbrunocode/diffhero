@@ -1,13 +1,13 @@
 name: indexnow
 
-# After every push to main (which auto-deploys via the git-connected Cloudflare
-# integration), submit all sitemap URLs to IndexNow so Bing/Yandex/Seznam/Naver
+# After every push to main (which auto-deploys via deploy.yml's wrangler
+# deploy), submit all sitemap URLs to IndexNow so Bing/Yandex/Seznam/Naver
 # re-crawl promptly. Google doesn't participate in IndexNow; it re-reads
 # sitemap.xml on its own schedule. See docs/seo-plan.md §1.3.
 #
-# The 90s wait lets the Cloudflare deploy finish first, so engines that crawl
-# immediately see the new content (and the IndexNow key file stays fetchable
-# at the live domain, which is how the protocol verifies ownership).
+# The 90s wait lets deploy.yml finish first, so engines that crawl immediately
+# see the new content (and the IndexNow key file stays fetchable at the live
+# domain, which is how the protocol verifies ownership).
 
 on:
   push:
