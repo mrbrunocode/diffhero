@@ -473,18 +473,62 @@
     elA.value = ""; elB.value = ""; render(); elA.focus();
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   });
+  // Per-slug examples: pages whose subject is a specific real-world format
+  // (a Dockerfile, an .srt file, a resume) get an example IN that format,
+  // not a generic snippet — this is what "Load example" is promising on
+  // those landing pages. Checked before the per-language map below.
+  var EXAMPLES_BY_SLUG = {
+    "csv-diff": ["id,name,price\n1,Widget,9.99\n2,Gadget,14.99", "id,name,price\n1,Widget,11.99\n2,Gadget,14.99\n3,Gizmo,19.99"],
+    "log-diff": ["2026-07-16 09:12:01 INFO  Starting worker pool (size=4)\n2026-07-16 09:12:03 INFO  Connected to queue\n2026-07-16 09:12:10 ERROR Job 8821 failed: timeout", "2026-07-16 09:12:01 INFO  Starting worker pool (size=8)\n2026-07-16 09:12:02 INFO  Connected to queue\n2026-07-16 09:12:10 WARN  Job 8821 retried (attempt 2)\n2026-07-16 09:12:11 INFO  Job 8821 completed"],
+    "ini-diff": ["[server]\nport=8080\ntimeout=30\n\n[logging]\nlevel=info", "[server]\nport=3000\ntimeout=60\n\n[logging]\nlevel=debug\nformat=json"],
+    "env-diff": ["DATABASE_URL=postgres://localhost:5432/app\nDEBUG=false\nPORT=3000", "DATABASE_URL=postgres://localhost:5432/app_prod\nDEBUG=false\nPORT=8080\nREDIS_URL=redis://localhost:6379"],
+    "dockerfile-diff": ["FROM node:18-alpine\nWORKDIR /app\nCOPY package.json .\nRUN npm install\nCOPY . .\nCMD [\"node\", \"index.js\"]", "FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --production\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]"],
+    "nginx-config-diff": ["server {\n  listen 80;\n  server_name example.com;\n  location / {\n    proxy_pass http://localhost:3000;\n  }\n}", "server {\n  listen 443 ssl;\n  server_name example.com;\n  location / {\n    proxy_pass http://localhost:3000;\n    proxy_set_header Host $host;\n  }\n}"],
+    "subtitle-diff": ["1\n00:00:01,000 --> 00:00:03,500\nWelcome back everyone.\n\n2\n00:00:03,600 --> 00:00:06,000\nLet's get started.", "1\n00:00:01,000 --> 00:00:04,000\nWelcome back, everyone!\n\n2\n00:00:04,100 --> 00:00:06,500\nLet's get right into it."],
+    "markdown-diff": ["# Getting Started\n\nInstall the package with `npm install`.\n\n- Fast\n- Lightweight", "# Getting Started\n\nInstall the package with `npm install --save`.\n\n- Fast\n- Lightweight\n- Zero dependencies"],
+    "terraform-diff": ['resource "aws_instance" "web" {\n  ami           = "ami-12345"\n  instance_type = "t2.micro"\n}', 'resource "aws_instance" "web" {\n  ami           = "ami-12345"\n  instance_type = "t3.small"\n  tags = {\n    Environment = "production"\n  }\n}'],
+    "ruby-diff": ["def greet(name)\n  msg = \"Hello, \" + name\n  puts msg\n  msg\nend", "def greet(name)\n  \"Hi there, #{name}!\"\nend"],
+    "resume-diff": ["Senior Software Engineer — Acme Corp (2022–2026)\nLed backend team of 4 engineers.\nShipped payments platform handling 10K tx/day.", "Senior Software Engineer — Acme Corp (2022–2026)\nLed backend team of 6 engineers.\nShipped payments platform handling 50K tx/day, reducing latency 40%."],
+    "contract-diff": ["The Contractor shall deliver the Work within 30 days of the Effective Date.\nPayment is due Net 30 upon invoice.", "The Contractor shall deliver the Work within 45 days of the Effective Date.\nPayment is due Net 15 upon invoice, with a 2% early-payment discount."],
+    "essay-diff": ["Climate change remains one of the most pressing challenges of our time, requiring coordinated global action.", "Climate change remains the most pressing challenge of our generation, requiring immediate and coordinated global action."],
+    "compare-two-lists": ["apples\nbananas\ncherries\ndates", "apples\nbananas\ncherries\nelderberries\nfigs"],
+    "docker-compose-diff": ['services:\n  web:\n    image: nginx:alpine\n    ports:\n      - "80:80"', 'services:\n  web:\n    image: nginx:alpine\n    ports:\n      - "80:80"\n      - "443:443"\n  db:\n    image: postgres:16'],
+    "package-json-diff": ['{\n  "name": "my-app",\n  "version": "1.2.0",\n  "dependencies": {\n    "express": "^4.18.0"\n  }\n}', '{\n  "name": "my-app",\n  "version": "1.3.0",\n  "dependencies": {\n    "express": "^4.19.0",\n    "zod": "^3.23.0"\n  }\n}'],
+  };
+
+  // Per-language examples — one real pair per option in the langSel dropdown,
+  // so switching the language and clicking "Load example" always shows that
+  // language, not a JS snippet mislabeled as Python or CSS.
+  var EXAMPLES_BY_LANG = {
+    clike: ["int main() {\n  int x = 10;\n  printf(\"%d\\n\", x);\n  return 0;\n}", "int main() {\n  int x = 20;\n  printf(\"Value: %d\\n\", x);\n  return 0;\n}"],
+    javascript: ["function greet(name) {\n  const msg = \"Hello, \" + name;\n  console.log(msg);\n  return msg;\n}", "function greet(name) {\n  const msg = `Hi there, ${name}!`;\n  return msg;\n}"],
+    python: ["def greet(name):\n    msg = 'Hello, ' + name\n    print(msg)\n    return msg", "def greet(name):\n    msg = f'Hi there, {name}!'\n    return msg"],
+    html: ["<div class=\"card\">\n  <h2>Pricing</h2>\n  <p>$9/month</p>\n</div>", "<div class=\"card featured\">\n  <h2>Pricing</h2>\n  <p>$12/month</p>\n</div>"],
+    xml: ["<config>\n  <timeout>30</timeout>\n  <retries>3</retries>\n</config>", "<config>\n  <timeout>60</timeout>\n  <retries>5</retries>\n  <verbose>true</verbose>\n</config>"],
+    css: [".btn {\n  padding: 8px 16px;\n  border-radius: 4px;\n  background: #3366ff;\n}", ".btn {\n  padding: 10px 20px;\n  border-radius: 8px;\n  background: #2255ee;\n  font-weight: 600;\n}"],
+    sql: ["SELECT id, name, email\nFROM users\nWHERE active = 1;", "SELECT id, name, email, created_at\nFROM users\nWHERE active = 1\nORDER BY created_at DESC;"],
+    yaml: ["server:\n  port: 8080\n  timeout: 30\nlogging:\n  level: info", "server:\n  port: 3000\n  timeout: 60\nlogging:\n  level: debug\n  format: json"],
+    go: ["func Greet(name string) string {\n\tmsg := \"Hello, \" + name\n\tfmt.Println(msg)\n\treturn msg\n}", "func Greet(name string) string {\n\tmsg := fmt.Sprintf(\"Hi there, %s!\", name)\n\treturn msg\n}"],
+    java: ["public String greet(String name) {\n    String msg = \"Hello, \" + name;\n    System.out.println(msg);\n    return msg;\n}", "public String greet(String name) {\n    String msg = String.format(\"Hi there, %s!\", name);\n    return msg;\n}"],
+    php: ["function greet($name) {\n    $msg = \"Hello, \" . $name;\n    echo $msg;\n    return $msg;\n}", "function greet($name) {\n    $msg = \"Hi there, {$name}!\";\n    return $msg;\n}"],
+    csharp: ["public string Greet(string name) {\n    string msg = \"Hello, \" + name;\n    Console.WriteLine(msg);\n    return msg;\n}", "public string Greet(string name) {\n    string msg = $\"Hi there, {name}!\";\n    return msg;\n}"],
+    rust: ["fn greet(name: &str) -> String {\n    let msg = format!(\"Hello, {}\", name);\n    println!(\"{}\", msg);\n    msg\n}", "fn greet(name: &str) -> String {\n    format!(\"Hi there, {}!\", name)\n}"],
+    kotlin: ["fun greet(name: String): String {\n    val msg = \"Hello, \" + name\n    println(msg)\n    return msg\n}", "fun greet(name: String): String {\n    return \"Hi there, $name!\"\n}"],
+    swift: ["func greet(name: String) -> String {\n    let msg = \"Hello, \" + name\n    print(msg)\n    return msg\n}", "func greet(name: String) -> String {\n    \"Hi there, \\(name)!\"\n}"],
+  };
+
+  var EXAMPLE_JSON = ['{\n  "name": "diffhero",\n  "version": "1.0.0",\n  "free": true,\n  "limits": { "perDay": 1 }\n}', '{\n  "name": "diffhero",\n  "version": "1.1.0",\n  "free": true,\n  "limits": { "perDay": 0 },\n  "shareable": true\n}'];
+  var EXAMPLE_PLAIN = ["The quarterly report shows steady growth across all regions, with the strongest gains coming from the APAC team.\n\nWe recommend maintaining the current strategy through Q3.", "The quarterly report shows strong growth across all regions, with the strongest gains coming from the APAC and EMEA teams.\n\nWe recommend expanding the current strategy through Q4."];
+
+  var slug = (toolEl && toolEl.getAttribute("data-slug")) || "";
   var exampleBtn = document.getElementById("exampleBtn");
   if (exampleBtn) exampleBtn.addEventListener("click", function () {
-    if (format === "json") {
-      elA.value = '{\n  "name": "diffhero",\n  "version": "1.0.0",\n  "free": true,\n  "limits": { "perDay": 1 }\n}';
-      elB.value = '{\n  "name": "diffhero",\n  "version": "1.1.0",\n  "free": true,\n  "limits": { "perDay": 0 },\n  "shareable": true\n}';
-    } else if (lang === "python") {
-      elA.value = "def greet(name):\n    msg = 'Hello, ' + name\n    print(msg)\n    return msg";
-      elB.value = "def greet(name):\n    msg = f'Hi there, {name}!'\n    return msg";
-    } else {
-      elA.value = "function greet(name) {\n  const msg = \"Hello, \" + name;\n  console.log(msg);\n  return msg;\n}";
-      elB.value = "function greet(name) {\n  const msg = `Hi there, ${name}!`;\n  return msg;\n}";
-    }
+    var pair = EXAMPLES_BY_SLUG[slug] ||
+      (format === "json" ? EXAMPLE_JSON : null) ||
+      EXAMPLES_BY_LANG[lang] ||
+      EXAMPLE_PLAIN;
+    elA.value = pair[0];
+    elB.value = pair[1];
     render();
   });
 

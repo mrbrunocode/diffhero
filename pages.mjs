@@ -571,7 +571,7 @@ export const PAGES = [
 const LANG_BY_SLUG = {
   "code-diff": "clike", "json-diff": "json", "xml-diff": "xml", "yaml-diff": "yaml",
   "sql-diff": "sql", "html-diff": "html", "python-diff": "python", "javascript-diff": "javascript",
-  "typescript-diff": "typescript", "go-diff": "go", "java-diff": "java", "php-diff": "php",
+  "typescript-diff": "javascript", "go-diff": "go", "java-diff": "java", "php-diff": "php",
   "csharp-diff": "csharp", "rust-diff": "rust", "kotlin-diff": "kotlin", "css-diff": "css",
   "package-json-diff": "json", "docker-compose-diff": "yaml",
 };
@@ -593,7 +593,7 @@ export function renderTool(p = {}) {
     ([v, label]) => `<option value="${v}"${v === lang ? " selected" : ""}>${label}</option>`
   ).join("");
   return `
-  <section class="tool difftool" data-format="${format}" data-lang="${lang}">
+  <section class="tool difftool" data-format="${format}" data-lang="${lang}" data-slug="${p.slug || ""}">
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">

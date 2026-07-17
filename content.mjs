@@ -18,6 +18,7 @@ export const home = {
   description: C.DESCRIPTION,
   bodyHtml: `
   <section class="hero hero--home">
+    <span class="badge"><span class="dot" aria-hidden="true"></span>Runs entirely in your browser — nothing uploaded</span>
     <h1>${C.NAME}</h1>
     <p class="lede">${C.DESCRIPTION}</p>
   </section>
