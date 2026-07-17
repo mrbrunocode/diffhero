@@ -724,12 +724,17 @@
       var params = new URLSearchParams(location.hash.slice(1));
       if (params.has("z") && window.DecompressionStream) {
         try {
-          inflate(b64urlToBytes(params.get("z"))).then(function (json) {
-            var pair = JSON.parse(json);
-            elA.value = String(pair[0]); elB.value = String(pair[1]);
-            render();
-          }, function () { render(); });
-          return; // render happens in the promise
+          // render() must run exactly once no matter what fails inside the
+          // promise (a corrupted link would otherwise leave the page blank —
+          // a throw in a .then success handler skips a rejection callback).
+          inflate(b64urlToBytes(params.get("z")))
+            .then(function (json) {
+              var pair = JSON.parse(json);
+              elA.value = String(pair[0]); elB.value = String(pair[1]);
+            })
+            .catch(function () {})
+            .then(function () { render(); });
+          return; // render happens in the promise chain
         } catch (e) {}
       }
       try {

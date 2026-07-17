@@ -366,6 +366,11 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
     --accent: #4635b8; --accent-soft: #eceafa; --on-accent: #ffffff;
     --add-bg: #e6f4ea; --add-line: #1e7e34; --add-strong: #c7e8d0;
     --del-bg: #fdecea; --del-line: #c0392b; --del-strong: #f5c6c0;
+    /* Syntax tokens too — without these, printing from dark mode puts the
+       dark theme's pale token colors on white paper (near-invisible). */
+    --tok-com: #6b6b74; --tok-str: #8a5a00; --tok-num: #1a5fa8;
+    --tok-kw: #6d28d9; --tok-bool: #9a4b00; --tok-key: #0f6674;
+    --tok-tag: #3b4fc4; --tok-attr: #2a6d5c; --tok-punct: #55555e;
   }
   header, .main-nav, .skip-link, .theme-toggle,
   .diff-inputs, .tool-actions, .fr, .view-toggle, .lang-opt, .opt, .change-nav,
