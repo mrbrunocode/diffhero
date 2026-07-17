@@ -276,6 +276,29 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
 /* wrap toggle: off → no wrap, horizontal scroll per view */
 .diff-view.nowrap .dtext { white-space: pre; }
 
+/* "Show invisibles" — revealed characters render as accent-tinted symbols so
+   they read as annotations, not as literal text content */
+.inv {
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 3px; padding: 0 1px; cursor: help;
+}
+
+/* Find & replace — a quiet disclosure below the actions; literal text only */
+.fr { margin-top: var(--space-4); }
+.fr summary {
+  cursor: pointer; font-size: var(--text-sm); color: var(--text-secondary);
+  width: max-content;
+}
+.fr summary:hover { color: var(--text-primary); }
+.fr-row { display: flex; gap: var(--space-2); margin-top: var(--space-3); flex-wrap: wrap; align-items: center; }
+.fr-row input {
+  flex: 1 1 160px; min-width: 0; height: var(--space-10); padding: 0 var(--space-3);
+  font-family: var(--font-display); font-size: var(--text-sm); color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+}
+.fr-row input:focus-visible { border-color: var(--accent); }
+.fr-row .btn { flex: 0 0 auto; }
+
 /* syntax tokens (compose with word-diff marks — marks are background, tokens are colour) */
 .tok-com { color: var(--tok-com); font-style: italic; }
 .tok-str { color: var(--tok-str); }
@@ -327,3 +350,33 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
   .diff-view.split .dcell { border-right: 0; border-bottom: 1px solid var(--border-subtle); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* ═══ Print / save-as-PDF ═════════════════════════════════════════════════
+   The Print/PDF button reduces the page to a clean report: page title, the
+   diff summary line, and the full diff result. Forced to the light palette —
+   nobody wants a solid-dark-ink PDF. */
+@media print {
+  :root {
+    color-scheme: light;
+    --n-0: #fafafa; --n-1: #ffffff; --n-2: #f7f7f8; --n-3: #efeff1; --n-4: #e0e0e3;
+    --n-5: #b4b4ba; --n-6: #6b6b74; --n-7: #4a4a52; --n-8: #1d1d22; --n-9: #101014;
+    --bg: #ffffff; --surface: #ffffff; --surface-elevated: #ffffff; --surface-hover: #ffffff;
+    --border: #d8d8dc; --border-subtle: #e5e5e8;
+    --text-primary: #1d1d22; --text-secondary: #55555e; --text-tertiary: #8a8a93;
+    --accent: #4635b8; --accent-soft: #eceafa; --on-accent: #ffffff;
+    --add-bg: #e6f4ea; --add-line: #1e7e34; --add-strong: #c7e8d0;
+    --del-bg: #fdecea; --del-line: #c0392b; --del-strong: #f5c6c0;
+  }
+  header, .main-nav, .skip-link, .theme-toggle,
+  .diff-inputs, .tool-actions, .fr, .view-toggle, .lang-opt, .opt, .change-nav,
+  .ad-slot, .feature-grid, .howto, .faq, .related, footer, .badge { display: none !important; }
+  body { background: #fff; }
+  .tool { border: none; box-shadow: none; padding: 0; background: #fff; }
+  .tool-bar { margin-top: 0; }
+  .diff-summary { margin-left: 0; color: #55555e; }
+  .diff-view { border: 1px solid #e0e0e3; background: #fff; }
+  .diff-expander { display: none !important; }
+  .hero { margin-bottom: 12px; }
+  h1 { font-size: 20px; }
+  .lede { display: none; }
+}

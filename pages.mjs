@@ -559,6 +559,21 @@ export const PAGES = [
       { q: "Is my subtitle file uploaded?", a: "No. Everything runs in your browser, so unreleased scripts and captions stay private." },
     ],
   },
+  {
+    slug: "invisible-character-checker",
+    eyebrow: "Invisible Characters",
+    title: "Invisible Character Checker — Why Identical-Looking Text Differs",
+    description:
+      "Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.",
+    intro:
+      "Paste both versions and turn on “Show invisibles” in the toolbar: non-breaking spaces render as ⍽, zero-width characters as ∅, and tabs as →, so the character your eye can't see becomes the change you can. These sneak in constantly — Word and Google Docs convert straight quotes to curly ones, web pages copy out non-breaking spaces, and AI chat output often carries zero-width characters — and they make string comparisons, config parsers and spreadsheet lookups fail on text that looks identical. Use Find & replace below the tool to strip the culprit once you've spotted it.",
+    format: "text",
+    faq: [
+      { q: "What invisible characters does it reveal?", a: "Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it." },
+      { q: "Where do these characters come from?", a: "The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space." },
+      { q: "How do I remove them once found?", a: "Open Find & replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge." },
+    ],
+  },
 ];
 
 /**
@@ -618,6 +633,8 @@ export function renderTool(p = {}) {
       <label class="opt lang-opt"><span class="sr-only">Syntax language</span><select id="langSel" class="lang-sel" aria-label="Syntax highlighting language">${langOpts}</select></label>
       <label class="opt"><input type="checkbox" id="optWhitespace"> Ignore whitespace</label>
       <label class="opt"><input type="checkbox" id="optCase"> Ignore case</label>
+      <label class="opt"><input type="checkbox" id="optChar" title="Mark the exact changed characters inside a changed word, not just the word"> Character detail</label>
+      <label class="opt"><input type="checkbox" id="optInv" title="Render invisible characters (non-breaking spaces, zero-width characters, tabs) as visible symbols"> Show invisibles</label>
       <label class="opt"><input type="checkbox" id="optCollapse" checked> Collapse unchanged</label>
       <label class="opt"><input type="checkbox" id="optWrap" checked> Wrap</label>
       <div class="change-nav" id="changeNav" hidden>
@@ -632,8 +649,19 @@ export function renderTool(p = {}) {
       <button type="button" class="btn" id="shareBtn">Copy share link</button>
       <button type="button" class="btn" id="copyBtn">Copy result</button>
       <button type="button" class="btn" id="downloadBtn">Download .diff</button>
+      <button type="button" class="btn" id="printBtn" title="Prints only the diff result — use your browser's 'Save as PDF' destination for a PDF report">Print / PDF</button>
       <button type="button" class="btn" id="clearBtn">Clear</button>
     </div>
+    <details class="fr">
+      <summary>Find &amp; replace</summary>
+      <div class="fr-row">
+        <input type="text" id="frFind" placeholder="Find (exact text)" autocomplete="off">
+        <input type="text" id="frRepl" placeholder="Replace with" autocomplete="off">
+        <button type="button" class="btn" id="frA">Original</button>
+        <button type="button" class="btn" id="frB">Changed</button>
+        <button type="button" class="btn" id="frBoth">Both</button>
+      </div>
+    </details>
     <div class="diff-output" id="diffOutput" aria-live="polite"></div>
   </section>`;
 }

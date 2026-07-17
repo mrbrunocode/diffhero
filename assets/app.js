@@ -34,6 +34,8 @@
   var summary = document.getElementById("diffSummary");
   var optWs = document.getElementById("optWhitespace");
   var optCase = document.getElementById("optCase");
+  var optChar = document.getElementById("optChar");
+  var optInv = document.getElementById("optInv");
   var optCollapse = document.getElementById("optCollapse");
   var optWrap = document.getElementById("optWrap");
   var langSel = document.getElementById("langSel");
@@ -51,6 +53,32 @@
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
   function normalize(t) { return t.replace(/\r\n?/g, "\n"); } // CRLF/CR → LF
+
+  // "Show invisibles": render characters the eye can't see as visible, named
+  // symbols. Runs on already-escaped text (these code points survive esc()
+  // untouched), so the injected spans are the only HTML added.
+  var INV = [
+    [/\u00A0/g, "\u237D", "non-breaking space (U+00A0)"],
+    [/\u202F/g, "\u237D", "narrow no-break space (U+202F)"],
+    [/\u2007/g, "\u237D", "figure space (U+2007)"],
+    [/\u200B/g, "\u2205", "zero-width space (U+200B)"],
+    [/\u200C/g, "\u2205", "zero-width non-joiner (U+200C)"],
+    [/\u200D/g, "\u2205", "zero-width joiner (U+200D)"],
+    [/\u2060/g, "\u2205", "word joiner (U+2060)"],
+    [/\uFEFF/g, "\u2205", "byte-order mark (U+FEFF)"],
+    [/\u00AD/g, "\u2010", "soft hyphen (U+00AD)"],
+    [/\t/g, "\u2192", "tab"],
+  ];
+  function revealInv(escText) {
+    for (var i = 0; i < INV.length; i++)
+      escText = escText.replace(INV[i][0], '<span class="inv" title="' + INV[i][2] + '">' + INV[i][1] + "</span>");
+    return escText;
+  }
+  // For the "this diff contains invisible-only changes" hint: two strings that
+  // render identically once invisibles are normalized away.
+  function stripInv(s) {
+    return s.replace(/[\u00A0\u202F\u2007]/g, " ").replace(/[\u200B-\u200D\u2060\uFEFF\u00AD]/g, "");
+  }
 
   // ── Syntax highlighting: a small, safe char-scanning lexer ─────────────────
   var BOOLS = toSet("true false null None True False nil undefined NaN yes no");
@@ -197,6 +225,7 @@
         if (inMark) next = Math.min(seg.e, marks[mi][1]);
         else next = (mi < marks.length && marks[mi][0] > pos) ? Math.min(seg.e, marks[mi][0]) : seg.e;
         var text = esc(line.slice(pos, next));
+        if (optInv && optInv.checked) text = revealInv(text);
         var cls = (seg.cls ? "tok-" + seg.cls : "") + (inMark ? (seg.cls ? " " : "") + markCls : "");
         html += cls ? '<span class="' + cls + '">' + text + "</span>" : text;
         pos = next;
@@ -242,11 +271,20 @@
   }
 
   // Word-level diff between two changed lines → changed char-ranges per side.
+  // With "Character detail" on, tokens are single characters instead of words,
+  // so the mark tightens to the exact changed characters (Diffchecker gates
+  // this behind Pro; here it's a checkbox).
   function tokenMarks(delStr, addStr) {
-    var re = /(\s+|\S+)/g, m, at = [], bt = [];
-    while ((m = re.exec(delStr))) at.push({ x: m[0], s: m.index, e: m.index + m[0].length });
-    re.lastIndex = 0;
-    while ((m = re.exec(addStr))) bt.push({ x: m[0], s: m.index, e: m.index + m[0].length });
+    var at = [], bt = [], m, i;
+    if (optChar && optChar.checked) {
+      for (i = 0; i < delStr.length; i++) at.push({ x: delStr[i], s: i, e: i + 1 });
+      for (i = 0; i < addStr.length; i++) bt.push({ x: addStr[i], s: i, e: i + 1 });
+    } else {
+      var re = /(\s+|\S+)/g;
+      while ((m = re.exec(delStr))) at.push({ x: m[0], s: m.index, e: m.index + m[0].length });
+      re.lastIndex = 0;
+      while ((m = re.exec(addStr))) bt.push({ x: m[0], s: m.index, e: m.index + m[0].length });
+    }
     if (at.length * bt.length > 250000) return { del: [[0, delStr.length]], add: [[0, addStr.length]] };
     var ops = lcs(at.map(function (t) { return t.x; }), bt.map(function (t) { return t.x; }));
     if (!ops) return { del: [[0, delStr.length]], add: [[0, addStr.length]] };
@@ -393,6 +431,18 @@
     var sim = total ? Math.round((2 * same / total) * 100) : 0;
     var parts = [adds + (adds === 1 ? " addition" : " additions"), dels + (dels === 1 ? " deletion" : " deletions"), sim + "% similar"];
     if (format === "json" && jsonFallback) parts.push("(JSON couldn't be parsed — compared as plain text)");
+    // If any changed line differs only by characters the eye can't see, say so
+    // — this is the single most confusing diff outcome, and the fix is one
+    // checkbox away.
+    if (!(optInv && optInv.checked)) {
+      for (var h = 0; h < rows.length; h++) {
+        var rh = rows[h];
+        if (rh.type === "mod" && rh.del !== rh.add && stripInv(rh.del) === stripInv(rh.add)) {
+          parts.push("some changes are invisible characters — turn on “Show invisibles”");
+          break;
+        }
+      }
+    }
     summary.textContent = parts.join(" · ");
     anchors = Array.prototype.slice.call(out.querySelectorAll("[data-ci]"));
     curAnchor = -1;
@@ -415,7 +465,7 @@
   function schedule() { if (scheduled) return; scheduled = true; (window.requestAnimationFrame || window.setTimeout)(function () { scheduled = false; render(); }); }
   elA.addEventListener("input", schedule);
   elB.addEventListener("input", schedule);
-  [optWs, optCase, optCollapse, optWrap].forEach(function (el) { if (el) el.addEventListener("change", render); });
+  [optWs, optCase, optChar, optInv, optCollapse, optWrap].forEach(function (el) { if (el) el.addEventListener("change", render); });
   if (langSel) langSel.addEventListener("change", function () { lang = langSel.value; render(); });
 
   // ── View toggle ───────────────────────────────────────────────────────────
@@ -473,6 +523,35 @@
     elA.value = ""; elB.value = ""; render(); elA.focus();
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   });
+
+  // Print / save-as-PDF: the @media print stylesheet reduces the page to the
+  // page title + summary + diff result. Collapsed regions are expanded first
+  // so the report is complete (the on-screen collapse state is restored by a
+  // plain re-render afterwards).
+  var printBtn = document.getElementById("printBtn");
+  if (printBtn) printBtn.addEventListener("click", function () {
+    if (lastRows && optCollapse && optCollapse.checked) {
+      var expanders = out.querySelectorAll(".diff-expander"), i;
+      for (i = expanders.length - 1; i >= 0; i--) expanders[i].click();
+    }
+    window.print();
+  });
+
+  // Find & replace (literal text, not regex — predictability over power).
+  var frFind = document.getElementById("frFind");
+  var frRepl = document.getElementById("frRepl");
+  function applyReplace(targets) {
+    if (!frFind || !frFind.value) { if (frFind) frFind.focus(); return; }
+    var find = frFind.value, repl = frRepl ? frRepl.value : "";
+    targets.forEach(function (el) { el.value = el.value.split(find).join(repl); });
+    render();
+  }
+  var frA = document.getElementById("frA");
+  var frB = document.getElementById("frB");
+  var frBoth = document.getElementById("frBoth");
+  if (frA) frA.addEventListener("click", function () { applyReplace([elA]); });
+  if (frB) frB.addEventListener("click", function () { applyReplace([elB]); });
+  if (frBoth) frBoth.addEventListener("click", function () { applyReplace([elA, elB]); });
   // Per-slug examples: pages whose subject is a specific real-world format
   // (a Dockerfile, an .srt file, a resume) get an example IN that format,
   // not a generic snippet — this is what "Load example" is promising on
@@ -494,6 +573,9 @@
     "compare-two-lists": ["apples\nbananas\ncherries\ndates", "apples\nbananas\ncherries\nelderberries\nfigs"],
     "docker-compose-diff": ['services:\n  web:\n    image: nginx:alpine\n    ports:\n      - "80:80"', 'services:\n  web:\n    image: nginx:alpine\n    ports:\n      - "80:80"\n      - "443:443"\n  db:\n    image: postgres:16'],
     "package-json-diff": ['{\n  "name": "my-app",\n  "version": "1.2.0",\n  "dependencies": {\n    "express": "^4.18.0"\n  }\n}', '{\n  "name": "my-app",\n  "version": "1.3.0",\n  "dependencies": {\n    "express": "^4.19.0",\n    "zod": "^3.23.0"\n  }\n}'],
+    // Deliberately differs only by invisible characters (NBSP, zero-width
+    // space, curly vs straight quote) — the page's whole point.
+    "invisible-character-checker": ["Order total: 1\u00A0299,00 kr\nPromo code \u201CSAVE10\u201D applied\nUser\u200Bname: anna", 'Order total: 1 299,00 kr\nPromo code "SAVE10" applied\nUsername: anna'],
   };
 
   // Per-language examples — one real pair per option in the langSel dropdown,
@@ -532,20 +614,55 @@
     render();
   });
 
-  // ── Shareable link (base64, UTF-8 safe) ────────────────────────────────────
+  // ── Shareable link ─────────────────────────────────────────────────────────
+  // New links compress the payload with the browser-native CompressionStream
+  // (deflate-raw) before base64url-encoding — ~3-5× more text fits in the same
+  // URL budget, no library. The old uncompressed "#a=…&b=…" format is still
+  // decoded so links shared before this change keep working; browsers without
+  // CompressionStream (rare) fall back to producing the old format too.
   function b64encode(str) { return btoa(unescape(encodeURIComponent(str))); }
   function b64decode(str) { return decodeURIComponent(escape(atob(str))); }
+  function bytesToB64url(buf) {
+    var bytes = new Uint8Array(buf), bin = "", CHUNK = 8192;
+    for (var i = 0; i < bytes.length; i += CHUNK) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function b64urlToBytes(s) {
+    s = s.replace(/-/g, "+").replace(/_/g, "/");
+    while (s.length % 4) s += "=";
+    var bin = atob(s), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+  function deflate(str) {
+    var stream = new Blob([str]).stream().pipeThrough(new CompressionStream("deflate-raw"));
+    return new Response(stream).arrayBuffer();
+  }
+  function inflate(bytes) {
+    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+    return new Response(stream).text();
+  }
   function flash(btn, msg) { var o = btn.textContent; btn.textContent = msg; setTimeout(function () { btn.textContent = o; }, 1600); }
 
   var shareBtn = document.getElementById("shareBtn");
   if (shareBtn) shareBtn.addEventListener("click", function () {
-    var payload = "a=" + encodeURIComponent(b64encode(elA.value)) + "&b=" + encodeURIComponent(b64encode(elB.value));
-    if (payload.length > 12000) { flash(shareBtn, "Too big to link — download instead"); return; }
-    var url = location.origin + location.pathname + "#" + payload;
-    history.replaceState(null, "", url);
-    var done = function () { flash(shareBtn, "Link copied ✓"); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, done);
-    else done();
+    var finish = function (payload) {
+      if (payload.length > 16000) { flash(shareBtn, "Too big to link — download instead"); return; }
+      var url = location.origin + location.pathname + "#" + payload;
+      history.replaceState(null, "", url);
+      var done = function () { flash(shareBtn, "Link copied ✓"); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, done);
+      else done();
+    };
+    if (window.CompressionStream) {
+      deflate(JSON.stringify([elA.value, elB.value])).then(function (buf) {
+        finish("z=" + bytesToB64url(buf));
+      }, function () {
+        finish("a=" + encodeURIComponent(b64encode(elA.value)) + "&b=" + encodeURIComponent(b64encode(elB.value)));
+      });
+    } else {
+      finish("a=" + encodeURIComponent(b64encode(elA.value)) + "&b=" + encodeURIComponent(b64encode(elB.value)));
+    }
   });
 
   function toUnifiedDiff(rows, ctx) {
@@ -605,6 +722,16 @@
   (function restore() {
     if (location.hash && location.hash.length > 1) {
       var params = new URLSearchParams(location.hash.slice(1));
+      if (params.has("z") && window.DecompressionStream) {
+        try {
+          inflate(b64urlToBytes(params.get("z"))).then(function (json) {
+            var pair = JSON.parse(json);
+            elA.value = String(pair[0]); elB.value = String(pair[1]);
+            render();
+          }, function () { render(); });
+          return; // render happens in the promise
+        } catch (e) {}
+      }
       try {
         if (params.has("a")) elA.value = b64decode(params.get("a"));
         if (params.has("b")) elB.value = b64decode(params.get("b"));

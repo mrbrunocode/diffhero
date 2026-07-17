@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diffhero — Free Online Diff Checker for Text &amp; Code</title>
-<meta name="description" content="A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.">
-<link rel="canonical" href="https://diffhero.app/">
-<meta property="og:title" content="Diffhero — Free Online Diff Checker for Text &amp; Code">
-<meta property="og:description" content="A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.">
+<title>Invisible Character Checker — Why Identical-Looking Text Differs | Diffhero</title>
+<meta name="description" content="Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.">
+<link rel="canonical" href="https://diffhero.app/diff/invisible-character-checker">
+<meta property="og:title" content="Invisible Character Checker — Why Identical-Looking Text Differs">
+<meta property="og:description" content="Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://diffhero.app/">
+<meta property="og:url" content="https://diffhero.app/diff/invisible-character-checker">
 <meta property="og:image" content="https://diffhero.app/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
-<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <meta name="theme-color" content="#0a0d12">
 <meta name="msvalidate.01" content="5A4EFD6B7BD09C4C115B7ACCF3688E1C">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/style.css">
+<link rel="stylesheet" href="../assets/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/","description":"A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-15","dateModified":"2026-07-15"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"}]}</script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/invisible-character-checker","description":"Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-15","dateModified":"2026-07-15"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Invisible Characters","item":"https://diffhero.app/diff/invisible-character-checker"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What invisible characters does it reveal?","acceptedAnswer":{"@type":"Answer","text":"Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it."}},{"@type":"Question","name":"Where do these characters come from?","acceptedAnswer":{"@type":"Answer","text":"The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space."}},{"@type":"Question","name":"How do I remove them once found?","acceptedAnswer":{"@type":"Answer","text":"Open Find & replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge."}}]}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2653891546345771" crossorigin="anonymous"></script>
 
 </head>
@@ -50,13 +50,13 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 </nav>
 <main class="wrap" id="main">
 
-  <section class="hero hero--home">
-    <span class="badge"><span class="dot" aria-hidden="true"></span>Runs entirely in your browser — nothing uploaded</span>
-    <h1>Diffhero</h1>
-    <p class="lede">A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.</p>
+  <section class="hero">
+    <span class="eyebrow">Invisible Characters</span>
+    <h1>Invisible Character Checker — Why Identical-Looking Text Differs</h1>
+    <p class="lede">Paste both versions and turn on “Show invisibles” in the toolbar: non-breaking spaces render as ⍽, zero-width characters as ∅, and tabs as →, so the character your eye can't see becomes the change you can. These sneak in constantly — Word and Google Docs convert straight quotes to curly ones, web pages copy out non-breaking spaces, and AI chat output often carries zero-width characters — and they make string comparisons, config parsers and spreadsheet lookups fail on text that looks identical. Use Find &amp; replace below the tool to strip the culprit once you've spotted it.</p>
   </section>
   
-  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="">
+  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="invisible-character-checker">
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">
@@ -112,27 +112,18 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     </details>
     <div class="diff-output" id="diffOutput" aria-live="polite"></div>
   </section>
-
-  <section class="feature-grid" aria-label="Features">
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M5.6 5.6l2.5 2.5M15.9 15.9l2.5 2.5M18.4 5.6l-2.5 2.5M8.1 15.9l-2.5 2.5"/></svg></span><h3>Word-level highlighting</h3><p>Not just which lines changed — the exact words inside a changed line are marked, so you see the real edit at a glance.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span><h3>Split &amp; unified views</h3><p>Compare side by side with line numbers, or switch to a single unified column. Your choice is remembered.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Nothing is uploaded</h3><p>Every comparison runs in your browser. Your text and code never touch a server, so it's safe for private files and works offline.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span><h3>Free, no signup, no limits</h3><p>No account, no daily cap, no paywall. Open the page and compare — every feature is free, immediately.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c-2 0-3 1-3 3v2.5c0 1-1 2-2 2.5 1 .5 2 1.5 2 2.5V17c0 2 1 3 3 3"/><path d="M15 4c2 0 3 1 3 3v2.5c0 1 1 2 2 2.5-1 .5-2 1.5-2 2.5V17c0 2-1 3-3 3"/></svg></span><h3>Formatting-aware JSON</h3><p>On the JSON page, both sides are normalised first, so a minified and a pretty-printed file with the same data read as identical.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.3 10.7l7.4-3.4M8.3 13.3l7.4 3.4"/></svg></span><h3>Share &amp; export</h3><p>Copy a link that reopens the same comparison, or download a standard unified <code>.diff</code> patch.</p></div>
-  </section>
-
-  <section class="howto">
-    <h2>How to compare two files with Diffhero</h2>
-    <ol>
-      <li>Paste or type the original version into the left box (or drag a file onto it).</li>
-      <li>Paste the changed version into the right box.</li>
-      <li>See the result instantly: additions in green, deletions in red, and the exact changed words highlighted inline.</li>
-      <li>Switch between Split and Unified view, jump between changes with the arrows, or download a .diff.</li>
-    </ol>
-  </section>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to compare two files with Diffhero","step":[{"@type":"HowToStep","position":1,"text":"Paste or type the original version into the left box (or drag a file onto it)."},{"@type":"HowToStep","position":2,"text":"Paste the changed version into the right box."},{"@type":"HowToStep","position":3,"text":"See the result instantly: additions in green, deletions in red, and the exact changed words highlighted inline."},{"@type":"HowToStep","position":4,"text":"Switch between Split and Unified view, jump between changes with the arrows, or download a .diff."}]}</script>
   <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
+  
+  
+  
+  <section class="faq">
+    <h2>Common questions</h2>
+    <dl class="faq-grid">
+      <div class="faq-item"><h3>What invisible characters does it reveal?</h3><dd>Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it.</dd></div>
+      <div class="faq-item"><h3>Where do these characters come from?</h3><dd>The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space.</dd></div>
+      <div class="faq-item"><h3>How do I remove them once found?</h3><dd>Open Find &amp; replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge.</dd></div>
+    </dl>
+  </section>
   
   <nav class="related" aria-label="More tools">
     <h2>More tools</h2>
@@ -173,7 +164,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <a href="/diff/private-diff-checker">Private Diff Checker</a>
       <a href="/diff/log-diff">Log Diff</a>
       <a href="/diff/subtitle-diff">Subtitle Diff</a>
-      <a href="/diff/invisible-character-checker">Invisible Characters</a>
     </div>
   </nav>
 </main>
@@ -185,6 +175,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     </div>
   </div>
 </footer>
-<script src="./assets/app.js" defer></script>
+<script src="../assets/app.js" defer></script>
 </body>
 </html>
