@@ -17,27 +17,39 @@ export const home = {
   title: `${C.NAME} — Free Online Diff Checker for Text & Code`,
   description: C.DESCRIPTION,
   bodyHtml: `
-  <section class="hero hero--home">
-    <span class="badge"><span class="dot" aria-hidden="true"></span>Runs entirely in your browser — nothing uploaded</span>
-    <h1>${C.NAME}</h1>
-    <p class="lede">${C.DESCRIPTION}</p>
+  <section class="hero hero--home hero--split">
+    <div class="hero-copy">
+      <span class="badge"><span class="dot" aria-hidden="true"></span>Runs entirely in your browser — nothing uploaded</span>
+      <h1>${C.NAME}</h1>
+      <p class="lede">${C.DESCRIPTION}</p>
+    </div>
+    <div class="hero-sample" aria-hidden="true">
+      <div class="hero-sample-head"><span class="dtext">config.yml</span></div>
+      <div class="diff-view unified">
+        <div class="dline"><span class="gut">4</span><span class="dsign"> </span><span class="dtext">  retries: 3</span></div>
+        <div class="dline del"><span class="gut">5</span><span class="dsign">−</span><span class="dtext">  timeout: <span class="wd-del">10s</span></span></div>
+        <div class="dline add"><span class="gut">5</span><span class="dsign">+</span><span class="dtext">  timeout: <span class="wd-add">30s</span></span></div>
+        <div class="dline add"><span class="gut">6</span><span class="dsign">+</span><span class="dtext">  <span class="wd-add">backoff: exponential</span></span></div>
+        <div class="dline"><span class="gut">7</span><span class="dsign"> </span><span class="dtext">  region: us-east-1</span></div>
+      </div>
+    </div>
   </section>
   ${renderTool({ format: "text" })}
 
-  <section class="feature-grid" aria-label="Features">
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M5.6 5.6l2.5 2.5M15.9 15.9l2.5 2.5M18.4 5.6l-2.5 2.5M8.1 15.9l-2.5 2.5"/></svg></span><h3>Word-level highlighting</h3><p>Not just which lines changed — the exact words inside a changed line are marked, so you see the real edit at a glance.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span><h3>Split &amp; unified views</h3><p>Compare side by side with line numbers, or switch to a single unified column. Your choice is remembered.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Nothing is uploaded</h3><p>Every comparison runs in your browser. Your text and code never touch a server, so it's safe for private files and works offline.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span><h3>Free, no signup, no limits</h3><p>No account, no daily cap, no paywall. Open the page and compare — every feature is free, immediately.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c-2 0-3 1-3 3v2.5c0 1-1 2-2 2.5 1 .5 2 1.5 2 2.5V17c0 2 1 3 3 3"/><path d="M15 4c2 0 3 1 3 3v2.5c0 1 1 2 2 2.5-1 .5-2 1.5-2 2.5V17c0 2-1 3-3 3"/></svg></span><h3>Formatting-aware JSON</h3><p>On the JSON page, both sides are normalised first, so a minified and a pretty-printed file with the same data read as identical.</p></div>
-    <div class="feature"><span class="ficon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.3 10.7l7.4-3.4M8.3 13.3l7.4 3.4"/></svg></span><h3>Share &amp; export</h3><p>Copy a link that reopens the same comparison, or download a standard unified <code>.diff</code> patch.</p></div>
+  <section class="feature-list" aria-label="Features">
+    <div class="feature-row feature-row--add"><h3>Word-level highlighting</h3><p>Not just which lines changed — the exact words inside a changed line are marked, so you see the real edit at a glance.</p></div>
+    <div class="feature-row feature-row--del"><h3>Split &amp; unified views</h3><p>Compare side by side with line numbers, or switch to a single unified column. Your choice is remembered.</p></div>
+    <div class="feature-row feature-row--add"><h3>Nothing is uploaded</h3><p>Every comparison runs in your browser. Your text and code never touch a server, so it's safe for private files and works offline.</p></div>
+    <div class="feature-row feature-row--del"><h3>Free, no signup, no limits</h3><p>No account, no daily cap, no paywall. Open the page and compare — every feature is free, immediately.</p></div>
+    <div class="feature-row feature-row--add"><h3>Formatting-aware JSON</h3><p>On the JSON page, both sides are normalised first, so a minified and a pretty-printed file with the same data read as identical.</p></div>
+    <div class="feature-row feature-row--del"><h3>Share &amp; export</h3><p>Copy a link that reopens the same comparison, or download a standard unified <code>.diff</code> patch.</p></div>
   </section>
 
   <section class="howto">
     <h2>How to compare two files with ${C.NAME}</h2>
-    <ol>
-      ${HOME_HOWTO.map((s) => `<li>${s}</li>`).join("\n      ")}
-    </ol>
+    <div class="howto-grid">
+      ${HOME_HOWTO.map((s) => `<div class="howto-step"><p>${s}</p></div>`).join("\n      ")}
+    </div>
   </section>
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
