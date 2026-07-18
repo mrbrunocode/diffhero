@@ -22,8 +22,8 @@ export const NAV = [
   { href: "/contact", label: "Contact" },
 ];
 
-export const LAST_UPDATED = "July 15, 2026";
-export const CONTENT_DATE = "2026-07-15";
+export const LAST_UPDATED = "July 18, 2026";
+export const CONTENT_DATE = "2026-07-18";
 
 // ── Monetization / analytics IDs (empty until wired up) ────────────────────
 export const GA_ID = "G-Q907KGWEP4";

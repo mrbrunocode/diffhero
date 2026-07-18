@@ -55,7 +55,7 @@ gtag('js',new Date());gtag('config','${C.GA_ID}');</script>`;
 }
 
 function adsenseLoader() {
-  if (!C.ADSENSE_PUB) return "";
+  if (!C.ADSENSE_PUB || !C.ADSENSE_SLOT) return "";
   return `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${C.ADSENSE_PUB}" crossorigin="anonymous"></script>`;
 }
 

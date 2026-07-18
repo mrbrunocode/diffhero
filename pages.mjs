@@ -16,7 +16,7 @@ export const PAGES = [
   {
     slug: "text-compare",
     eyebrow: "Text Compare",
-    title: "Text Compare — Find the Difference Between Two Texts",
+    title: "Text Compare — Find Text Differences",
     description:
       "Paste two versions of any text and see every added, removed and changed line — with the exact words highlighted — instantly. Free, browser-only, nothing uploaded.",
     intro:
@@ -82,7 +82,7 @@ export const PAGES = [
   {
     slug: "json-diff",
     eyebrow: "JSON Diff",
-    title: "JSON Diff — Compare Two JSON Files, Formatting-Aware",
+    title: "JSON Diff — Compare Two JSON Files",
     description:
       "Compare two JSON documents without formatting noise. Diffhero pretty-prints both sides first, so only real value changes show up — not whitespace or key spacing.",
     intro:
@@ -472,7 +472,7 @@ export const PAGES = [
   {
     slug: "docker-compose-diff",
     eyebrow: "docker-compose Diff",
-    title: "docker-compose.yml Diff — Compare Two Compose Files",
+    title: "docker-compose.yml Diff — Compare Files",
     description:
       "Compare two docker-compose.yml files and see exactly which services, ports or volumes changed. Free, browser-only, nothing uploaded.",
     intro:
@@ -607,7 +607,7 @@ export const PAGES = [
   {
     slug: "private-diff-checker",
     eyebrow: "Private Diff Checker",
-    title: "Private Diff Checker — Compare Text With Nothing Uploaded",
+    title: "Private Diff Checker — Nothing Uploaded",
     description:
       "A diff checker that never uploads what you paste — the entire comparison runs client-side in your browser. Free, no signup, no server round-trip.",
     intro:
@@ -652,7 +652,7 @@ export const PAGES = [
   {
     slug: "invisible-character-checker",
     eyebrow: "Invisible Characters",
-    title: "Invisible Character Checker — Why Identical-Looking Text Differs",
+    title: "Invisible Character Checker",
     description:
       "Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.",
     intro:
