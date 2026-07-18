@@ -34,6 +34,6 @@ export const ADSENSE_SLOT = "";
 export const BING_VERIFY = "5A4EFD6B7BD09C4C115B7ACCF3688E1C";
 
 export const FONT_HREF =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap";
 
 export const THEME_COLOR = "#0a0d12";

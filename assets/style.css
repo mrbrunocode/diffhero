@@ -1,17 +1,17 @@
 /* ─────────────────────────────────────────────────────────────────────────
    Diffhero stylesheet — self-contained: no build step, no external requests.
-   Design tokens (dark-first, cool-neutral + one violet accent) are inlined at
-   the top; the diff-view and homepage rules follow.
+   Design tokens (dark-first, cool slate-neutral + one cyan accent, IBM Plex
+   Sans/Mono) are inlined at the top; the diff-view and homepage rules follow.
    ───────────────────────────────────────────────────────────────────────── */
 
 /* ---- Colors (dark-first) ---- */
 :root {
   color-scheme: dark;
-  --n-0: oklch(0.14 0.012 260); --n-1: oklch(0.185 0.013 260); --n-2: oklch(0.23 0.014 260);
-  --n-3: oklch(0.29 0.015 260); --n-4: oklch(0.36 0.015 260); --n-5: oklch(0.46 0.014 260);
-  --n-6: oklch(0.62 0.012 260); --n-7: oklch(0.80 0.008 260); --n-8: oklch(0.94 0.004 260);
-  --n-9: oklch(0.99 0.002 260);
-  --accent-h: 265;
+  --n-0: oklch(0.14 0.012 235); --n-1: oklch(0.185 0.013 235); --n-2: oklch(0.23 0.014 235);
+  --n-3: oklch(0.29 0.015 235); --n-4: oklch(0.36 0.015 235); --n-5: oklch(0.46 0.014 235);
+  --n-6: oklch(0.62 0.012 235); --n-7: oklch(0.80 0.008 235); --n-8: oklch(0.94 0.004 235);
+  --n-9: oklch(0.99 0.002 235);
+  --accent-h: 198;
   --accent: oklch(0.72 0.16 var(--accent-h));
   --accent-strong: oklch(0.62 0.18 var(--accent-h));
   --accent-soft: oklch(0.72 0.16 var(--accent-h) / 0.16);
@@ -22,21 +22,21 @@
   --del-bg: oklch(0.66 0.17 25 / 0.13); --del-line: oklch(0.70 0.18 25);
   --del-strong: oklch(0.66 0.17 25 / 0.32);
   /* syntax tokens (dark) — hues kept off green/red so they read on diff backgrounds */
-  --tok-com: oklch(0.56 0.02 260); --tok-str: oklch(0.80 0.12 85); --tok-num: oklch(0.80 0.10 210);
+  --tok-com: oklch(0.56 0.02 235); --tok-str: oklch(0.80 0.12 85); --tok-num: oklch(0.80 0.10 210);
   --tok-kw: oklch(0.76 0.15 300); --tok-bool: oklch(0.80 0.12 55); --tok-key: oklch(0.82 0.09 195);
   --tok-tag: oklch(0.74 0.14 255); --tok-attr: oklch(0.82 0.09 175); --tok-punct: var(--text-secondary);
   --bg: var(--n-0); --surface: var(--n-1); --surface-elevated: var(--n-2); --surface-hover: var(--n-3);
   --border: var(--n-4); --border-subtle: var(--n-3);
   --text-primary: var(--n-8); --text-secondary: var(--n-6); --text-tertiary: var(--n-5);
   --focus-ring: oklch(0.72 0.16 var(--accent-h) / 0.45);
-  --shadow-color: 260 30% 4%;
+  --shadow-color: 235 30% 4%;
 }
 [data-theme="light"] {
   color-scheme: light;
-  --n-0: oklch(0.985 0.004 260); --n-1: oklch(1 0 0); --n-2: oklch(0.975 0.005 260);
-  --n-3: oklch(0.94 0.007 260); --n-4: oklch(0.88 0.008 260); --n-5: oklch(0.72 0.01 260);
-  --n-6: oklch(0.50 0.014 260); --n-7: oklch(0.36 0.014 260); --n-8: oklch(0.19 0.014 260);
-  --n-9: oklch(0.10 0.012 260);
+  --n-0: oklch(0.985 0.004 235); --n-1: oklch(1 0 0); --n-2: oklch(0.975 0.005 235);
+  --n-3: oklch(0.94 0.007 235); --n-4: oklch(0.88 0.008 235); --n-5: oklch(0.72 0.01 235);
+  --n-6: oklch(0.50 0.014 235); --n-7: oklch(0.36 0.014 235); --n-8: oklch(0.19 0.014 235);
+  --n-9: oklch(0.10 0.012 235);
   --accent: oklch(0.56 0.19 var(--accent-h));
   --accent-strong: oklch(0.46 0.20 var(--accent-h));
   --accent-soft: oklch(0.56 0.19 var(--accent-h) / 0.12);
@@ -47,23 +47,23 @@
   --del-bg: oklch(0.66 0.17 25 / 0.14); --del-line: oklch(0.52 0.18 25);
   --del-strong: oklch(0.66 0.17 25 / 0.30);
   /* syntax tokens (light) */
-  --tok-com: oklch(0.55 0.02 260); --tok-str: oklch(0.48 0.13 50); --tok-num: oklch(0.48 0.13 245);
+  --tok-com: oklch(0.55 0.02 235); --tok-str: oklch(0.48 0.13 50); --tok-num: oklch(0.48 0.13 245);
   --tok-kw: oklch(0.46 0.18 300); --tok-bool: oklch(0.50 0.15 40); --tok-key: oklch(0.42 0.10 200);
-  --tok-tag: oklch(0.44 0.15 260); --tok-attr: oklch(0.40 0.10 175); --tok-punct: var(--text-secondary);
+  --tok-tag: oklch(0.44 0.15 235); --tok-attr: oklch(0.40 0.10 175); --tok-punct: var(--text-secondary);
   --surface-elevated: var(--n-1);
   --focus-ring: oklch(0.56 0.19 var(--accent-h) / 0.35);
-  --shadow-color: 260 30% 60%;
+  --shadow-color: 235 30% 60%;
 }
 
 /* ---- Type / spacing / effects ---- */
 :root {
-  --font-ui: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-display: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-ui: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --text-xs: 12px; --text-sm: 13px; --text-base: 15px; --text-md: 17px; --text-lg: 20px;
   --text-xl: 24px; --text-2xl: 32px; --text-3xl: 44px;
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
   --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px;
-  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-full: 999px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 10px; --radius-full: 999px;
   --container-max: 1080px;
   --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / 0.28), 0 1px 2px hsl(var(--shadow-color) / 0.30);
   --shadow-md: 0 8px 24px hsl(var(--shadow-color) / 0.30), 0 2px 6px hsl(var(--shadow-color) / 0.24);
@@ -78,13 +78,13 @@ body {
   color: var(--text-primary); background: var(--bg); -webkit-font-smoothing: antialiased;
   min-height: 100vh; display: flex; flex-direction: column;
   /* A whisper of the accent behind the hero, not a flat neutral field — echoes
-     the violet used everywhere else instead of introducing a new color. */
+     the cyan used everywhere else instead of introducing a new color. */
   background-image: radial-gradient(ellipse 900px 480px at 50% -8%, var(--accent-soft), transparent 60%);
   background-repeat: no-repeat;
 }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
-h1, h2, h3 { line-height: 1.1; letter-spacing: -0.03em; font-weight: 800; }
+h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
 h1 { font-size: var(--text-3xl); text-wrap: balance; }
 h2 { font-size: var(--text-xl); }
 h3 { font-size: var(--text-md); }
@@ -101,7 +101,7 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   max-width: var(--container-max); margin: 0 auto; width: 100%; padding: var(--space-4) var(--space-5);
 }
-.logo { font-weight: 800; font-size: var(--text-lg); color: var(--text-primary); letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: var(--space-2); }
+.logo { font-weight: 700; font-size: var(--text-lg); color: var(--text-primary); letter-spacing: -0.03em; display: inline-flex; align-items: center; gap: var(--space-2); }
 .logo:hover { text-decoration: none; }
 .logo-mark { color: var(--accent); flex: 0 0 auto; }
 .theme-toggle {
