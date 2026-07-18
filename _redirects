@@ -1,6 +1,0 @@
-# www is not the canonical host (every canonical tag / sitemap URL is
-# apex-only) — force it to the apex domain instead of silently serving
-# duplicate content that only a canonical tag would de-dupe. Same fix as
-# countlink, which Search Console flagged for exactly this (www crawled
-# and indexed as a near-duplicate "alternate" of the apex page).
-https://www.diffhero.app/* https://diffhero.app/:splat 301!
