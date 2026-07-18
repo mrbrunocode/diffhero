@@ -747,6 +747,22 @@ export const PAGES = [
       { q: "How do I remove them once found?", a: "Open Find & replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge." },
     ],
   },
+  {
+    slug: "protobuf-diff",
+    eyebrow: "Protobuf Diff",
+    title: "Protobuf Diff — Compare Two .proto Schema Files",
+    description:
+      "Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.",
+    intro:
+      "Paste the old and new version of a .proto file to see precisely which message, field, or tag number changed before you ship a schema update. Protobuf's wire format depends on field numbers staying stable — a renumbered or removed field tag can silently break compatibility between an old client and a new server even though the .proto file still \"looks\" similar, so seeing the exact line that changed matters more here than the file's surface syntax.",
+    format: "text",
+    faq: [
+      { q: "Can this tell me if a schema change breaks wire compatibility?", a: "It shows you exactly which lines changed — a reused or renumbered field tag, a field removed instead of marked reserved, a changed type on an existing tag — but it's a text diff, not a protobuf compiler, so judging whether a specific change is breaking is still yours to make from what it highlights." },
+      { q: "What should I look for in the diff to catch a breaking change?", a: "Field tag numbers (the `= 1`, `= 2` at the end of each field) that were reused or renumbered, a field deleted without being added to `reserved`, and a field's type changed to one that isn't wire-compatible with the old type — all show up as ordinary changed lines." },
+      { q: "Does it work for proto2 and proto3?", a: "Yes — both are plain text, so a `.proto` file compares the same way regardless of syntax version." },
+      { q: "Is my schema uploaded anywhere?", a: "No. The comparison runs entirely in your browser, so an unreleased API schema never leaves your device." },
+    ],
+  },
 ];
 
 /**

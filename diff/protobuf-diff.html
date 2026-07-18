@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swift Diff — Compare Two Swift Files | Diffhero</title>
-<meta name="description" content="Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.">
-<link rel="canonical" href="https://diffhero.app/diff/swift-diff">
-<meta property="og:title" content="Swift Diff — Compare Two Swift Files">
-<meta property="og:description" content="Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.">
+<title>Protobuf Diff — Compare Two .proto Schema Files | Diffhero</title>
+<meta name="description" content="Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.">
+<link rel="canonical" href="https://diffhero.app/diff/protobuf-diff">
+<meta property="og:title" content="Protobuf Diff — Compare Two .proto Schema Files">
+<meta property="og:description" content="Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://diffhero.app/diff/swift-diff">
+<meta property="og:url" content="https://diffhero.app/diff/protobuf-diff">
 <meta property="og:image" content="https://diffhero.app/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
@@ -24,9 +24,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/swift-diff","description":"Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Swift Diff","item":"https://diffhero.app/diff/swift-diff"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it handle optionals and property wrappers?","acceptedAnswer":{"@type":"Answer","text":"Yes — they're compared as text, so a changed `?`/`!` or an added `@State`/`@Published` wrapper shows up like any other token change."}},{"@type":"Question","name":"Does it work for SwiftUI view bodies?","acceptedAnswer":{"@type":"Answer","text":"Yes, a SwiftUI `.swift` file diffs the same as any other Swift source — useful for reviewing a view's body before a PR without opening Xcode."}},{"@type":"Question","name":"Is my Swift code uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser, so App Store-bound or private source stays on your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/protobuf-diff","description":"Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Protobuf Diff","item":"https://diffhero.app/diff/protobuf-diff"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can this tell me if a schema change breaks wire compatibility?","acceptedAnswer":{"@type":"Answer","text":"It shows you exactly which lines changed — a reused or renumbered field tag, a field removed instead of marked reserved, a changed type on an existing tag — but it's a text diff, not a protobuf compiler, so judging whether a specific change is breaking is still yours to make from what it highlights."}},{"@type":"Question","name":"What should I look for in the diff to catch a breaking change?","acceptedAnswer":{"@type":"Answer","text":"Field tag numbers (the `= 1`, `= 2` at the end of each field) that were reused or renumbered, a field deleted without being added to `reserved`, and a field's type changed to one that isn't wire-compatible with the old type — all show up as ordinary changed lines."}},{"@type":"Question","name":"Does it work for proto2 and proto3?","acceptedAnswer":{"@type":"Answer","text":"Yes — both are plain text, so a `.proto` file compares the same way regardless of syntax version."}},{"@type":"Question","name":"Is my schema uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely in your browser, so an unreleased API schema never leaves your device."}}]}</script>
 
 
 </head>
@@ -51,12 +51,12 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <main class="wrap" id="main">
 
   <section class="hero">
-    <span class="eyebrow">Swift Diff</span>
-    <h1>Swift Diff — Compare Two Swift Files</h1>
-    <p class="lede">Paste two versions of a .swift file to see exactly what changed — a property wrapper, an optional-binding tweak, a SwiftUI view's body — with the changed tokens highlighted inline. Works the same for UIKit and SwiftUI source.</p>
+    <span class="eyebrow">Protobuf Diff</span>
+    <h1>Protobuf Diff — Compare Two .proto Schema Files</h1>
+    <p class="lede">Paste the old and new version of a .proto file to see precisely which message, field, or tag number changed before you ship a schema update. Protobuf's wire format depends on field numbers staying stable — a renumbered or removed field tag can silently break compatibility between an old client and a new server even though the .proto file still &quot;looks&quot; similar, so seeing the exact line that changed matters more here than the file's surface syntax.</p>
   </section>
   
-  <section class="tool difftool" data-format="text" data-lang="swift" data-slug="swift-diff">
+  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="protobuf-diff">
     
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
@@ -79,7 +79,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
         <button type="button" class="seg is-active" id="viewSplit" data-view="split" aria-pressed="true">Split</button>
         <button type="button" class="seg" id="viewUnified" data-view="unified" aria-pressed="false">Unified</button>
       </div>
-      <label class="opt lang-opt"><span class="sr-only">Syntax language</span><select id="langSel" class="lang-sel" aria-label="Syntax highlighting language"><option value="plain">Plain text</option><option value="clike">Code (C-like)</option><option value="javascript">JavaScript / TS</option><option value="python">Python</option><option value="json">JSON</option><option value="html">HTML / XML</option><option value="xml">XML</option><option value="css">CSS</option><option value="sql">SQL</option><option value="yaml">YAML</option><option value="go">Go</option><option value="java">Java</option><option value="php">PHP</option><option value="csharp">C#</option><option value="rust">Rust</option><option value="kotlin">Kotlin</option><option value="swift" selected>Swift</option></select></label>
+      <label class="opt lang-opt"><span class="sr-only">Syntax language</span><select id="langSel" class="lang-sel" aria-label="Syntax highlighting language"><option value="plain" selected>Plain text</option><option value="clike">Code (C-like)</option><option value="javascript">JavaScript / TS</option><option value="python">Python</option><option value="json">JSON</option><option value="html">HTML / XML</option><option value="xml">XML</option><option value="css">CSS</option><option value="sql">SQL</option><option value="yaml">YAML</option><option value="go">Go</option><option value="java">Java</option><option value="php">PHP</option><option value="csharp">C#</option><option value="rust">Rust</option><option value="kotlin">Kotlin</option><option value="swift">Swift</option></select></label>
       <label class="opt"><input type="checkbox" id="optWhitespace"> Ignore whitespace</label>
       <label class="opt"><input type="checkbox" id="optCase"> Ignore case</label>
       <label class="opt"><input type="checkbox" id="optChar" title="Mark the exact changed characters inside a changed word, not just the word"> Character detail</label>
@@ -120,9 +120,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   <section class="faq">
     <h2>Common questions</h2>
     <dl class="faq-grid">
-      <div class="faq-item"><h3>Does it handle optionals and property wrappers?</h3><dd>Yes — they're compared as text, so a changed `?`/`!` or an added `@State`/`@Published` wrapper shows up like any other token change.</dd></div>
-      <div class="faq-item"><h3>Does it work for SwiftUI view bodies?</h3><dd>Yes, a SwiftUI `.swift` file diffs the same as any other Swift source — useful for reviewing a view's body before a PR without opening Xcode.</dd></div>
-      <div class="faq-item"><h3>Is my Swift code uploaded?</h3><dd>No. The comparison runs entirely in your browser, so App Store-bound or private source stays on your device.</dd></div>
+      <div class="faq-item"><h3>Can this tell me if a schema change breaks wire compatibility?</h3><dd>It shows you exactly which lines changed — a reused or renumbered field tag, a field removed instead of marked reserved, a changed type on an existing tag — but it's a text diff, not a protobuf compiler, so judging whether a specific change is breaking is still yours to make from what it highlights.</dd></div>
+      <div class="faq-item"><h3>What should I look for in the diff to catch a breaking change?</h3><dd>Field tag numbers (the `= 1`, `= 2` at the end of each field) that were reused or renumbered, a field deleted without being added to `reserved`, and a field's type changed to one that isn't wire-compatible with the old type — all show up as ordinary changed lines.</dd></div>
+      <div class="faq-item"><h3>Does it work for proto2 and proto3?</h3><dd>Yes — both are plain text, so a `.proto` file compares the same way regardless of syntax version.</dd></div>
+      <div class="faq-item"><h3>Is my schema uploaded anywhere?</h3><dd>No. The comparison runs entirely in your browser, so an unreleased API schema never leaves your device.</dd></div>
     </dl>
   </section>
   
@@ -154,6 +155,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <a href="/diff/ruby-diff">Ruby Diff</a>
       <a href="/diff/css-diff">CSS Diff</a>
       <a href="/diff/kotlin-diff">Kotlin Diff</a>
+      <a href="/diff/swift-diff">Swift Diff</a>
       <a href="/diff/zig-diff">Zig Diff</a>
       <a href="/diff/elixir-diff">Elixir Diff</a>
       <a href="/diff/gleam-diff">Gleam Diff</a>
@@ -176,7 +178,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <a href="/diff/git-diff-viewer">Git Diff Viewer</a>
       <a href="/diff/subtitle-diff">Subtitle Diff</a>
       <a href="/diff/invisible-character-checker">Invisible Characters</a>
-      <a href="/diff/protobuf-diff">Protobuf Diff</a>
     </div>
   </nav>
 </main>

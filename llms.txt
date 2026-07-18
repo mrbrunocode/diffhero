@@ -60,3 +60,4 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Git Diff Viewer](https://diffhero.app/diff/git-diff-viewer): Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.
 - [Subtitle Diff](https://diffhero.app/diff/subtitle-diff): Compare two subtitle files and see exactly which lines, timings or text changed between them. Free, browser-only, nothing uploaded.
 - [Invisible Characters](https://diffhero.app/diff/invisible-character-checker): Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.
+- [Protobuf Diff](https://diffhero.app/diff/protobuf-diff): Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.
