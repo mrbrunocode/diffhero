@@ -33,6 +33,113 @@
     });
   }
 
+  // ── 3-way merge (conflict resolver) ─────────────────────────────────────────
+  // Placed before the 2-way diff tool's own early return, since a merge page
+  // has none of #original/#changed — mirrors how the theme toggle above runs
+  // unconditionally. Reuses `lcs` (defined later, but hoisted) run twice
+  // (base→mine, base→theirs), then merges the two change sets: an overlap
+  // between mine's and theirs' changed ranges is a real conflict; anything
+  // else auto-merges. This is the same idea as `git merge-file` / diff3,
+  // scoped to whole-line changes (no word-level merging).
+  (function () {
+    var baseEl = document.getElementById("mergeBase");
+    var mineEl = document.getElementById("mergeMine");
+    var theirsEl = document.getElementById("mergeTheirs");
+    if (!baseEl || !mineEl || !theirsEl) return; // not a merge page
+
+    var outEl = document.getElementById("mergeOutput");
+    var summaryEl = document.getElementById("mergeSummary");
+
+    function extractChanges(ops, otherLines) {
+      var changes = [], baseIdx = 0, curStart = null, curAddIdxs = [];
+      function flush() {
+        if (curStart !== null) {
+          changes.push({ start: curStart, end: baseIdx, lines: curAddIdxs.map(function (bi) { return otherLines[bi]; }) });
+        }
+        curStart = null; curAddIdxs = [];
+      }
+      for (var k = 0; k < ops.length; k++) {
+        var o = ops[k];
+        if (o.t === " ") { flush(); baseIdx++; }
+        else if (o.t === "-") { if (curStart === null) curStart = baseIdx; baseIdx++; }
+        else { if (curStart === null) curStart = baseIdx; curAddIdxs.push(o.bi); }
+      }
+      flush();
+      return changes;
+    }
+    function linesEqual(a, b) { return a.length === b.length && a.every(function (v, i) { return v === b[i]; }); }
+
+    function mergeThreeWay(baseLines, mineLines, theirsLines) {
+      var changesMine = extractChanges(lcs(baseLines, mineLines), mineLines);
+      var changesTheirs = extractChanges(lcs(baseLines, theirsLines), theirsLines);
+      var out = [], conflicts = 0, i = 0, j = 0, cursor = 0;
+      while (i < changesMine.length || j < changesTheirs.length) {
+        var cm = changesMine[i], ct = changesTheirs[j];
+        var takeMineFirst = cm && (!ct || cm.start <= ct.start);
+        var a = takeMineFirst ? cm : ct, b = takeMineFirst ? ct : cm;
+        if (b && a.end > b.start) {
+          // overlapping ranges from both sides — one combined conflict block
+          var start = Math.min(cm.start, ct.start), end = Math.max(cm.end, ct.end);
+          for (; cursor < start; cursor++) out.push(baseLines[cursor]);
+          if (cm.start === ct.start && cm.end === ct.end && linesEqual(cm.lines, ct.lines)) {
+            out.push.apply(out, cm.lines); // both sides made the identical edit — not a real conflict
+          } else {
+            conflicts++;
+            out.push("<<<<<<< mine");
+            out.push.apply(out, cm.lines);
+            out.push("=======");
+            out.push.apply(out, ct.lines);
+            out.push(">>>>>>> theirs");
+          }
+          cursor = end; i++; j++;
+        } else {
+          for (; cursor < a.start; cursor++) out.push(baseLines[cursor]);
+          out.push.apply(out, a.lines);
+          cursor = a.end;
+          if (takeMineFirst) i++; else j++;
+        }
+      }
+      for (; cursor < baseLines.length; cursor++) out.push(baseLines[cursor]);
+      return { merged: out.join("\n"), conflicts: conflicts };
+    }
+
+    function renderMerge() {
+      var baseLines = normalize(baseEl.value).split("\n");
+      var mineLines = normalize(mineEl.value).split("\n");
+      var theirsLines = normalize(theirsEl.value).split("\n");
+      var result = mergeThreeWay(baseLines, mineLines, theirsLines);
+      outEl.textContent = result.merged;
+      summaryEl.textContent = result.conflicts === 0
+        ? "Merged cleanly — no conflicts."
+        : result.conflicts + " conflict" + (result.conflicts === 1 ? "" : "s") + " marked below — resolve by editing the merged result directly.";
+      outEl.classList.toggle("has-conflicts", result.conflicts > 0);
+    }
+    [baseEl, mineEl, theirsEl].forEach(function (el) { el.addEventListener("input", renderMerge); });
+    renderMerge();
+
+    var mergeCopyBtn = document.getElementById("mergeCopyBtn");
+    if (mergeCopyBtn) mergeCopyBtn.addEventListener("click", function () {
+      if (!outEl.textContent) return;
+      var done = function () {
+        var t = mergeCopyBtn.textContent; mergeCopyBtn.textContent = "Copied ✓";
+        setTimeout(function () { mergeCopyBtn.textContent = t; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(outEl.textContent).then(done, done);
+      else done();
+    });
+    var mergeExampleBtn = document.getElementById("mergeExampleBtn");
+    if (mergeExampleBtn) mergeExampleBtn.addEventListener("click", function () {
+      baseEl.value = "function greet(name) {\n  const msg = 'Hello, ' + name;\n  return msg;\n}";
+      mineEl.value = "function greet(name) {\n  const msg = 'Hi there, ' + name;\n  return msg;\n}";
+      theirsEl.value = "function greet(name) {\n  const msg = 'Hello, ' + name + '!';\n  return msg;\n}";
+      renderMerge();
+    });
+    var mergeClearBtn = document.getElementById("mergeClearBtn");
+    if (mergeClearBtn) mergeClearBtn.addEventListener("click", function () {
+      baseEl.value = ""; mineEl.value = ""; theirsEl.value = ""; renderMerge(); baseEl.focus();
+    });
+  })();
+
   // ── The tool ──────────────────────────────────────────────────────────────
   var elA = document.getElementById("original");
   var elB = document.getElementById("changed");

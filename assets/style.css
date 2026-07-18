@@ -257,6 +257,17 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
 .change-nav { display: inline-flex; gap: var(--space-2); }
 .diff-summary { font-family: var(--font-display); font-size: var(--text-xs); color: var(--text-secondary); margin-left: auto; }
 
+/* 3-way merge tool */
+.merge-inputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-4); }
+.merge-summary { font-family: var(--font-display); font-size: var(--text-xs); }
+.merge-output {
+  margin-top: var(--space-2); white-space: pre-wrap; word-break: break-word; min-height: 160px;
+}
+.merge-output.has-conflicts { border-color: var(--del-line); box-shadow: 0 0 0 1px var(--del-strong); }
+@media (max-width: 860px) {
+  .merge-inputs { grid-template-columns: 1fr; }
+}
+
 /* diff output */
 .diff-output { margin-top: var(--space-5); }
 .diff-view {
@@ -409,7 +420,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
     --tok-tag: #3b4fc4; --tok-attr: #2a6d5c; --tok-punct: #55555e;
   }
   header, .main-nav, .skip-link, .theme-toggle,
-  .diff-inputs, .tool-actions, .fr, .view-toggle, .lang-opt, .opt, .change-nav,
+  .diff-inputs, .merge-inputs, .tool-actions, .fr, .view-toggle, .lang-opt, .opt, .change-nav,
   .ad-slot, .feature-grid, .howto, .faq, .related, footer, .badge { display: none !important; }
   body { background: #fff; }
   .tool { border: none; box-shadow: none; padding: 0; background: #fff; }

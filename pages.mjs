@@ -80,6 +80,23 @@ export const PAGES = [
     ],
   },
   {
+    slug: "merge-conflict-resolver",
+    eyebrow: "Merge Conflict Resolver",
+    title: "Merge Conflict Resolver — 3-Way Merge Online",
+    description:
+      "Paste a base version plus two changed versions (mine/theirs) and get an automatic 3-way merge, with real conflicts clearly marked. Free, browser-only.",
+    intro:
+      "Paste the common ancestor (Base) plus your version (Mine) and the other version (Theirs). Diffhero merges non-overlapping changes automatically and marks only genuine conflicts — where both sides changed the same lines differently — the same idea as `git merge-file`, done in your browser.",
+    shape: "merge",
+    format: "text",
+    faq: [
+      { q: "How is this different from a 2-way diff?", a: "A 2-way diff only ever compares two texts. This tool takes three — a common Base plus two edited versions — and merges them the way a real version-control merge does: changes that don't overlap combine automatically, and only lines both sides actually changed differently get flagged as conflicts." },
+      { q: "What do the conflict markers mean?", a: "Where both sides edited the same lines differently, the merged result shows `<<<<<<< mine`, your version, `=======`, their version, then `>>>>>>> theirs` — identical to the markers Git itself uses. Edit the merged result directly to pick a side or combine them by hand." },
+      { q: "What if both sides made the exact same edit?", a: "That's not treated as a conflict — if mine and theirs changed the same lines to the identical result, the merge takes it cleanly with no markers, same as a real merge tool would." },
+      { q: "Is my code uploaded anywhere?", a: "No. The merge runs entirely in your browser — nothing from any of the three inputs is sent to a server." },
+    ],
+  },
+  {
     slug: "json-diff",
     eyebrow: "JSON Diff",
     title: "JSON Diff — Compare Two JSON Files",
@@ -724,6 +741,40 @@ const LANG_OPTIONS = [
 ];
 
 export function renderTool(p = {}) {
+  // Merge/conflict resolver is a genuinely different tool shape — three
+  // inputs (base/mine/theirs) and a merged-with-conflict-markers result,
+  // not a two-way diff. Its own early return, same reasoning as every other
+  // shape branch: it has nothing in common with the 2-way diff markup below.
+  if (p.shape === "merge") {
+    return `
+  <section class="tool mergetool" data-slug="${p.slug || ""}">
+    <div class="merge-inputs">
+      <div class="diff-pane" data-side="base">
+        <div class="diff-pane-head"><label class="diff-label" for="mergeBase">Base (original)</label></div>
+        <textarea id="mergeBase" class="editor code" placeholder="Paste the common ancestor version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="mine">
+        <div class="diff-pane-head"><label class="diff-label" for="mergeMine">Mine</label></div>
+        <textarea id="mergeMine" class="editor code" placeholder="Paste your changed version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="theirs">
+        <div class="diff-pane-head"><label class="diff-label" for="mergeTheirs">Theirs</label></div>
+        <textarea id="mergeTheirs" class="editor code" placeholder="Paste the other changed version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+    <div class="tool-bar">
+      <span class="merge-summary" id="mergeSummary" role="status" aria-live="polite"></span>
+    </div>
+    <label for="mergeOutput">Merged result</label>
+    <pre class="editor code merge-output" id="mergeOutput" aria-live="polite"></pre>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="mergeExampleBtn">Load example</button>
+      <button type="button" class="btn" id="mergeCopyBtn">Copy merged result</button>
+      <button type="button" class="btn" id="mergeClearBtn">Clear</button>
+    </div>
+  </section>`;
+  }
+
   const format = p.format || "text";
   const lang = p.lang || LANG_BY_SLUG[p.slug] || "plain";
   const langOpts = LANG_OPTIONS.map(
