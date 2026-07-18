@@ -9,7 +9,7 @@ import { loadDiffEngine } from "./helpers/load-app.mjs";
 const engine = loadDiffEngine();
 
 test("engine exports the expected pure functions", () => {
-  for (const name of ["normalize", "lineKey", "lcs", "tokenMarks", "buildRows", "toUnifiedDiff"]) {
+  for (const name of ["normalize", "lineKey", "lcs", "tokenMarks", "buildRows", "toUnifiedDiff", "parseUnifiedDiff", "prepPair"]) {
     assert.equal(typeof engine[name], "function", `expected ${name} to be exported`);
   }
 });
@@ -104,4 +104,75 @@ test("toUnifiedDiff includes a hunk header and +/- lines for a real change", () 
   assert.match(patch, /^@@ /m);
   assert.match(patch, /^-b$/m);
   assert.match(patch, /^\+B$/m);
+});
+
+test("parseUnifiedDiff extracts original/changed from a single-file unified diff", () => {
+  const diff = [
+    "diff --git a/foo.js b/foo.js",
+    "index abc123..def456 100644",
+    "--- a/foo.js",
+    "+++ b/foo.js",
+    "@@ -1,3 +1,3 @@",
+    " unchanged1",
+    "-old line",
+    "+new line",
+    " unchanged2",
+    "",
+  ].join("\n");
+  const result = engine.parseUnifiedDiff(diff);
+  assert.equal(result.original, "unchanged1\nold line\nunchanged2\n");
+  assert.equal(result.changed, "unchanged1\nnew line\nunchanged2\n");
+  assert.equal(result.multiFile, false);
+});
+
+test("parseUnifiedDiff throws when there's no @@ hunk header", () => {
+  assert.throws(() => engine.parseUnifiedDiff("this is not a diff at all"), /No @@ hunk header/);
+});
+
+test("parseUnifiedDiff stops at a second file's header instead of splicing its lines onto the first file", () => {
+  const diff = [
+    "diff --git a/foo.js b/foo.js",
+    "--- a/foo.js",
+    "+++ b/foo.js",
+    "@@ -1,2 +1,2 @@",
+    "-old foo line",
+    "+new foo line",
+    " unchanged foo",
+    "diff --git a/bar.js b/bar.js",
+    "--- a/bar.js",
+    "+++ b/bar.js",
+    "@@ -1,2 +1,2 @@",
+    "-old bar line",
+    "+new bar line",
+    " unchanged bar",
+    "",
+  ].join("\n");
+  const result = engine.parseUnifiedDiff(diff);
+  assert.equal(result.multiFile, true);
+  // only foo.js's lines should appear — bar.js's must not be spliced on
+  assert.equal(result.original, "old foo line\nunchanged foo");
+  assert.equal(result.changed, "new foo line\nunchanged foo");
+  assert.ok(!result.original.includes("bar"));
+  assert.ok(!result.changed.includes("bar"));
+});
+
+test("prepPair passes text through unchanged when format isn't json", () => {
+  const result = engine.prepPair("text", "raw a", "raw b");
+  assert.deepEqual(result, { a: "raw a", b: "raw b", fallback: false });
+});
+
+test("prepPair pretty-prints both sides when both are valid json", () => {
+  const result = engine.prepPair("json", '{"b":2,"a":1}', '{"a": 1}');
+  assert.equal(result.fallback, false);
+  assert.equal(result.a, JSON.stringify({ b: 2, a: 1 }, null, 2));
+  assert.equal(result.b, JSON.stringify({ a: 1 }, null, 2));
+});
+
+test("prepPair leaves BOTH sides as raw text if either fails to parse (no asymmetric reformatting)", () => {
+  const result = engine.prepPair("json", '{"a":1}', "not json at all");
+  assert.equal(result.fallback, true);
+  // the valid side must stay as originally typed, not silently pretty-printed
+  // against the other side's untouched raw text
+  assert.equal(result.a, '{"a":1}');
+  assert.equal(result.b, "not json at all");
 });

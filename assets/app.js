@@ -17,7 +17,7 @@
   // runs before their definitions and before any DOM access — this branch
   // never executes in a browser, where `module` is undefined.
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff };
+    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff, parseUnifiedDiff: parseUnifiedDiff, prepPair: prepPair };
     return;
   }
 
@@ -456,12 +456,17 @@
 
   // ── Diff core ──────────────────────────────────────────────────────────────
   var jsonFallback = false;
-  function prep(text) {
-    if (format === "json") {
-      try { return JSON.stringify(JSON.parse(text), null, 2); }
-      catch (e) { jsonFallback = true; return text; }
-    }
-    return text;
+  // Reformats both sides together, not independently — pretty-printing only
+  // whichever side happens to parse would leave it reformatted against the
+  // other side's untouched raw text, even though the "compared as plain
+  // text" fallback message tells the user neither side was touched.
+  function prepPair(fmt, textA, textB) {
+    if (fmt !== "json") return { a: textA, b: textB, fallback: false };
+    var parsedA, parsedB, okA = true, okB = true;
+    try { parsedA = JSON.parse(textA); } catch (e) { okA = false; }
+    try { parsedB = JSON.parse(textB); } catch (e) { okB = false; }
+    if (okA && okB) return { a: JSON.stringify(parsedA, null, 2), b: JSON.stringify(parsedB, null, 2), fallback: false };
+    return { a: textA, b: textB, fallback: true };
   }
   function lineKey(line) {
     var k = line;
@@ -626,7 +631,9 @@
       out.innerHTML = '<p class="diff-empty">Paste something into both boxes (or drop a file on each) to see the differences here.</p>';
       summary.textContent = ""; if (changeNav) changeNav.hidden = true; lastRows = null; anchors = []; return;
     }
-    var a = prep(normalize(rawA)), b = prep(normalize(rawB));
+    var prepped = prepPair(format, normalize(rawA), normalize(rawB));
+    jsonFallback = prepped.fallback;
+    var a = prepped.a, b = prepped.b;
     var aLines = a.length ? a.split("\n") : [];
     var bLines = b.length ? b.split("\n") : [];
     var rows = buildRows(aLines, bLines);
@@ -763,12 +770,21 @@
     }).then(function (result) { return result.value; });
   }
   // ── Paste-a-git-diff parser (optional, only present on pages with p.pasteDiff) ──
+  // A multi-file `git diff` paste (several "diff --git" headers) used to have
+  // its second file's hunk silently spliced onto the end of the first file's
+  // lines, with no separator — the tool has only one Original/Changed pane,
+  // so there's nowhere to put a second file. Rather than produce that
+  // nonsensical merged "file", stop at the first file's hunks and flag it.
   function parseUnifiedDiff(text) {
     var lines = normalize(text).split("\n");
-    var origLines = [], changedLines = [], sawHunk = false;
+    var origLines = [], changedLines = [], sawHunk = false, multiFile = false;
     for (var i = 0; i < lines.length; i++) {
       var l = lines[i];
-      if (l.slice(0, 3) === "---" || l.slice(0, 3) === "+++" || l.slice(0, 10) === "diff --git" || l.slice(0, 6) === "index " || l.slice(0, 3) === "\\ N") continue;
+      if (l.slice(0, 10) === "diff --git") {
+        if (sawHunk) { multiFile = true; break; } // second file header — stop here
+        continue;
+      }
+      if (l.slice(0, 3) === "---" || l.slice(0, 3) === "+++" || l.slice(0, 6) === "index " || l.slice(0, 3) === "\\ N") continue;
       if (l.slice(0, 2) === "@@") { sawHunk = true; continue; }
       if (l.charAt(0) === "-") { origLines.push(l.slice(1)); }
       else if (l.charAt(0) === "+") { changedLines.push(l.slice(1)); }
@@ -777,7 +793,7 @@
       // any other line (e.g. a stray "diff --git" variant) is ignored
     }
     if (!sawHunk) throw new Error("No @@ hunk header found — this doesn't look like a unified diff.");
-    return { original: origLines.join("\n"), changed: changedLines.join("\n") };
+    return { original: origLines.join("\n"), changed: changedLines.join("\n"), multiFile: multiFile };
   }
   var pasteDiffInput = document.getElementById("pasteDiffInput");
   var pasteDiffParseBtn = document.getElementById("pasteDiffParseBtn");
@@ -787,7 +803,9 @@
       var result = parseUnifiedDiff(pasteDiffInput.value);
       elA.value = result.original;
       elB.value = result.changed;
-      pasteDiffError.textContent = "";
+      pasteDiffError.textContent = result.multiFile
+        ? "This paste has multiple files — only the first file's diff was loaded."
+        : "";
       render();
     } catch (e) {
       pasteDiffError.textContent = e.message;
