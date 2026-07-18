@@ -6,7 +6,8 @@
   "description": "A free, private, client-side diff checker for text and code.",
   "scripts": {
     "build": "node engine/build.mjs",
-    "dev": "node engine/build.mjs && node scripts/dev-server.mjs"
+    "dev": "node engine/build.mjs && node scripts/dev-server.mjs",
+    "test": "node --test"
   },
   "engines": {
     "node": ">=18"

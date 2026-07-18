@@ -11,6 +11,16 @@
 (function () {
   "use strict";
 
+  // Exposes the pure diff-engine functions to Node's test runner (see
+  // test/diff-engine.test.mjs). Function declarations below are hoisted to
+  // the top of this scope, so they're already callable here even though this
+  // runs before their definitions and before any DOM access — this branch
+  // never executes in a browser, where `module` is undefined.
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff };
+    return;
+  }
+
   // ── Theme toggle (shared across every app in the family) ──────────────────
   var root = document.documentElement;
   try { var s = localStorage.getItem("theme"); if (s) root.setAttribute("data-theme", s); } catch (e) {}

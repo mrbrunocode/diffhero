@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Run test suite
+        run: npm test
       - name: Regenerate the static site
         run: node engine/build.mjs
       - name: Ensure committed output matches source
