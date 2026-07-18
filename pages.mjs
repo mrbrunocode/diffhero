@@ -142,6 +142,23 @@ export const PAGES = [
     ],
   },
   {
+    slug: "csv-table-diff",
+    eyebrow: "CSV Table Diff",
+    title: "CSV Table Diff — Compare Two CSVs as a Table",
+    description:
+      "Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.",
+    intro:
+      "Paste two CSV exports below and see them compared as a real table, columns aligned — not as raw text lines. Added rows, removed rows, and edited rows are colored distinctly, and within an edited row the exact cell that changed is outlined.",
+    shape: "csv-table",
+    format: "text",
+    faq: [
+      { q: "How is this different from the regular CSV Diff page?", a: "The regular CSV Diff treats each row as a line of text and highlights changed words inline. This page parses the CSV into actual columns and renders a real table, so a changed cell is outlined in its own column rather than just highlighted as text in a line." },
+      { q: "Does it handle quoted fields with commas inside them?", a: "Yes — quoted CSV fields (e.g. \"Smith, John\") are parsed correctly as a single cell, not split on the comma inside the quotes." },
+      { q: "What if the two files have different columns?", a: "The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read." },
+      { q: "Is my data uploaded anywhere?", a: "No. Parsing and comparison both run entirely in your browser." },
+    ],
+  },
+  {
     slug: "xml-diff",
     eyebrow: "XML Diff",
     title: "XML Diff Checker — Compare Two XML Documents",
@@ -771,6 +788,32 @@ export function renderTool(p = {}) {
       <button type="button" class="btn" id="mergeExampleBtn">Load example</button>
       <button type="button" class="btn" id="mergeCopyBtn">Copy merged result</button>
       <button type="button" class="btn" id="mergeClearBtn">Clear</button>
+    </div>
+  </section>`;
+  }
+
+  // CSV table diff: renders an actual aligned <table>, cell by cell, instead
+  // of treating rows as plain text lines like the regular csv-diff page does.
+  if (p.shape === "csv-table") {
+    return `
+  <section class="tool csvtable-tool" data-slug="${p.slug || ""}">
+    <div class="diff-inputs">
+      <div class="diff-pane" data-side="a">
+        <div class="diff-pane-head"><label class="diff-label" for="csvA">Original CSV</label></div>
+        <textarea id="csvA" class="editor code" placeholder="Paste the original CSV here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="b">
+        <div class="diff-pane-head"><label class="diff-label" for="csvB">Changed CSV</label></div>
+        <textarea id="csvB" class="editor code" placeholder="Paste the changed CSV here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+    <div class="tool-bar">
+      <span class="merge-summary" id="csvTableSummary" role="status" aria-live="polite"></span>
+    </div>
+    <div id="csvTableOutput"></div>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="csvExampleBtn">Load example</button>
+      <button type="button" class="btn" id="csvClearBtn">Clear</button>
     </div>
   </section>`;
   }

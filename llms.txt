@@ -20,6 +20,7 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [JSON Diff](https://diffhero.app/diff/json-diff): Compare two JSON documents without formatting noise. Diffhero pretty-prints both sides first, so only real value changes show up — not whitespace or key spacing.
 - [Compare Lists](https://diffhero.app/diff/compare-two-lists): Paste two lists and instantly see which items were added, which were removed, and which appear in both. Line-based, browser-only, nothing uploaded.
 - [CSV Diff](https://diffhero.app/diff/csv-diff): Spot added, removed and changed rows between two CSV files, with the changed cells highlighted. Line-based comparison, entirely in your browser.
+- [CSV Table Diff](https://diffhero.app/diff/csv-table-diff): Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.
 - [XML Diff](https://diffhero.app/diff/xml-diff): Compare two XML files line by line and see exactly what changed, with changed values highlighted. Free, no upload, runs in your browser.
 - [YAML Diff](https://diffhero.app/diff/yaml-diff): Compare two YAML files and highlight every changed line and value. Ideal for Kubernetes manifests, CI configs and app settings. Browser-only, nothing uploaded.
 - [SQL Diff](https://diffhero.app/diff/sql-diff): Compare two SQL scripts or schema dumps and see what changed line by line, with changed clauses highlighted. Free, client-side — nothing leaves your browser.

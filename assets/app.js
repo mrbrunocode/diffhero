@@ -140,6 +140,109 @@
     });
   })();
 
+  // ── CSV table diff (cell-level, not line-text) ──────────────────────────────
+  // Same early-placement reasoning as the merge tool above: this page has
+  // none of #original/#changed, so it needs to run before that guard.
+  (function () {
+    var aEl = document.getElementById("csvA");
+    var bEl = document.getElementById("csvB");
+    if (!aEl || !bEl) return; // not a CSV-table page
+
+    var outEl = document.getElementById("csvTableOutput");
+    var summaryEl = document.getElementById("csvTableSummary");
+
+    function parseCsvLine(line) {
+      var cells = [], cur = "", inQuotes = false;
+      for (var i = 0; i < line.length; i++) {
+        var c = line[i];
+        if (inQuotes) {
+          if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else inQuotes = false; }
+          else cur += c;
+        } else {
+          if (c === '"') inQuotes = true;
+          else if (c === ",") { cells.push(cur); cur = ""; }
+          else cur += c;
+        }
+      }
+      cells.push(cur);
+      return cells;
+    }
+    function parseCsv(text) {
+      return normalize(text).split("\n").filter(function (l) { return l.length > 0; }).map(parseCsvLine);
+    }
+
+    function renderCsvTable() {
+      var allA = parseCsv(aEl.value), allB = parseCsv(bEl.value);
+      if (!allA.length && !allB.length) { outEl.innerHTML = ""; summaryEl.textContent = ""; return; }
+      // First row of each is its header — used for <thead>, and excluded
+      // from the diffed body so it doesn't also show up as a "same" data row.
+      var headerCells = allA[0] || allB[0] || [];
+      var rowsA = allA.slice(1), rowsB = allB.slice(1);
+      var keysA = rowsA.map(function (r) { return r.join(""); });
+      var keysB = rowsB.map(function (r) { return r.join(""); });
+      var ops = lcs(keysA, keysB) || [];
+      var colCount = Math.max(1, headerCells.length || (rowsA[0] || rowsB[0] || []).length);
+      var added = 0, removed = 0, modified = 0;
+
+      function cellsHtml(cells, otherCells, cls) {
+        var out = "";
+        for (var c = 0; c < colCount; c++) {
+          var v = cells[c] !== undefined ? cells[c] : "";
+          var changed = otherCells && otherCells[c] !== v;
+          out += '<td class="' + cls + (changed ? " cell-changed" : "") + '">' + esc(v) + "</td>";
+        }
+        return out;
+      }
+
+      var bodyHtml = "", pendingDel = [], pendingAdd = [];
+      function flushPending() {
+        var n = Math.max(pendingDel.length, pendingAdd.length);
+        for (var i = 0; i < n; i++) {
+          if (i < pendingDel.length && i < pendingAdd.length) {
+            modified++;
+            bodyHtml += "<tr class=\"row-mod\">" + cellsHtml(pendingDel[i], pendingAdd[i], "cell-mod-old") + "</tr>";
+            bodyHtml += "<tr class=\"row-mod\">" + cellsHtml(pendingAdd[i], pendingDel[i], "cell-mod-new") + "</tr>";
+          } else if (i < pendingDel.length) {
+            removed++;
+            bodyHtml += "<tr class=\"row-del\">" + cellsHtml(pendingDel[i], null, "cell-del") + "</tr>";
+          } else {
+            added++;
+            bodyHtml += "<tr class=\"row-add\">" + cellsHtml(pendingAdd[i], null, "cell-add") + "</tr>";
+          }
+        }
+        pendingDel = []; pendingAdd = [];
+      }
+      ops.forEach(function (o) {
+        if (o.t === " ") { flushPending(); bodyHtml += "<tr class=\"row-same\">" + cellsHtml(rowsA[o.ai], null, "cell-same") + "</tr>"; }
+        else if (o.t === "-") pendingDel.push(rowsA[o.ai]);
+        else pendingAdd.push(rowsB[o.bi]);
+      });
+      flushPending();
+
+      var theadHtml = "<tr>" + headerCells.map(function (h, i) { return "<th>" + esc(h || "Column " + (i + 1)) + "</th>"; }).join("") + "</tr>";
+
+      outEl.innerHTML = '<div class="csv-table-wrap"><table class="csv-table"><thead>' + theadHtml + "</thead><tbody>" + bodyHtml + "</tbody></table></div>";
+      var parts = [];
+      if (added) parts.push(added + " row" + (added === 1 ? "" : "s") + " added");
+      if (removed) parts.push(removed + " row" + (removed === 1 ? "" : "s") + " removed");
+      if (modified) parts.push(modified + " row" + (modified === 1 ? "" : "s") + " changed");
+      summaryEl.textContent = parts.length ? parts.join(" · ") : "No differences.";
+    }
+    [aEl, bEl].forEach(function (el) { el.addEventListener("input", renderCsvTable); });
+    renderCsvTable();
+
+    var csvExampleBtn = document.getElementById("csvExampleBtn");
+    if (csvExampleBtn) csvExampleBtn.addEventListener("click", function () {
+      aEl.value = "name,role,salary\nAda,Engineer,95000\nGrace,Manager,110000\nAlan,Engineer,90000";
+      bEl.value = "name,role,salary\nAda,Senior Engineer,105000\nGrace,Manager,110000\nMargaret,Engineer,88000";
+      renderCsvTable();
+    });
+    var csvClearBtn = document.getElementById("csvClearBtn");
+    if (csvClearBtn) csvClearBtn.addEventListener("click", function () {
+      aEl.value = ""; bEl.value = ""; renderCsvTable(); aEl.focus();
+    });
+  })();
+
   // ── The tool ──────────────────────────────────────────────────────────────
   var elA = document.getElementById("original");
   var elB = document.getElementById("changed");

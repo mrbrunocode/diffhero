@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSV Table Diff — Compare Two CSVs as a Table | Diffhero</title>
+<meta name="description" content="Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.">
+<link rel="canonical" href="https://diffhero.app/diff/csv-table-diff">
+<meta property="og:title" content="CSV Table Diff — Compare Two CSVs as a Table">
+<meta property="og:description" content="Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diffhero.app/diff/csv-table-diff">
+<meta property="og:image" content="https://diffhero.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#0a0d12">
+<meta name="msvalidate.01" content="5A4EFD6B7BD09C4C115B7ACCF3688E1C">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=bbf58d4c">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/csv-table-diff","description":"Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"CSV Table Diff","item":"https://diffhero.app/diff/csv-table-diff"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from the regular CSV Diff page?","acceptedAnswer":{"@type":"Answer","text":"The regular CSV Diff treats each row as a line of text and highlights changed words inline. This page parses the CSV into actual columns and renders a real table, so a changed cell is outlined in its own column rather than just highlighted as text in a line."}},{"@type":"Question","name":"Does it handle quoted fields with commas inside them?","acceptedAnswer":{"@type":"Answer","text":"Yes — quoted CSV fields (e.g. \"Smith, John\") are parsed correctly as a single cell, not split on the comma inside the quotes."}},{"@type":"Question","name":"What if the two files have different columns?","acceptedAnswer":{"@type":"Answer","text":"The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read."}},{"@type":"Question","name":"Is my data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and comparison both run entirely in your browser."}}]}</script>
+
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <a class="logo" href="/">
+    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" rx="2.5" fill="currentColor"/><rect x="13" y="7" width="7" height="12" rx="2.5" fill="currentColor" opacity="0.45"/></svg>
+    Diffhero
+  </a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+  </button>
+</header>
+<nav class="main-nav" aria-label="Site">
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/contact">Contact</a>
+</nav>
+<main class="wrap" id="main">
+
+  <section class="hero">
+    <span class="eyebrow">CSV Table Diff</span>
+    <h1>CSV Table Diff — Compare Two CSVs as a Table</h1>
+    <p class="lede">Paste two CSV exports below and see them compared as a real table, columns aligned — not as raw text lines. Added rows, removed rows, and edited rows are colored distinctly, and within an edited row the exact cell that changed is outlined.</p>
+  </section>
+  
+  <section class="tool csvtable-tool" data-slug="csv-table-diff">
+    <div class="diff-inputs">
+      <div class="diff-pane" data-side="a">
+        <div class="diff-pane-head"><label class="diff-label" for="csvA">Original CSV</label></div>
+        <textarea id="csvA" class="editor code" placeholder="Paste the original CSV here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="b">
+        <div class="diff-pane-head"><label class="diff-label" for="csvB">Changed CSV</label></div>
+        <textarea id="csvB" class="editor code" placeholder="Paste the changed CSV here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+    <div class="tool-bar">
+      <span class="merge-summary" id="csvTableSummary" role="status" aria-live="polite"></span>
+    </div>
+    <div id="csvTableOutput"></div>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="csvExampleBtn">Load example</button>
+      <button type="button" class="btn" id="csvClearBtn">Clear</button>
+    </div>
+  </section>
+  <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
+  
+  
+  
+  <section class="faq">
+    <h2>Common questions</h2>
+    <dl class="faq-grid">
+      <div class="faq-item"><h3>How is this different from the regular CSV Diff page?</h3><dd>The regular CSV Diff treats each row as a line of text and highlights changed words inline. This page parses the CSV into actual columns and renders a real table, so a changed cell is outlined in its own column rather than just highlighted as text in a line.</dd></div>
+      <div class="faq-item"><h3>Does it handle quoted fields with commas inside them?</h3><dd>Yes — quoted CSV fields (e.g. &quot;Smith, John&quot;) are parsed correctly as a single cell, not split on the comma inside the quotes.</dd></div>
+      <div class="faq-item"><h3>What if the two files have different columns?</h3><dd>The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read.</dd></div>
+      <div class="faq-item"><h3>Is my data uploaded anywhere?</h3><dd>No. Parsing and comparison both run entirely in your browser.</dd></div>
+    </dl>
+  </section>
+  
+  <nav class="related" aria-label="More tools">
+    <h2>More tools</h2>
+    <div class="related-grid">
+      <a href="/diff/text-compare">Text Compare</a>
+      <a href="/diff/compare-two-text-files">Compare Two Files</a>
+      <a href="/diff/online-diff-checker">Diff Checker</a>
+      <a href="/diff/code-diff">Code Diff</a>
+      <a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a>
+      <a href="/diff/json-diff">JSON Diff</a>
+      <a href="/diff/compare-two-lists">Compare Lists</a>
+      <a href="/diff/csv-diff">CSV Diff</a>
+      <a href="/diff/xml-diff">XML Diff</a>
+      <a href="/diff/yaml-diff">YAML Diff</a>
+      <a href="/diff/sql-diff">SQL Diff</a>
+      <a href="/diff/markdown-diff">Markdown Diff</a>
+      <a href="/diff/html-diff">HTML Diff</a>
+      <a href="/diff/python-diff">Python Diff</a>
+      <a href="/diff/javascript-diff">JavaScript Diff</a>
+      <a href="/diff/typescript-diff">TypeScript Diff</a>
+      <a href="/diff/go-diff">Go Diff</a>
+      <a href="/diff/java-diff">Java Diff</a>
+      <a href="/diff/php-diff">PHP Diff</a>
+      <a href="/diff/csharp-diff">C# Diff</a>
+      <a href="/diff/rust-diff">Rust Diff</a>
+      <a href="/diff/ruby-diff">Ruby Diff</a>
+      <a href="/diff/css-diff">CSS Diff</a>
+      <a href="/diff/kotlin-diff">Kotlin Diff</a>
+      <a href="/diff/swift-diff">Swift Diff</a>
+      <a href="/diff/zig-diff">Zig Diff</a>
+      <a href="/diff/elixir-diff">Elixir Diff</a>
+      <a href="/diff/gleam-diff">Gleam Diff</a>
+      <a href="/diff/solidity-diff">Solidity Diff</a>
+      <a href="/diff/julia-diff">Julia Diff</a>
+      <a href="/diff/dockerfile-diff">Dockerfile Diff</a>
+      <a href="/diff/docker-compose-diff">docker-compose Diff</a>
+      <a href="/diff/env-diff">ENV Diff</a>
+      <a href="/diff/package-json-diff">package.json Diff</a>
+      <a href="/diff/terraform-diff">Terraform Diff</a>
+      <a href="/diff/nginx-config-diff">Nginx Config Diff</a>
+      <a href="/diff/ini-diff">INI Diff</a>
+      <a href="/diff/contract-diff">Contract Diff</a>
+      <a href="/diff/resume-diff">Resume Diff</a>
+      <a href="/diff/essay-diff">Essay Diff</a>
+      <a href="/diff/pdf-diff">PDF Diff</a>
+      <a href="/diff/word-diff">Word Diff</a>
+      <a href="/diff/private-diff-checker">Private Diff Checker</a>
+      <a href="/diff/log-diff">Log Diff</a>
+      <a href="/diff/subtitle-diff">Subtitle Diff</a>
+      <a href="/diff/invisible-character-checker">Invisible Characters</a>
+    </div>
+  </nav>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+      <div>Free. No signup, no upload — everything runs in your browser.</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/app.js?v=a165d071" defer></script>
+</body>
+</html>
