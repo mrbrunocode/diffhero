@@ -365,6 +365,96 @@ export const PAGES = [
     ],
   },
   {
+    slug: "swift-diff",
+    eyebrow: "Swift Diff",
+    title: "Swift Diff — Compare Two Swift Files",
+    description:
+      "Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.",
+    intro:
+      "Paste two versions of a .swift file to see exactly what changed — a property wrapper, an optional-binding tweak, a SwiftUI view's body — with the changed tokens highlighted inline. Works the same for UIKit and SwiftUI source.",
+    format: "text",
+    faq: [
+      { q: "Does it handle optionals and property wrappers?", a: "Yes — they're compared as text, so a changed `?`/`!` or an added `@State`/`@Published` wrapper shows up like any other token change." },
+      { q: "Does it work for SwiftUI view bodies?", a: "Yes, a SwiftUI `.swift` file diffs the same as any other Swift source — useful for reviewing a view's body before a PR without opening Xcode." },
+      { q: "Is my Swift code uploaded?", a: "No. The comparison runs entirely in your browser, so App Store-bound or private source stays on your device." },
+    ],
+  },
+  {
+    slug: "zig-diff",
+    eyebrow: "Zig Diff",
+    title: "Zig Diff — Compare Two Zig Files",
+    description:
+      "Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.",
+    intro:
+      "Paste two versions of a .zig file to see exactly what changed — a comptime block, an allocator swap, an added error union — with the changed tokens highlighted. Zig has no hidden control flow, so a line-level diff maps directly onto what actually changed at runtime.",
+    format: "text",
+    faq: [
+      { q: "Does it understand comptime?", a: "No — it's a text diff, not a Zig compiler. That's fine for review purposes: an edited `comptime` block or a changed allocator argument shows as a normal line/token change." },
+      { q: "Does it work across Zig versions?", a: "Yes, since Zig's syntax has changed release to release (it's still pre-1.0), comparing a file before and after a version migration works exactly like any other text diff." },
+      { q: "Is my Zig source uploaded?", a: "No. Everything runs client-side, so unreleased systems code stays on your device." },
+    ],
+  },
+  {
+    slug: "elixir-diff",
+    eyebrow: "Elixir Diff",
+    title: "Elixir Diff — Compare Two Elixir Files",
+    description:
+      "Compare two Elixir files or snippets and highlight every changed line and token. Client-side — works for Phoenix and LiveView modules too.",
+    intro:
+      "Paste two versions of a .ex or .exs file to see exactly what changed — a pattern-matched function clause, a pipe (|>) chain, a GenServer callback — with the changed tokens highlighted inline. Works the same for plain Elixir, Phoenix controllers, or LiveView modules.",
+    format: "text",
+    faq: [
+      { q: "Does it handle multiple function clauses with pattern matching?", a: "Yes — each clause is just a line (or block) of text, so an added or reordered pattern-matched clause shows up as an insertion or move, same as any other language." },
+      { q: "Does it work for LiveView .heex templates?", a: "Yes, .heex is text like any other source file, so template markup changes diff the same way as .ex module changes." },
+      { q: "Is my Elixir code uploaded?", a: "No. The comparison runs entirely in your browser, so private Phoenix apps stay on your device." },
+    ],
+  },
+  {
+    slug: "gleam-diff",
+    eyebrow: "Gleam Diff",
+    title: "Gleam Diff — Compare Two Gleam Files",
+    description:
+      "Compare two Gleam files or snippets and highlight every changed line and token. Free, client-side diff for the type-safe language on the BEAM.",
+    intro:
+      "Paste two versions of a .gleam file to see exactly what changed — a type signature, a case expression, a new custom type variant — with the changed tokens highlighted. Since Gleam has no null and no exceptions, most meaningful diffs are in the type signatures and case-match arms, which a plain text diff surfaces clearly.",
+    format: "text",
+    faq: [
+      { q: "Does it understand Gleam's type system?", a: "No — it's a text diff, so it doesn't check types. It still shows exactly which type signature or case-match arm changed, which is what a code review actually needs." },
+      { q: "Does it work for gleam.toml too?", a: "Yes, any plain-text file works — paste the manifest to see dependency or version changes the same way." },
+      { q: "Is my Gleam source uploaded?", a: "No. Everything runs in your browser, so unreleased source stays private." },
+    ],
+  },
+  {
+    slug: "solidity-diff",
+    eyebrow: "Solidity Diff",
+    title: "Solidity Diff — Compare Two Smart Contract Files",
+    description:
+      "Compare two Solidity (.sol) smart contract files and highlight every changed line and token — including changes that affect an audit. Nothing uploaded.",
+    intro:
+      "Paste the old and new version of a .sol contract to see precisely which functions, modifiers, or storage variables changed before a re-audit or a deploy. Because even a reordered storage variable or a tightened `require` can change a contract's behavior or gas cost, a full, unhidden line-by-line diff matters more here than in most languages.",
+    format: "text",
+    faq: [
+      { q: "Should I collapse unchanged lines for an audit?", a: "Turn that option off for contract review — an audit needs to see the full file in context, not just the changed hunks, since storage layout order matters for upgradeable contracts." },
+      { q: "Does it catch storage-layout-breaking reorders?", a: "It shows the reorder as a line move, but doesn't itself flag storage-slot incompatibility — that judgment call is still yours (or your audit tool's) to make from the diff." },
+      { q: "Is my contract source uploaded anywhere?", a: "No. The comparison runs entirely client-side, so unaudited or pre-launch contract code never leaves your device." },
+    ],
+  },
+  {
+    slug: "julia-diff",
+    eyebrow: "Julia Diff",
+    title: "Julia Diff — Compare Two Julia Files",
+    description:
+      "Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.",
+    intro:
+      "Paste two versions of a .jl file to see exactly what changed — a new method for an existing function, a type annotation, a broadcasted operation — with the changed tokens highlighted inline. Julia's multiple dispatch means the same function name can gain or lose methods without the call site changing at all, so seeing the exact method signature that changed is what matters most in review.",
+    format: "text",
+    faq: [
+      { q: "Does it show which dispatch method changed?", a: "It shows the exact line(s) that changed — for a new or edited method that's the method signature itself, which is the part of a Julia diff that actually matters." },
+      { q: "Does it work for Jupyter-exported .jl scripts?", a: "Yes, any plain-text .jl file diffs the same way, whether hand-written or exported from a notebook." },
+      { q: "Is my Julia code uploaded?", a: "No. Everything runs locally in your browser, so research or proprietary numerical code stays on your device." },
+    ],
+  },
+  {
     slug: "dockerfile-diff",
     eyebrow: "Dockerfile Diff",
     title: "Dockerfile Diff — Compare Two Dockerfiles",
@@ -588,7 +678,7 @@ const LANG_BY_SLUG = {
   "sql-diff": "sql", "html-diff": "html", "python-diff": "python", "javascript-diff": "javascript",
   "typescript-diff": "javascript", "go-diff": "go", "java-diff": "java", "php-diff": "php",
   "csharp-diff": "csharp", "rust-diff": "rust", "kotlin-diff": "kotlin", "css-diff": "css",
-  "package-json-diff": "json", "docker-compose-diff": "yaml",
+  "package-json-diff": "json", "docker-compose-diff": "yaml", "swift-diff": "swift",
 };
 
 // Every value here must have a matching <option> below — app.js falls back to

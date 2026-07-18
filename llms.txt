@@ -35,6 +35,12 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Ruby Diff](https://diffhero.app/diff/ruby-diff): Compare two Ruby files or snippets and see exactly what changed, with changed tokens highlighted. Client-side, nothing uploaded.
 - [CSS Diff](https://diffhero.app/diff/css-diff): Compare two CSS files or snippets and see exactly which selectors, properties or values changed. Client-side, nothing uploaded.
 - [Kotlin Diff](https://diffhero.app/diff/kotlin-diff): Compare two Kotlin files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.
+- [Swift Diff](https://diffhero.app/diff/swift-diff): Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.
+- [Zig Diff](https://diffhero.app/diff/zig-diff): Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.
+- [Elixir Diff](https://diffhero.app/diff/elixir-diff): Compare two Elixir files or snippets and highlight every changed line and token. Client-side — works for Phoenix and LiveView modules too.
+- [Gleam Diff](https://diffhero.app/diff/gleam-diff): Compare two Gleam files or snippets and highlight every changed line and token. Free, client-side diff for the type-safe language on the BEAM.
+- [Solidity Diff](https://diffhero.app/diff/solidity-diff): Compare two Solidity (.sol) smart contract files and highlight every changed line and token — including changes that affect an audit. Nothing uploaded.
+- [Julia Diff](https://diffhero.app/diff/julia-diff): Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.
 - [Dockerfile Diff](https://diffhero.app/diff/dockerfile-diff): Compare two Dockerfiles and see exactly which instructions, base images or layers changed, line by line. Free, client-side, nothing uploaded.
 - [docker-compose Diff](https://diffhero.app/diff/docker-compose-diff): Compare two docker-compose.yml files and see exactly which services, ports or volumes changed. Free, browser-only, nothing uploaded.
 - [ENV Diff](https://diffhero.app/diff/env-diff): Compare two .env files and see exactly which variables were added, removed or changed — without ever uploading real secrets. Free, browser-only.
