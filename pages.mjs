@@ -570,7 +570,8 @@ export const PAGES = [
     format: "text",
     faq: [
       { q: "Is this a substitute for legal review?", a: "No — it's a text-comparison tool, not legal advice. Use it to quickly spot exactly which clauses changed so a reviewer can focus their attention, not to replace their judgment." },
-      { q: "Is my contract uploaded anywhere?", a: "No. The whole comparison runs client-side in your browser — nothing is sent to a server, which matters for confidential or privileged documents." },
+      { q: "Can I drop the actual contract file in, or do I need to paste text?", a: "Both work — drag a .pdf or .docx file straight onto either side and the text is extracted automatically, or paste text you've already copied out. Either way, extraction happens locally in your browser." },
+      { q: "Is my contract uploaded anywhere?", a: "No. The whole comparison — including PDF/Word text extraction — runs client-side in your browser. Nothing is sent to a server, which matters for confidential or privileged documents." },
       { q: "Can it handle a long document?", a: "Yes — paste the full text of both versions. For very long contracts, comparing one section at a time can make the highlighted changes easier to review." },
     ],
   },
@@ -584,7 +585,7 @@ export const PAGES = [
       "Paste an old and a revised version of your resume to see precisely what changed between drafts — a reworded bullet, an updated date range, a trimmed section — so you can track edits across revisions or compare notes with a reviewer.",
     format: "text",
     faq: [
-      { q: "Does it work if I paste from a PDF or Word doc?", a: "Yes — copy the text out of your PDF or Word resume and paste it in; the tool compares the text content, not the file format or layout." },
+      { q: "Does it work with a PDF or Word doc?", a: "Yes, two ways: drag the actual .pdf or .docx file straight onto either side and Diffhero extracts the text for you, or copy the text out yourself and paste it in. Either way it's the text content being compared, not the file's layout or formatting." },
       { q: "Will formatting differences show as changes?", a: "Line breaks and spacing from copy-pasting can show as differences. Turn on \"Ignore whitespace\" to focus on actual wording changes instead." },
       { q: "Is my resume uploaded?", a: "No — everything runs in your browser, so personal and contact details never leave your device." },
     ],
@@ -600,8 +601,39 @@ export const PAGES = [
     format: "text",
     faq: [
       { q: "Does it work for any length of writing?", a: "Yes — a paragraph, a full essay, or a long article all work the same way; very long drafts may take a moment longer to render." },
+      { q: "Can I drop a .docx file instead of pasting?", a: "Yes — drag the Word file straight onto either side and Diffhero extracts its text automatically. A plain paste works just as well if you already have the text." },
       { q: "Will a reflowed paragraph show as fully changed?", a: "Line-based diffing can flag a re-wrapped paragraph as changed even if only a few words moved — the inline word highlighting still shows exactly which words differ within it." },
       { q: "Is my writing uploaded?", a: "No. The comparison runs entirely in your browser, so unpublished drafts stay private." },
+    ],
+  },
+  {
+    slug: "pdf-diff",
+    eyebrow: "PDF Diff",
+    title: "PDF Diff — Compare Two PDF Files Online",
+    description:
+      "Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.",
+    intro:
+      "Drag two PDF files onto the boxes below — Diffhero extracts the text from each locally in your browser (using the open-source pdf.js library, loaded on demand) and shows exactly what changed, word by word. Nothing about the files themselves is uploaded; only the extracted text is compared.",
+    format: "text",
+    faq: [
+      { q: "Does it compare the visual layout, or just the text?", a: "Just the text content, in reading order — page position, fonts, and images aren't compared. For a contract or report where the wording is what matters, that's usually exactly what you want; for a design proof where layout matters, a visual diff tool would serve you better." },
+      { q: "Is my PDF uploaded to a server?", a: "No. Text extraction runs entirely in your browser via pdf.js (fetched from a CDN the first time you drop a file, same as this page's fonts) — the PDF itself is read locally and never leaves your device." },
+      { q: "What if a PDF is scanned images rather than real text?", a: "Extraction only works on PDFs with a real text layer. A scanned document with no OCR applied will extract as empty or garbled text — you'd need to run OCR first with a separate tool." },
+    ],
+  },
+  {
+    slug: "word-diff",
+    eyebrow: "Word Diff",
+    title: "Word Document Diff — Compare Two .docx Files Online",
+    description:
+      "Drop two Word (.docx) files in and see exactly what changed between them, word by word. Free, browser-only — nothing is uploaded, only read locally.",
+    intro:
+      "Drag two .docx files onto the boxes below — Diffhero extracts the text from each locally in your browser (using the open-source mammoth.js library, loaded on demand) and shows precisely what changed. Only the extracted text is compared; the files themselves never leave your device.",
+    format: "text",
+    faq: [
+      { q: "Does it preserve formatting like bold or track changes?", a: "No — it extracts plain text content only, not formatting, styles, or Word's own tracked-changes markup. If a document already has Word's Track Changes turned on, Word's own review view will show more than this tool does." },
+      { q: "Does it work with the old .doc format too?", a: "Only .docx (the modern, XML-based format). The legacy binary .doc format isn't supported — save it as .docx from Word first (File → Save As → Word Document) if you have an older file." },
+      { q: "Is my document uploaded anywhere?", a: "No. Extraction runs entirely in your browser via mammoth.js (fetched from a CDN the first time you drop a file) — the file is read locally and never sent to a server." },
     ],
   },
   {
@@ -703,14 +735,14 @@ export function renderTool(p = {}) {
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">
           <label class="diff-label" for="original">Original</label>
-          <span class="diff-drop-hint">paste, type, or drop a file</span>
+          <span class="diff-drop-hint">paste, type, or drop a file (.txt, .pdf, .docx)</span>
         </div>
         <textarea id="original" class="editor code" placeholder="Paste the original version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
       </div>
       <div class="diff-pane" data-side="b">
         <div class="diff-pane-head">
           <label class="diff-label" for="changed">Changed</label>
-          <span class="diff-drop-hint">paste, type, or drop a file</span>
+          <span class="diff-drop-hint">paste, type, or drop a file (.txt, .pdf, .docx)</span>
         </div>
         <textarea id="changed" class="editor code" placeholder="Paste the changed version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
       </div>

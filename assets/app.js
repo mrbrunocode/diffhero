@@ -510,6 +510,48 @@
   });
 
   // ── File drag-and-drop (local FileReader; nothing uploaded) ────────────────
+  // PDF/Word files are binary, not plain text — reading them as text produces
+  // garbage. pdf.js / mammoth.js run entirely in the browser (loaded from a
+  // CDN on first use, same trust model as Google Fonts/AdSense already
+  // loaded this way) to extract real text client-side; the file itself is
+  // never uploaded anywhere, only parsed locally.
+  var libScriptsLoaded = {};
+  function loadScript(src) {
+    if (libScriptsLoaded[src]) return libScriptsLoaded[src];
+    libScriptsLoaded[src] = new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error("Could not load " + src)); };
+      document.head.appendChild(s);
+    });
+    return libScriptsLoaded[src];
+  }
+  function extractPdfText(file) {
+    return loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js").then(function () {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      return file.arrayBuffer();
+    }).then(function (buf) {
+      return window.pdfjsLib.getDocument({ data: buf }).promise;
+    }).then(function (pdf) {
+      var pageTexts = [], i;
+      function nextPage(n) {
+        if (n > pdf.numPages) return Promise.resolve();
+        return pdf.getPage(n).then(function (page) { return page.getTextContent(); }).then(function (tc) {
+          pageTexts.push(tc.items.map(function (it) { return it.str; }).join(" "));
+          return nextPage(n + 1);
+        });
+      }
+      return nextPage(1).then(function () { return pageTexts.join("\n\n"); });
+    });
+  }
+  function extractDocxText(file) {
+    return loadScript("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js").then(function () {
+      return file.arrayBuffer();
+    }).then(function (buf) {
+      return window.mammoth.extractRawText({ arrayBuffer: buf });
+    }).then(function (result) { return result.value; });
+  }
   function wireDrop(pane, textarea) {
     if (!pane) return;
     ["dragenter", "dragover"].forEach(function (ev) { pane.addEventListener(ev, function (e) { e.preventDefault(); pane.classList.add("dragover"); }); });
@@ -517,6 +559,19 @@
     pane.addEventListener("drop", function (e) {
       var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
       if (!file) return;
+      var name = (file.name || "").toLowerCase();
+      if (name.slice(-4) === ".pdf" || file.type === "application/pdf") {
+        textarea.value = "Extracting text from PDF…";
+        extractPdfText(file).then(function (text) { textarea.value = text; render(); })
+          .catch(function (err) { textarea.value = "Could not read this PDF: " + err.message; render(); });
+        return;
+      }
+      if (name.slice(-5) === ".docx" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+        textarea.value = "Extracting text from Word document…";
+        extractDocxText(file).then(function (text) { textarea.value = text; render(); })
+          .catch(function (err) { textarea.value = "Could not read this Word document: " + err.message; render(); });
+        return;
+      }
       var reader = new FileReader();
       reader.onload = function () { textarea.value = String(reader.result); render(); };
       reader.readAsText(file);

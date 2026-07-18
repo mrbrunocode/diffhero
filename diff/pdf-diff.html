@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invisible Character Checker | Diffhero</title>
-<meta name="description" content="Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.">
-<link rel="canonical" href="https://diffhero.app/diff/invisible-character-checker">
-<meta property="og:title" content="Invisible Character Checker">
-<meta property="og:description" content="Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.">
+<title>PDF Diff — Compare Two PDF Files Online | Diffhero</title>
+<meta name="description" content="Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.">
+<link rel="canonical" href="https://diffhero.app/diff/pdf-diff">
+<meta property="og:title" content="PDF Diff — Compare Two PDF Files Online">
+<meta property="og:description" content="Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://diffhero.app/diff/invisible-character-checker">
+<meta property="og:url" content="https://diffhero.app/diff/pdf-diff">
 <meta property="og:image" content="https://diffhero.app/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
@@ -24,9 +24,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/invisible-character-checker","description":"Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Invisible Characters","item":"https://diffhero.app/diff/invisible-character-checker"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What invisible characters does it reveal?","acceptedAnswer":{"@type":"Answer","text":"Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it."}},{"@type":"Question","name":"Where do these characters come from?","acceptedAnswer":{"@type":"Answer","text":"The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space."}},{"@type":"Question","name":"How do I remove them once found?","acceptedAnswer":{"@type":"Answer","text":"Open Find & replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/pdf-diff","description":"Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"PDF Diff","item":"https://diffhero.app/diff/pdf-diff"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it compare the visual layout, or just the text?","acceptedAnswer":{"@type":"Answer","text":"Just the text content, in reading order — page position, fonts, and images aren't compared. For a contract or report where the wording is what matters, that's usually exactly what you want; for a design proof where layout matters, a visual diff tool would serve you better."}},{"@type":"Question","name":"Is my PDF uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Text extraction runs entirely in your browser via pdf.js (fetched from a CDN the first time you drop a file, same as this page's fonts) — the PDF itself is read locally and never leaves your device."}},{"@type":"Question","name":"What if a PDF is scanned images rather than real text?","acceptedAnswer":{"@type":"Answer","text":"Extraction only works on PDFs with a real text layer. A scanned document with no OCR applied will extract as empty or garbled text — you'd need to run OCR first with a separate tool."}}]}</script>
 
 
 </head>
@@ -51,12 +51,12 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <main class="wrap" id="main">
 
   <section class="hero">
-    <span class="eyebrow">Invisible Characters</span>
-    <h1>Invisible Character Checker</h1>
-    <p class="lede">Paste both versions and turn on “Show invisibles” in the toolbar: non-breaking spaces render as ⍽, zero-width characters as ∅, and tabs as →, so the character your eye can't see becomes the change you can. These sneak in constantly — Word and Google Docs convert straight quotes to curly ones, web pages copy out non-breaking spaces, and AI chat output often carries zero-width characters — and they make string comparisons, config parsers and spreadsheet lookups fail on text that looks identical. Use Find &amp; replace below the tool to strip the culprit once you've spotted it.</p>
+    <span class="eyebrow">PDF Diff</span>
+    <h1>PDF Diff — Compare Two PDF Files Online</h1>
+    <p class="lede">Drag two PDF files onto the boxes below — Diffhero extracts the text from each locally in your browser (using the open-source pdf.js library, loaded on demand) and shows exactly what changed, word by word. Nothing about the files themselves is uploaded; only the extracted text is compared.</p>
   </section>
   
-  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="invisible-character-checker">
+  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="pdf-diff">
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">
@@ -119,9 +119,9 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   <section class="faq">
     <h2>Common questions</h2>
     <dl class="faq-grid">
-      <div class="faq-item"><h3>What invisible characters does it reveal?</h3><dd>Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it.</dd></div>
-      <div class="faq-item"><h3>Where do these characters come from?</h3><dd>The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space.</dd></div>
-      <div class="faq-item"><h3>How do I remove them once found?</h3><dd>Open Find &amp; replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge.</dd></div>
+      <div class="faq-item"><h3>Does it compare the visual layout, or just the text?</h3><dd>Just the text content, in reading order — page position, fonts, and images aren't compared. For a contract or report where the wording is what matters, that's usually exactly what you want; for a design proof where layout matters, a visual diff tool would serve you better.</dd></div>
+      <div class="faq-item"><h3>Is my PDF uploaded to a server?</h3><dd>No. Text extraction runs entirely in your browser via pdf.js (fetched from a CDN the first time you drop a file, same as this page's fonts) — the PDF itself is read locally and never leaves your device.</dd></div>
+      <div class="faq-item"><h3>What if a PDF is scanned images rather than real text?</h3><dd>Extraction only works on PDFs with a real text layer. A scanned document with no OCR applied will extract as empty or garbled text — you'd need to run OCR first with a separate tool.</dd></div>
     </dl>
   </section>
   
@@ -167,11 +167,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <a href="/diff/contract-diff">Contract Diff</a>
       <a href="/diff/resume-diff">Resume Diff</a>
       <a href="/diff/essay-diff">Essay Diff</a>
-      <a href="/diff/pdf-diff">PDF Diff</a>
       <a href="/diff/word-diff">Word Diff</a>
       <a href="/diff/private-diff-checker">Private Diff Checker</a>
       <a href="/diff/log-diff">Log Diff</a>
       <a href="/diff/subtitle-diff">Subtitle Diff</a>
+      <a href="/diff/invisible-character-checker">Invisible Characters</a>
     </div>
   </nav>
 </main>
