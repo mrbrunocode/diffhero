@@ -57,5 +57,6 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Word Diff](https://diffhero.app/diff/word-diff): Drop two Word (.docx) files in and see exactly what changed between them, word by word. Free, browser-only — nothing is uploaded, only read locally.
 - [Private Diff Checker](https://diffhero.app/diff/private-diff-checker): A diff checker that never uploads what you paste — the entire comparison runs client-side in your browser. Free, no signup, no server round-trip.
 - [Log Diff](https://diffhero.app/diff/log-diff): Compare two log files and see exactly which lines were added, removed or changed between them. Free, line-based, nothing uploaded.
+- [Git Diff Viewer](https://diffhero.app/diff/git-diff-viewer): Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.
 - [Subtitle Diff](https://diffhero.app/diff/subtitle-diff): Compare two subtitle files and see exactly which lines, timings or text changed between them. Free, browser-only, nothing uploaded.
 - [Invisible Characters](https://diffhero.app/diff/invisible-character-checker): Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.

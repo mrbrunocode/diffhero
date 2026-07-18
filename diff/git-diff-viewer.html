@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contract Diff — Compare Two Versions of a Contract | Diffhero</title>
-<meta name="description" content="Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.">
-<link rel="canonical" href="https://diffhero.app/diff/contract-diff">
-<meta property="og:title" content="Contract Diff — Compare Two Versions of a Contract">
-<meta property="og:description" content="Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.">
+<title>Git Diff Viewer — Paste a `git diff` to Visualize It | Diffhero</title>
+<meta name="description" content="Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.">
+<link rel="canonical" href="https://diffhero.app/diff/git-diff-viewer">
+<meta property="og:title" content="Git Diff Viewer — Paste a `git diff` to Visualize It">
+<meta property="og:description" content="Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://diffhero.app/diff/contract-diff">
+<meta property="og:url" content="https://diffhero.app/diff/git-diff-viewer">
 <meta property="og:image" content="https://diffhero.app/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
@@ -24,9 +24,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/contract-diff","description":"Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Contract Diff","item":"https://diffhero.app/diff/contract-diff"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a substitute for legal review?","acceptedAnswer":{"@type":"Answer","text":"No — it's a text-comparison tool, not legal advice. Use it to quickly spot exactly which clauses changed so a reviewer can focus their attention, not to replace their judgment."}},{"@type":"Question","name":"Can I drop the actual contract file in, or do I need to paste text?","acceptedAnswer":{"@type":"Answer","text":"Both work — drag a .pdf or .docx file straight onto either side and the text is extracted automatically, or paste text you've already copied out. Either way, extraction happens locally in your browser."}},{"@type":"Question","name":"Is my contract uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The whole comparison — including PDF/Word text extraction — runs client-side in your browser. Nothing is sent to a server, which matters for confidential or privileged documents."}},{"@type":"Question","name":"Can it handle a long document?","acceptedAnswer":{"@type":"Answer","text":"Yes — paste the full text of both versions. For very long contracts, comparing one section at a time can make the highlighted changes easier to review."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/git-diff-viewer","description":"Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Git Diff Viewer","item":"https://diffhero.app/diff/git-diff-viewer"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as a \"unified diff\"?","acceptedAnswer":{"@type":"Answer","text":"The format `git diff`, `diff -u`, and GitHub/GitLab patch downloads all produce: a `@@ ... @@` hunk header, context lines with a leading space, removed lines starting with `-`, and added lines starting with `+`. That's what gets parsed here."}},{"@type":"Question","name":"Does it handle a diff covering multiple files?","acceptedAnswer":{"@type":"Answer","text":"It reconstructs all hunks it finds, but multiple files get concatenated into one Original/Changed pair rather than kept separate — for a multi-file diff, it's cleanest to paste one file's section at a time."}},{"@type":"Question","name":"What if I don't have a real diff, just two files?","acceptedAnswer":{"@type":"Answer","text":"You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output."}},{"@type":"Question","name":"Is the pasted diff uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No — parsing and rendering both happen entirely in your browser."}}]}</script>
 
 
 </head>
@@ -51,13 +51,21 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <main class="wrap" id="main">
 
   <section class="hero">
-    <span class="eyebrow">Contract Diff</span>
-    <h1>Contract Diff — Compare Two Versions of a Contract</h1>
-    <p class="lede">Paste the original and the redlined or renegotiated version of a contract to see exactly which clauses changed, word by word — without emailing a sensitive document to a third-party service.</p>
+    <span class="eyebrow">Git Diff Viewer</span>
+    <h1>Git Diff Viewer — Paste a `git diff` to Visualize It</h1>
+    <p class="lede">Paste the output of `git diff`, a GitHub/GitLab patch, or any unified-diff text into the box below and click Parse — Diffhero reconstructs the original and changed versions and renders them the same way as every other page here, split or unified, with word-level highlighting.</p>
   </section>
   
-  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="contract-diff">
+  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="git-diff-viewer">
     
+    <div class="paste-diff-box">
+      <label class="diff-label" for="pasteDiffInput">Paste a unified diff / `git diff` output</label>
+      <textarea id="pasteDiffInput" class="editor code" placeholder="diff --git a/file.js b/file.js&#10;--- a/file.js&#10;+++ b/file.js&#10;@@ -1,3 +1,3 @@&#10; unchanged line&#10;-old line&#10;+new line" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      <div class="tool-actions">
+        <button type="button" class="btn primary" id="pasteDiffParseBtn">Parse into Original / Changed</button>
+      </div>
+      <p class="paste-diff-error" id="pasteDiffError" role="alert"></p>
+    </div>
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">
@@ -120,10 +128,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   <section class="faq">
     <h2>Common questions</h2>
     <dl class="faq-grid">
-      <div class="faq-item"><h3>Is this a substitute for legal review?</h3><dd>No — it's a text-comparison tool, not legal advice. Use it to quickly spot exactly which clauses changed so a reviewer can focus their attention, not to replace their judgment.</dd></div>
-      <div class="faq-item"><h3>Can I drop the actual contract file in, or do I need to paste text?</h3><dd>Both work — drag a .pdf or .docx file straight onto either side and the text is extracted automatically, or paste text you've already copied out. Either way, extraction happens locally in your browser.</dd></div>
-      <div class="faq-item"><h3>Is my contract uploaded anywhere?</h3><dd>No. The whole comparison — including PDF/Word text extraction — runs client-side in your browser. Nothing is sent to a server, which matters for confidential or privileged documents.</dd></div>
-      <div class="faq-item"><h3>Can it handle a long document?</h3><dd>Yes — paste the full text of both versions. For very long contracts, comparing one section at a time can make the highlighted changes easier to review.</dd></div>
+      <div class="faq-item"><h3>What counts as a &quot;unified diff&quot;?</h3><dd>The format `git diff`, `diff -u`, and GitHub/GitLab patch downloads all produce: a `@@ ... @@` hunk header, context lines with a leading space, removed lines starting with `-`, and added lines starting with `+`. That's what gets parsed here.</dd></div>
+      <div class="faq-item"><h3>Does it handle a diff covering multiple files?</h3><dd>It reconstructs all hunks it finds, but multiple files get concatenated into one Original/Changed pair rather than kept separate — for a multi-file diff, it's cleanest to paste one file's section at a time.</dd></div>
+      <div class="faq-item"><h3>What if I don't have a real diff, just two files?</h3><dd>You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output.</dd></div>
+      <div class="faq-item"><h3>Is the pasted diff uploaded anywhere?</h3><dd>No — parsing and rendering both happen entirely in your browser.</dd></div>
     </dl>
   </section>
   
@@ -168,13 +176,13 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <a href="/diff/terraform-diff">Terraform Diff</a>
       <a href="/diff/nginx-config-diff">Nginx Config Diff</a>
       <a href="/diff/ini-diff">INI Diff</a>
+      <a href="/diff/contract-diff">Contract Diff</a>
       <a href="/diff/resume-diff">Resume Diff</a>
       <a href="/diff/essay-diff">Essay Diff</a>
       <a href="/diff/pdf-diff">PDF Diff</a>
       <a href="/diff/word-diff">Word Diff</a>
       <a href="/diff/private-diff-checker">Private Diff Checker</a>
       <a href="/diff/log-diff">Log Diff</a>
-      <a href="/diff/git-diff-viewer">Git Diff Viewer</a>
       <a href="/diff/subtitle-diff">Subtitle Diff</a>
       <a href="/diff/invisible-character-checker">Invisible Characters</a>
     </div>

@@ -762,6 +762,38 @@
       return window.mammoth.extractRawText({ arrayBuffer: buf });
     }).then(function (result) { return result.value; });
   }
+  // ── Paste-a-git-diff parser (optional, only present on pages with p.pasteDiff) ──
+  function parseUnifiedDiff(text) {
+    var lines = normalize(text).split("\n");
+    var origLines = [], changedLines = [], sawHunk = false;
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i];
+      if (l.slice(0, 3) === "---" || l.slice(0, 3) === "+++" || l.slice(0, 10) === "diff --git" || l.slice(0, 6) === "index " || l.slice(0, 3) === "\\ N") continue;
+      if (l.slice(0, 2) === "@@") { sawHunk = true; continue; }
+      if (l.charAt(0) === "-") { origLines.push(l.slice(1)); }
+      else if (l.charAt(0) === "+") { changedLines.push(l.slice(1)); }
+      else if (l.charAt(0) === " ") { origLines.push(l.slice(1)); changedLines.push(l.slice(1)); }
+      else if (l === "") { origLines.push(""); changedLines.push(""); }
+      // any other line (e.g. a stray "diff --git" variant) is ignored
+    }
+    if (!sawHunk) throw new Error("No @@ hunk header found — this doesn't look like a unified diff.");
+    return { original: origLines.join("\n"), changed: changedLines.join("\n") };
+  }
+  var pasteDiffInput = document.getElementById("pasteDiffInput");
+  var pasteDiffParseBtn = document.getElementById("pasteDiffParseBtn");
+  var pasteDiffError = document.getElementById("pasteDiffError");
+  if (pasteDiffParseBtn) pasteDiffParseBtn.addEventListener("click", function () {
+    try {
+      var result = parseUnifiedDiff(pasteDiffInput.value);
+      elA.value = result.original;
+      elB.value = result.changed;
+      pasteDiffError.textContent = "";
+      render();
+    } catch (e) {
+      pasteDiffError.textContent = e.message;
+    }
+  });
+
   function wireDrop(pane, textarea) {
     if (!pane) return;
     ["dragenter", "dragover"].forEach(function (ev) { pane.addEventListener(ev, function (e) { e.preventDefault(); pane.classList.add("dragover"); }); });

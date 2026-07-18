@@ -701,6 +701,23 @@ export const PAGES = [
     ],
   },
   {
+    slug: "git-diff-viewer",
+    eyebrow: "Git Diff Viewer",
+    title: "Git Diff Viewer — Paste a `git diff` to Visualize It",
+    description:
+      "Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.",
+    intro:
+      "Paste the output of `git diff`, a GitHub/GitLab patch, or any unified-diff text into the box below and click Parse — Diffhero reconstructs the original and changed versions and renders them the same way as every other page here, split or unified, with word-level highlighting.",
+    format: "text",
+    pasteDiff: true,
+    faq: [
+      { q: "What counts as a \"unified diff\"?", a: "The format `git diff`, `diff -u`, and GitHub/GitLab patch downloads all produce: a `@@ ... @@` hunk header, context lines with a leading space, removed lines starting with `-`, and added lines starting with `+`. That's what gets parsed here." },
+      { q: "Does it handle a diff covering multiple files?", a: "It reconstructs all hunks it finds, but multiple files get concatenated into one Original/Changed pair rather than kept separate — for a multi-file diff, it's cleanest to paste one file's section at a time." },
+      { q: "What if I don't have a real diff, just two files?", a: "You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output." },
+      { q: "Is the pasted diff uploaded anywhere?", a: "No — parsing and rendering both happen entirely in your browser." },
+    ],
+  },
+  {
     slug: "subtitle-diff",
     eyebrow: "Subtitle Diff",
     title: "Subtitle Diff — Compare Two SRT or VTT Files",
@@ -823,8 +840,22 @@ export function renderTool(p = {}) {
   const langOpts = LANG_OPTIONS.map(
     ([v, label]) => `<option value="${v}"${v === lang ? " selected" : ""}>${label}</option>`
   ).join("");
+  // Optional: a single "paste a git diff" box above the normal two-pane tool,
+  // which parses a unified-diff blob into Original/Changed and fills those
+  // panes — reusing the entire existing diff engine/UI rather than building
+  // a separate renderer for it. Gated per-page so every other page is unaffected.
+  const pasteDiffBox = p.pasteDiff ? `
+    <div class="paste-diff-box">
+      <label class="diff-label" for="pasteDiffInput">Paste a unified diff / \`git diff\` output</label>
+      <textarea id="pasteDiffInput" class="editor code" placeholder="diff --git a/file.js b/file.js&#10;--- a/file.js&#10;+++ b/file.js&#10;@@ -1,3 +1,3 @@&#10; unchanged line&#10;-old line&#10;+new line" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      <div class="tool-actions">
+        <button type="button" class="btn primary" id="pasteDiffParseBtn">Parse into Original / Changed</button>
+      </div>
+      <p class="paste-diff-error" id="pasteDiffError" role="alert"></p>
+    </div>` : "";
   return `
   <section class="tool difftool" data-format="${format}" data-lang="${lang}" data-slug="${p.slug || ""}">
+    ${pasteDiffBox}
     <div class="diff-inputs">
       <div class="diff-pane" data-side="a">
         <div class="diff-pane-head">

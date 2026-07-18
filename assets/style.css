@@ -268,6 +268,11 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
   .merge-inputs { grid-template-columns: 1fr; }
 }
 
+/* Paste-a-git-diff box */
+.paste-diff-box { margin-bottom: var(--space-5); padding-bottom: var(--space-5); border-bottom: 1px solid var(--border-subtle); }
+.paste-diff-box .editor { min-height: 140px; margin-top: var(--space-2); margin-bottom: var(--space-3); }
+.paste-diff-error { color: var(--del-line); font-size: var(--text-sm); min-height: 1.2em; margin: var(--space-2) 0 0; }
+
 /* CSV table diff */
 .csv-table-wrap { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
 .csv-table { border-collapse: collapse; width: 100%; font-family: var(--font-display); font-size: var(--text-sm); }
