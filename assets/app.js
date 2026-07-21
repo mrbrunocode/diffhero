@@ -17,8 +17,25 @@
   // runs before their definitions and before any DOM access — this branch
   // never executes in a browser, where `module` is undefined.
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff, parseUnifiedDiff: parseUnifiedDiff, prepPair: prepPair };
+    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff, parseUnifiedDiff: parseUnifiedDiff, prepPair: prepPair, pixelDiff: pixelDiff };
     return;
+  }
+
+  // The image-diff tool's core comparison, pulled out as a pure function (flat
+  // RGBA arrays in, a per-pixel diff mask out) so it's testable with plain
+  // arrays — no <canvas>/ImageData needed — same reasoning as every other
+  // pure function exported above.
+  function pixelDiff(dataA, dataB, threshold) {
+    var total = Math.floor(dataA.length / 4);
+    var changed = 0;
+    var diffMask = new Array(total).fill(false);
+    for (var i = 0, p = 0; i < dataA.length; i += 4, p++) {
+      var dr = dataA[i] - dataB[i], dg = dataA[i + 1] - dataB[i + 1],
+          db = dataA[i + 2] - dataB[i + 2], da = dataA[i + 3] - dataB[i + 3];
+      var diff = (Math.abs(dr) + Math.abs(dg) + Math.abs(db) + Math.abs(da)) / 4;
+      if (diff > threshold) { changed++; diffMask[p] = true; }
+    }
+    return { changed: changed, total: total, diffMask: diffMask };
   }
 
   // ── Theme toggle (shared across every app in the family) ──────────────────
@@ -240,6 +257,140 @@
     var csvClearBtn = document.getElementById("csvClearBtn");
     if (csvClearBtn) csvClearBtn.addEventListener("click", function () {
       aEl.value = ""; bEl.value = ""; renderCsvTable(); aEl.focus();
+    });
+  })();
+
+  // ── Image diff (pixel-level, canvas-based) ──────────────────────────────────
+  // Same early-guard pattern as the merge/CSV-table tools above: bail
+  // immediately on any page without these elements.
+  (function () {
+    var fileA = document.getElementById("imgA");
+    var fileB = document.getElementById("imgB");
+    if (!fileA || !fileB) return; // not the image-diff page
+
+    var previewA = document.getElementById("imgAPreview");
+    var previewB = document.getElementById("imgBPreview");
+    var canvas = document.getElementById("imageDiffCanvas");
+    var summaryEl = document.getElementById("imageDiffSummary");
+    var thresholdEl = document.getElementById("imgThreshold");
+    var thresholdLabel = document.getElementById("imgThresholdLabel");
+    var downloadBtn = document.getElementById("imgDownloadBtn");
+    var exampleBtn = document.getElementById("imgExampleBtn");
+    var clearBtn = document.getElementById("imgClearBtn");
+    var ctx = canvas.getContext("2d");
+
+    var imageA = null, imageB = null;
+
+    function loadFile(file, which) {
+      if (!file || file.type.indexOf("image/") !== 0) return;
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        if (which === "a") { imageA = img; previewA.src = img.src || ""; previewA.hidden = false; }
+        else { imageB = img; previewB.src = img.src || ""; previewB.hidden = false; }
+        // The <img> preview needs its own persistent src (object URLs revoke
+        // after decode), so re-point it at a data URL for display purposes.
+        var tmp = document.createElement("canvas");
+        tmp.width = img.naturalWidth; tmp.height = img.naturalHeight;
+        tmp.getContext("2d").drawImage(img, 0, 0);
+        (which === "a" ? previewA : previewB).src = tmp.toDataURL();
+        render();
+      };
+      img.src = url;
+    }
+
+    function render() {
+      if (!imageA || !imageB) { canvas.hidden = true; downloadBtn.disabled = true; summaryEl.textContent = ""; return; }
+      var w = Math.max(imageA.naturalWidth, imageB.naturalWidth);
+      var h = Math.max(imageA.naturalHeight, imageB.naturalHeight);
+      canvas.width = w; canvas.height = h; canvas.hidden = false;
+
+      var ca = document.createElement("canvas"); ca.width = w; ca.height = h;
+      var cb = document.createElement("canvas"); cb.width = w; cb.height = h;
+      ca.getContext("2d").drawImage(imageA, 0, 0);
+      cb.getContext("2d").drawImage(imageB, 0, 0);
+      var dataA = ca.getContext("2d").getImageData(0, 0, w, h).data;
+      var dataB = cb.getContext("2d").getImageData(0, 0, w, h).data;
+
+      // Backdrop: the "changed" image, dimmed, so highlighted pixels stand out.
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = 0.35;
+      ctx.drawImage(imageB, 0, 0);
+      ctx.globalAlpha = 1;
+
+      var threshold = Number(thresholdEl.value) || 0;
+      var result = pixelDiff(dataA, dataB, threshold);
+      var out = ctx.createImageData(w, h);
+      for (var p = 0; p < result.diffMask.length; p++) {
+        if (result.diffMask[p]) {
+          var i = p * 4;
+          out.data[i] = 255; out.data[i + 1] = 0; out.data[i + 2] = 200; out.data[i + 3] = 220;
+        }
+      }
+      ctx.putImageData(out, 0, 0);
+
+      var pct = result.total ? ((result.changed / result.total) * 100) : 0;
+      summaryEl.textContent = pct === 0
+        ? "No differences above the current sensitivity."
+        : pct.toFixed(pct < 1 ? 2 : 1) + "% of pixels differ (" + result.changed.toLocaleString() + " of " + result.total.toLocaleString() + ") — " + w + "×" + h + ".";
+      downloadBtn.disabled = false;
+    }
+
+    function wireDrop(dropEl, inputEl, which) {
+      dropEl.addEventListener("dragover", function (e) { e.preventDefault(); dropEl.classList.add("is-drag"); });
+      dropEl.addEventListener("dragleave", function () { dropEl.classList.remove("is-drag"); });
+      dropEl.addEventListener("drop", function (e) {
+        e.preventDefault(); dropEl.classList.remove("is-drag");
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0], which);
+      });
+    }
+    wireDrop(document.getElementById("imgADrop"), fileA, "a");
+    wireDrop(document.getElementById("imgBDrop"), fileB, "b");
+    fileA.addEventListener("change", function () { loadFile(fileA.files[0], "a"); });
+    fileB.addEventListener("change", function () { loadFile(fileB.files[0], "b"); });
+
+    thresholdEl.addEventListener("input", function () {
+      thresholdLabel.textContent = "Sensitivity: " + thresholdEl.value;
+      render();
+    });
+
+    downloadBtn.addEventListener("click", function () {
+      if (downloadBtn.disabled) return;
+      var a = document.createElement("a");
+      a.download = "image-diff.png";
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    });
+
+    exampleBtn.addEventListener("click", function () {
+      // Two small synthetic images generated on the fly (no network fetch,
+      // no bundled asset) — a rectangle in a different position/color so the
+      // diff is obvious.
+      function synth(shiftX, color) {
+        var c = document.createElement("canvas"); c.width = 200; c.height = 120;
+        var cx = c.getContext("2d");
+        cx.fillStyle = "#e8e8e8"; cx.fillRect(0, 0, 200, 120);
+        cx.fillStyle = color; cx.fillRect(30 + shiftX, 30, 60, 60);
+        var img = new Image(); img.src = c.toDataURL();
+        return img;
+      }
+      var a = synth(0, "#2d6cdf");
+      var b = synth(40, "#2d6cdf");
+      a.onload = function () {
+        imageA = a; previewA.src = a.src; previewA.hidden = false;
+        b.onload = function () {
+          imageB = b; previewB.src = b.src; previewB.hidden = false;
+          render();
+        };
+      };
+    });
+
+    clearBtn.addEventListener("click", function () {
+      imageA = null; imageB = null;
+      fileA.value = ""; fileB.value = "";
+      previewA.hidden = true; previewB.hidden = true; previewA.src = ""; previewB.src = "";
+      canvas.hidden = true; downloadBtn.disabled = true; summaryEl.textContent = "";
     });
   })();
 

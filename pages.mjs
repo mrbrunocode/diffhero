@@ -763,6 +763,22 @@ export const PAGES = [
       { q: "Is my schema uploaded anywhere?", a: "No. The comparison runs entirely in your browser, so an unreleased API schema never leaves your device." },
     ],
   },
+  {
+    slug: "image-diff",
+    eyebrow: "Image Diff",
+    title: "Image Diff — Compare Two Images Pixel by Pixel",
+    description:
+      "Drop two images in and see exactly which pixels changed, highlighted over the original. Free, browser-only — nothing is ever uploaded.",
+    intro:
+      "Drop two images onto the boxes below to see exactly what changed between them — every pixel that differs is highlighted, so a moved button, a shifted line of text, or a recolored icon jumps out instead of hiding in a side-by-side squint test. Comparison happens entirely on canvas in your browser; neither image is ever uploaded anywhere.",
+    shape: "image",
+    faq: [
+      { q: "What counts as a \"different\" pixel?", a: "Each pixel's red, green, blue and alpha values are compared between the two images; if the combined difference passes a small threshold (to absorb harmless compression noise), it's marked as changed and highlighted in the result." },
+      { q: "What if the two images are different sizes?", a: "The comparison canvas is sized to the larger of the two images; any area only one image covers counts as fully different, so a resized or cropped image will show a highlighted border or region rather than failing outright." },
+      { q: "Are my images uploaded anywhere?", a: "No. Both images are decoded and compared entirely on an in-browser <canvas> element — nothing is sent to a server, and the comparison works offline once the page has loaded." },
+      { q: "What image formats are supported?", a: "Anything your browser can decode natively — PNG, JPEG, WebP, GIF (first frame) and SVG all work, since the comparison operates on decoded pixel data, not the file format itself." },
+    ],
+  },
 ];
 
 /**
@@ -847,6 +863,42 @@ export function renderTool(p = {}) {
     <div class="tool-actions">
       <button type="button" class="btn" id="csvExampleBtn">Load example</button>
       <button type="button" class="btn" id="csvClearBtn">Clear</button>
+    </div>
+  </section>`;
+  }
+
+  // Image diff: a genuinely different shape again — two file drops, a canvas
+  // pixel comparison, and a visual (not textual) result.
+  if (p.shape === "image") {
+    return `
+  <section class="tool imagetool" data-slug="${p.slug || ""}">
+    <div class="diff-inputs image-diff-inputs">
+      <div class="diff-pane image-pane" data-side="a">
+        <div class="diff-pane-head"><label class="diff-label" for="imgA">Original image</label></div>
+        <label class="image-drop" for="imgA" id="imgADrop">
+          <span class="image-drop-hint">Click, or drag an image here</span>
+          <img id="imgAPreview" alt="" hidden>
+        </label>
+        <input type="file" id="imgA" accept="image/*" class="sr-only">
+      </div>
+      <div class="diff-pane image-pane" data-side="b">
+        <div class="diff-pane-head"><label class="diff-label" for="imgB">Changed image</label></div>
+        <label class="image-drop" for="imgB" id="imgBDrop">
+          <span class="image-drop-hint">Click, or drag an image here</span>
+          <img id="imgBPreview" alt="" hidden>
+        </label>
+        <input type="file" id="imgB" accept="image/*" class="sr-only">
+      </div>
+    </div>
+    <div class="tool-bar">
+      <label class="opt"><input type="range" id="imgThreshold" min="0" max="128" value="24"> <span id="imgThresholdLabel">Sensitivity: 24</span></label>
+      <span class="diff-summary" id="imageDiffSummary" role="status" aria-live="polite"></span>
+    </div>
+    <canvas id="imageDiffCanvas" class="image-diff-canvas" hidden></canvas>
+    <div class="tool-actions">
+      <button type="button" class="btn" id="imgExampleBtn">Load example</button>
+      <button type="button" class="btn" id="imgDownloadBtn" disabled>Download diff image</button>
+      <button type="button" class="btn" id="imgClearBtn">Clear</button>
     </div>
   </section>`;
   }

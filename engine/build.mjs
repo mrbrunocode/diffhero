@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { mkdir, writeFile, rm } from "node:fs/promises";
 import * as C from "../site.config.mjs";
-import { renderDocument, adSlot, faqHtml, esc } from "./template.mjs";
+import { renderDocument, adSlot, affiliateSlot, faqHtml, esc } from "./template.mjs";
 import { PAGES, renderTool } from "../pages.mjs";
 import { home, about, privacy, terms, contact } from "../content.mjs";
 
@@ -82,6 +82,7 @@ function collectionPage(p) {
   ${p.extra || ""}
   ${howToHtml(p.howto, p.eyebrow || C.NAME)}
   ${faqHtml(p.faq)}
+  ${affiliateSlot()}
   ${relatedLinks(p.slug)}`;
   return renderDocument({
     title: p.h1 || p.title,

@@ -61,3 +61,4 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Subtitle Diff](https://diffhero.app/diff/subtitle-diff): Compare two subtitle files and see exactly which lines, timings or text changed between them. Free, browser-only, nothing uploaded.
 - [Invisible Characters](https://diffhero.app/diff/invisible-character-checker): Two strings look identical but a comparison says they differ? Find the hidden non-breaking spaces, zero-width characters and smart quotes. Free, client-side.
 - [Protobuf Diff](https://diffhero.app/diff/protobuf-diff): Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.
+- [Image Diff](https://diffhero.app/diff/image-diff): Drop two images in and see exactly which pixels changed, highlighted over the original. Free, browser-only — nothing is ever uploaded.

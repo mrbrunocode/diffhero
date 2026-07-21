@@ -200,6 +200,19 @@ main.wrap { flex: 1; padding-top: var(--space-6); padding-bottom: var(--space-16
 .ad-slot--placeholder { min-height: 0; }
 
 /* ---- FAQ ---- */
+.affiliate-card {
+  margin-top: var(--space-8); padding: var(--space-4) var(--space-5); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); background: var(--surface); font-size: var(--text-sm);
+}
+.affiliate-card p { margin: 0 0 var(--space-2); color: var(--text-secondary); }
+.affiliate-card p:last-of-type { margin-bottom: var(--space-3); }
+.affiliate-label {
+  font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  color: var(--text-tertiary, var(--text-secondary)); margin-bottom: var(--space-2) !important;
+}
+.affiliate-card a { font-weight: 600; color: var(--accent); }
+.affiliate-card a:hover { text-decoration: underline; }
+
 .faq { margin-top: var(--space-12); }
 .faq-grid { display: grid; gap: var(--space-5); margin-top: var(--space-5); }
 .faq-item h3 { margin-bottom: var(--space-2); }
@@ -236,6 +249,17 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
 .diff-pane-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-2); gap: var(--space-3); }
 .diff-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); font-weight: 600; }
 .diff-drop-hint { font-size: var(--text-xs); color: var(--text-tertiary); }
+
+.image-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 160px; border: 1px dashed var(--border); border-radius: var(--radius-md); background: var(--surface);
+  cursor: pointer; padding: var(--space-4); text-align: center; transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+}
+.image-drop:hover, .image-drop.is-drag { border-color: var(--accent); background: var(--accent-soft); }
+.image-drop-hint { font-size: var(--text-sm); color: var(--text-secondary); }
+.image-drop img { max-width: 100%; max-height: 200px; border-radius: var(--radius-sm); }
+.image-diff-canvas { max-width: 100%; height: auto; margin-top: var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--border); background: repeating-conic-gradient(#8883 0% 25%, transparent 0% 50%) 50% / 16px 16px; }
+.tool-bar input[type="range"] { vertical-align: middle; margin-right: var(--space-2); }
 .editor {
   width: 100%; min-height: 200px; resize: vertical; font-family: var(--font-ui); font-size: var(--text-base);
   line-height: 1.6; color: var(--text-primary); background: var(--surface); border: 1px solid var(--border);

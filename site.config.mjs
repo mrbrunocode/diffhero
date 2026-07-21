@@ -33,6 +33,12 @@ export const ADSENSE_SLOT = "";
 // Bing Webmaster Tools site-ownership verification (empty until wired up).
 export const BING_VERIFY = "5A4EFD6B7BD09C4C115B7ACCF3688E1C";
 
+// Affiliate recommendation card (empty until an affiliate account exists —
+// see boring-app-factory docs for the vetting checklist before filling these in).
+export const AFFILIATE_NAME = "";
+export const AFFILIATE_URL = "";
+export const AFFILIATE_BLURB = "";
+
 export const FONT_HREF =
   "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap";
 

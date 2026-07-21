@@ -78,6 +78,27 @@ export function adSlot() {
   return `<div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>`;
 }
 
+/**
+ * A single, clearly-labeled affiliate recommendation card. Renders nothing
+ * until AFFILIATE_PARTNER/AFFILIATE_URL are set in site.config.mjs (same
+ * off-by-default pattern as adSlot()) — never a dead or placeholder link.
+ * Deliberately one partner, one line of copy, no banner imagery: it should
+ * read as a genuine adjacent recommendation, not an ad unit. Sits AFTER the
+ * ad slot and FAQ, so it never competes with the paid ad or the tool itself.
+ */
+// cfg defaults to the real site.config.mjs values; tests pass an explicit
+// cfg so both the "off" and "configured" branches are checkable without
+// mocking a module of `const` bindings.
+export function affiliateSlot(cfg = { name: C.AFFILIATE_NAME, url: C.AFFILIATE_URL, blurb: C.AFFILIATE_BLURB }) {
+  if (!cfg.url || !cfg.name || !cfg.blurb) return "";
+  return `
+  <aside class="affiliate-card">
+    <p class="affiliate-label">Sponsored</p>
+    <p>${esc(cfg.blurb)}</p>
+    <a href="${esc(cfg.url)}" rel="sponsored noopener" target="_blank">Try ${esc(cfg.name)} →</a>
+  </aside>`;
+}
+
 export const faqSchema = (faq) =>
   faq && faq.length
     ? `<script type="application/ld+json">${JSON.stringify({
