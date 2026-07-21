@@ -9,7 +9,7 @@ your device.
 
 ## Features
 
-- **Syntax highlighting** — a dependency-free lexer for ~12 languages (JS/TS,
+- **Syntax highlighting** — a dependency-free lexer for ~17 languages (JS/TS,
   Python, JSON, HTML/XML, CSS, SQL, YAML, Go, Java, PHP, and a generic C-like
   mode), chosen per page and switchable in-tool. Composes cleanly with the
   word-level diff.
@@ -30,6 +30,9 @@ your device.
 - **Fast on large files** — common prefix/suffix are trimmed before the diff, so
   a small edit in a big file only compares the changed middle.
 - **Private by design** — every comparison runs client-side; there is no backend.
+- **Image diff** (added 2026-07-21) — pixel-level comparison of two uploaded
+  images on a `<canvas>`, adjustable sensitivity, changed regions highlighted
+  over the original. Same client-side-only guarantee as the text tools.
 
 ## Develop
 

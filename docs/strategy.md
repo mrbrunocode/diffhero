@@ -21,51 +21,46 @@ persuasive true sentence we can write.
 
 ## 2. Feature roadmap (phased, all static-feasible)
 
+**Status check 2026-07-21: nearly this entire roadmap is already built.**
+Items 1–9 and 11 below are done (verified against the current `pages.mjs`/
+`assets/app.js`, not just recalled) — this section was badly out of date
+before this pass. Only item 10 (PWA/offline) is still open.
+
 Already shipped and free-unlimited (Diffchecker gates all of these): split +
-unified views, word-level inline diff, syntax highlighting (~17 langs), ignore
+unified views, word-level inline diff, syntax highlighting, ignore
 whitespace/case, collapse unchanged, wrap toggle, share link, .diff export,
-drag-and-drop files, JSON normalization, dark/light.
+drag-and-drop files, JSON normalization, dark/light, plus everything marked
+✅ below.
 
 ### Phase 1 — cheap wins that close real gaps (each ~a session)
-1. **Character-level diff toggle.** Diffchecker Pro-gates this. Our word-diff
-   already computes token marks; add a per-character LCS fallback for changed
-   word pairs. New checkbox "Character detail".
-2. **Printable report / "Export PDF".** A print stylesheet + `window.print()`
-   = free "PDF export" (another Pro-gated feature). Add a "Print / Save as
-   PDF" button.
-3. **Compressed share links.** `CompressionStream("deflate-raw")` is native in
-   all modern browsers — gzip the payload before base64. Raises the ~12 KB
-   share ceiling ~3–5×, no library. Keep the old decoder for existing links.
-4. **Invisible-character revealer.** When two lines *look* identical but
-   differ, show a "reveal invisible characters" affordance (NBSP, zero-width,
-   smart quotes, CRLF). Nobody does this well; it's the #1 "why does my diff
-   show a change?" confusion. Long-tail page: "why do identical-looking texts
-   differ".
-5. **Find & replace inside the editors.** Small, expected, retention-positive.
+1. ✅ **Character-level diff toggle** — shipped ("Character detail" checkbox).
+   Diffchecker Pro-gates this equivalent.
+2. ✅ **Printable report / "Export PDF"** — shipped (Print / PDF button).
+3. ✅ **Compressed share links** — shipped (`CompressionStream("deflate-raw")`).
+4. ✅ **Invisible-character revealer** — shipped as its own page,
+   `/diff/invisible-character-checker`, not just an in-tool toggle.
+5. ✅ **Find & replace inside the editors** — shipped.
 
 ### Phase 2 — new tool surfaces (each unlocks a long-tail cluster)
-6. **Image diff** (client-side canvas: side-by-side / slider / onion-skin /
-   pixel-highlight). Diffchecker's is free but server-side; ours is private.
-   Cluster: `/diff/image-diff`, png-diff, screenshot-compare (~5–10 pages).
-7. **Word (.docx) diff.** A .docx is a zip of XML — unzip client-side
-   (fflate is ~8 KB, vendored), extract paragraph text, feed the existing
-   engine. "compare two word documents online free without upload" is a
-   high-intent, high-RPM (legal/business) query the upload-based incumbents
-   can't honestly answer. Cluster: docx-diff, contract-redline, resume
-   versions (~5 pages).
-8. **PDF text diff** via a vendored pdf.js text extractor. Heavier (~300 KB)
-   — lazy-load it only on the pdf-diff page so the rest of the site stays
-   lean. Same privacy story, same high-RPM legal/business intent.
-9. **Merge view.** Accept/reject each change → produces merged output +
-   download. Pro-gated at Diffchecker; genuinely rare among free tools.
+6. ✅ **Image diff** — shipped 2026-07-21 (`/diff/image-diff`, canvas
+   pixel-highlight with adjustable sensitivity). **Still open:** the
+   originally-suggested png-diff/screenshot-compare sub-pages — right now
+   there's one general image-diff page, not the finer-grained cluster.
+7. ✅ **Word (.docx) diff** — shipped (`/diff/word-diff`, mammoth.js).
+   The suggested cluster is covered too: `/diff/contract-diff`,
+   `/diff/resume-diff`, `/diff/essay-diff` all exist.
+8. ✅ **PDF text diff** — shipped (`/diff/pdf-diff`, pdf.js).
+9. ✅ **Merge view** — shipped as `/diff/merge-conflict-resolver` (also
+   satisfies item 11 below — same feature, one page).
 
 ### Phase 3 — moats
-10. **PWA / installable + offline.** A manifest + tiny service worker makes
-    "works offline" provable (install it, kill wifi, diff away) and adds a
-    return loop (installed app = direct traffic, less SERP dependence).
-11. **3-way diff / conflict resolver** for `<<<<<<<` git conflict blocks.
-    Almost no free online tool does this; devs land from "resolve merge
-    conflict online".
+10. 🔲 **PWA / installable + offline — not built yet.** No `manifest.json` or
+    service worker in this repo (CountLink has one; Diffhero doesn't). Still
+    the one clearly-open item on this list — a manifest + tiny service worker
+    makes "works offline" provable and adds a return loop (installed app =
+    direct traffic, less SERP dependence).
+11. ✅ **3-way diff / conflict resolver** — same feature as item 9,
+    `/diff/merge-conflict-resolver`.
 
 Skip (violate the model): real-time collaboration, folder diff at scale,
 accounts, AI summaries (server + cost), anything requiring upload.
@@ -91,7 +86,16 @@ accounts, AI summaries (server + cost), anything requiring upload.
   with commercial advertisers, currently answered only by upload-based tools.
 
 ## 5. Sequencing recommendation
-Phase 1 items 1–3 next session (small, visible, close Pro-gated gaps), then
-the image-diff cluster (biggest new-query surface per effort), then docx.
-Add `PAGES` rows *with* each feature — a feature without its long-tail pages
-earns nothing.
+
+**Done as of 2026-07-21** — see the status check at the top of §2. The
+original recommendation here (Phase 1 items 1–3, then image-diff, then docx)
+is exactly what happened, just also including everything else in Phase 1/2/3
+except PWA/offline.
+
+Next up, in order: (a) **PWA/offline** (§2 item 10, the one open item), (b)
+split the general image-diff page into the originally-suggested finer-grained
+cluster (png-diff, screenshot-compare) if that traffic looks worth it once
+Diffhero has real Search Console data, (c) new ideas — this doc needs a fresh
+research pass rather than reusing July 17's competitor snapshot, which is now
+over two weeks stale. Keep adding `PAGES` rows *with* each feature — a
+feature without its long-tail pages earns nothing.
