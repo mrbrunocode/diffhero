@@ -6,10 +6,20 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 
 ## Primary pages
 - [Home / the tool](https://diffhero.app/)
+- [Guides](https://diffhero.app/guides)
 - [About](https://diffhero.app/about)
 - [Privacy policy](https://diffhero.app/privacy)
 - [Terms of Service](https://diffhero.app/terms)
 - [Contact](https://diffhero.app/contact)
+
+## Guides
+- [What is a diff? How software compares two versions of a file](https://diffhero.app/guides/what-is-a-diff): A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.
+- [How to review a pull request well](https://diffhero.app/guides/how-to-review-a-pull-request): A practical guide to reviewing code changes: what to actually look for, how to read a diff efficiently, and how to give feedback that helps.
+- [Merge conflicts explained, and how to resolve them without losing work](https://diffhero.app/guides/merge-conflicts-explained): Why merge conflicts happen, what the conflict markers mean, and a safe step-by-step approach to resolving one without dropping anyone's changes.
+- [How to diff config files without breaking production](https://diffhero.app/guides/diffing-config-files-safely): Config files punch above their weight — a one-line change can take a service down. A practical guide to comparing YAML, JSON, .env and other config safely.
+- [Line, word and semantic diffs: which comparison you actually need](https://diffhero.app/guides/line-word-and-semantic-diffs): Not all diffs are the same. Understanding line-level, word-level and structure-aware comparison helps you pick the right view and avoid being misled.
+- [Why “nothing leaves your browser” matters for developer tools](https://diffhero.app/guides/client-side-tools-and-privacy): Many online tools quietly upload your input to a server. Here's why client-side processing matters for code, config and documents — and how to verify it.
+- [How to compare two documents when Track Changes wasn't on](https://diffhero.app/guides/comparing-documents-without-track-changes): Someone edited your document and never turned on Track Changes. Here's how to find exactly what changed between two versions of a contract, résumé or report.
 
 ## diff
 - [Text Compare](https://diffhero.app/diff/text-compare): Paste two versions of any text and see every added, removed and changed line — with the exact words highlighted — instantly. Free, browser-only, nothing uploaded.

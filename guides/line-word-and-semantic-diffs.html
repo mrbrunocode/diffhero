@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Line, word and semantic diffs: which comparison you actually need | Diffhero</title>
+<meta name="description" content="Not all diffs are the same. Understanding line-level, word-level and structure-aware comparison helps you pick the right view and avoid being misled.">
+<link rel="canonical" href="https://diffhero.app/guides/line-word-and-semantic-diffs">
+<meta property="og:title" content="Line, word and semantic diffs: which comparison you actually need">
+<meta property="og:description" content="Not all diffs are the same. Understanding line-level, word-level and structure-aware comparison helps you pick the right view and avoid being misled.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diffhero.app/guides/line-word-and-semantic-diffs">
+<meta property="og:image" content="https://diffhero.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#0a0d12">
+<meta name="msvalidate.01" content="5A4EFD6B7BD09C4C115B7ACCF3688E1C">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=cdc51f61">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/guides/line-word-and-semantic-diffs","description":"Not all diffs are the same. Understanding line-level, word-level and structure-aware comparison helps you pick the right view and avoid being misled.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://diffhero.app/guides/line-word-and-semantic-diffs"}]}</script>
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Line, word and semantic diffs: which comparison you actually need","description":"Not all diffs are the same. Understanding line-level, word-level and structure-aware comparison helps you pick the right view and avoid being misled.","author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"publisher":{"@type":"Organization","name":"Diffhero"},"datePublished":"2026-07-23","dateModified":"2026-07-23","mainEntityOfPage":"https://diffhero.app/guides/line-word-and-semantic-diffs"}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <a class="logo" href="/">
+    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" rx="2.5" fill="currentColor"/><rect x="13" y="7" width="7" height="12" rx="2.5" fill="currentColor" opacity="0.45"/></svg>
+    Diffhero
+  </a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+  </button>
+</header>
+<nav class="main-nav" aria-label="Site">
+  <a href="/guides">Guides</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/contact">Contact</a>
+</nav>
+<main class="wrap" id="main">
+
+  <article class="prose article">
+    <span class="eyebrow">Guide</span>
+    <h1>Line, word and semantic diffs: which comparison you actually need</h1>
+    
+  <p class="byline">By <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>
+    · <time datetime="2026-07-23">23 July 2026</time>
+    · 5 min read</p>
+    
+    <p>"These two files are different" is almost never the answer you want. You want to know <em>how</em> they differ, and at what level of detail — and that's where it helps to know that "a diff" isn't one thing. Line, word and structure-aware comparisons each answer a different question, and picking the wrong one means either missing the change you cared about or being buried in noise you didn't.</p>
+
+    <h2>Line-level: the default, and its blind spot</h2>
+    <p>The standard diff — what Git shows, what a <a href="/diff/online-diff-checker">diff checker</a> does by default — works line by line. It's fast, it maps cleanly onto how code is written, and it's what everyone means by "the diff". Its blind spot is granularity: change one word and the entire line is marked as removed-and-re-added. For code that's usually fine, but for prose, where a "line" might be a whole paragraph, it can flag an eighty-word paragraph as changed because you fixed one typo.</p>
+
+    <h2>Word- and character-level: seeing the real edit</h2>
+    <p>A word-level diff runs a second comparison <em>inside</em> each changed line, highlighting just the tokens that moved. This is what lets you see that "the quick brown fox" became "the quick red fox" with only one word touched, rather than the whole line lighting up. For editing prose, reviewing a reworded sentence, or spotting a one-character code change buried in a long line, word- or character-level detail is the difference between the tool pointing at the change and you hunting for it. When you <a href="/diff/text-compare">compare two blocks of text</a>, it's usually the view you want.</p>
+
+    <h2>Whitespace-aware vs whitespace-blind</h2>
+    <p>Cutting across all of this is the whitespace question. "Ignore whitespace" tells the diff to treat spacing and indentation changes as nothing — invaluable when a formatter or a re-wrap has churned a file without changing meaning. But it's a genuine trap in whitespace-significant formats: in <a href="/diff/python-diff">Python</a> and <a href="/diff/yaml-diff">YAML</a>, indentation <em>is</em> the logic, so ignoring it can hide a change that moves a statement into or out of a block. The rule of thumb: ignore whitespace to cut formatting noise in languages where it's cosmetic; keep it on where indentation carries meaning.</p>
+
+    <h2>Structure-aware: when text order lies</h2>
+    <p>Sometimes even a perfect text diff gives the wrong answer, because the meaning doesn't live in the line order. Two examples:</p>
+    <ul>
+      <li><strong>Data with reordered rows or keys.</strong> Two <a href="/diff/json-diff">JSON</a> objects with the same data but different key order are logically identical; a text diff calls them different. A <a href="/diff/csv-table-diff">table-aware CSV comparison</a> lines up columns and rows regardless of order, so you see a changed <em>cell</em>, not a whole row moved.</li>
+      <li><strong>Lists.</strong> Two lists containing the same items in a different order aren't really "different", but a line diff marks nearly everything as moved. <a href="/diff/compare-two-lists">Sort both sides first</a>, and only the genuine additions and removals remain.</li>
+    </ul>
+
+    <h2>Choosing quickly</h2>
+    <p>A short decision guide: for code, start with a line diff and turn on word-level highlighting for the changed lines. For prose, use word-level from the start and ignore whitespace so reflow doesn't dominate. For data where order might differ, sort or use a structure-aware comparison before you trust the result. And in any indentation-sensitive format, leave whitespace <em>on</em>. The tool can show you the difference at any of these levels — knowing which level answers your question is what makes the difference useful.</p>
+    
+  <aside class="author-box">
+    <p class="author-box-name">Bruno FK</p>
+    <p>Bruno FK is an Edinburgh-based software developer who builds small, fast, privacy-respecting web tools. He created Diffhero after one too many diff checkers that either paywalled the useful features or uploaded his code to a server. <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno's site →</a></p>
+  </aside>
+    <p class="article-back"><a href="/guides">← All guides</a></p>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+      <div>Free. No signup, no upload — everything runs in your browser.</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/app.js?v=2959a381" defer></script>
+</body>
+</html>

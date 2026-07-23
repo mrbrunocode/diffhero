@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merge conflicts explained, and how to resolve them without losing work | Diffhero</title>
+<meta name="description" content="Why merge conflicts happen, what the conflict markers mean, and a safe step-by-step approach to resolving one without dropping anyone's changes.">
+<link rel="canonical" href="https://diffhero.app/guides/merge-conflicts-explained">
+<meta property="og:title" content="Merge conflicts explained, and how to resolve them without losing work">
+<meta property="og:description" content="Why merge conflicts happen, what the conflict markers mean, and a safe step-by-step approach to resolving one without dropping anyone's changes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diffhero.app/guides/merge-conflicts-explained">
+<meta property="og:image" content="https://diffhero.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#0a0d12">
+<meta name="msvalidate.01" content="5A4EFD6B7BD09C4C115B7ACCF3688E1C">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=cdc51f61">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/guides/merge-conflicts-explained","description":"Why merge conflicts happen, what the conflict markers mean, and a safe step-by-step approach to resolving one without dropping anyone's changes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://diffhero.app/guides/merge-conflicts-explained"}]}</script>
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Merge conflicts explained, and how to resolve them without losing work","description":"Why merge conflicts happen, what the conflict markers mean, and a safe step-by-step approach to resolving one without dropping anyone's changes.","author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"publisher":{"@type":"Organization","name":"Diffhero"},"datePublished":"2026-07-23","dateModified":"2026-07-23","mainEntityOfPage":"https://diffhero.app/guides/merge-conflicts-explained"}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <a class="logo" href="/">
+    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" rx="2.5" fill="currentColor"/><rect x="13" y="7" width="7" height="12" rx="2.5" fill="currentColor" opacity="0.45"/></svg>
+    Diffhero
+  </a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+  </button>
+</header>
+<nav class="main-nav" aria-label="Site">
+  <a href="/guides">Guides</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/contact">Contact</a>
+</nav>
+<main class="wrap" id="main">
+
+  <article class="prose article">
+    <span class="eyebrow">Guide</span>
+    <h1>Merge conflicts explained, and how to resolve them without losing work</h1>
+    
+  <p class="byline">By <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>
+    · <time datetime="2026-07-23">23 July 2026</time>
+    · 6 min read</p>
+    
+    <p>Few things stop a developer's momentum like <code>CONFLICT (content): Merge conflict in app.js</code>. But a merge conflict isn't an error or a sign you did something wrong — it's Git being honest. It happens whenever two branches changed the same part of a file in ways Git can't safely combine on its own, so instead of guessing (and risking dropping someone's work) it hands the decision to you. Understanding what it's actually showing you turns a conflict from a panic into a two-minute job.</p>
+
+    <h2>Why conflicts happen</h2>
+    <p>Most of the time, Git merges branches automatically: if you edited the top of a file and a colleague edited the bottom, it takes both, no questions asked. A conflict arises only when both branches touched <em>the same lines</em> — or one branch edited a line the other deleted. Git has two plausible versions of that spot and no way to know which is right, so it marks the region and asks.</p>
+    <p>This is why conflicts cluster in files that everyone edits — a central config, a shared constants file, an import list — and why long-lived branches conflict more: the longer a branch lives away from the mainline, the more the two histories drift apart.</p>
+
+    <h2>Reading the conflict markers</h2>
+    <p>When Git marks a conflict, it rewrites the region between three markers:</p>
+    <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+your current branch's version
+=======
+the incoming branch's version
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch</code></pre>
+    <p>Everything between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>=======</code> is <em>your</em> side (the branch you're on). Everything between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> is the <em>incoming</em> side. Your job is to replace the whole block — markers included — with the single correct version.</p>
+    <p>In a dense conflict, those two sides can be hard to compare by eye. Pasting them into a <a href="/diff/merge-conflict-resolver">side-by-side view</a> makes it obvious what each branch actually changed, so you're deciding based on the real difference rather than squinting at interleaved lines.</p>
+
+    <h2>A safe resolution routine</h2>
+    <ol>
+      <li><strong>Understand both sides before you touch anything.</strong> What was each branch trying to do here? The right answer is often not "pick one" but "combine both" — keep your change <em>and</em> theirs.</li>
+      <li><strong>Edit down to the intended result.</strong> Delete the markers and the version(s) you don't want, and shape what remains into correct, working code.</li>
+      <li><strong>Remove every marker.</strong> Search the file for <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. A leftover marker compiles in some languages and breaks silently in others — either way it's a bug you'll regret.</li>
+      <li><strong>Test before you commit the resolution.</strong> A conflict resolved wrong is worse than the conflict, because now the code looks finished. Run it.</li>
+    </ol>
+
+    <h2>The mistake that actually loses work</h2>
+    <p>The dangerous move is resolving a conflict by keeping only one side when the correct answer was both. It's easy to do under time pressure — "I'll just take mine" — and it silently deletes a colleague's change that had merged cleanly right up until this moment. Whenever you "take one side", pause and confirm the other side's change is genuinely obsolete and not just inconvenient. When in doubt, diff the resolved file against both original versions to see exactly what you kept and what you dropped.</p>
+
+    <h2>Preventing them in the first place</h2>
+    <p>You can't avoid conflicts entirely, but you can make them small: merge or rebase from the mainline often so your branch never drifts far, keep branches short-lived, and avoid sweeping reformats in the same change as real logic (a formatting-only commit conflicts with everything). Conflicts are a normal cost of people working in parallel — the goal isn't zero conflicts, it's conflicts that are small enough to resolve with confidence.</p>
+    
+  <aside class="author-box">
+    <p class="author-box-name">Bruno FK</p>
+    <p>Bruno FK is an Edinburgh-based software developer who builds small, fast, privacy-respecting web tools. He created Diffhero after one too many diff checkers that either paywalled the useful features or uploaded his code to a server. <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno's site →</a></p>
+  </aside>
+    <p class="article-back"><a href="/guides">← All guides</a></p>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+      <div>Free. No signup, no upload — everything runs in your browser.</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/app.js?v=2959a381" defer></script>
+</body>
+</html>

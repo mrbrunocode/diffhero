@@ -16,11 +16,19 @@ export const DESCRIPTION =
 export const COLLECTION_DIR = "diff";
 
 export const NAV = [
+  { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/contact", label: "Contact" },
 ];
+
+// Author identity (E-E-A-T). Articles carry a byline linking here; the About
+// page names the same person. brunofk.dev is the developer's own site.
+export const AUTHOR_NAME = "Bruno FK";
+export const AUTHOR_URL = "https://brunofk.dev";
+export const AUTHOR_BIO =
+  "Bruno FK is an Edinburgh-based software developer who builds small, fast, privacy-respecting web tools. He created Diffhero after one too many diff checkers that either paywalled the useful features or uploaded his code to a server.";
 
 export const LAST_UPDATED = "July 18, 2026";
 export const CONTENT_DATE = "2026-07-18";

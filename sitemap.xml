@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://diffhero.app/</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/about</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/privacy</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/terms</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/contact</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/what-is-a-diff</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/how-to-review-a-pull-request</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/merge-conflicts-explained</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/diffing-config-files-safely</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/line-word-and-semantic-diffs</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/client-side-tools-and-privacy</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/guides/comparing-documents-without-track-changes</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/text-compare</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/compare-two-text-files</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/online-diff-checker</loc><lastmod>2026-07-18</lastmod></url>

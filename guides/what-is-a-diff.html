@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is a diff? How software compares two versions of a file | Diffhero</title>
+<meta name="description" content="A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.">
+<link rel="canonical" href="https://diffhero.app/guides/what-is-a-diff">
+<meta property="og:title" content="What is a diff? How software compares two versions of a file">
+<meta property="og:description" content="A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://diffhero.app/guides/what-is-a-diff">
+<meta property="og:image" content="https://diffhero.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://diffhero.app/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta name="theme-color" content="#0a0d12">
+<meta name="msvalidate.01" content="5A4EFD6B7BD09C4C115B7ACCF3688E1C">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=cdc51f61">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/guides/what-is-a-diff","description":"A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://diffhero.app/guides/what-is-a-diff"}]}</script>
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What is a diff? How software compares two versions of a file","description":"A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.","author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"publisher":{"@type":"Organization","name":"Diffhero"},"datePublished":"2026-07-23","dateModified":"2026-07-23","mainEntityOfPage":"https://diffhero.app/guides/what-is-a-diff"}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <a class="logo" href="/">
+    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" rx="2.5" fill="currentColor"/><rect x="13" y="7" width="7" height="12" rx="2.5" fill="currentColor" opacity="0.45"/></svg>
+    Diffhero
+  </a>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+  </button>
+</header>
+<nav class="main-nav" aria-label="Site">
+  <a href="/guides">Guides</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/contact">Contact</a>
+</nav>
+<main class="wrap" id="main">
+
+  <article class="prose article">
+    <span class="eyebrow">Guide</span>
+    <h1>What is a diff? How software compares two versions of a file</h1>
+    
+  <p class="byline">By <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>
+    · <time datetime="2026-07-23">23 July 2026</time>
+    · 6 min read</p>
+    
+    <p>If you've spent any time near code, documents or configuration, you've met the word <em>diff</em> — short for "difference". You <code>git diff</code>, someone asks you to "diff the two files", a review tool shows you a wall of red and green. But what is a diff, really, and how does a computer work out what changed between two versions of some text? It's worth understanding, because once you know how the comparison is computed you also know its limits — and when it will mislead you.</p>
+
+    <h2>A diff is the shortest set of edits between two texts</h2>
+    <p>At its core, a diff answers a precise question: what is the smallest set of insertions and deletions that turns version A into version B? "Smallest" matters. Almost any change can be described as "delete everything, then type the new version", but that would be useless — it tells you nothing about <em>what</em> changed. A good diff finds the minimal edit script, so that the parts which stayed the same are recognised as unchanged and only the genuine edits are highlighted.</p>
+    <p>Concretely, if the original says "the quick brown fox" and the new version says "the quick red fox", a naive comparison might flag the whole line as different. A diff worth using recognises that "the quick " and " fox" are untouched and that only "brown" became "red". That is the difference between a tool that points at the actual change and one that makes you find it yourself.</p>
+
+    <h2>How the comparison is computed</h2>
+    <p>The classic approach treats the two versions as sequences — usually sequences of lines — and looks for the <strong>longest common subsequence</strong>: the longest run of lines that appears, in order, in both versions. Anything not part of that common backbone is either an insertion (present in the new version only) or a deletion (present in the old version only). Most real diff tools, including the Unix <code>diff</code> command and Git, use refinements of an algorithm published by Eugene Myers in 1986 that finds this efficiently.</p>
+    <p>Line-level diffing is fast and it's what version control shows you, but it's coarse: change one word and the whole line is marked. That's why better tools add a second pass — a <strong>word-level</strong> or <strong>character-level</strong> diff <em>within</em> each changed line — so a one-character fix doesn't light up eighty characters of unchanged text. When you use a <a href="/diff/online-diff-checker">diff checker</a> and see the exact changed token highlighted inside a line, that's the second pass at work.</p>
+
+    <h2>Where you already rely on diffs</h2>
+    <ul>
+      <li><strong>Version control.</strong> Every commit in Git is stored and shown as a diff against what came before. Code review on GitHub, GitLab and the rest is diff-reading as a job.</li>
+      <li><strong>Patches.</strong> A <code>.patch</code> or <code>.diff</code> file <em>is</em> a diff, written in a standard format so it can be emailed and re-applied to a codebase. That's how open-source contributions travelled for decades.</li>
+      <li><strong>Document editing.</strong> "Track changes" in a word processor and "suggesting mode" in a docs app are diffs with a friendly face.</li>
+      <li><strong>Backups and sync.</strong> Tools that store or transfer only what changed are computing diffs under the hood to avoid moving whole files.</li>
+    </ul>
+
+    <h2>The limits worth knowing</h2>
+    <p>A text diff compares <em>text</em>, which means it's blind to meaning. Two things follow. First, a change that's semantically trivial can look large: reformatting a file, re-indenting a block, or re-wrapping a paragraph rewrites many lines without changing what any of it means. That's why "ignore whitespace" exists — it tells the diff to treat spacing changes as noise. Second, a change that's semantically huge can look tiny: flipping a single <code>&lt;</code> to <code>&gt;</code>, or deleting one "not", is a one-character diff with outsized consequences. The tool shows you <em>where</em> things differ; judging <em>how much it matters</em> is still your job.</p>
+    <p>There's also the question of order. A text diff assumes the two versions are meant to be in the same sequence. If you compare two lists that were simply sorted differently, nearly every line will read as moved, even though the sets are identical — the fix is to <a href="/diff/compare-two-lists">sort both sides first</a>, or use a comparison that ignores order.</p>
+
+    <h2>The takeaway</h2>
+    <p>A diff is a minimal, mechanical description of what changed between two texts — nothing more, nothing less. Understanding that it works on text (not meaning) and assumes a shared order tells you when to trust it at a glance and when to slow down: turn on "ignore whitespace" when formatting is drowning the signal, read word-level highlights for the real edit, and treat a small-looking change in something high-stakes with the same care as a large one. Everything a good <a href="/diff/code-diff">diff checker</a> does is in service of one goal — showing you the change instead of making you hunt for it.</p>
+    
+  <aside class="author-box">
+    <p class="author-box-name">Bruno FK</p>
+    <p>Bruno FK is an Edinburgh-based software developer who builds small, fast, privacy-respecting web tools. He created Diffhero after one too many diff checkers that either paywalled the useful features or uploaded his code to a server. <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno's site →</a></p>
+  </aside>
+    <p class="article-back"><a href="/guides">← All guides</a></p>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+      <div>Free. No signup, no upload — everything runs in your browser.</div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/app.js?v=2959a381" defer></script>
+</body>
+</html>
