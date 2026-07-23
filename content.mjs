@@ -51,6 +51,25 @@ export const home = {
       ${HOME_HOWTO.map((s) => `<div class="howto-step"><p>${s}</p></div>`).join("\n      ")}
     </div>
   </section>
+
+  <section class="guide">
+    <h2>What a diff checker is for</h2>
+    <p>A diff (short for "difference") checker takes two versions of the same text and works out the smallest set of changes that turns one into the other — then shows you those changes instead of making you hunt for them line by line. It's the engine behind the <code>diff</code> command, the review view on GitHub, and the "compare versions" feature in a word processor, distilled to a single page with nothing to install.</p>
+    <p>You reach for one whenever you have a "before" and an "after" and need to know exactly what moved: two drafts of a document, a config file before and after an edit, a code snippet you're refactoring, two exports that are supposed to match, or a contract that came back from the other side with "just a couple of tweaks." ${C.NAME} highlights not only which <em>lines</em> differ but the exact <em>words</em> inside a changed line, so a one-character fix doesn't light up the whole row.</p>
+
+    <h2>Text, code, data and documents</h2>
+    <p>Because the comparison works on text, it's language- and format-agnostic. ${C.NAME} has dedicated pages tuned to the formats people compare most — each with guidance on that format's particular pitfalls:</p>
+    <ul>
+      <li><strong>Code</strong> in any language, with syntax highlighting and whitespace handling that respects indentation-sensitive languages like Python and YAML.</li>
+      <li><strong>Structured data</strong> — <a href="/${C.COLLECTION_DIR}/json-diff">JSON</a>, <a href="/${C.COLLECTION_DIR}/csv-diff">CSV</a>, <a href="/${C.COLLECTION_DIR}/xml-diff">XML</a>, <a href="/${C.COLLECTION_DIR}/yaml-diff">YAML</a> — where key order and formatting can hide the real change.</li>
+      <li><strong>Config and DevOps</strong> files — <a href="/${C.COLLECTION_DIR}/dockerfile-diff">Dockerfiles</a>, <a href="/${C.COLLECTION_DIR}/env-diff">.env</a>, <a href="/${C.COLLECTION_DIR}/terraform-diff">Terraform</a>, <a href="/${C.COLLECTION_DIR}/nginx-config-diff">nginx</a> — where a one-line change has outsized effects.</li>
+      <li><strong>Documents</strong> — <a href="/${C.COLLECTION_DIR}/pdf-diff">PDF</a>, <a href="/${C.COLLECTION_DIR}/word-diff">Word</a>, <a href="/${C.COLLECTION_DIR}/contract-diff">contracts</a> and <a href="/${C.COLLECTION_DIR}/resume-diff">résumés</a> — with text extracted from the file in your browser.</li>
+    </ul>
+
+    <h2>Why "nothing uploaded" matters</h2>
+    <p>Most online diff tools send your text to a server to compute the comparison. ${C.NAME} doesn't: the whole diff runs in your browser with JavaScript, so whatever you paste — proprietary code, a draft agreement, a config file full of secrets, personal data — never leaves your device. You can confirm it yourself in your browser's Network tab, and the tool keeps working offline once it has loaded. That makes it safe for exactly the material you shouldn't paste into a typical web tool.</p>
+  </section>
+
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "HowTo",

@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/style.css?v=a8e41527">
+<link rel="stylesheet" href="./assets/style.css?v=d110fbb8">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -144,11 +144,30 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <div class="howto-step"><p>Switch between Split and Unified view, jump between changes with the arrows, or download a .diff.</p></div>
     </div>
   </section>
+
+  <section class="guide">
+    <h2>What a diff checker is for</h2>
+    <p>A diff (short for "difference") checker takes two versions of the same text and works out the smallest set of changes that turns one into the other — then shows you those changes instead of making you hunt for them line by line. It's the engine behind the <code>diff</code> command, the review view on GitHub, and the "compare versions" feature in a word processor, distilled to a single page with nothing to install.</p>
+    <p>You reach for one whenever you have a "before" and an "after" and need to know exactly what moved: two drafts of a document, a config file before and after an edit, a code snippet you're refactoring, two exports that are supposed to match, or a contract that came back from the other side with "just a couple of tweaks." Diffhero highlights not only which <em>lines</em> differ but the exact <em>words</em> inside a changed line, so a one-character fix doesn't light up the whole row.</p>
+
+    <h2>Text, code, data and documents</h2>
+    <p>Because the comparison works on text, it's language- and format-agnostic. Diffhero has dedicated pages tuned to the formats people compare most — each with guidance on that format's particular pitfalls:</p>
+    <ul>
+      <li><strong>Code</strong> in any language, with syntax highlighting and whitespace handling that respects indentation-sensitive languages like Python and YAML.</li>
+      <li><strong>Structured data</strong> — <a href="/diff/json-diff">JSON</a>, <a href="/diff/csv-diff">CSV</a>, <a href="/diff/xml-diff">XML</a>, <a href="/diff/yaml-diff">YAML</a> — where key order and formatting can hide the real change.</li>
+      <li><strong>Config and DevOps</strong> files — <a href="/diff/dockerfile-diff">Dockerfiles</a>, <a href="/diff/env-diff">.env</a>, <a href="/diff/terraform-diff">Terraform</a>, <a href="/diff/nginx-config-diff">nginx</a> — where a one-line change has outsized effects.</li>
+      <li><strong>Documents</strong> — <a href="/diff/pdf-diff">PDF</a>, <a href="/diff/word-diff">Word</a>, <a href="/diff/contract-diff">contracts</a> and <a href="/diff/resume-diff">résumés</a> — with text extracted from the file in your browser.</li>
+    </ul>
+
+    <h2>Why "nothing uploaded" matters</h2>
+    <p>Most online diff tools send your text to a server to compute the comparison. Diffhero doesn't: the whole diff runs in your browser with JavaScript, so whatever you paste — proprietary code, a draft agreement, a config file full of secrets, personal data — never leaves your device. You can confirm it yourself in your browser's Network tab, and the tool keeps working offline once it has loaded. That makes it safe for exactly the material you shouldn't paste into a typical web tool.</p>
+  </section>
+
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to compare two files with Diffhero","step":[{"@type":"HowToStep","position":1,"text":"Paste or type the original version into the left box (or drag a file onto it)."},{"@type":"HowToStep","position":2,"text":"Paste the changed version into the right box."},{"@type":"HowToStep","position":3,"text":"See the result instantly: additions in green, deletions in red, and the exact changed words highlighted inline."},{"@type":"HowToStep","position":4,"text":"Switch between Split and Unified view, jump between changes with the arrows, or download a .diff."}]}</script>
   <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
   
   <nav class="related" aria-label="More tools">
-    <h2>More tools</h2>
+    <h2>All tools</h2>
     <div class="related-grid">
       <a href="/diff/text-compare">Text Compare</a>
       <a href="/diff/compare-two-text-files">Compare Two Files</a>

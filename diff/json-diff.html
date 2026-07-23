@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=a8e41527">
+<link rel="stylesheet" href="../assets/style.css?v=d110fbb8">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -115,6 +115,17 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   </section>
   <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
   
+  <section class="guide">
+    <h2>Diffing JSON without getting lost in formatting</h2>
+    <p>Two JSON documents can be logically identical but textually very different — reordered keys, different indentation, single versus double spacing — so a plain text diff over raw JSON is often all noise. The useful comparison is structural: which keys and values actually changed.</p>
+    <h3>JSON-specific things to watch</h3>
+    <ul>
+      <li><b>Key order</b> doesn't matter to JSON semantics but does to a text diff — pretty-print both sides consistently first so reordering doesn't masquerade as a change.</li>
+      <li><b>Trailing commas</b> are invalid in strict JSON; if one side has them it may be config-flavoured JSON5, worth noting before you trust the parse.</li>
+      <li><b>Number formatting</b> (<code>1.0</code> vs <code>1</code>, exponent notation) reads as a change textually even when the value is the same.</li>
+    </ul>
+    <p>It's the everyday tool for comparing two API responses, a config before and after an edit, or a fixture against live output to see what drifted. Nothing is uploaded — safe for responses containing tokens or personal data.</p>
+  </section>
   
   
   <section class="faq">
@@ -128,57 +139,21 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   
   
   <nav class="related" aria-label="More tools">
-    <h2>More tools</h2>
+    <h2>Related tools</h2>
     <div class="related-grid">
-      <a href="/diff/text-compare">Text Compare</a>
-      <a href="/diff/compare-two-text-files">Compare Two Files</a>
-      <a href="/diff/online-diff-checker">Diff Checker</a>
-      <a href="/diff/code-diff">Code Diff</a>
-      <a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a>
       <a href="/diff/compare-two-lists">Compare Lists</a>
+      <a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a>
       <a href="/diff/csv-diff">CSV Diff</a>
+      <a href="/diff/code-diff">Code Diff</a>
       <a href="/diff/csv-table-diff">CSV Table Diff</a>
+      <a href="/diff/online-diff-checker">Diff Checker</a>
       <a href="/diff/xml-diff">XML Diff</a>
+      <a href="/diff/compare-two-text-files">Compare Two Files</a>
       <a href="/diff/yaml-diff">YAML Diff</a>
+      <a href="/diff/text-compare">Text Compare</a>
       <a href="/diff/sql-diff">SQL Diff</a>
-      <a href="/diff/markdown-diff">Markdown Diff</a>
-      <a href="/diff/html-diff">HTML Diff</a>
-      <a href="/diff/python-diff">Python Diff</a>
-      <a href="/diff/javascript-diff">JavaScript Diff</a>
-      <a href="/diff/typescript-diff">TypeScript Diff</a>
-      <a href="/diff/go-diff">Go Diff</a>
-      <a href="/diff/java-diff">Java Diff</a>
-      <a href="/diff/php-diff">PHP Diff</a>
-      <a href="/diff/csharp-diff">C# Diff</a>
-      <a href="/diff/rust-diff">Rust Diff</a>
-      <a href="/diff/ruby-diff">Ruby Diff</a>
-      <a href="/diff/css-diff">CSS Diff</a>
-      <a href="/diff/kotlin-diff">Kotlin Diff</a>
-      <a href="/diff/swift-diff">Swift Diff</a>
-      <a href="/diff/zig-diff">Zig Diff</a>
-      <a href="/diff/elixir-diff">Elixir Diff</a>
-      <a href="/diff/gleam-diff">Gleam Diff</a>
-      <a href="/diff/solidity-diff">Solidity Diff</a>
-      <a href="/diff/julia-diff">Julia Diff</a>
-      <a href="/diff/dockerfile-diff">Dockerfile Diff</a>
-      <a href="/diff/docker-compose-diff">docker-compose Diff</a>
-      <a href="/diff/env-diff">ENV Diff</a>
-      <a href="/diff/package-json-diff">package.json Diff</a>
-      <a href="/diff/terraform-diff">Terraform Diff</a>
-      <a href="/diff/nginx-config-diff">Nginx Config Diff</a>
-      <a href="/diff/ini-diff">INI Diff</a>
-      <a href="/diff/contract-diff">Contract Diff</a>
-      <a href="/diff/resume-diff">Resume Diff</a>
-      <a href="/diff/essay-diff">Essay Diff</a>
-      <a href="/diff/pdf-diff">PDF Diff</a>
-      <a href="/diff/word-diff">Word Diff</a>
-      <a href="/diff/private-diff-checker">Private Diff Checker</a>
-      <a href="/diff/log-diff">Log Diff</a>
-      <a href="/diff/git-diff-viewer">Git Diff Viewer</a>
-      <a href="/diff/subtitle-diff">Subtitle Diff</a>
-      <a href="/diff/invisible-character-checker">Invisible Characters</a>
-      <a href="/diff/protobuf-diff">Protobuf Diff</a>
       <a href="/diff/image-diff">Image Diff</a>
+      <a class="related-all" href="/">Browse all 50 tools →</a>
     </div>
   </nav>
 </main>

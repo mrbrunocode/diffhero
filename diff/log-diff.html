@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=a8e41527">
+<link rel="stylesheet" href="../assets/style.css?v=d110fbb8">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -115,6 +115,17 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   </section>
   <div class="ad-slot ad-slot--placeholder" aria-hidden="true"><!-- ad slot reserved; height is held so the layout never shifts --></div>
   
+  <section class="guide">
+    <h2>Diffing log files to find what changed</h2>
+    <p>Comparing a "good" run against a "bad" one is one of the fastest ways to localise a problem — the diff points straight at the lines that appeared, disappeared, or changed. Paste two log excerpts and the differences are highlighted.</p>
+    <h3>Taming log noise</h3>
+    <ul>
+      <li><b>Timestamps</b> differ on every run and will dominate a naive diff — trim or align them first, or focus on the message text, so the real difference isn't buried.</li>
+      <li><b>Ignore whitespace</b> helps with variable-width columns and padding.</li>
+      <li><b>Request/trace IDs and PIDs</b> change every run too; mentally discount those and look for changed messages and new errors.</li>
+    </ul>
+    <p>Logs frequently contain IPs, user IDs and internal hostnames — all of which stay in your browser, since nothing is uploaded.</p>
+  </section>
   
   
   <section class="faq">
@@ -128,57 +139,21 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   
   
   <nav class="related" aria-label="More tools">
-    <h2>More tools</h2>
+    <h2>Related tools</h2>
     <div class="related-grid">
-      <a href="/diff/text-compare">Text Compare</a>
-      <a href="/diff/compare-two-text-files">Compare Two Files</a>
-      <a href="/diff/online-diff-checker">Diff Checker</a>
-      <a href="/diff/code-diff">Code Diff</a>
-      <a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a>
-      <a href="/diff/json-diff">JSON Diff</a>
-      <a href="/diff/compare-two-lists">Compare Lists</a>
-      <a href="/diff/csv-diff">CSV Diff</a>
-      <a href="/diff/csv-table-diff">CSV Table Diff</a>
-      <a href="/diff/xml-diff">XML Diff</a>
-      <a href="/diff/yaml-diff">YAML Diff</a>
-      <a href="/diff/sql-diff">SQL Diff</a>
-      <a href="/diff/markdown-diff">Markdown Diff</a>
-      <a href="/diff/html-diff">HTML Diff</a>
-      <a href="/diff/python-diff">Python Diff</a>
-      <a href="/diff/javascript-diff">JavaScript Diff</a>
-      <a href="/diff/typescript-diff">TypeScript Diff</a>
-      <a href="/diff/go-diff">Go Diff</a>
-      <a href="/diff/java-diff">Java Diff</a>
-      <a href="/diff/php-diff">PHP Diff</a>
-      <a href="/diff/csharp-diff">C# Diff</a>
-      <a href="/diff/rust-diff">Rust Diff</a>
-      <a href="/diff/ruby-diff">Ruby Diff</a>
-      <a href="/diff/css-diff">CSS Diff</a>
-      <a href="/diff/kotlin-diff">Kotlin Diff</a>
-      <a href="/diff/swift-diff">Swift Diff</a>
-      <a href="/diff/zig-diff">Zig Diff</a>
-      <a href="/diff/elixir-diff">Elixir Diff</a>
-      <a href="/diff/gleam-diff">Gleam Diff</a>
-      <a href="/diff/solidity-diff">Solidity Diff</a>
-      <a href="/diff/julia-diff">Julia Diff</a>
-      <a href="/diff/dockerfile-diff">Dockerfile Diff</a>
-      <a href="/diff/docker-compose-diff">docker-compose Diff</a>
-      <a href="/diff/env-diff">ENV Diff</a>
-      <a href="/diff/package-json-diff">package.json Diff</a>
-      <a href="/diff/terraform-diff">Terraform Diff</a>
-      <a href="/diff/nginx-config-diff">Nginx Config Diff</a>
-      <a href="/diff/ini-diff">INI Diff</a>
-      <a href="/diff/contract-diff">Contract Diff</a>
-      <a href="/diff/resume-diff">Resume Diff</a>
-      <a href="/diff/essay-diff">Essay Diff</a>
-      <a href="/diff/pdf-diff">PDF Diff</a>
-      <a href="/diff/word-diff">Word Diff</a>
-      <a href="/diff/private-diff-checker">Private Diff Checker</a>
       <a href="/diff/git-diff-viewer">Git Diff Viewer</a>
+      <a href="/diff/private-diff-checker">Private Diff Checker</a>
       <a href="/diff/subtitle-diff">Subtitle Diff</a>
+      <a href="/diff/word-diff">Word Diff</a>
       <a href="/diff/invisible-character-checker">Invisible Characters</a>
+      <a href="/diff/pdf-diff">PDF Diff</a>
       <a href="/diff/protobuf-diff">Protobuf Diff</a>
+      <a href="/diff/essay-diff">Essay Diff</a>
       <a href="/diff/image-diff">Image Diff</a>
+      <a href="/diff/resume-diff">Resume Diff</a>
+      <a href="/diff/text-compare">Text Compare</a>
+      <a href="/diff/contract-diff">Contract Diff</a>
+      <a class="related-all" href="/">Browse all 50 tools →</a>
     </div>
   </nav>
 </main>
