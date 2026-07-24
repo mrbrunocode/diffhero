@@ -165,6 +165,11 @@ export function renderDocument(o) {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Any (web browser)",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    // Named maintainer on every tool page, not just the guide articles.
+    // Google's "Who created it?" test is applied per page, and the tool pages
+    // are the overwhelming majority of the site — leaving them anonymous made
+    // the whole domain read as unattributed.
+    author: { "@type": "Person", name: C.AUTHOR_NAME, url: C.AUTHOR_URL },
     datePublished: C.CONTENT_DATE,
     dateModified: C.CONTENT_DATE,
   };
@@ -230,7 +235,8 @@ ${bodyHtml}
   <div class="wrap">
     <div class="foot-in">
       <div><span class="fb">${esc(C.NAME)}</span> — ${esc(C.TAGLINE)} · ${C.NAV.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join(" · ")} · <a href="mailto:${C.CONTACT_EMAIL}">${esc(C.CONTACT_EMAIL)}</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.</div>
+      <div>Free. No signup, no upload — everything runs in your browser.<br>
+      Built and maintained by <a href="${C.AUTHOR_URL}" rel="author noopener" target="_blank">${esc(C.AUTHOR_NAME)}</a>, an independent developer in Edinburgh.</div>
     </div>
   </div>
 </footer>
