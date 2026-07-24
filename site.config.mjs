@@ -17,6 +17,10 @@ export const COLLECTION_DIR = "diff";
 
 export const NAV = [
   { href: "/guides", label: "Guides" },
+  // Label is "Compare", not "Diffchecker alternative": this anchor repeats on
+  // every page, and exact-match anchor text at that volume reads as
+  // over-optimisation. The page's own title and h1 carry the query.
+  { href: "/diffchecker-alternative", label: "Compare" },
   { href: "/about", label: "About" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },

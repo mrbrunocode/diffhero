@@ -159,6 +159,67 @@ export const terms = {
   </section>`,
 };
 
+// Commercial-intent comparison page targeting "diffchecker alternative".
+//
+// Every claim about Diffchecker below is taken from their own published
+// pricing page and marketing copy, checked 2026-07-24, and dated in the text
+// so a reader can tell how fresh it is. Competitor pricing changes — if this
+// page is being revised, re-check https://www.diffchecker.com/pricing/ rather
+// than trusting these numbers. The page deliberately says where Diffchecker
+// is the better tool: a comparison that never concedes anything reads as
+// marketing, ranks worse, and isn't true.
+export const diffcheckerAlternative = {
+  path: "/diffchecker-alternative",
+  title: `A Free Diffchecker Alternative — ${C.NAME} vs Diffchecker`,
+  description:
+    "An honest comparison of Diffhero and Diffchecker: what each one does free, what Diffchecker meters or charges for, and which to pick for your case.",
+  bodyHtml: `
+  <section class="prose">
+    <h1>A free Diffchecker alternative</h1>
+    <p>Diffchecker is the tool most people mean when they say "online diff checker" — it's mature, well built, and has been around far longer than ${C.NAME}. This page is a straight comparison of the two, including the cases where Diffchecker is the one you should use.</p>
+    <p><strong>Short version:</strong> if you want to compare two pieces of text or code in a browser, ${C.NAME} does it free and unmetered, and never sends your input anywhere. If you need to compare <em>folders</em>, run diffs offline in a desktop app, or plug diffing into Git or a document-management system, Diffchecker does things ${C.NAME} doesn't.</p>
+
+    <h2>What Diffchecker's free tier limits</h2>
+    <p>Diffchecker's tools are free to open, but several features are metered per month on the free plan. Taken from <a href="https://www.diffchecker.com/pricing/" rel="nofollow noopener" target="_blank">Diffchecker's published pricing</a> as of July 2026:</p>
+    <ul>
+      <li>Syntax highlighting — 5 uses/month</li>
+      <li>Unified view — 5 uses/month</li>
+      <li>Character-level differences — 10 uses/month</li>
+      <li>Hide whitespace changes — 5 uses/month</li>
+      <li>Custom ignore rules — 5 uses/month</li>
+      <li>Merge changes — 10 uses/month</li>
+      <li>Export as PDF — 5 uses/month</li>
+    </ul>
+    <p>Lifting those limits means Diffchecker Pro, listed at $15/month. Folder and batch comparison, the desktop app, offline use, and the Git and iManage integrations are paid-only regardless.</p>
+    <p>In ${C.NAME} every one of the metered features above is simply on, with no counter, no account, and no monthly reset: <a href="/diff/code-diff">syntax highlighting across ~17 languages</a>, split and unified views, character-level detail, ignore-whitespace and ignore-case, <a href="/diff/merge-conflict-resolver">3-way merge</a>, and print-to-PDF plus <code>.diff</code> download.</p>
+
+    <h2>Where your text actually goes</h2>
+    <p>This is the difference that matters most if you paste anything sensitive. Diffchecker markets its <em>desktop</em> app with the line "the most secure way to run Diffchecker — your diffs never leave your computer", which is a fair description of a desktop app and also tells you what it implies about the web one.</p>
+    <p>${C.NAME} has no server to send anything to. The comparison is done in JavaScript on your own machine, so pasting proprietary code, an unsigned contract, or a config file full of credentials doesn't hand that content to anyone. You don't have to take that on trust either — open your browser's Network tab while you diff and you'll see no request carrying your text, and the page keeps working with your connection switched off. That's the same guarantee Diffchecker reserves for its paid desktop app, except it's the default and it's free.</p>
+
+    <h2>When Diffchecker is the better choice</h2>
+    <p>Genuinely, not as a formality:</p>
+    <ul>
+      <li><strong>Comparing folders or many files at once.</strong> ${C.NAME} compares two inputs. Diffchecker does folder and batch comparison; ${C.NAME} has no equivalent.</li>
+      <li><strong>You want a real desktop application.</strong> ${C.NAME} is a web page. It works offline once loaded and can be installed to your dock, but it isn't a native app with filesystem access.</li>
+      <li><strong>Integrations.</strong> If you need diffing wired into Git tooling or iManage, that's a Diffchecker Pro feature with no counterpart here.</li>
+      <li><strong>Rich document comparison.</strong> Diffchecker handles Word/PDF/spreadsheet comparison more thoroughly. ${C.NAME} reads <code>.txt</code>, <code>.pdf</code> and <code>.docx</code> as text and compares <a href="/diff/csv-table-diff">CSV as a table</a>, but it isn't a full redline tool.</li>
+    </ul>
+
+    <h2>When ${C.NAME} is the better choice</h2>
+    <ul>
+      <li>You want the useful options — syntax highlighting, unified view, character detail — without a monthly counter.</li>
+      <li>The content is sensitive and you'd rather it never reach a server.</li>
+      <li>You want to send someone a comparison: <a href="/diff/online-diff-checker">the share link encodes both sides in the URL</a>, no account on either end.</li>
+      <li>You're diffing a specific format and want the gotchas spelled out — <a href="/diff/python-diff">why ignoring whitespace breaks Python diffs</a>, <a href="/diff/json-diff">how JSON key order trips up comparisons</a>, <a href="/diff/csv-diff">why re-sorted CSV rows all look changed</a>.</li>
+    </ul>
+
+    <h2>Both are free to try</h2>
+    <p>There's no signup here to get in the way, so the fastest way to decide is to <a href="/">paste your own text into ${C.NAME}</a> and see whether it covers what you need. If it doesn't, Diffchecker is a good tool and this page will still be here.</p>
+    <p class="note">Diffchecker is a product of Checker Software Inc. ${C.NAME} is not affiliated with it. Pricing and feature limits described above were checked in July 2026 and may have changed since.</p>
+  </section>`,
+};
+
 export const contact = {
   path: "/contact",
   title: `Contact — ${C.NAME}`,

@@ -150,6 +150,9 @@ export function renderDocument(o) {
     themeColor = C.THEME_COLOR,
     bodyClass = "",
     headExtra = "",
+    // Last time this page's content actually changed (see content-dates.mjs).
+    // Falls back to the site-wide constant for pages not yet tracked.
+    dateModified = C.CONTENT_DATE,
   } = o;
   const r = rel(depth);
   const canonical = `${C.SITE_URL}${canonicalPath}`;
@@ -171,7 +174,7 @@ export function renderDocument(o) {
     // the whole domain read as unattributed.
     author: { "@type": "Person", name: C.AUTHOR_NAME, url: C.AUTHOR_URL },
     datePublished: C.CONTENT_DATE,
-    dateModified: C.CONTENT_DATE,
+    dateModified,
   };
   const breadcrumb = {
     "@context": "https://schema.org",
