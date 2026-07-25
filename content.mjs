@@ -17,9 +17,14 @@ export const home = {
   title: `${C.NAME} — Free Online Diff Checker for Text & Code`,
   description: C.DESCRIPTION,
   bodyHtml: `
+  <div class="specbar">
+    <span><span class="dot" aria-hidden="true"></span>Client-side</span>
+    <span>Nothing uploaded</span>
+    <span>~17 languages</span>
+    <span>No account</span>
+  </div>
   <section class="hero hero--home hero--split">
     <div class="hero-copy">
-      <span class="badge"><span class="dot" aria-hidden="true"></span>Every feature free and unmetered — nothing uploaded</span>
       <h1>${C.NAME}</h1>
       <p class="lede">A diff checker that doesn't hold anything back: syntax highlighting across ~17 languages, character-level detail, split and unified views, 3-way merge, image and CSV comparison — all free, all unlimited, all running on your own machine.</p>
       <p class="lede lede--sub">Most free diff tools do plain line comparison and stop. The big paid one meters syntax highlighting at five uses a month. <a href="/diffchecker-alternative">See the comparison →</a></p>
