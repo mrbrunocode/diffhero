@@ -42,6 +42,29 @@ export const GA_ID = "G-Q907KGWEP4";
 export const ADSENSE_PUB = "ca-pub-2653891546345771";
 export const ADSENSE_SLOT = "";
 
+// Mediavine Grow — required for Journey by Mediavine (the ad network we plan to
+// graduate to from AdSense; see boring-app-factory/docs/monetization.md).
+//
+// WHY THIS IS HERE BEFORE WE NEED IT: Journey requires Grow to have been
+// running for a MINIMUM OF 30 DAYS before a site is even evaluated, and that
+// clock is independent of traffic. Installing it at zero traffic costs nothing
+// and means the 30 days are already served by the time the 1,000-sessions
+// threshold is reached. Every day it is not installed is a day added to the
+// eventual timeline.
+//
+// Empty = renders nothing (same contract as GA_ID/ADSENSE_PUB above), so the
+// site ships clean until Bruno pastes the real value.
+//
+// TO ENABLE: create a Grow publisher account, open the Publisher Portal, choose
+// the MANUAL / non-WordPress install, and copy the data-grow-faves-site-id
+// value out of the snippet it shows. Paste it here and rebuild. Then click
+// "I've Installed the Script" in the portal to verify.
+//
+// VERIFY THE GENERATED SNIPPET against what the portal shows before relying on
+// it — engine/template.mjs reproduces Grow's standard loader, and if Grow ever
+// changes that format, the portal is the source of truth, not this repo.
+export const GROW_SITE_ID = "";
+
 // Bing Webmaster Tools site-ownership verification (empty until wired up).
 export const BING_VERIFY = "5A4EFD6B7BD09C4C115B7ACCF3688E1C";
 

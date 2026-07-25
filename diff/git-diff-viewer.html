@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as a \"unified diff\"?","acceptedAnswer":{"@type":"Answer","text":"The format `git diff`, `diff -u`, and GitHub/GitLab patch downloads all produce: a `@@ ... @@` hunk header, context lines with a leading space, removed lines starting with `-`, and added lines starting with `+`. That's what gets parsed here."}},{"@type":"Question","name":"Does it handle a diff covering multiple files?","acceptedAnswer":{"@type":"Answer","text":"It reconstructs all hunks it finds, but multiple files get concatenated into one Original/Changed pair rather than kept separate — for a multi-file diff, it's cleanest to paste one file's section at a time."}},{"@type":"Question","name":"What if I don't have a real diff, just two files?","acceptedAnswer":{"@type":"Answer","text":"You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output."}},{"@type":"Question","name":"Is the pasted diff uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No — parsing and rendering both happen entirely in your browser."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

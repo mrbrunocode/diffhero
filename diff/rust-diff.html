@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will rustfmt changes clutter the diff?","acceptedAnswer":{"@type":"Answer","text":"If both files are already rustfmt-formatted, the diff stays clean. If not, turn on \"Ignore whitespace\" to focus on substantive changes."}},{"@type":"Question","name":"Does it understand borrow-checker semantics?","acceptedAnswer":{"@type":"Answer","text":"No — it's a text diff, not a compiler. That's exactly what you want for reviewing what a change touches, before you run cargo check."}},{"@type":"Question","name":"Is my Rust code uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser, so private crates and proprietary code never leave your device."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

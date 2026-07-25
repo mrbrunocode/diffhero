@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this replace terraform plan?","acceptedAnswer":{"@type":"Answer","text":"No — this diffs the source files themselves, not the planned infrastructure changes. Use it for a quick source review before you run plan, not as a substitute for it."}},{"@type":"Question","name":"Can it ignore HCL formatting differences?","acceptedAnswer":{"@type":"Answer","text":"Turn on \"Ignore whitespace\" if one file was run through terraform fmt and the other wasn't, so re-alignment doesn't obscure the real changes."}},{"@type":"Question","name":"Is my Terraform code uploaded?","acceptedAnswer":{"@type":"Answer","text":"No — the comparison runs entirely client-side, so internal module names, resource IDs and provider configs never leave your browser."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

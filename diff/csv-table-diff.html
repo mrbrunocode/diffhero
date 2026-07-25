@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from the regular CSV Diff page?","acceptedAnswer":{"@type":"Answer","text":"The regular CSV Diff treats each row as a line of text and highlights changed words inline. This page parses the CSV into actual columns and renders a real table, so a changed cell is outlined in its own column rather than just highlighted as text in a line."}},{"@type":"Question","name":"Does it handle quoted fields with commas inside them?","acceptedAnswer":{"@type":"Answer","text":"Yes — quoted CSV fields (e.g. \"Smith, John\") are parsed correctly as a single cell, not split on the comma inside the quotes."}},{"@type":"Question","name":"What if the two files have different columns?","acceptedAnswer":{"@type":"Answer","text":"The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read."}},{"@type":"Question","name":"Is my data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and comparison both run entirely in your browser."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

@@ -54,6 +54,26 @@ function analytics() {
 gtag('js',new Date());gtag('config','${C.GA_ID}');</script>`;
 }
 
+/**
+ * Mediavine Grow loader. Renders nothing until GROW_SITE_ID is set, same
+ * contract as analytics()/adsenseLoader() above.
+ *
+ * Grow is a prerequisite for Journey by Mediavine, which requires it to have
+ * been running for 30+ days before a site is evaluated — so this goes in early,
+ * at zero traffic, to start that clock. See site.config.mjs for the full note
+ * and boring-app-factory/docs/monetization.md for why Journey matters.
+ *
+ * This reproduces Grow's documented non-WordPress loader. The Publisher Portal
+ * is the source of truth: check the snippet it shows matches this before
+ * relying on it.
+ */
+function growScript() {
+  if (!C.GROW_SITE_ID) return "";
+  return `<script data-grow-initializer="">
+!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","${C.GROW_SITE_ID}");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
+</script>`;
+}
+
 function adsenseLoader() {
   if (!C.ADSENSE_PUB || !C.ADSENSE_SLOT) return "";
   return `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${C.ADSENSE_PUB}" crossorigin="anonymous"></script>`;
@@ -214,6 +234,7 @@ ${analytics()}
 <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>
 ${faqSchema(faq)}
 ${adsenseLoader()}
+${growScript()}
 ${headExtra}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>

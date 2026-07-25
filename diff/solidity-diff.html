@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should I collapse unchanged lines for an audit?","acceptedAnswer":{"@type":"Answer","text":"Turn that option off for contract review — an audit needs to see the full file in context, not just the changed hunks, since storage layout order matters for upgradeable contracts."}},{"@type":"Question","name":"Does it catch storage-layout-breaking reorders?","acceptedAnswer":{"@type":"Answer","text":"It shows the reorder as a line move, but doesn't itself flag storage-slot incompatibility — that judgment call is still yours (or your audit tool's) to make from the diff."}},{"@type":"Question","name":"Is my contract source uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The comparison runs entirely client-side, so unaudited or pre-launch contract code never leaves your device."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

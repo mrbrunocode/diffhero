@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as a \"different\" pixel?","acceptedAnswer":{"@type":"Answer","text":"Each pixel's red, green, blue and alpha values are compared between the two images; if the combined difference passes a small threshold (to absorb harmless compression noise), it's marked as changed and highlighted in the result."}},{"@type":"Question","name":"What if the two images are different sizes?","acceptedAnswer":{"@type":"Answer","text":"The comparison canvas is sized to the larger of the two images; any area only one image covers counts as fully different, so a resized or cropped image will show a highlighted border or region rather than failing outright."}},{"@type":"Question","name":"Are my images uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Both images are decoded and compared entirely on an in-browser <canvas> element — nothing is sent to a server, and the comparison works offline once the page has loaded."}},{"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Anything your browser can decode natively — PNG, JPEG, WebP, GIF (first frame) and SVG all work, since the comparison operates on decoded pixel data, not the file format itself."}}]}</script>
 
 
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
