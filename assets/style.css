@@ -27,7 +27,11 @@
   --tok-tag: oklch(0.74 0.14 255); --tok-attr: oklch(0.82 0.09 175); --tok-punct: var(--text-secondary);
   --bg: var(--n-0); --surface: var(--n-1); --surface-elevated: var(--n-2); --surface-hover: var(--n-3);
   --border: var(--n-4); --border-subtle: var(--n-3);
-  --text-primary: var(--n-8); --text-secondary: var(--n-6); --text-tertiary: var(--n-5);
+  /* --text-tertiary is a TEXT tier and has to clear AA on its own ground. It
+     aliased --n-5, which measured 2.79:1 in both themes — fine for a hairline,
+     not for the mono micro-labels (rail heads, spec plate, drop hints, crumbs)
+     this layout leans on for wayfinding. --n-5 is untouched for borders. */
+  --text-primary: var(--n-8); --text-secondary: var(--n-6); --text-tertiary: oklch(0.66 0.012 235);
   --focus-ring: oklch(0.72 0.16 var(--accent-h) / 0.45);
   --shadow-color: 235 30% 4%;
 }
@@ -37,9 +41,14 @@
   --n-3: oklch(0.94 0.007 235); --n-4: oklch(0.88 0.008 235); --n-5: oklch(0.72 0.01 235);
   --n-6: oklch(0.50 0.014 235); --n-7: oklch(0.36 0.014 235); --n-8: oklch(0.19 0.014 235);
   --n-9: oklch(0.10 0.012 235);
-  --accent: oklch(0.56 0.19 var(--accent-h));
-  --accent-strong: oklch(0.46 0.20 var(--accent-h));
-  --accent-soft: oklch(0.56 0.19 var(--accent-h) / 0.12);
+  /* Darker than it looks like it needs to be, for two reasons measured rather
+     than guessed: this colour carries near-white text on the primary buttons
+     and the active segment (3.66:1 at the old 0.56), and it is also link text
+     on a near-white ground (3.61:1). Both now clear AA. Cyan goes muddy if you
+     hold chroma while dropping lightness, so chroma eases back with it. */
+  --accent: oklch(0.48 0.16 var(--accent-h));
+  --accent-strong: oklch(0.40 0.15 var(--accent-h));
+  --accent-soft: oklch(0.48 0.16 var(--accent-h) / 0.12);
   --on-accent: oklch(0.99 0.005 var(--accent-h));
   --success: oklch(0.52 0.15 152);
   --add-bg: oklch(0.72 0.15 152 / 0.16); --add-line: oklch(0.48 0.14 152);
@@ -51,6 +60,9 @@
   --tok-kw: oklch(0.46 0.18 300); --tok-bool: oklch(0.50 0.15 40); --tok-key: oklch(0.42 0.10 200);
   --tok-tag: oklch(0.44 0.15 235); --tok-attr: oklch(0.40 0.10 175); --tok-punct: var(--text-secondary);
   --surface-elevated: var(--n-1);
+  /* Light needs its own darker tertiary — --n-5 is 0.72 here, which is 2.79:1
+     against the near-white ground. See the note in the dark block above. */
+  --text-tertiary: oklch(0.53 0.013 235);
   --focus-ring: oklch(0.56 0.19 var(--accent-h) / 0.35);
   --shadow-color: 235 30% 60%;
 }

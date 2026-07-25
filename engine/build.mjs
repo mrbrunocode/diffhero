@@ -63,10 +63,11 @@ function toolRail(currentSlug) {
       })
       .join("\n          ");
     const open = currentSlug == null || GROUP_OF[currentSlug] === g.name;
+    const id = `rail-${slugifyHeading(g.name)}`;
     return `
       <section class="rail-group">
-        <h2 class="rail-head">${esc(g.name)}</h2>
-        <ul class="rail-list${open ? " is-here" : ""}">
+        <p class="rail-head" id="${id}">${esc(g.name)}</p>
+        <ul class="rail-list${open ? " is-here" : ""}" aria-labelledby="${id}">
           ${items}
         </ul>
       </section>`;
@@ -85,14 +86,14 @@ function docsRail(currentPath) {
   <div class="rail-in">
     <p class="rail-title"><a href="/${GUIDES_DIR}">Guides</a></p>
     <section class="rail-group">
-      <h2 class="rail-head">Reading</h2>
-      <ul class="rail-list is-here">
+      <p class="rail-head" id="rail-reading">Reading</p>
+      <ul class="rail-list is-here" aria-labelledby="rail-reading">
         ${ARTICLES.map((a) => link(`/${GUIDES_DIR}/${a.slug}`, a.title)).join("\n        ")}
       </ul>
     </section>
     <section class="rail-group">
-      <h2 class="rail-head">Site</h2>
-      <ul class="rail-list is-here">
+      <p class="rail-head" id="rail-site">Site</p>
+      <ul class="rail-list is-here" aria-labelledby="rail-site">
         ${link("/diffchecker-alternative", "Diffchecker alternative")}
         ${link("/embed", "Embed the diff checker")}
         ${link("/about", "About")}
@@ -102,8 +103,8 @@ function docsRail(currentPath) {
       </ul>
     </section>
     <section class="rail-group">
-      <h2 class="rail-head">Tools</h2>
-      <ul class="rail-list is-here">
+      <p class="rail-head" id="rail-tools">Tools</p>
+      <ul class="rail-list is-here" aria-labelledby="rail-tools">
         <li><a href="/">All ${PAGES.length} diff tools →</a></li>
       </ul>
     </section>
