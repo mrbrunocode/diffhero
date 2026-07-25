@@ -127,6 +127,10 @@ main.wrap { flex: 1; padding-top: var(--space-6); padding-bottom: var(--space-16
 .hero--home h1 { font-size: clamp(2.4rem, 5.2vw, 3.6rem); }
 .eyebrow { display: inline-block; font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: var(--space-3); }
 .lede { font-size: var(--text-md); color: var(--text-secondary); max-width: 64ch; margin-top: var(--space-4); }
+/* Secondary hero line: the concrete competitive claim, deliberately smaller
+   than the main lede so it reads as a footnote, not a second headline. */
+.lede--sub { font-size: var(--text-sm); margin-top: var(--space-3); }
+.lede--sub a { color: var(--accent); font-weight: 600; }
 .hero--home .lede { margin-left: auto; margin-right: auto; max-width: 46ch; }
 
 /* Split hero: copy on the left, a static illustrative diff snippet on the
