@@ -17,7 +17,7 @@
   // runs before their definitions and before any DOM access — this branch
   // never executes in a browser, where `module` is undefined.
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff, parseUnifiedDiff: parseUnifiedDiff, prepPair: prepPair, pixelDiff: pixelDiff };
+    module.exports = { normalize: normalize, lineKey: lineKey, lcs: lcs, tokenMarks: tokenMarks, codePointTokens: codePointTokens, buildRows: buildRows, toUnifiedDiff: toUnifiedDiff, parseUnifiedDiff: parseUnifiedDiff, prepPair: prepPair, pixelDiff: pixelDiff };
     return;
   }
 
@@ -650,11 +650,49 @@
   // With "Character detail" on, tokens are single characters instead of words,
   // so the mark tightens to the exact changed characters (Diffchecker gates
   // this behind Pro; here it's a checkbox).
+  // Splits a string into one token per Unicode CODE POINT, not UTF-16 code
+  // unit. Plain `str[i]` indexing splits any astral character (most emoji,
+  // some CJK Extension B+, mathematical alphanumeric symbols — anything
+  // outside the Basic Multilingual Plane) in half, since those are stored as
+  // a surrogate PAIR of two code units: each half is an invalid, individually
+  // meaningless lone surrogate, and diffing them as two separate "characters"
+  // is where the bug this fixes was found. `for...of` yields full code
+  // points, so each token's .length is 1 for BMP characters and 2 for astral
+  // ones — s/e stay in the UTF-16 offsets the rest of tokenMarks (and
+  // highlightLine's slicing) still expects.
+  // NOT fixed by this: multi-codepoint grapheme clusters joined by ZWJ (a
+  // family emoji, a flag) still diff as separate codepoints, which can
+  // visually split one glyph across a highlight boundary. True grapheme
+  // handling needs Intl.Segmenter; this fixes the invalid-surrogate case —
+  // the one that produced outright broken tokens — not the rarer cosmetic one.
+  function codePointTokens(str) {
+    var tokens = [], i = 0;
+    for (var ch of str) { tokens.push({ x: ch, s: i, e: i + ch.length }); i += ch.length; }
+    return tokens;
+  }
+
   function tokenMarks(delStr, addStr) {
     var at = [], bt = [], m, i;
     if (optChar && optChar.checked) {
-      for (i = 0; i < delStr.length; i++) at.push({ x: delStr[i], s: i, e: i + 1 });
-      for (i = 0; i < addStr.length; i++) bt.push({ x: addStr[i], s: i, e: i + 1 });
+      // Iterate by Unicode CODE POINT, not UTF-16 code unit. delStr[i] indexes
+      // code units, and any astral character (most emoji, some CJK Extension
+      // B+, mathematical alphanumeric symbols — anything outside the Basic
+      // Multilingual Plane) is stored as a surrogate PAIR: two code units.
+      // Indexing it char-by-char split each one into two lone, individually
+      // meaningless surrogate halves, each diffed as its own "character" —
+      // found by testing an emoji through this exact path, where it produced
+      // two invalid half-tokens instead of one. `for...of` yields full code
+      // points, so each token's .length is 1 for BMP characters and 2 for
+      // astral ones, keeping s/e in the UTF-16 offsets the rest of this
+      // function (and highlightLine's slicing) still expects.
+      // NOT fixed by this: multi-codepoint grapheme clusters joined by ZWJ
+      // (a family emoji, a flag) still diff as separate codepoints, which can
+      // visually split one glyph across a highlight boundary. True grapheme
+      // handling needs Intl.Segmenter; this fixes the invalid-surrogate case,
+      // which is the one that produced outright broken output, not the rarer
+      // cosmetic one.
+      at = codePointTokens(delStr);
+      bt = codePointTokens(addStr);
     } else {
       var re = /(\s+|\S+)/g;
       while ((m = re.exec(delStr))) at.push({ x: m[0], s: m.index, e: m.index + m[0].length });

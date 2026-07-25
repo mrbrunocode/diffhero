@@ -176,3 +176,41 @@ test("prepPair leaves BOTH sides as raw text if either fails to parse (no asymme
   assert.equal(result.a, '{"a":1}');
   assert.equal(result.b, "not json at all");
 });
+
+// Regression: tokenMarks' character-detail mode used to index delStr[i]/
+// addStr[i] directly — UTF-16 code UNITS, not code points. Any astral
+// character (most emoji, some CJK Extension B+, math alphanumeric symbols)
+// is stored as a surrogate PAIR, so that indexing split it into two invalid,
+// individually meaningless lone-surrogate "characters", each diffed
+// separately. codePointTokens (what character-detail mode now uses) fixes
+// this by iterating with `for...of`, which yields whole code points.
+test("codePointTokens keeps an astral character (surrogate pair) as one token, not two", () => {
+  const tokens = engine.codePointTokens("a🎉b");
+  assert.equal(tokens.length, 3, "🎉 must be ONE token, not two lone surrogates");
+  assert.equal(tokens[0].x, "a");
+  assert.equal(tokens[1].x, "🎉");
+  assert.equal(tokens[2].x, "b");
+});
+
+test("codePointTokens produces no lone surrogate as its own token", () => {
+  const tokens = engine.codePointTokens("👍🎉😀");
+  for (const t of tokens) {
+    const cc = t.x.charCodeAt(0);
+    const isLoneHighSurrogate = cc >= 0xd800 && cc <= 0xdbff && t.x.length === 1;
+    assert.ok(!isLoneHighSurrogate, `token "${t.x}" is an invalid lone surrogate`);
+  }
+});
+
+test("codePointTokens keeps s/e offsets in UTF-16 units, so slicing the original string still works", () => {
+  const tokens = engine.codePointTokens("a🎉b");
+  // 🎉 is 2 UTF-16 units, so "b" must start at offset 3, not 2.
+  assert.deepEqual(tokens.map((t) => [t.s, t.e]), [[0, 1], [1, 3], [3, 4]]);
+  for (const t of tokens) assert.equal("a🎉b".slice(t.s, t.e), t.x);
+});
+
+test("tokenMarks itself still isolates a plain-ASCII word change correctly (word-level path unaffected)", () => {
+  // Guards against the codePointTokens refactor having broken the (separate,
+  // unchanged) word-level branch that runs when character-detail is off.
+  const marks = engine.tokenMarks("the quick fox", "the slow fox");
+  assert.ok(marks.del.length >= 1 && marks.add.length >= 1);
+});
