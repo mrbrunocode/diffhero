@@ -16,41 +16,33 @@ const HOME_HOWTO = [
 export const home = {
   title: `${C.NAME} — Free Online Diff Checker for Text & Code`,
   description: C.DESCRIPTION,
+  // THE TOOL IS THE HERO. The homepage used to open with a centred-ish hero and
+  // a decorative static diff snippet, which pushed the real two-pane tool most
+  // of the way down the first screen — a picture of the product above the
+  // product. Excalidraw opens on the canvas; regex101 opens on the expression
+  // box. So this opens on the diff panes, with the claim compressed into one
+  // dense strip above them. The static sample is gone: the live tool sits in
+  // exactly the place it used to occupy, and does the same job for real.
   bodyHtml: `
-  <div class="specbar">
-    <span><span class="dot" aria-hidden="true"></span>Client-side</span>
-    <span>Nothing uploaded</span>
-    <span>~17 languages</span>
-    <span>No account</span>
-  </div>
-  <section class="hero hero--home hero--split">
-    <div class="hero-copy">
+  <div class="toolhead toolhead--home">
+    <div class="toolhead-id">
+      <p class="crumb"><span>Diff checker</span></p>
       <h1>${C.NAME}</h1>
-      <p class="lede">A diff checker that doesn't hold anything back: syntax highlighting across ~17 languages, character-level detail, split and unified views, 3-way merge, image and CSV comparison — all free, all unlimited, all running on your own machine.</p>
-      <p class="lede lede--sub">Most free diff tools do plain line comparison and stop. The big paid one meters syntax highlighting at five uses a month. <a href="/diffchecker-alternative">See the comparison →</a></p>
     </div>
-    <div class="hero-sample" aria-hidden="true">
-      <div class="hero-sample-head"><span class="dtext">config.yml</span></div>
-      <div class="diff-view unified">
-        <div class="dline"><span class="gut">4</span><span class="dsign"> </span><span class="dtext">  retries: 3</span></div>
-        <div class="dline del"><span class="gut">5</span><span class="dsign">−</span><span class="dtext">  timeout: <span class="wd-del">10s</span></span></div>
-        <div class="dline add"><span class="gut">5</span><span class="dsign">+</span><span class="dtext">  timeout: <span class="wd-add">30s</span></span></div>
-        <div class="dline add"><span class="gut">6</span><span class="dsign">+</span><span class="dtext">  <span class="wd-add">backoff: exponential</span></span></div>
-        <div class="dline"><span class="gut">7</span><span class="dsign"> </span><span class="dtext">  region: us-east-1</span></div>
-      </div>
-    </div>
-  </section>
-  ${renderTool({ format: "text" })}
+    <p class="toolhead-lede">A diff checker that doesn't hold anything back: syntax highlighting across ~17 languages, character-level detail, split and unified views, 3-way merge, image and CSV comparison — all free, all unlimited, all running on your own machine.</p>
+    <ul class="toolhead-spec">
+      <li><span class="dot" aria-hidden="true"></span>Client-side</li>
+      <li>Nothing uploaded</li>
+      <li>~17 languages</li>
+      <li>No account</li>
+    </ul>
+    <p class="toolhead-claim">Most free diff tools do plain line comparison and stop. The big paid one meters syntax highlighting at five uses a month. <a href="/diffchecker-alternative">See the comparison →</a></p>
+  </div>
+  ${renderTool({ format: "text" })}`,
 
-  <section class="feature-list" aria-label="Features">
-    <div class="feature-row feature-row--add"><h3>Word-level highlighting</h3><p>Not just which lines changed — the exact words inside a changed line are marked, so you see the real edit at a glance.</p></div>
-    <div class="feature-row feature-row--del"><h3>Split &amp; unified views</h3><p>Compare side by side with line numbers, or switch to a single unified column. Your choice is remembered.</p></div>
-    <div class="feature-row feature-row--add"><h3>Nothing is uploaded</h3><p>Every comparison runs in your browser. Your text and code never touch a server, so it's safe for private files and works offline.</p></div>
-    <div class="feature-row feature-row--del"><h3>Free, no signup, no limits</h3><p>No account, no daily cap, no paywall. Open the page and compare — every feature is free, immediately.</p></div>
-    <div class="feature-row feature-row--add"><h3>Formatting-aware JSON</h3><p>On the JSON page, both sides are normalised first, so a minified and a pretty-printed file with the same data read as identical.</p></div>
-    <div class="feature-row feature-row--del"><h3>Share &amp; export</h3><p>Copy a link that reopens the same comparison, or download a standard unified <code>.diff</code> patch.</p></div>
-  </section>
-
+  belowHtml: `
+  <div class="below">
+    <div class="below-read">
   <section class="howto">
     <h2>How to compare two files with ${C.NAME}</h2>
     <div class="howto-grid">
@@ -75,6 +67,19 @@ export const home = {
     <h2>Why "nothing uploaded" matters</h2>
     <p>Most online diff tools send your text to a server to compute the comparison. ${C.NAME} doesn't: the whole diff runs in your browser with JavaScript, so whatever you paste — proprietary code, a draft agreement, a config file full of secrets, personal data — never leaves your device. You can confirm it yourself in your browser's Network tab, and the tool keeps working offline once it has loaded. That makes it safe for exactly the material you shouldn't paste into a typical web tool.</p>
   </section>
+    </div>
+    <div class="below-margin">
+      <section class="feature-list" aria-label="Features">
+        <h2>What you get</h2>
+        <div class="feature-row feature-row--add"><h3>Word-level highlighting</h3><p>Not just which lines changed — the exact words inside a changed line are marked, so you see the real edit at a glance.</p></div>
+        <div class="feature-row feature-row--del"><h3>Split &amp; unified views</h3><p>Compare side by side with line numbers, or switch to a single unified column. Your choice is remembered.</p></div>
+        <div class="feature-row feature-row--add"><h3>Nothing is uploaded</h3><p>Every comparison runs in your browser. Your text and code never touch a server, so it's safe for private files and works offline.</p></div>
+        <div class="feature-row feature-row--del"><h3>Free, no signup, no limits</h3><p>No account, no daily cap, no paywall. Open the page and compare — every feature is free, immediately.</p></div>
+        <div class="feature-row feature-row--add"><h3>Formatting-aware JSON</h3><p>On the JSON page, both sides are normalised first, so a minified and a pretty-printed file with the same data read as identical.</p></div>
+        <div class="feature-row feature-row--del"><h3>Share &amp; export</h3><p>Copy a link that reopens the same comparison, or download a standard unified <code>.diff</code> patch.</p></div>
+      </section>
+    </div>
+  </div>
 
   <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",

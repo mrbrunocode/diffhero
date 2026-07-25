@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=bc8cedc1">
+<link rel="stylesheet" href="../assets/style.css?v=9df46e9d">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -36,25 +36,62 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header>
+<header class="topbar">
   <a class="logo" href="/">
-    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
+    <svg class="logo-mark" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
     Diffhero
   </a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
-  </button>
+  <nav class="topnav" aria-label="Main">
+    <a href="/">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/diffchecker-alternative">Compare</a>
+    <a href="/about">About</a>
+  </nav>
+  <div class="topbar-end">
+    
+    <span class="topbar-note">no upload · no account</span>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+    </button>
+  </div>
 </header>
-<nav class="main-nav chrome-rule" aria-label="Site">
-  <a href="/guides">Guides</a>
-  <a href="/diffchecker-alternative">Compare</a>
-  <a href="/about">About</a>
-  <a href="/privacy">Privacy</a>
-  <a href="/terms">Terms</a>
-  <a href="/contact">Contact</a>
+<div class="shell shell--docs has-aside">
+<nav class="rail" aria-label="Guides and site">
+  <div class="rail-in">
+    <p class="rail-title"><a href="/guides">Guides</a></p>
+    <section class="rail-group">
+      <h2 class="rail-head">Reading</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/guides/what-is-a-diff">What is a diff? How software compares two versions of a file</a></li>
+        <li><a href="/guides/how-to-review-a-pull-request" aria-current="page">How to review a pull request well</a></li>
+        <li><a href="/guides/merge-conflicts-explained">Merge conflicts explained, and how to resolve them without losing work</a></li>
+        <li><a href="/guides/diffing-config-files-safely">How to diff config files without breaking production</a></li>
+        <li><a href="/guides/line-word-and-semantic-diffs">Line, word and semantic diffs: which comparison you actually need</a></li>
+        <li><a href="/guides/client-side-tools-and-privacy">Why “nothing leaves your browser” matters for developer tools</a></li>
+        <li><a href="/guides/comparing-documents-without-track-changes">How to compare two documents when Track Changes wasn't on</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Site</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/diffchecker-alternative">Diffchecker alternative</a></li>
+        <li><a href="/embed">Embed the diff checker</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Tools</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/">All 50 diff tools →</a></li>
+      </ul>
+    </section>
+  </div>
 </nav>
-<main class="wrap" id="main">
+<main class="content" id="main">
 
   <article class="prose article">
     <span class="eyebrow">Guide</span>
@@ -66,10 +103,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     
     <p>Reviewing a pull request is one of the highest-leverage things a developer does and one of the least taught. Done well, review catches bugs early, spreads knowledge across a team, and keeps a codebase coherent. Done as a rubber stamp — "LGTM" thirty seconds after it lands — it does none of those things and quietly trains everyone to expect nothing. Here's a way to review that's thorough without being slow, built around actually reading the diff.</p>
 
-    <h2>Start with the description, not the code</h2>
+    <h2 id="start-with-the-description-not-the-code">Start with the description, not the code</h2>
     <p>Before you read a single line, read what the change claims to do. What problem does it solve? What's the intended approach? A pull request that can't explain itself in a few sentences is a review finding on its own. Knowing the intent gives you something to check the code <em>against</em> — otherwise you're just reading code with no way to tell whether it does the right thing.</p>
 
-    <h2>Read the diff in the right order</h2>
+    <h2 id="read-the-diff-in-the-right-order">Read the diff in the right order</h2>
     <p>Don't read a large change top to bottom in file order; that's how you drown. Instead:</p>
     <ol>
       <li><strong>Find the core change first.</strong> Most PRs have one file where the real work happens and several that just follow from it (tests, call-site updates, generated files). Read the core first so the rest makes sense.</li>
@@ -78,7 +115,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     </ol>
     <p>When a PR mixes a real change with a big automated reformat, the review is far easier if you can see them separately. Pasting the before/after of a specific function into a <a href="/diff/code-diff">code diff</a> with "ignore whitespace" on is a quick way to isolate the logic change from the formatter's churn.</p>
 
-    <h2>What to actually look for</h2>
+    <h2 id="what-to-actually-look-for">What to actually look for</h2>
     <p>Prioritise, roughly in this order:</p>
     <ul>
       <li><strong>Correctness.</strong> Does it do what it claims? Walk the important path with a real input in your head. Check the edges: empty input, zero, null, the boundary value, the error case.</li>
@@ -88,7 +125,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     </ul>
     <p>Deliberately <em>not</em> at the top: style nits a linter should catch, and personal preference dressed up as principle. If a formatter can decide it, don't spend a human's review budget on it.</p>
 
-    <h2>Give feedback people can act on</h2>
+    <h2 id="give-feedback-people-can-act-on">Give feedback people can act on</h2>
     <p>Be specific and be kind — they're the same skill. "This is confusing" helps no one; "this returns early when <code>items</code> is empty, so the counter never resets — was that intended?" is a comment the author can act on in one read. A few habits that help:</p>
     <ul>
       <li><strong>Ask, don't decree,</strong> when you're not certain. The author usually has context you don't.</li>
@@ -96,7 +133,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><strong>Praise the good parts.</strong> Review that only ever points at problems trains people to dread it.</li>
     </ul>
 
-    <h2>Know when to stop</h2>
+    <h2 id="know-when-to-stop">Know when to stop</h2>
     <p>A review is not a demand for perfection; it's a check that the change is a net improvement that's safe to ship. If it's correct, clear enough, and tested, approve it — even if you'd have written it slightly differently. Perpetual back-and-forth over taste is how teams learn to route around review entirely. The goal is a codebase that stays healthy and a team that keeps learning from each other, and both of those depend on review being something people can actually finish.</p>
     
   <aside class="author-box">
@@ -106,13 +143,24 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p class="article-back"><a href="/guides">← All guides</a></p>
   </article>
 </main>
+<aside class="toc" aria-label="On this page">
+  <div class="toc-in">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#start-with-the-description-not-the-code">Start with the description, not the code</a></li>
+      <li><a href="#read-the-diff-in-the-right-order">Read the diff in the right order</a></li>
+      <li><a href="#what-to-actually-look-for">What to actually look for</a></li>
+      <li><a href="#give-feedback-people-can-act-on">Give feedback people can act on</a></li>
+      <li><a href="#know-when-to-stop">Know when to stop</a></li>
+    </ol>
+  </div>
+</aside>
+</div>
 <footer>
-  <div class="wrap">
-    <div class="foot-in">
-      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.<br>
-      Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
-    </div>
+  <div class="foot-in">
+    <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+    <div>Free. No signup, no upload — everything runs in your browser.<br>
+    Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
   </div>
 </footer>
 <script src="../assets/app.js?v=aea90853" defer></script>

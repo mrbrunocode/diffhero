@@ -5,7 +5,7 @@
 // regression class, plus basic structural mistakes (bad slugs, missing FAQ).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { PAGES } from "../pages.mjs";
+import { PAGES, GROUPS, GROUP_OF } from "../pages.mjs";
 import { GUIDES } from "../guides.mjs";
 
 test("every page has a unique slug", () => {
@@ -69,5 +69,20 @@ test("format is either 'text' or 'json'", () => {
 test("description stays within a reasonable meta-description length", () => {
   for (const p of PAGES) {
     assert.ok(p.description.length <= 200, `${p.slug} description is ${p.description.length} chars, too long for a meta description`);
+  }
+});
+
+test("every slug is filed in exactly one sidebar group", () => {
+  // The tool rail on every page renders from GROUPS. A new PAGES row that
+  // nobody files into a group would silently disappear from site navigation,
+  // so make that a build failure instead.
+  const grouped = GROUPS.flatMap((g) => g.slugs);
+  assert.equal(new Set(grouped).size, grouped.length, "a slug appears in more than one group");
+  const slugs = new Set(PAGES.map((p) => p.slug));
+  for (const p of PAGES) {
+    assert.ok(GROUP_OF[p.slug], `${p.slug} is not in any GROUPS entry`);
+  }
+  for (const s of grouped) {
+    assert.ok(slugs.has(s), `GROUPS references unknown slug: ${s}`);
   }
 });

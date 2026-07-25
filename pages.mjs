@@ -831,7 +831,7 @@ export function renderTool(p = {}) {
     <div class="tool-bar">
       <span class="merge-summary" id="mergeSummary" role="status" aria-live="polite"></span>
     </div>
-    <label for="mergeOutput">Merged result</label>
+    <label class="diff-label merge-output-label" for="mergeOutput">Merged result</label>
     <pre class="editor code merge-output" id="mergeOutput" aria-live="polite"></pre>
     <div class="tool-actions">
       <button type="button" class="btn" id="mergeExampleBtn">Load example</button>
@@ -980,3 +980,60 @@ export function renderTool(p = {}) {
     <div class="diff-output" id="diffOutput" aria-live="polite"></div>
   </section>`;
 }
+
+/**
+ * The sidebar taxonomy: the 50 collection pages grouped into named families.
+ *
+ * WHY THIS EXISTS AS DATA RATHER THAN AS MARKUP: the persistent tool rail on
+ * every page renders from this, so the navigation and the page set cannot
+ * drift apart — a new PAGES row that nobody files into a group fails the
+ * "every slug is in exactly one group" test rather than quietly vanishing
+ * from the site's navigation.
+ *
+ * Order matters twice over: within a group it is the display order in the
+ * rail, and across groups it is the reading order of the whole index (general
+ * tools first, then the things people arrive looking for by name).
+ */
+export const GROUPS = [
+  {
+    name: "General",
+    slugs: ["text-compare", "compare-two-text-files", "online-diff-checker", "code-diff", "compare-two-lists", "private-diff-checker"],
+  },
+  {
+    name: "Merge & patch",
+    slugs: ["merge-conflict-resolver", "git-diff-viewer"],
+  },
+  {
+    name: "Data",
+    slugs: ["json-diff", "csv-diff", "csv-table-diff", "xml-diff", "yaml-diff", "sql-diff", "protobuf-diff"],
+  },
+  {
+    name: "Markup & styles",
+    slugs: ["markdown-diff", "html-diff", "css-diff"],
+  },
+  {
+    name: "Languages",
+    slugs: [
+      "python-diff", "javascript-diff", "typescript-diff", "go-diff", "java-diff", "php-diff",
+      "csharp-diff", "rust-diff", "ruby-diff", "kotlin-diff", "swift-diff", "zig-diff",
+      "elixir-diff", "gleam-diff", "solidity-diff", "julia-diff",
+    ],
+  },
+  {
+    name: "Config & DevOps",
+    slugs: ["dockerfile-diff", "docker-compose-diff", "env-diff", "package-json-diff", "terraform-diff", "nginx-config-diff", "ini-diff", "log-diff"],
+  },
+  {
+    name: "Documents",
+    slugs: ["contract-diff", "resume-diff", "essay-diff", "pdf-diff", "word-diff", "subtitle-diff"],
+  },
+  {
+    name: "Inspect",
+    slugs: ["image-diff", "invisible-character-checker"],
+  },
+];
+
+/** slug → group name, for the "you are here" state in the rail. */
+export const GROUP_OF = Object.fromEntries(
+  GROUPS.flatMap((g) => g.slugs.map((s) => [s, g.name])),
+);

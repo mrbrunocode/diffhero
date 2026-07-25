@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=bc8cedc1">
+<link rel="stylesheet" href="../assets/style.css?v=9df46e9d">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -36,25 +36,62 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header>
+<header class="topbar">
   <a class="logo" href="/">
-    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
+    <svg class="logo-mark" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
     Diffhero
   </a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
-  </button>
+  <nav class="topnav" aria-label="Main">
+    <a href="/">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/diffchecker-alternative">Compare</a>
+    <a href="/about">About</a>
+  </nav>
+  <div class="topbar-end">
+    
+    <span class="topbar-note">no upload · no account</span>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+    </button>
+  </div>
 </header>
-<nav class="main-nav chrome-rule" aria-label="Site">
-  <a href="/guides">Guides</a>
-  <a href="/diffchecker-alternative">Compare</a>
-  <a href="/about">About</a>
-  <a href="/privacy">Privacy</a>
-  <a href="/terms">Terms</a>
-  <a href="/contact">Contact</a>
+<div class="shell shell--docs has-aside">
+<nav class="rail" aria-label="Guides and site">
+  <div class="rail-in">
+    <p class="rail-title"><a href="/guides">Guides</a></p>
+    <section class="rail-group">
+      <h2 class="rail-head">Reading</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/guides/what-is-a-diff">What is a diff? How software compares two versions of a file</a></li>
+        <li><a href="/guides/how-to-review-a-pull-request">How to review a pull request well</a></li>
+        <li><a href="/guides/merge-conflicts-explained">Merge conflicts explained, and how to resolve them without losing work</a></li>
+        <li><a href="/guides/diffing-config-files-safely">How to diff config files without breaking production</a></li>
+        <li><a href="/guides/line-word-and-semantic-diffs" aria-current="page">Line, word and semantic diffs: which comparison you actually need</a></li>
+        <li><a href="/guides/client-side-tools-and-privacy">Why “nothing leaves your browser” matters for developer tools</a></li>
+        <li><a href="/guides/comparing-documents-without-track-changes">How to compare two documents when Track Changes wasn't on</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Site</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/diffchecker-alternative">Diffchecker alternative</a></li>
+        <li><a href="/embed">Embed the diff checker</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Tools</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/">All 50 diff tools →</a></li>
+      </ul>
+    </section>
+  </div>
 </nav>
-<main class="wrap" id="main">
+<main class="content" id="main">
 
   <article class="prose article">
     <span class="eyebrow">Guide</span>
@@ -66,23 +103,23 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     
     <p>"These two files are different" is almost never the answer you want. You want to know <em>how</em> they differ, and at what level of detail — and that's where it helps to know that "a diff" isn't one thing. Line, word and structure-aware comparisons each answer a different question, and picking the wrong one means either missing the change you cared about or being buried in noise you didn't.</p>
 
-    <h2>Line-level: the default, and its blind spot</h2>
+    <h2 id="line-level-the-default-and-its-blind-spot">Line-level: the default, and its blind spot</h2>
     <p>The standard diff — what Git shows, what a <a href="/diff/online-diff-checker">diff checker</a> does by default — works line by line. It's fast, it maps cleanly onto how code is written, and it's what everyone means by "the diff". Its blind spot is granularity: change one word and the entire line is marked as removed-and-re-added. For code that's usually fine, but for prose, where a "line" might be a whole paragraph, it can flag an eighty-word paragraph as changed because you fixed one typo.</p>
 
-    <h2>Word- and character-level: seeing the real edit</h2>
+    <h2 id="word-and-character-level-seeing-the-real-edit">Word- and character-level: seeing the real edit</h2>
     <p>A word-level diff runs a second comparison <em>inside</em> each changed line, highlighting just the tokens that moved. This is what lets you see that "the quick brown fox" became "the quick red fox" with only one word touched, rather than the whole line lighting up. For editing prose, reviewing a reworded sentence, or spotting a one-character code change buried in a long line, word- or character-level detail is the difference between the tool pointing at the change and you hunting for it. When you <a href="/diff/text-compare">compare two blocks of text</a>, it's usually the view you want.</p>
 
-    <h2>Whitespace-aware vs whitespace-blind</h2>
+    <h2 id="whitespace-aware-vs-whitespace-blind">Whitespace-aware vs whitespace-blind</h2>
     <p>Cutting across all of this is the whitespace question. "Ignore whitespace" tells the diff to treat spacing and indentation changes as nothing — invaluable when a formatter or a re-wrap has churned a file without changing meaning. But it's a genuine trap in whitespace-significant formats: in <a href="/diff/python-diff">Python</a> and <a href="/diff/yaml-diff">YAML</a>, indentation <em>is</em> the logic, so ignoring it can hide a change that moves a statement into or out of a block. The rule of thumb: ignore whitespace to cut formatting noise in languages where it's cosmetic; keep it on where indentation carries meaning.</p>
 
-    <h2>Structure-aware: when text order lies</h2>
+    <h2 id="structure-aware-when-text-order-lies">Structure-aware: when text order lies</h2>
     <p>Sometimes even a perfect text diff gives the wrong answer, because the meaning doesn't live in the line order. Two examples:</p>
     <ul>
       <li><strong>Data with reordered rows or keys.</strong> Two <a href="/diff/json-diff">JSON</a> objects with the same data but different key order are logically identical; a text diff calls them different. A <a href="/diff/csv-table-diff">table-aware CSV comparison</a> lines up columns and rows regardless of order, so you see a changed <em>cell</em>, not a whole row moved.</li>
       <li><strong>Lists.</strong> Two lists containing the same items in a different order aren't really "different", but a line diff marks nearly everything as moved. <a href="/diff/compare-two-lists">Sort both sides first</a>, and only the genuine additions and removals remain.</li>
     </ul>
 
-    <h2>Choosing quickly</h2>
+    <h2 id="choosing-quickly">Choosing quickly</h2>
     <p>A short decision guide: for code, start with a line diff and turn on word-level highlighting for the changed lines. For prose, use word-level from the start and ignore whitespace so reflow doesn't dominate. For data where order might differ, sort or use a structure-aware comparison before you trust the result. And in any indentation-sensitive format, leave whitespace <em>on</em>. The tool can show you the difference at any of these levels — knowing which level answers your question is what makes the difference useful.</p>
     
   <aside class="author-box">
@@ -92,13 +129,24 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p class="article-back"><a href="/guides">← All guides</a></p>
   </article>
 </main>
+<aside class="toc" aria-label="On this page">
+  <div class="toc-in">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#line-level-the-default-and-its-blind-spot">Line-level: the default, and its blind spot</a></li>
+      <li><a href="#word-and-character-level-seeing-the-real-edit">Word- and character-level: seeing the real edit</a></li>
+      <li><a href="#whitespace-aware-vs-whitespace-blind">Whitespace-aware vs whitespace-blind</a></li>
+      <li><a href="#structure-aware-when-text-order-lies">Structure-aware: when text order lies</a></li>
+      <li><a href="#choosing-quickly">Choosing quickly</a></li>
+    </ol>
+  </div>
+</aside>
+</div>
 <footer>
-  <div class="wrap">
-    <div class="foot-in">
-      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.<br>
-      Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
-    </div>
+  <div class="foot-in">
+    <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+    <div>Free. No signup, no upload — everything runs in your browser.<br>
+    Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
   </div>
 </footer>
 <script src="../assets/app.js?v=aea90853" defer></script>

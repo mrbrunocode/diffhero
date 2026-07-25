@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/style.css?v=bc8cedc1">
+<link rel="stylesheet" href="./assets/style.css?v=9df46e9d">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -36,32 +36,69 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header>
+<header class="topbar">
   <a class="logo" href="/">
-    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
+    <svg class="logo-mark" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
     Diffhero
   </a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
-  </button>
+  <nav class="topnav" aria-label="Main">
+    <a href="/">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/diffchecker-alternative">Compare</a>
+    <a href="/about">About</a>
+  </nav>
+  <div class="topbar-end">
+    
+    <span class="topbar-note">no upload · no account</span>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+    </button>
+  </div>
 </header>
-<nav class="main-nav chrome-rule" aria-label="Site">
-  <a href="/guides">Guides</a>
-  <a href="/diffchecker-alternative">Compare</a>
-  <a href="/about">About</a>
-  <a href="/privacy">Privacy</a>
-  <a href="/terms">Terms</a>
-  <a href="/contact">Contact</a>
+<div class="shell shell--docs has-aside">
+<nav class="rail" aria-label="Guides and site">
+  <div class="rail-in">
+    <p class="rail-title"><a href="/guides">Guides</a></p>
+    <section class="rail-group">
+      <h2 class="rail-head">Reading</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/guides/what-is-a-diff">What is a diff? How software compares two versions of a file</a></li>
+        <li><a href="/guides/how-to-review-a-pull-request">How to review a pull request well</a></li>
+        <li><a href="/guides/merge-conflicts-explained">Merge conflicts explained, and how to resolve them without losing work</a></li>
+        <li><a href="/guides/diffing-config-files-safely">How to diff config files without breaking production</a></li>
+        <li><a href="/guides/line-word-and-semantic-diffs">Line, word and semantic diffs: which comparison you actually need</a></li>
+        <li><a href="/guides/client-side-tools-and-privacy">Why “nothing leaves your browser” matters for developer tools</a></li>
+        <li><a href="/guides/comparing-documents-without-track-changes">How to compare two documents when Track Changes wasn't on</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Site</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/diffchecker-alternative" aria-current="page">Diffchecker alternative</a></li>
+        <li><a href="/embed">Embed the diff checker</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Tools</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/">All 50 diff tools →</a></li>
+      </ul>
+    </section>
+  </div>
 </nav>
-<main class="wrap" id="main">
+<main class="content" id="main">
 
   <section class="prose">
     <h1>A free Diffchecker alternative</h1>
     <p>Diffchecker is the tool most people mean when they say "online diff checker" — it's mature, well built, and has been around far longer than Diffhero. This page is a straight comparison of the two, including the cases where Diffchecker is the one you should use.</p>
     <p><strong>Short version:</strong> if you want to compare two pieces of text or code in a browser, Diffhero does it free and unmetered, and never sends your input anywhere. If you need to compare <em>folders</em>, run diffs offline in a desktop app, or plug diffing into Git or a document-management system, Diffchecker does things Diffhero doesn't.</p>
 
-    <h2>What Diffchecker's free tier limits</h2>
+    <h2 id="what-diffchecker-s-free-tier-limits">What Diffchecker's free tier limits</h2>
     <p>Diffchecker's tools are free to open, but several features are metered per month on the free plan. Taken from <a href="https://www.diffchecker.com/pricing/" rel="nofollow noopener" target="_blank">Diffchecker's published pricing</a> as of July 2026:</p>
     <ul>
       <li>Syntax highlighting — 5 uses/month</li>
@@ -75,11 +112,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>Lifting those limits means Diffchecker Pro, listed at $15/month. Folder and batch comparison, the desktop app, offline use, and the Git and iManage integrations are paid-only regardless.</p>
     <p>In Diffhero every one of the metered features above is simply on, with no counter, no account, and no monthly reset: <a href="/diff/code-diff">syntax highlighting across ~17 languages</a>, split and unified views, character-level detail, ignore-whitespace and ignore-case, <a href="/diff/merge-conflict-resolver">3-way merge</a>, and print-to-PDF plus <code>.diff</code> download.</p>
 
-    <h2>Where your text actually goes</h2>
+    <h2 id="where-your-text-actually-goes">Where your text actually goes</h2>
     <p>This is the difference that matters most if you paste anything sensitive. Diffchecker markets its <em>desktop</em> app with the line "the most secure way to run Diffchecker — your diffs never leave your computer", which is a fair description of a desktop app and also tells you what it implies about the web one.</p>
     <p>Diffhero has no server to send anything to. The comparison is done in JavaScript on your own machine, so pasting proprietary code, an unsigned contract, or a config file full of credentials doesn't hand that content to anyone. You don't have to take that on trust either — open your browser's Network tab while you diff and you'll see no request carrying your text, and the page keeps working with your connection switched off. That's the same guarantee Diffchecker reserves for its paid desktop app, except it's the default and it's free.</p>
 
-    <h2>When Diffchecker is the better choice</h2>
+    <h2 id="when-diffchecker-is-the-better-choice">When Diffchecker is the better choice</h2>
     <p>Genuinely, not as a formality:</p>
     <ul>
       <li><strong>Comparing folders or many files at once.</strong> Diffhero compares two inputs. Diffchecker does folder and batch comparison; Diffhero has no equivalent.</li>
@@ -88,7 +125,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><strong>Rich document comparison.</strong> Diffchecker handles Word/PDF/spreadsheet comparison more thoroughly. Diffhero reads <code>.txt</code>, <code>.pdf</code> and <code>.docx</code> as text and compares <a href="/diff/csv-table-diff">CSV as a table</a>, but it isn't a full redline tool.</li>
     </ul>
 
-    <h2>When Diffhero is the better choice</h2>
+    <h2 id="when-diffhero-is-the-better-choice">When Diffhero is the better choice</h2>
     <ul>
       <li>You want the useful options — syntax highlighting, unified view, character detail — without a monthly counter.</li>
       <li>The content is sensitive and you'd rather it never reach a server.</li>
@@ -96,18 +133,29 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li>You're diffing a specific format and want the gotchas spelled out — <a href="/diff/python-diff">why ignoring whitespace breaks Python diffs</a>, <a href="/diff/json-diff">how JSON key order trips up comparisons</a>, <a href="/diff/csv-diff">why re-sorted CSV rows all look changed</a>.</li>
     </ul>
 
-    <h2>Both are free to try</h2>
+    <h2 id="both-are-free-to-try">Both are free to try</h2>
     <p>There's no signup here to get in the way, so the fastest way to decide is to <a href="/">paste your own text into Diffhero</a> and see whether it covers what you need. If it doesn't, Diffchecker is a good tool and this page will still be here.</p>
     <p class="note">Diffchecker is a product of Checker Software Inc. Diffhero is not affiliated with it. Pricing and feature limits described above were checked in July 2026 and may have changed since.</p>
   </section>
 </main>
+<aside class="toc" aria-label="On this page">
+  <div class="toc-in">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#what-diffchecker-s-free-tier-limits">What Diffchecker's free tier limits</a></li>
+      <li><a href="#where-your-text-actually-goes">Where your text actually goes</a></li>
+      <li><a href="#when-diffchecker-is-the-better-choice">When Diffchecker is the better choice</a></li>
+      <li><a href="#when-diffhero-is-the-better-choice">When Diffhero is the better choice</a></li>
+      <li><a href="#both-are-free-to-try">Both are free to try</a></li>
+    </ol>
+  </div>
+</aside>
+</div>
 <footer>
-  <div class="wrap">
-    <div class="foot-in">
-      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.<br>
-      Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
-    </div>
+  <div class="foot-in">
+    <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+    <div>Free. No signup, no upload — everything runs in your browser.<br>
+    Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
   </div>
 </footer>
 <script src="./assets/app.js?v=aea90853" defer></script>

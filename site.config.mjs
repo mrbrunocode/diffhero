@@ -15,6 +15,17 @@ export const DESCRIPTION =
 // The subdirectory holding the programmatic-SEO collection pages.
 export const COLLECTION_DIR = "diff";
 
+// The top bar carries only the pages a visitor navigates to on purpose. The
+// legal/contact set stays in the footer, which every page still renders — so
+// they keep their sitewide internal links (which AdSense review looks for)
+// without six items of chrome competing with the tool for attention.
+export const NAV_MAIN = [
+  { href: "/", label: "Tools" },
+  { href: "/guides", label: "Guides" },
+  { href: "/diffchecker-alternative", label: "Compare" },
+  { href: "/about", label: "About" },
+];
+
 export const NAV = [
   { href: "/guides", label: "Guides" },
   // Label is "Compare", not "Diffchecker alternative": this anchor repeats on

@@ -1,8 +1,21 @@
 /**
  * The shared page shell: <head> (SEO + JSON-LD + analytics + ads loader),
- * header, nav, ad slot, and footer. Every collection page and — via the same
- * helpers — every hand-written page renders through here, so the chrome and
- * the SEO/structured-data scaffolding live in exactly one place.
+ * the top bar, the layout grid, the ad slot, and the footer. Every collection
+ * page and — via the same helpers — every hand-written page renders through
+ * here, so the chrome and the SEO/structured-data scaffolding live in exactly
+ * one place.
+ *
+ * THE LAYOUT, and why it is not one centred column. Every page used to be
+ * `nav > main.wrap > section.hero > section.tool > stacked sections` inside a
+ * 1080px centred column — the same skeleton for the tool, the guides and the
+ * privacy policy. That sameness, not the colours, is what reads as generated.
+ * So there are now two shells, chosen per page type via `layout`, both
+ * full-bleed with a persistent left rail (see renderDocument):
+ *
+ *   "app"   — the workbench. Tool-first, the way Excalidraw or regex101 put
+ *             the instrument on the page instead of a hero above it.
+ *   "docs"  — three columns: rail, a measured reading column, sticky on-page
+ *             contents. The MDN/Stripe reading layout.
  *
  * The proven structure this encodes (from the CountLink/vClock build):
  *   - unique <title>/<meta description>/canonical per page (duplicate meta is
@@ -158,6 +171,9 @@ export const faqHtml = (faq) =>
  * @param {string}  [o.themeColor]      override the browser-chrome color
  * @param {string}  [o.bodyClass]       extra class on <body>
  * @param {string}  [o.headExtra]       extra markup injected at end of <head>
+ * @param {"app"|"docs"} [o.layout]     which shell to build (see below)
+ * @param {string}  [o.rail]            left-rail navigation markup (both layouts)
+ * @param {string}  [o.aside]           right-rail markup — the on-page ToC (docs only)
  */
 export function renderDocument(o) {
   const {
@@ -171,6 +187,20 @@ export function renderDocument(o) {
     themeColor = C.THEME_COLOR,
     bodyClass = "",
     headExtra = "",
+    // ── Shell ────────────────────────────────────────────────────────────
+    // "app"  — the workbench: dense header strip, then the tool at the full
+    //          width of the content column, then supporting prose below it.
+    //          Used by the homepage and all 50 collection pages.
+    // "docs" — the reading layout: left rail, a measured 68ch column, and a
+    //          sticky on-page contents rail on the right. Used by guides,
+    //          articles and the hand-written prose pages.
+    //
+    // Neither is a centred column. That skeleton — nav, then one 900–1080px
+    // <main> holding a centred hero and a stack of full-width sections — is
+    // what reads as templated, and it was identical on every page here.
+    layout = "app",
+    rail = "",
+    aside = "",
     // Last time this page's content actually changed (see content-dates.mjs).
     // Falls back to the site-wide constant for pages not yet tracked.
     dateModified = C.CONTENT_DATE,
@@ -189,6 +219,11 @@ export function renderDocument(o) {
   const canonical = `${C.SITE_URL}${canonicalPath}`;
   const ogImage = `${C.SITE_URL}/assets/og-image.png`;
   const isHome = canonicalPath === "/";
+  // The rail is real navigation, so a page rendered without one collapses the
+  // grid to a single column rather than leaving an empty gutter.
+  const shellClass = ["shell", `shell--${layout}`, rail ? "" : "shell--norail", aside ? "has-aside" : ""]
+    .filter(Boolean)
+    .join(" ");
 
   const webApp = {
     "@context": "https://schema.org",
@@ -251,29 +286,35 @@ ${headExtra}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
 <a class="skip-link" href="#main">Skip to content</a>
-<header>
+<header class="topbar">
   <a class="logo" href="/">
-    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
+    <svg class="logo-mark" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
     ${esc(C.NAME)}
   </a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
-  </button>
+  <nav class="topnav" aria-label="Main">
+    ${C.NAV_MAIN.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("\n    ")}
+  </nav>
+  <div class="topbar-end">
+    ${langSwitcher(i18nPath, lang)}
+    <span class="topbar-note">no upload · no account</span>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+    </button>
+  </div>
 </header>
-<nav class="main-nav chrome-rule" aria-label="Site">
-  ${C.NAV.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join("\n  ")}
-</nav>
-<main class="wrap" id="main">
+<div class="${shellClass}">
+${rail}
+<main class="content" id="main">
 ${bodyHtml}
 </main>
+${aside}
+</div>
 <footer>
-  <div class="wrap">
-    <div class="foot-in">
-      <div><span class="fb">${esc(C.NAME)}</span> — ${esc(C.TAGLINE)} · ${C.NAV.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join(" · ")} · <a href="mailto:${C.CONTACT_EMAIL}">${esc(C.CONTACT_EMAIL)}</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.<br>
-      Built and maintained by <a href="${C.AUTHOR_URL}" rel="author noopener" target="_blank">${esc(C.AUTHOR_NAME)}</a>, an independent developer in Edinburgh.</div>
-    </div>
+  <div class="foot-in">
+    <div><span class="fb">${esc(C.NAME)}</span> — ${esc(C.TAGLINE)} · ${C.NAV.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join(" · ")} · <a href="mailto:${C.CONTACT_EMAIL}">${esc(C.CONTACT_EMAIL)}</a></div>
+    <div>Free. No signup, no upload — everything runs in your browser.<br>
+    Built and maintained by <a href="${C.AUTHOR_URL}" rel="author noopener" target="_blank">${esc(C.AUTHOR_NAME)}</a>, an independent developer in Edinburgh.</div>
   </div>
 </footer>
 <script src="${r}assets/app.js?v=${JS_V}" defer></script>

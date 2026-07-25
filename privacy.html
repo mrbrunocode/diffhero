@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/style.css?v=bc8cedc1">
+<link rel="stylesheet" href="./assets/style.css?v=9df46e9d">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -36,55 +36,103 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header>
+<header class="topbar">
   <a class="logo" href="/">
-    <svg class="logo-mark" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
+    <svg class="logo-mark" width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="2" y="3" width="7" height="16" fill="currentColor"/><rect x="13" y="7" width="7" height="12" fill="currentColor" opacity="0.45"/></svg>
     Diffhero
   </a>
-  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
-    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
-  </button>
+  <nav class="topnav" aria-label="Main">
+    <a href="/">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/diffchecker-alternative">Compare</a>
+    <a href="/about">About</a>
+  </nav>
+  <div class="topbar-end">
+    
+    <span class="topbar-note">no upload · no account</span>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 1 1 9.4 3.8a7 7 0 0 0 10.8 10.8Z"/></svg>
+    </button>
+  </div>
 </header>
-<nav class="main-nav chrome-rule" aria-label="Site">
-  <a href="/guides">Guides</a>
-  <a href="/diffchecker-alternative">Compare</a>
-  <a href="/about">About</a>
-  <a href="/privacy">Privacy</a>
-  <a href="/terms">Terms</a>
-  <a href="/contact">Contact</a>
+<div class="shell shell--docs has-aside">
+<nav class="rail" aria-label="Guides and site">
+  <div class="rail-in">
+    <p class="rail-title"><a href="/guides">Guides</a></p>
+    <section class="rail-group">
+      <h2 class="rail-head">Reading</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/guides/what-is-a-diff">What is a diff? How software compares two versions of a file</a></li>
+        <li><a href="/guides/how-to-review-a-pull-request">How to review a pull request well</a></li>
+        <li><a href="/guides/merge-conflicts-explained">Merge conflicts explained, and how to resolve them without losing work</a></li>
+        <li><a href="/guides/diffing-config-files-safely">How to diff config files without breaking production</a></li>
+        <li><a href="/guides/line-word-and-semantic-diffs">Line, word and semantic diffs: which comparison you actually need</a></li>
+        <li><a href="/guides/client-side-tools-and-privacy">Why “nothing leaves your browser” matters for developer tools</a></li>
+        <li><a href="/guides/comparing-documents-without-track-changes">How to compare two documents when Track Changes wasn't on</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Site</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/diffchecker-alternative">Diffchecker alternative</a></li>
+        <li><a href="/embed">Embed the diff checker</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/privacy" aria-current="page">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </section>
+    <section class="rail-group">
+      <h2 class="rail-head">Tools</h2>
+      <ul class="rail-list is-here">
+        <li><a href="/">All 50 diff tools →</a></li>
+      </ul>
+    </section>
+  </div>
 </nav>
-<main class="wrap" id="main">
+<main class="content" id="main">
 
   <section class="prose">
     <h1>Privacy policy</h1>
     <p class="muted">Last updated: July 18, 2026</p>
 
-    <h2>The short version</h2>
+    <h2 id="the-short-version">The short version</h2>
     <p>Whatever you paste into Diffhero is compared entirely in your own browser. It is never uploaded, stored, or sent to us. Close the tab and it's gone.</p>
 
-    <h2>What we collect</h2>
+    <h2 id="what-we-collect">What we collect</h2>
     <p><strong>Your text and code: nothing.</strong> The diff runs client-side; your content never reaches a server we control. A share link, if you choose to create one, encodes your two inputs into the URL itself — it is not stored by us. Files you drag in are read locally in your browser and never uploaded.</p>
     <p><strong>Analytics:</strong> We use Google Analytics to understand aggregate, anonymous usage (pages viewed, rough country, device type). It does not see the text you compare.</p>
     <p><strong>Advertising:</strong> We show ads via Google AdSense. Google and its partners may use cookies to serve ads based on your prior visits to this and other sites. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" rel="noopener" target="_blank">Google Ads Settings</a>. Visitors in the EEA/UK are shown a consent choice before any personalized ads load.</p>
 
-    <h2>Cookies</h2>
+    <h2 id="cookies">Cookies</h2>
     <p>Third-party cookies may be set by Google (for the services named above). The tool itself sets no tracking cookies of its own; any preferences (like light/dark theme or your split/unified choice) are stored locally in your browser and never transmitted.</p>
 
-    <h2>Your rights</h2>
+    <h2 id="your-rights">Your rights</h2>
     <p>Because we don't hold your content or a profile of you, there's nothing on our side to access, export, or delete. For any third-party services above, refer to <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's privacy policy</a>.</p>
 
-    <h2>Contact</h2>
+    <h2 id="contact">Contact</h2>
     <p>Questions about this policy: <a href="mailto:hello@diffhero.app">hello@diffhero.app</a>.</p>
   </section>
 </main>
+<aside class="toc" aria-label="On this page">
+  <div class="toc-in">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#the-short-version">The short version</a></li>
+      <li><a href="#what-we-collect">What we collect</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#your-rights">Your rights</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+</aside>
+</div>
 <footer>
-  <div class="wrap">
-    <div class="foot-in">
-      <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
-      <div>Free. No signup, no upload — everything runs in your browser.<br>
-      Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
-    </div>
+  <div class="foot-in">
+    <div><span class="fb">Diffhero</span> — See exactly what changed. · <a href="/guides">Guides</a> · <a href="/diffchecker-alternative">Compare</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a> · <a href="mailto:hello@diffhero.app">hello@diffhero.app</a></div>
+    <div>Free. No signup, no upload — everything runs in your browser.<br>
+    Built and maintained by <a href="https://brunofk.dev" rel="author noopener" target="_blank">Bruno FK</a>, an independent developer in Edinburgh.</div>
   </div>
 </footer>
 <script src="./assets/app.js?v=aea90853" defer></script>

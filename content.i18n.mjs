@@ -20,11 +20,11 @@ export const homeES = {
   description:
     "Compara dos versiones de un texto o de código y ve exactamente qué ha cambiado, con las palabras modificadas resaltadas. Todo funciona en tu navegador: nada se sube a ningún servidor.",
   bodyHtml: `
-  <section class="hero hero--home">
-    <span class="badge"><span class="dot" aria-hidden="true"></span>Todo funciona en tu navegador — no se sube nada</span>
+  <div class="page-head">
+    <p class="page-head-note"><span class="dot" aria-hidden="true"></span>Todo funciona en tu navegador — no se sube nada</p>
     <h1>${C.NAME}</h1>
     <p class="lede">Un comparador de diferencias que no reserva nada para una versión de pago: resaltado de sintaxis en unos 17 lenguajes, detalle carácter a carácter, vistas dividida y unificada, fusión a tres bandas y comparación de imágenes y CSV. Todo gratis, sin límites de uso y ejecutándose en tu propio equipo.</p>
-  </section>
+  </div>
 
   <section class="guide">
     <h2>Para qué sirve un comparador de diferencias</h2>
@@ -48,11 +48,11 @@ export const homeDE = {
   description:
     "Vergleiche zwei Versionen eines Textes oder Codes und sieh genau, was sich geändert hat — mit hervorgehobenen Wörtern. Alles läuft im Browser: nichts wird hochgeladen.",
   bodyHtml: `
-  <section class="hero hero--home">
-    <span class="badge"><span class="dot" aria-hidden="true"></span>Läuft vollständig im Browser — nichts wird hochgeladen</span>
+  <div class="page-head">
+    <p class="page-head-note"><span class="dot" aria-hidden="true"></span>Läuft vollständig im Browser — nichts wird hochgeladen</p>
     <h1>${C.NAME}</h1>
     <p class="lede">Ein Diff-Werkzeug, das nichts für eine Bezahlversion zurückhält: Syntaxhervorhebung für rund 17 Sprachen, Unterschiede auf Zeichenebene, geteilte und vereinheitlichte Ansicht, Drei-Wege-Merge sowie Bild- und CSV-Vergleich. Alles kostenlos, ohne Nutzungsgrenzen und auf deinem eigenen Rechner.</p>
-  </section>
+  </div>
 
   <section class="guide">
     <h2>Wozu ein Diff-Werkzeug dient</h2>
