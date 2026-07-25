@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diff checker — Diffhero</title>
 <meta name="robots" content="noindex,follow">
-<link rel="stylesheet" href="/assets/style.css?v=79023de3">
+<link rel="stylesheet" href="/assets/style.css?v=f12ce522">
 <style>
   /* Widget chrome only: no nav, no footer, no ads, no page padding. */
   body { padding: var(--space-4); background: var(--bg); }
@@ -49,6 +49,7 @@
       <div class="change-nav" id="changeNav" hidden>
         <button type="button" class="btn-icon" id="prevChange" aria-label="Previous change" title="Previous change (Alt+↑)">↑</button>
         <button type="button" class="btn-icon" id="nextChange" aria-label="Next change" title="Next change (Alt+↓)">↓</button>
+        <span class="change-count" id="changeCount" aria-live="polite"></span>
       </div>
       <span class="diff-summary" id="diffSummary" role="status" aria-live="polite"></span>
     </div>
@@ -74,6 +75,6 @@
     <div class="diff-output" id="diffOutput" aria-live="polite"></div>
   </section>
 <p class="embed-credit">Powered by <a href="https://diffhero.app/diff/text-compare" target="_blank" rel="noopener">Diffhero</a></p>
-<script src="/assets/app.js?v=aea90853" defer></script>
+<script src="/assets/app.js?v=915cb235" defer></script>
 </body>
 </html>

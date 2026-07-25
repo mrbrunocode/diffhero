@@ -37,6 +37,7 @@ export const home = {
       <li>No account</li>
     </ul>
     <p class="toolhead-claim">Most free diff tools do plain line comparison and stop. The big paid one meters syntax highlighting at five uses a month. <a href="/diffchecker-alternative">See the comparison →</a></p>
+    <p class="toolhead-claim toolhead-more">Also: <a href="/${C.COLLECTION_DIR}/image-diff">image diff</a>, <a href="/${C.COLLECTION_DIR}/merge-conflict-resolver">3-way merge</a>, <a href="/${C.COLLECTION_DIR}/csv-diff">CSV compare →</a></p>
   </div>
   ${renderTool({ format: "text" })}`,
 

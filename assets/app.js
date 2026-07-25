@@ -42,11 +42,19 @@
   var root = document.documentElement;
   try { var s = localStorage.getItem("theme"); if (s) root.setAttribute("data-theme", s); } catch (e) {}
   var toggle = document.getElementById("themeToggle");
+  function reflectTheme() {
+    if (!toggle) return;
+    var isLight = root.getAttribute("data-theme") === "light";
+    toggle.setAttribute("aria-pressed", String(isLight));
+    toggle.classList.toggle("is-active", isLight);
+  }
   if (toggle) {
+    reflectTheme();
     toggle.addEventListener("click", function () {
       var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("theme", next); } catch (e) {}
+      reflectTheme();
     });
   }
 
@@ -817,8 +825,8 @@
     jsonFallback = false;
     var rawA = elA.value, rawB = elB.value;
     if (!rawA && !rawB) {
-      out.innerHTML = '<p class="diff-empty">Paste something into both boxes (or drop a file on each) to see the differences here.</p>';
-      summary.textContent = ""; if (changeNav) changeNav.hidden = true; lastRows = null; anchors = []; return;
+      out.innerHTML = '<div class="diff-empty diff-empty--waiting"><p class="term-line"><span class="term-prompt">$</span> waiting for input<span class="term-cursor" aria-hidden="true"></span></p><p class="diff-empty-hint">Paste something into both boxes (or drop a file on each) to see the differences here.</p></div>';
+      summary.textContent = ""; if (changeNav) changeNav.hidden = true; lastRows = null; anchors = []; updateChangeCount(); return;
     }
     var prepped = prepPair(format, normalize(rawA), normalize(rawB));
     jsonFallback = prepped.fallback;
@@ -829,7 +837,7 @@
     lastRows = rows;
     if (!rows) {
       out.innerHTML = '<p class="diff-empty">These inputs are too large or too different to compare line-by-line in the browser. Try smaller sections.</p>';
-      summary.textContent = ""; if (changeNav) changeNav.hidden = true; anchors = []; return;
+      summary.textContent = ""; if (changeNav) changeNav.hidden = true; anchors = []; updateChangeCount(); return;
     }
     var adds = 0, dels = 0, same = 0;
     for (var i = 0; i < rows.length; i++) {
@@ -840,7 +848,7 @@
     if (adds === 0 && dels === 0) {
       out.innerHTML = '<p class="diff-empty diff-identical">The two inputs are identical' +
         (jsonFallback ? " as text." : (format === "json" ? " once formatting is normalised." : ".")) + "</p>";
-      summary.textContent = "0 changes · 100% similar"; if (changeNav) changeNav.hidden = true; anchors = []; return;
+      summary.textContent = "0 changes · 100% similar"; if (changeNav) changeNav.hidden = true; anchors = []; updateChangeCount(); return;
     }
     out.innerHTML = renderDiff(rows, view);
     var total = aLines.length + bLines.length;
@@ -863,6 +871,7 @@
     anchors = Array.prototype.slice.call(out.querySelectorAll("[data-ci]"));
     curAnchor = -1;
     if (changeNav) changeNav.hidden = anchors.length === 0;
+    updateChangeCount();
   }
 
   // Lazily render a collapsed region on expand (event-delegated).
@@ -897,6 +906,13 @@
   reflectView();
 
   // ── Jump-to-change navigation ──────────────────────────────────────────────
+  var changeCount = document.getElementById("changeCount");
+  function updateChangeCount() {
+    if (!changeCount) return;
+    if (!anchors.length) { changeCount.textContent = ""; return; }
+    var pos = curAnchor < 0 ? 1 : curAnchor + 1;
+    changeCount.textContent = pos + " of " + anchors.length;
+  }
   function goToChange(dir) {
     if (!anchors.length) return;
     curAnchor = (curAnchor + dir + anchors.length) % anchors.length;
@@ -904,6 +920,7 @@
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     anchors.forEach(function (a) { a.classList.remove("change-focus"); });
     el.classList.add("change-focus");
+    updateChangeCount();
   }
   var prevBtn = document.getElementById("prevChange");
   var nextBtn = document.getElementById("nextChange");

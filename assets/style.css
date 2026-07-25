@@ -185,6 +185,10 @@ footer { --bleed: max(0px, calc((100% - var(--shell-max)) / 2)); }
 .theme-toggle .icon-sun { display: none; }
 [data-theme="light"] .theme-toggle .icon-sun { display: block; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+/* Pressed state — without this the icon swap alone reads as decoration, not
+   a control that's "on". */
+.theme-toggle.is-active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.theme-toggle.is-active:hover { background: var(--accent-soft); }
 
 /* ---- The grid ---- */
 /* Columns stretch to the full row height (that is what draws the rail's
@@ -290,6 +294,10 @@ footer { --bleed: max(0px, calc((100% - var(--shell-max)) / 2)); }
   color: var(--text-tertiary); font-size: var(--text-sm);
 }
 .toolhead-claim a { color: var(--accent); font-weight: 600; }
+/* Homepage-only: image diff / 3-way merge / CSV compare are real
+   differentiators but only reachable via the rail otherwise. Same visual
+   register as the claim line above it, not a new pattern. */
+.toolhead-more { grid-row: 4; }
 /* The spec plate — the true, checkable facts as a device's printed markings:
    hard edges, mono, rule-separated fields. (This is what the old pill badge
    with a coloured dot became.) */
@@ -493,7 +501,32 @@ footer {
 .seg.is-active { background: var(--accent); color: var(--on-accent); }
 .opt { display: inline-flex; align-items: center; gap: var(--space-2); cursor: pointer; }
 .opt input { accent-color: var(--accent); width: 16px; height: 16px; }
-.change-nav { display: inline-flex; gap: var(--space-2); }
+/* Toggle chips — a flag-style "[ ]"/"[x]" prefix in the mono display face
+   turns the checkbox row into a row of terminal-style switches instead of a
+   flat wall of same-weight labels. The checkbox itself stays a real,
+   focusable input (visually-hidden, not display:none) so keyboard nav,
+   labels and screen readers all still work exactly as before — only the
+   painted state changes. Scoped to actual checkboxes only, so the language
+   <select> and the image-diff sensitivity <input type="range"> (both also
+   `.opt`) are unaffected. */
+.opt:has(input[type="checkbox"]) {
+  position: relative; padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  font-family: var(--font-display); font-size: var(--text-xs); letter-spacing: 0.01em;
+  color: var(--text-secondary); background: var(--surface);
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+}
+.opt:has(input[type="checkbox"]):hover { border-color: var(--border); color: var(--text-primary); }
+.opt:has(input[type="checkbox"])::before { content: "[ ]"; color: var(--text-tertiary); font-weight: 700; }
+.opt:has(input[type="checkbox"]:checked) { border-color: var(--accent); color: var(--text-primary); background: var(--accent-soft); }
+.opt:has(input[type="checkbox"]:checked)::before { content: "[x]"; color: var(--accent); }
+.opt:has(input[type="checkbox"]:focus-visible) { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.opt input[type="checkbox"] {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.change-nav { display: inline-flex; align-items: center; gap: var(--space-2); }
+.change-count { font-family: var(--font-display); font-size: var(--text-xs); color: var(--text-tertiary); min-width: 4.5em; }
 .diff-summary { font-family: var(--font-display); font-size: var(--text-xs); color: var(--text-secondary); margin-left: auto; }
 
 /* 3-way merge tool */
@@ -560,6 +593,22 @@ footer {
 
 .change-focus { outline: 2px solid var(--accent); outline-offset: -2px; }
 .diff-empty { color: var(--text-secondary); padding: var(--space-5); background: var(--surface); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); text-align: center; }
+/* Pre-paste state — a quiet nod to the terminal register instead of a plain
+   sentence, without turning a professional tool into a joke emulator: one
+   prompt line with a blinking cursor, the actual instructions underneath. */
+.diff-empty--waiting { text-align: left; }
+.diff-empty--waiting .term-line {
+  margin: 0 0 var(--space-2); font-family: var(--font-display); font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.diff-empty--waiting .term-prompt { color: var(--accent); margin-right: var(--space-2); }
+.diff-empty--waiting .term-cursor {
+  display: inline-block; width: 8px; height: 1em; margin-left: 2px; vertical-align: text-bottom;
+  background: var(--accent); animation: term-blink 1s steps(1, start) infinite;
+}
+.diff-empty-hint { margin: 0; font-size: var(--text-sm); color: var(--text-tertiary); }
+@keyframes term-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .diff-empty--waiting .term-cursor { animation: none; } }
 .diff-identical { color: var(--success); border-style: solid; }
 
 /* collapse unchanged regions */
@@ -677,6 +726,7 @@ footer {
   .toolhead { grid-template-columns: minmax(0, 1fr); }
   .toolhead-spec { grid-column: 1; grid-row: 3; }
   .toolhead-claim { grid-row: 4; }
+  .toolhead-more { grid-row: 5; }
 }
 @media (max-width: 720px) {
   h1 { font-size: var(--text-2xl); }

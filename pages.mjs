@@ -955,6 +955,7 @@ export function renderTool(p = {}) {
       <div class="change-nav" id="changeNav" hidden>
         <button type="button" class="btn-icon" id="prevChange" aria-label="Previous change" title="Previous change (Alt+↑)">↑</button>
         <button type="button" class="btn-icon" id="nextChange" aria-label="Next change" title="Next change (Alt+↓)">↓</button>
+        <span class="change-count" id="changeCount" aria-live="polite"></span>
       </div>
       <span class="diff-summary" id="diffSummary" role="status" aria-live="polite"></span>
     </div>
