@@ -1,0 +1,14 @@
+# Redirects for Cloudflare (Workers static assets / Pages) and Netlify — all
+# three read this same file format.
+
+# /es/ and /de/ were live and listed in sitemap.xml until 2026-07-25, so they
+# may be indexed. i18n is now switched off (see i18n.mjs for why), and a page
+# that was in the sitemap must not become a hard 404 — that drops whatever
+# equity it had and leaves anyone who bookmarked or linked it on an error page.
+# 301 to the English homepage, which is what both pages ended by linking to
+# anyway. Remove these only once Search Console shows the old URLs dropped out
+# of the index.
+/es/*   /   301
+/de/*   /   301
+/es     /   301
+/de     /   301

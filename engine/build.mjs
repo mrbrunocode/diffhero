@@ -32,7 +32,7 @@ import { ARTICLES } from "../articles.mjs";
 import { home, about, privacy, terms, contact, diffcheckerAlternative, embed } from "../content.mjs";
 import { EMBEDDABLE, embedPage } from "./embed.mjs";
 import { TRANSLATIONS } from "../content.i18n.mjs";
-import { LOCALES, TRANSLATED_PAGES } from "../i18n.mjs";
+import { I18N_ENABLED, LOCALES, TRANSLATED_PAGES } from "../i18n.mjs";
 import { makeDateTracker } from "./content-dates.mjs";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -388,7 +388,9 @@ function sitemap() {
     "/",
     `/${GUIDES_DIR}`,
     ...[about, privacy, terms, contact, diffcheckerAlternative, embed].map((p) => p.path),
-    ...TRANSLATIONS.map((t) => (t.path === "/" ? `/${t.lang}/` : `/${t.lang}${t.path}`)),
+    ...(I18N_ENABLED
+      ? TRANSLATIONS.map((t) => (t.path === "/" ? `/${t.lang}/` : `/${t.lang}${t.path}`))
+      : []),
     ...ARTICLES.map((a) => `/${GUIDES_DIR}/${a.slug}`),
     ...PAGES.map((p) => `/${C.COLLECTION_DIR}/${p.slug}`),
   ];
@@ -463,6 +465,14 @@ async function main() {
   }
 
   // Translated pages (see i18n.mjs — deliberately a small, hand-written set).
+  // Gated on I18N_ENABLED; when off, any previously generated locale directory
+  // is removed so a disabled language can't linger as an orphaned live page.
+  if (!I18N_ENABLED) {
+    for (const loc of LOCALES) {
+      if (loc.path) await rm(join(ROOT, loc.path.replace(/^\//, "")), { recursive: true, force: true });
+    }
+    console.log(`i18n disabled — no translated pages (see i18n.mjs).`);
+  } else {
   for (const t of TRANSLATIONS) {
     const dir = join(ROOT, t.lang);
     await mkdir(dir, { recursive: true });
@@ -482,6 +492,7 @@ async function main() {
     }));
   }
   console.log(`Wrote ${TRANSLATIONS.length} translated page(s): ${TRANSLATIONS.map((t) => "/" + t.lang).join(", ")}`);
+  }
 
   const embedOut = join(ROOT, "embed");
   await mkdir(embedOut, { recursive: true });
