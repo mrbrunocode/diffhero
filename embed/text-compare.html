@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diff checker — Diffhero</title>
+<meta name="robots" content="noindex,follow">
+<link rel="stylesheet" href="/assets/style.css?v=dff7f34c">
+<style>
+  /* Widget chrome only: no nav, no footer, no ads, no page padding. */
+  body { padding: var(--space-4); background: var(--bg); }
+  .embed-credit { margin-top: var(--space-3); font-size: var(--text-xs); color: var(--text-secondary); text-align: right; }
+  .embed-credit a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .embed-credit a:hover { text-decoration: underline; }
+</style>
+</head>
+<body class="embed">
+
+  <section class="tool difftool" data-format="text" data-lang="plain" data-slug="text-compare">
+    
+    <div class="diff-inputs">
+      <div class="diff-pane" data-side="a">
+        <div class="diff-pane-head">
+          <label class="diff-label" for="original">Original</label>
+          <span class="diff-drop-hint">paste, type, or drop a file (.txt, .pdf, .docx)</span>
+        </div>
+        <textarea id="original" class="editor code" placeholder="Paste the original version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+      <div class="diff-pane" data-side="b">
+        <div class="diff-pane-head">
+          <label class="diff-label" for="changed">Changed</label>
+          <span class="diff-drop-hint">paste, type, or drop a file (.txt, .pdf, .docx)</span>
+        </div>
+        <textarea id="changed" class="editor code" placeholder="Paste the changed version here…" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+    <div class="tool-bar">
+      <div class="view-toggle" role="group" aria-label="Diff view">
+        <button type="button" class="seg is-active" id="viewSplit" data-view="split" aria-pressed="true">Split</button>
+        <button type="button" class="seg" id="viewUnified" data-view="unified" aria-pressed="false">Unified</button>
+      </div>
+      <label class="opt lang-opt"><span class="sr-only">Syntax language</span><select id="langSel" class="lang-sel" aria-label="Syntax highlighting language"><option value="plain" selected>Plain text</option><option value="clike">Code (C-like)</option><option value="javascript">JavaScript / TS</option><option value="python">Python</option><option value="json">JSON</option><option value="html">HTML / XML</option><option value="xml">XML</option><option value="css">CSS</option><option value="sql">SQL</option><option value="yaml">YAML</option><option value="go">Go</option><option value="java">Java</option><option value="php">PHP</option><option value="csharp">C#</option><option value="rust">Rust</option><option value="kotlin">Kotlin</option><option value="swift">Swift</option></select></label>
+      <label class="opt"><input type="checkbox" id="optWhitespace"> Ignore whitespace</label>
+      <label class="opt"><input type="checkbox" id="optCase"> Ignore case</label>
+      <label class="opt"><input type="checkbox" id="optChar" title="Mark the exact changed characters inside a changed word, not just the word"> Character detail</label>
+      <label class="opt"><input type="checkbox" id="optInv" title="Render invisible characters (non-breaking spaces, zero-width characters, tabs) as visible symbols"> Show invisibles</label>
+      <label class="opt"><input type="checkbox" id="optCollapse" checked> Collapse unchanged</label>
+      <label class="opt"><input type="checkbox" id="optWrap" checked> Wrap</label>
+      <div class="change-nav" id="changeNav" hidden>
+        <button type="button" class="btn-icon" id="prevChange" aria-label="Previous change" title="Previous change (Alt+↑)">↑</button>
+        <button type="button" class="btn-icon" id="nextChange" aria-label="Next change" title="Next change (Alt+↓)">↓</button>
+      </div>
+      <span class="diff-summary" id="diffSummary" role="status" aria-live="polite"></span>
+    </div>
+    <div class="tool-actions">
+      <button type="button" class="btn primary" id="swapBtn">Swap sides</button>
+      <button type="button" class="btn" id="exampleBtn">Load example</button>
+      <button type="button" class="btn" id="shareBtn">Copy share link</button>
+      <button type="button" class="btn" id="copyBtn">Copy result</button>
+      <button type="button" class="btn" id="downloadBtn">Download .diff</button>
+      <button type="button" class="btn" id="printBtn" title="Prints only the diff result — use your browser's 'Save as PDF' destination for a PDF report">Print / PDF</button>
+      <button type="button" class="btn" id="clearBtn">Clear</button>
+    </div>
+    <details class="fr">
+      <summary>Find &amp; replace</summary>
+      <div class="fr-row">
+        <input type="text" id="frFind" placeholder="Find (exact text)" autocomplete="off">
+        <input type="text" id="frRepl" placeholder="Replace with" autocomplete="off">
+        <button type="button" class="btn" id="frA">Original</button>
+        <button type="button" class="btn" id="frB">Changed</button>
+        <button type="button" class="btn" id="frBoth">Both</button>
+      </div>
+    </details>
+    <div class="diff-output" id="diffOutput" aria-live="polite"></div>
+  </section>
+<p class="embed-credit">Powered by <a href="https://diffhero.app/diff/text-compare" target="_blank" rel="noopener">Diffhero</a></p>
+<script src="/assets/app.js?v=2959a381" defer></script>
+</body>
+</html>

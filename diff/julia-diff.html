@@ -6,6 +6,7 @@
 <title>Julia Diff — Compare Two Julia Files | Diffhero</title>
 <meta name="description" content="Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.">
 <link rel="canonical" href="https://diffhero.app/diff/julia-diff">
+
 <meta property="og:title" content="Julia Diff — Compare Two Julia Files">
 <meta property="og:description" content="Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.">
 <meta property="og:type" content="website">
@@ -20,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=2a21cd98">
+<link rel="stylesheet" href="../assets/style.css?v=dff7f34c">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/julia-diff","description":"Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/julia-diff","description":"Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-25"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Julia Diff","item":"https://diffhero.app/diff/julia-diff"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it show which dispatch method changed?","acceptedAnswer":{"@type":"Answer","text":"It shows the exact line(s) that changed — for a new or edited method that's the method signature itself, which is the part of a Julia diff that actually matters."}},{"@type":"Question","name":"Does it work for Jupyter-exported .jl scripts?","acceptedAnswer":{"@type":"Answer","text":"Yes, any plain-text .jl file diffs the same way, whether hand-written or exported from a notebook."}},{"@type":"Question","name":"Is my Julia code uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser, so research or proprietary numerical code stays on your device."}}]}</script>
 
@@ -128,6 +129,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><b>1-based indexing edits</b> and <code>@</code> macro changes.</li>
     </ul>
     <p>Julia isn't whitespace-sensitive, so <b>Ignore whitespace</b> is safe. The comparison happens entirely on your machine.</p>
+    <h3>Multiple dispatch makes Julia diffs subtle</h3>
+    <p>In most languages a changed function signature affects that function. In Julia it changes which method gets selected, for every call site in the program. Narrowing an argument type from <code>Number</code> to <code>Float64</code> doesn't just tighten a check — it can silently hand dispatch to a different, less specific method for the calls that no longer match. That's a one-word diff with program-wide consequences.</p>
+    <p>Also worth close reading: the dot that makes an operation broadcast. <code>f(x)</code> and <code>f.(x)</code> differ by one character and do fundamentally different things, one operating on a value and the other elementwise across a collection. Turn on character-level detail when reviewing numerical code for exactly this reason.</p>
+    <p>Type-annotation changes on struct fields matter more than they look too, since they affect memory layout and whether the compiler can specialise — a performance change that no test will fail on but a benchmark will.</p>
   </section>
   
   

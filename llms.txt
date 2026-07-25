@@ -12,6 +12,7 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Terms of Service](https://diffhero.app/terms)
 - [Contact](https://diffhero.app/contact)
 - [Diffchecker alternative — how Diffhero compares](https://diffhero.app/diffchecker-alternative)
+- [Embed a diff checker on your site](https://diffhero.app/embed)
 
 ## Guides
 - [What is a diff? How software compares two versions of a file](https://diffhero.app/guides/what-is-a-diff): A plain-English explanation of what a diff is, how the comparison actually works, and why it underpins version control, code review and document editing.

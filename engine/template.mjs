@@ -20,6 +20,7 @@
  * one-line config change (see scripts/enable-adsense.mjs), not an HTML edit.
  */
 import * as C from "../site.config.mjs";
+import { hreflangTags, langSwitcher } from "../i18n.mjs";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
@@ -173,6 +174,16 @@ export function renderDocument(o) {
     // Last time this page's content actually changed (see content-dates.mjs).
     // Falls back to the site-wide constant for pages not yet tracked.
     dateModified = C.CONTENT_DATE,
+    // Locale of THIS document. Drives <html lang>, the hreflang set and the
+    // language switcher. Defaults to the English original.
+    lang = "en",
+    // The LOGICAL page path, independent of locale ("/" for the homepage in
+    // every language). hreflang sets are keyed on this, not on canonicalPath —
+    // a translated page's canonicalPath is locale-prefixed ("/es/"), and using
+    // that would look up a key that doesn't exist, emit no alternates, and
+    // silently break reciprocity. Google discards a set whose members don't
+    // all point back at each other, so that failure is total, not partial.
+    i18nPath = canonicalPath,
   } = o;
   const r = rel(depth);
   const canonical = `${C.SITE_URL}${canonicalPath}`;
@@ -208,13 +219,14 @@ export function renderDocument(o) {
   };
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)}${isHome ? "" : ` | ${esc(C.NAME)}`}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
+${hreflangTags(C.SITE_URL, i18nPath)}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website">

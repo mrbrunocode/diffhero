@@ -6,6 +6,7 @@
 <title>Zig Diff — Compare Two Zig Files | Diffhero</title>
 <meta name="description" content="Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.">
 <link rel="canonical" href="https://diffhero.app/diff/zig-diff">
+
 <meta property="og:title" content="Zig Diff — Compare Two Zig Files">
 <meta property="og:description" content="Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.">
 <meta property="og:type" content="website">
@@ -20,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=2a21cd98">
+<link rel="stylesheet" href="../assets/style.css?v=dff7f34c">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/zig-diff","description":"Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/zig-diff","description":"Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-25"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Zig Diff","item":"https://diffhero.app/diff/zig-diff"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it understand comptime?","acceptedAnswer":{"@type":"Answer","text":"No — it's a text diff, not a Zig compiler. That's fine for review purposes: an edited `comptime` block or a changed allocator argument shows as a normal line/token change."}},{"@type":"Question","name":"Does it work across Zig versions?","acceptedAnswer":{"@type":"Answer","text":"Yes, since Zig's syntax has changed release to release (it's still pre-1.0), comparing a file before and after a version migration works exactly like any other text diff."}},{"@type":"Question","name":"Is my Zig source uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs client-side, so unreleased systems code stays on your device."}}]}</script>
 
@@ -128,6 +129,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><b>Optionals</b> (<code>?T</code>) and pointer types (<code>*T</code>, <code>[]T</code>).</li>
     </ul>
     <p>Zig ships with <code>zig fmt</code>, so format both sides first for a clean comparison. All diffing is local — your source never leaves the page.</p>
+    <h3>Reading a Zig diff for the things that actually change behaviour</h3>
+    <p>Because Zig has no hidden control flow, most of what you're scanning for in a diff is explicit in the tokens. A <code>try</code> appearing or disappearing changes error propagation at that call site. A shift between <code>!T</code> and <code>T</code> in a return type changes the contract for every caller. An allocator parameter swapped from one to another changes lifetime and ownership assumptions that the compiler will enforce but a reader can easily skim past.</p>
+    <p>Run <code>zig fmt</code> on both sides before comparing. Zig's formatter is canonical and non-negotiable in style, so any formatting difference between two snippets is noise introduced by whoever pasted them, not a real change — and normalising it first means the diff shows only what matters.</p>
+    <p>One Zig-specific trap: <code>comptime</code> blocks look like ordinary code in a text diff, but a change inside one runs at compile time rather than runtime. A diff can tell you the block changed; it can't tell you what that does to the generated code. Treat a <code>comptime</code> change as a prompt to check the build output, not as a self-contained edit.</p>
   </section>
   
   

@@ -221,6 +221,41 @@ export const diffcheckerAlternative = {
   </section>`,
 };
 
+// The public "embed this" page. Each embed places a real link on someone
+// else's site, which is the family's binding constraint (docs/seo-strategy.md).
+export const embed = {
+  path: "/embed",
+  title: `Embed a free diff checker on your site — ${C.NAME}`,
+  description:
+    "Put a working diff checker on your own page for free. One line of HTML, no account, no tracking — and nothing your readers paste leaves their browser.",
+  bodyHtml: `
+  <section class="prose">
+    <h1>Embed a diff checker on your site</h1>
+    <p>If you write documentation, a programming tutorial, a migration guide or a style guide, you can drop a working ${C.NAME} diff checker straight into the page. It's free, there's no account, and there's nothing to keep updated.</p>
+    <p>It's most useful where you're already asking a reader to compare two things — a before-and-after config, two versions of a snippet, the output of a command run twice. Instead of describing the difference, let them paste it in.</p>
+
+    <h2>The snippet</h2>
+    <pre class="embed-code"><code>&lt;iframe src="${C.SITE_URL}/embed/text-compare" width="100%" height="460"
+        style="border:1px solid #ddd;border-radius:8px"
+        title="Diff checker by ${C.NAME}" loading="lazy"&gt;&lt;/iframe&gt;
+&lt;p style="font-size:13px"&gt;&lt;a href="${C.SITE_URL}/${C.COLLECTION_DIR}/text-compare"&gt;Diff checker&lt;/a&gt;
+   by &lt;a href="${C.SITE_URL}"&gt;${C.NAME}&lt;/a&gt;&lt;/p&gt;</code></pre>
+    <p><a href="/embed/text-compare" target="_blank" rel="noopener">Preview the widget →</a></p>
+
+    <h2>Why the credit line is separate from the iframe</h2>
+    <p>The small line underneath is the only thing we ask for, and it's deliberately plain, visible HTML rather than something buried. A link inside an iframe belongs to the iframe's own document rather than to your page, so without that line an embed gives us nothing at all. The widget works either way; we'd just appreciate it.</p>
+
+    <h2>The details</h2>
+    <ul>
+      <li><strong>Nothing your readers paste is uploaded.</strong> The widget runs the same client-side diff as the rest of the site — safe for readers pasting a config or a private snippet.</li>
+      <li><strong>No account, no key, no rate limit.</strong> Use it on as many pages as you like.</li>
+      <li><strong>Give it room.</strong> A diff needs more height than most widgets; 460px is a sensible floor and taller is better on a wide layout.</li>
+      <li><strong>It won't break.</strong> The embed URL is stable and picks up improvements automatically.</li>
+    </ul>
+    <p>Want a format-specific version — <a href="/${C.COLLECTION_DIR}/json-diff">JSON</a> for an API guide, or <a href="/${C.COLLECTION_DIR}/yaml-diff">YAML</a> for a config walkthrough? <a href="/contact">Ask</a> and it'll likely get added.</p>
+  </section>`,
+};
+
 export const contact = {
   path: "/contact",
   title: `Contact — ${C.NAME}`,

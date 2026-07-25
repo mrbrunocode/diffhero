@@ -11,6 +11,10 @@
     "hash": "f8ce6b7a4277245f",
     "date": "2026-07-24"
   },
+  "/embed": {
+    "hash": "1c36eaeaada6ccb9",
+    "date": "2026-07-25"
+  },
   "/privacy": {
     "hash": "7bac74d179ba3ef2",
     "date": "2026-07-24"
@@ -18,6 +22,10 @@
   "/terms": {
     "hash": "c9dd22e1d570072b",
     "date": "2026-07-24"
+  },
+  "de/": {
+    "hash": "bfda220aea3e9d8b",
+    "date": "2026-07-25"
   },
   "diff/code-diff": {
     "hash": "c6e794a15bee06c8",
@@ -60,8 +68,8 @@
     "date": "2026-07-24"
   },
   "diff/elixir-diff": {
-    "hash": "1cf88b4d3d2405a2",
-    "date": "2026-07-24"
+    "hash": "189be2b6f85b2346",
+    "date": "2026-07-25"
   },
   "diff/env-diff": {
     "hash": "f5c170195adbc86d",
@@ -76,8 +84,8 @@
     "date": "2026-07-24"
   },
   "diff/gleam-diff": {
-    "hash": "f9acadda5dd12a4a",
-    "date": "2026-07-24"
+    "hash": "cb7a07a5e6399f6e",
+    "date": "2026-07-25"
   },
   "diff/go-diff": {
     "hash": "bcab42c839f465ec",
@@ -112,8 +120,8 @@
     "date": "2026-07-24"
   },
   "diff/julia-diff": {
-    "hash": "a83404388182d77c",
-    "date": "2026-07-24"
+    "hash": "8d619d88232ddb8a",
+    "date": "2026-07-25"
   },
   "diff/kotlin-diff": {
     "hash": "fe3b95f6b5c51724",
@@ -132,8 +140,8 @@
     "date": "2026-07-24"
   },
   "diff/nginx-config-diff": {
-    "hash": "b29f1b117cb72220",
-    "date": "2026-07-24"
+    "hash": "1f1f7a9cf2734073",
+    "date": "2026-07-25"
   },
   "diff/online-diff-checker": {
     "hash": "ba2b509495127b5c",
@@ -156,8 +164,8 @@
     "date": "2026-07-24"
   },
   "diff/protobuf-diff": {
-    "hash": "8ba28d051f00c45a",
-    "date": "2026-07-24"
+    "hash": "8ce8ed0902acde20",
+    "date": "2026-07-25"
   },
   "diff/python-diff": {
     "hash": "3f8fb1af15ba7d80",
@@ -176,8 +184,8 @@
     "date": "2026-07-24"
   },
   "diff/solidity-diff": {
-    "hash": "b85a9cff0e0683d0",
-    "date": "2026-07-24"
+    "hash": "0359b29bf4937cac",
+    "date": "2026-07-25"
   },
   "diff/sql-diff": {
     "hash": "4b64b2b9079afd68",
@@ -192,8 +200,8 @@
     "date": "2026-07-24"
   },
   "diff/terraform-diff": {
-    "hash": "8281d8486961f5d9",
-    "date": "2026-07-24"
+    "hash": "961527bbda8998ba",
+    "date": "2026-07-25"
   },
   "diff/text-compare": {
     "hash": "6b6e20464493ce04",
@@ -216,7 +224,11 @@
     "date": "2026-07-24"
   },
   "diff/zig-diff": {
-    "hash": "c4ea4df888232c78",
-    "date": "2026-07-24"
+    "hash": "276925f590b465c8",
+    "date": "2026-07-25"
+  },
+  "es/": {
+    "hash": "07c5500355f2cf0d",
+    "date": "2026-07-25"
   }
 }

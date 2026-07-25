@@ -6,6 +6,7 @@
 <title>Terraform Diff — Compare Two .tf Files | Diffhero</title>
 <meta name="description" content="Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.">
 <link rel="canonical" href="https://diffhero.app/diff/terraform-diff">
+
 <meta property="og:title" content="Terraform Diff — Compare Two .tf Files">
 <meta property="og:description" content="Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.">
 <meta property="og:type" content="website">
@@ -20,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=2a21cd98">
+<link rel="stylesheet" href="../assets/style.css?v=dff7f34c">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/terraform-diff","description":"Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/terraform-diff","description":"Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-25"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Terraform Diff","item":"https://diffhero.app/diff/terraform-diff"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this replace terraform plan?","acceptedAnswer":{"@type":"Answer","text":"No — this diffs the source files themselves, not the planned infrastructure changes. Use it for a quick source review before you run plan, not as a substitute for it."}},{"@type":"Question","name":"Can it ignore HCL formatting differences?","acceptedAnswer":{"@type":"Answer","text":"Turn on \"Ignore whitespace\" if one file was run through terraform fmt and the other wasn't, so re-alignment doesn't obscure the real changes."}},{"@type":"Question","name":"Is my Terraform code uploaded?","acceptedAnswer":{"@type":"Answer","text":"No — the comparison runs entirely client-side, so internal module names, resource IDs and provider configs never leave your browser."}}]}</script>
 
@@ -129,6 +130,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li>Block ordering in HCL is usually insignificant — focus on values.</li>
     </ul>
     <p>Terraform files reference account IDs, regions and resource names — all of which stay in your browser, since nothing is uploaded.</p>
+    <h3>Reading a Terraform diff before <code>plan</code> reads it for you</h3>
+    <p>Terraform will tell you what it intends to do, but <code>plan</code> output tells you the effect, not the intent. Reading the configuration diff first tells you whether the effect is what someone meant — and the highest-stakes distinction is between changes that update a resource in place and changes that force it to be destroyed and recreated.</p>
+    <p>Attributes that trigger replacement vary by provider, but the pattern is consistent: identifiers, names, availability zones, and anything the provider treats as immutable. A one-word change to a resource name is textually trivial and operationally means deleting the thing and building a new one, which for a database is a very different conversation.</p>
+    <p>Also watch for changes to <code>lifecycle</code> blocks — particularly <code>prevent_destroy</code> being removed, which is usually someone clearing an obstacle rather than making a considered decision — and for version constraints on providers and modules, where a loosened constraint means the next apply may pull in changes nobody reviewed.</p>
+    <p>Comparing state files rather than configuration is a different job and generally a worse idea; state contains secrets in plain text, which is a good reason to keep it out of any tool you don't control. Everything here runs in your browser, but the habit is still worth keeping.</p>
   </section>
   
   

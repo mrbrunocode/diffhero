@@ -512,3 +512,7 @@ footer { border-top: 1px solid var(--border-subtle); padding: var(--space-8) 0; 
   h1 { font-size: 20px; }
   .lede { display: none; }
 }
+
+/* ---- Embed snippet block (/embed) ---- */
+.embed-code { background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; padding: var(--space-4); overflow-x: auto; font-size: var(--text-sm); line-height: 1.6; }
+.embed-code code { white-space: pre; color: var(--text-primary); }

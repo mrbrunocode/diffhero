@@ -315,7 +315,11 @@ export const GUIDES = {
       <li><b>comptime</b> markers and allocator parameters passed explicitly.</li>
       <li><b>Optionals</b> (<code>?T</code>) and pointer types (<code>*T</code>, <code>[]T</code>).</li>
     </ul>
-    <p>Zig ships with <code>zig fmt</code>, so format both sides first for a clean comparison. All diffing is local — your source never leaves the page.</p>`),
+    <p>Zig ships with <code>zig fmt</code>, so format both sides first for a clean comparison. All diffing is local — your source never leaves the page.</p>
+    <h3>Reading a Zig diff for the things that actually change behaviour</h3>
+    <p>Because Zig has no hidden control flow, most of what you're scanning for in a diff is explicit in the tokens. A <code>try</code> appearing or disappearing changes error propagation at that call site. A shift between <code>!T</code> and <code>T</code> in a return type changes the contract for every caller. An allocator parameter swapped from one to another changes lifetime and ownership assumptions that the compiler will enforce but a reader can easily skim past.</p>
+    <p>Run <code>zig fmt</code> on both sides before comparing. Zig's formatter is canonical and non-negotiable in style, so any formatting difference between two snippets is noise introduced by whoever pasted them, not a real change — and normalising it first means the diff shows only what matters.</p>
+    <p>One Zig-specific trap: <code>comptime</code> blocks look like ordinary code in a text diff, but a change inside one runs at compile time rather than runtime. A diff can tell you the block changed; it can't tell you what that does to the generated code. Treat a <code>comptime</code> change as a prompt to check the build output, not as a self-contained edit.</p>`),
 
   "elixir-diff": g(`
     <h2>Comparing Elixir code</h2>
@@ -326,7 +330,11 @@ export const GUIDES = {
       <li><b>Pipe order</b> (<code>|&gt;</code>) — reordering stages changes behaviour even when all stages look familiar.</li>
       <li><b>Atoms vs strings</b> and map/keyword-list syntax.</li>
     </ul>
-    <p>Elixir has <code>mix format</code>, so formatting both sides keeps the diff focused on logic. It runs entirely in your browser.</p>`),
+    <p>Elixir has <code>mix format</code>, so formatting both sides keeps the diff focused on logic. It runs entirely in your browser.</p>
+    <h3>Elixir changes that are bigger than they look</h3>
+    <p>Elixir's expressiveness means small textual edits can carry large behavioural weight. Pattern matches in function heads are the clearest example: adding or reordering a clause changes which implementation runs for a given input, and because Elixir tries clauses top to bottom, a reordering that looks like pure formatting in a diff can change the result.</p>
+    <p>Watch for <code>with</code> chains gaining or losing a step, and for changes to the <code>else</code> block that handles their failures — a common source of errors that silently change shape. Supervision-tree edits deserve the same care: a changed restart strategy (<code>:one_for_one</code> versus <code>:rest_for_one</code>) is one atom, and it changes what happens to sibling processes when one crashes.</p>
+    <p>Run <code>mix format</code> on both sides first. Elixir's formatter is standard across the ecosystem, so normalising removes whitespace noise and leaves only semantic differences to read.</p>`),
 
   "gleam-diff": g(`
     <h2>Diffing Gleam code</h2>
@@ -337,7 +345,11 @@ export const GUIDES = {
       <li><b>case expression arms</b> — a changed or reordered pattern.</li>
       <li><b>Pipe (<code>|&gt;</code>) sequences</b> and <code>use</code> expressions.</li>
     </ul>
-    <p>Gleam has a built-in formatter, so <code>gleam format</code> both sides for the cleanest result. All comparison is client-side — nothing is uploaded.</p>`),
+    <p>Gleam has a built-in formatter, so <code>gleam format</code> both sides for the cleanest result. All comparison is client-side — nothing is uploaded.</p>
+    <h3>What to look for in a Gleam diff</h3>
+    <p>Gleam's type system means many changes that would be runtime bugs elsewhere are compile errors here — which shifts what's worth scrutinising in a diff. Pattern matches are the high-value target: a removed case arm may still compile if the match was already inexhaustive somewhere upstream, and an added variant to a custom type ripples out to every <code>case</code> that handles it.</p>
+    <p>Watch the pipelines. Gleam code leans heavily on <code>|></code> chains, and inserting or removing a stage mid-chain shifts everything downstream by one position. Word-level highlighting helps here: the line looks broadly similar, and the meaningful change is a single function name in the middle of it.</p>
+    <p>Because Gleam compiles to both Erlang and JavaScript, also note changes to external function bindings — an <code>@external</code> annotation pointing at a different target module is a substantial change dressed up as one short line.</p>`),
 
   "solidity-diff": g(`
     <h2>Comparing Solidity contracts</h2>
@@ -349,7 +361,13 @@ export const GUIDES = {
       <li><b>Arithmetic and <code>require</code>/<code>revert</code> conditions</b> — the guards that protect funds.</li>
       <li><b>Compiler pragma</b> version changes.</li>
     </ul>
-    <p>Your contract source stays entirely in your browser — nothing is sent to a server, which matters for unpublished or pre-audit code.</p>`),
+    <p>Your contract source stays entirely in your browser — nothing is sent to a server, which matters for unpublished or pre-audit code.</p>
+    <h3>The diff review that matters most in Solidity</h3>
+    <p>Solidity is the language on this site where reading a diff carefully has the most direct financial consequence, because deployed contract code is typically immutable and bugs are not patchable after the fact. A handful of token-level changes deserve disproportionate attention.</p>
+    <p><strong>Visibility and mutability modifiers.</strong> A function moving from <code>internal</code> to <code>public</code>, or losing a <code>view</code>, changes the attack surface. These are single words in the middle of an otherwise unchanged signature — exactly the kind of edit a line-level diff makes easy to miss and word-level highlighting makes obvious.</p>
+    <p><strong>Access-control annotations.</strong> A removed <code>onlyOwner</code> is one token. So is a changed <code>require</code> condition. Both are among the most common root causes in post-mortems of exploited contracts.</p>
+    <p><strong>Arithmetic and version pragmas.</strong> A changed <code>pragma solidity</code> line can silently alter overflow behaviour — 0.8.0 made arithmetic checked by default, so the same code before and after that boundary behaves differently. It's one line at the top of the file and it's easy to skim past.</p>
+    <p>Compare the flattened source of what was actually deployed, not just your working files, if you're verifying a deployment against a review.</p>`),
 
   "julia-diff": g(`
     <h2>Diffing Julia code</h2>
@@ -360,7 +378,11 @@ export const GUIDES = {
       <li><b>Broadcasting dots</b> (<code>.+</code>, <code>f.(x)</code>) added or removed — a real change to whether an operation is elementwise.</li>
       <li><b>1-based indexing edits</b> and <code>@</code> macro changes.</li>
     </ul>
-    <p>Julia isn't whitespace-sensitive, so <b>Ignore whitespace</b> is safe. The comparison happens entirely on your machine.</p>`),
+    <p>Julia isn't whitespace-sensitive, so <b>Ignore whitespace</b> is safe. The comparison happens entirely on your machine.</p>
+    <h3>Multiple dispatch makes Julia diffs subtle</h3>
+    <p>In most languages a changed function signature affects that function. In Julia it changes which method gets selected, for every call site in the program. Narrowing an argument type from <code>Number</code> to <code>Float64</code> doesn't just tighten a check — it can silently hand dispatch to a different, less specific method for the calls that no longer match. That's a one-word diff with program-wide consequences.</p>
+    <p>Also worth close reading: the dot that makes an operation broadcast. <code>f(x)</code> and <code>f.(x)</code> differ by one character and do fundamentally different things, one operating on a value and the other elementwise across a collection. Turn on character-level detail when reviewing numerical code for exactly this reason.</p>
+    <p>Type-annotation changes on struct fields matter more than they look too, since they affect memory layout and whether the compiler can specialise — a performance change that no test will fail on but a benchmark will.</p>`),
 
   "dockerfile-diff": g(`
     <h2>Comparing two Dockerfiles</h2>
@@ -419,7 +441,12 @@ export const GUIDES = {
       <li><b>Provider and module version</b> pins.</li>
       <li>Block ordering in HCL is usually insignificant — focus on values.</li>
     </ul>
-    <p>Terraform files reference account IDs, regions and resource names — all of which stay in your browser, since nothing is uploaded.</p>`),
+    <p>Terraform files reference account IDs, regions and resource names — all of which stay in your browser, since nothing is uploaded.</p>
+    <h3>Reading a Terraform diff before <code>plan</code> reads it for you</h3>
+    <p>Terraform will tell you what it intends to do, but <code>plan</code> output tells you the effect, not the intent. Reading the configuration diff first tells you whether the effect is what someone meant — and the highest-stakes distinction is between changes that update a resource in place and changes that force it to be destroyed and recreated.</p>
+    <p>Attributes that trigger replacement vary by provider, but the pattern is consistent: identifiers, names, availability zones, and anything the provider treats as immutable. A one-word change to a resource name is textually trivial and operationally means deleting the thing and building a new one, which for a database is a very different conversation.</p>
+    <p>Also watch for changes to <code>lifecycle</code> blocks — particularly <code>prevent_destroy</code> being removed, which is usually someone clearing an obstacle rather than making a considered decision — and for version constraints on providers and modules, where a loosened constraint means the next apply may pull in changes nobody reviewed.</p>
+    <p>Comparing state files rather than configuration is a different job and generally a worse idea; state contains secrets in plain text, which is a good reason to keep it out of any tool you don't control. Everything here runs in your browser, but the habit is still worth keeping.</p>`),
 
   "nginx-config-diff": g(`
     <h2>Diffing an nginx config</h2>
@@ -431,7 +458,11 @@ export const GUIDES = {
       <li><b>Semicolons and braces:</b> a missing <code>;</code> is a syntax error; the diff makes an accidental deletion visible.</li>
       <li><b>SSL and header directives</b> that affect security.</li>
     </ul>
-    <p>Configs full of hostnames and upstream addresses stay entirely in your browser.</p>`),
+    <p>Configs full of hostnames and upstream addresses stay entirely in your browser.</p>
+    <h3>Where nginx configs bite</h3>
+    <p>nginx's configuration is order-dependent in ways that make diffs deceptive. <code>location</code> blocks are matched by a specific priority scheme — exact matches, then prefix matches, then regexes in file order — so moving a block up or down the file can change which one handles a request even though the block's own contents are untouched. A diff showing a relocated section with no internal changes is not necessarily a no-op.</p>
+    <p>The classic single-character error is a missing semicolon, which turns a valid directive into a syntax error that only shows up when you reload. Character-level detail makes these visible; so does running <code>nginx -t</code> before reloading, which you should do regardless of what the diff says.</p>
+    <p>Pay particular attention to <code>proxy_pass</code> lines. Whether the URL ends in a trailing slash changes how the request path is rewritten before it's forwarded — one character, entirely different routing behaviour, and a frequent cause of upstream 404s that look inexplicable. Also check <code>root</code> versus <code>alias</code> changes, which interact with the location prefix differently and are easy to swap by mistake.</p>`),
 
   "ini-diff": g(`
     <h2>Comparing INI and config files</h2>
@@ -565,7 +596,11 @@ export const GUIDES = {
       <li><b>Type changes</b> and required/optional/repeated edits.</li>
       <li><b>Reserved</b> ranges added to protect retired field numbers.</li>
     </ul>
-    <p>Your schema stays in your browser — nothing is uploaded, which suits internal service contracts.</p>`),
+    <p>Your schema stays in your browser — nothing is uploaded, which suits internal service contracts.</p>
+    <h3>Field numbers are the contract, not the names</h3>
+    <p>The single most important rule when reviewing a <code>.proto</code> diff: field <em>numbers</em> are what serialisation depends on, not field names. Renaming a field is safe on the wire and breaks only generated code. Changing a field's number, or reusing a number that a removed field previously held, breaks every client that hasn't been redeployed — silently, by decoding bytes into the wrong field rather than by erroring.</p>
+    <p>So when reading a protobuf diff, check the numbers first and the names second, which is the opposite of how the eye naturally scans. A removed field should leave behind a <code>reserved</code> entry for its number and name; a diff that removes a field without adding one is the change most likely to cause a problem months later when someone reuses the slot.</p>
+    <p>Type changes are the other high-risk edit. Some are wire-compatible (<code>int32</code> to <code>int64</code>), some are quietly not (<code>int32</code> to <code>string</code>), and the diff looks identical in both cases — one word. Check the compatibility table rather than assuming.</p>`),
 
   "image-diff": g(`
     <h2>Spotting the difference between two images</h2>

@@ -6,6 +6,7 @@
 <title>Nginx Config Diff — Compare Two nginx.conf Files | Diffhero</title>
 <meta name="description" content="Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.">
 <link rel="canonical" href="https://diffhero.app/diff/nginx-config-diff">
+
 <meta property="og:title" content="Nginx Config Diff — Compare Two nginx.conf Files">
 <meta property="og:description" content="Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.">
 <meta property="og:type" content="website">
@@ -20,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=2a21cd98">
+<link rel="stylesheet" href="../assets/style.css?v=dff7f34c">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/nginx-config-diff","description":"Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/nginx-config-diff","description":"Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-25"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Nginx Config Diff","item":"https://diffhero.app/diff/nginx-config-diff"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it validate Nginx syntax?","acceptedAnswer":{"@type":"Answer","text":"No — it's a text diff, so it won't catch a syntax error. Run nginx -t on the actual file for that; use this to review what changed between two versions."}},{"@type":"Question","name":"Can I compare a single server block?","acceptedAnswer":{"@type":"Answer","text":"Yes — paste just the block you care about on each side rather than the whole file, if that's a cleaner comparison for your use case."}},{"@type":"Question","name":"Is my config uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser, so internal hostnames, upstream addresses and TLS paths never leave your device."}}]}</script>
 
@@ -129,6 +130,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><b>SSL and header directives</b> that affect security.</li>
     </ul>
     <p>Configs full of hostnames and upstream addresses stay entirely in your browser.</p>
+    <h3>Where nginx configs bite</h3>
+    <p>nginx's configuration is order-dependent in ways that make diffs deceptive. <code>location</code> blocks are matched by a specific priority scheme — exact matches, then prefix matches, then regexes in file order — so moving a block up or down the file can change which one handles a request even though the block's own contents are untouched. A diff showing a relocated section with no internal changes is not necessarily a no-op.</p>
+    <p>The classic single-character error is a missing semicolon, which turns a valid directive into a syntax error that only shows up when you reload. Character-level detail makes these visible; so does running <code>nginx -t</code> before reloading, which you should do regardless of what the diff says.</p>
+    <p>Pay particular attention to <code>proxy_pass</code> lines. Whether the URL ends in a trailing slash changes how the request path is rewritten before it's forwarded — one character, entirely different routing behaviour, and a frequent cause of upstream 404s that look inexplicable. Also check <code>root</code> versus <code>alias</code> changes, which interact with the location prefix differently and are easy to swap by mistake.</p>
   </section>
   
   

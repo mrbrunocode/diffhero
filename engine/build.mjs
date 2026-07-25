@@ -29,7 +29,10 @@ import { renderDocument, adSlot, affiliateSlot, faqHtml, esc } from "./template.
 import { PAGES, renderTool } from "../pages.mjs";
 import { GUIDES } from "../guides.mjs";
 import { ARTICLES } from "../articles.mjs";
-import { home, about, privacy, terms, contact, diffcheckerAlternative } from "../content.mjs";
+import { home, about, privacy, terms, contact, diffcheckerAlternative, embed } from "../content.mjs";
+import { EMBEDDABLE, embedPage } from "./embed.mjs";
+import { TRANSLATIONS } from "../content.i18n.mjs";
+import { LOCALES, TRANSLATED_PAGES } from "../i18n.mjs";
 import { makeDateTracker } from "./content-dates.mjs";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -248,7 +251,8 @@ function sitemap() {
   const all = [
     "/",
     `/${GUIDES_DIR}`,
-    ...[about, privacy, terms, contact, diffcheckerAlternative].map((p) => p.path),
+    ...[about, privacy, terms, contact, diffcheckerAlternative, embed].map((p) => p.path),
+    ...TRANSLATIONS.map((t) => (t.path === "/" ? `/${t.lang}/` : `/${t.lang}${t.path}`)),
     ...ARTICLES.map((a) => `/${GUIDES_DIR}/${a.slug}`),
     ...PAGES.map((p) => `/${C.COLLECTION_DIR}/${p.slug}`),
   ];
@@ -288,6 +292,7 @@ ${C.NAME} is a static web app: no signup, no backend, no per-visitor cost. Every
 - [Terms of Service](${C.SITE_URL}/terms)
 - [Contact](${C.SITE_URL}/contact)
 - [Diffchecker alternative — how Diffhero compares](${C.SITE_URL}/diffchecker-alternative)
+- [Embed a diff checker on your site](${C.SITE_URL}/embed)
 
 ## Guides
 ${ARTICLES.map((a) => `- [${a.title}](${C.SITE_URL}/${GUIDES_DIR}/${a.slug}): ${a.description}`).join("\n")}
@@ -308,7 +313,7 @@ async function main() {
   }
 
   await writeFile(join(ROOT, "index.html"), homeDocument());
-  for (const page of [about, privacy, terms, contact, diffcheckerAlternative]) {
+  for (const page of [about, privacy, terms, contact, diffcheckerAlternative, embed]) {
     await writeFile(join(ROOT, page.path.replace(/^\//, "") + ".html"), proseDocument(page));
   }
 
@@ -321,12 +326,36 @@ async function main() {
     await writeFile(join(guidesOut, `${a.slug}.html`), articleDocument(a));
   }
 
+  // Translated pages (see i18n.mjs — deliberately a small, hand-written set).
+  for (const t of TRANSLATIONS) {
+    const dir = join(ROOT, t.lang);
+    await mkdir(dir, { recursive: true });
+    await writeFile(join(dir, "index.html"), renderDocument({
+      title: t.title,
+      description: t.description,
+      canonicalPath: t.path === "/" ? `/${t.lang}/` : `/${t.lang}${t.path}`,
+      depth: 1,
+      bodyHtml: t.bodyHtml,
+      lang: t.lang,
+      i18nPath: t.path,
+      dateModified: dates.dateFor(`${t.lang}${t.path}`, [t.title, t.description, t.bodyHtml]),
+    }));
+  }
+  console.log(`Wrote ${TRANSLATIONS.length} translated page(s): ${TRANSLATIONS.map((t) => "/" + t.lang).join(", ")}`);
+
+  const embedOut = join(ROOT, "embed");
+  await mkdir(embedOut, { recursive: true });
+  for (const item of EMBEDDABLE) {
+    await writeFile(join(embedOut, `${item.slug}.html`), embedPage(item));
+  }
+  console.log(`Wrote ${EMBEDDABLE.length} embed widget(s) to embed/ (noindex, not in sitemap).`);
+
   await writeFile(join(ROOT, "sitemap.xml"), sitemap());
   await writeFile(join(ROOT, "robots.txt"), robots());
   await writeFile(join(ROOT, "llms.txt"), llmsTxt());
 
   const d = dates.save();
-  console.log(`Built: index + ${[about, privacy, terms, contact, diffcheckerAlternative].length} prose pages + ${n} ${C.COLLECTION_DIR} page(s) + sitemap/robots/llms.`);
+  console.log(`Built: index + ${[about, privacy, terms, contact, diffcheckerAlternative, embed].length} prose pages + ${n} ${C.COLLECTION_DIR} page(s) + sitemap/robots/llms.`);
   console.log(`dateModified: ${d.total} pages tracked, ${d.changed.length} changed this build.`);
   console.log(`Site: ${C.NAME} <${C.SITE_URL}>`);
   if (!C.ADSENSE_PUB) console.log("Note: AdSense not configured yet — ad slot renders as a reserved placeholder. See scripts/enable-adsense.mjs.");
