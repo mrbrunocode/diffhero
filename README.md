@@ -7,6 +7,11 @@ your device.
 
 **Live site:** https://diffhero.app
 
+**License:** source-available, not open source. No LICENSE file means all
+rights reserved by default — this repo is public so the "nothing you paste is
+uploaded" claim is checkable, not an invitation to redistribute or relaunch it
+as your own product.
+
 ## Features
 
 - **Syntax highlighting** — a dependency-free lexer for ~17 languages (JS/TS,
