@@ -11,3 +11,14 @@
 /assets/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
   X-Content-Type-Options: nosniff
+
+# Embeddable widgets must be framable by other sites — that is the entire
+# point of them. X-Frame-Options above is a blanket DENY and has no
+# "allow any origin" value, so it is removed here and replaced with the
+# modern equivalent (frame-ancestors), scoped to just this directory.
+# Everything outside /embed/ keeps the DENY.
+/embed/*
+  ! X-Frame-Options
+  Content-Security-Policy: frame-ancestors *
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=3600
