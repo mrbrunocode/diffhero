@@ -63,7 +63,7 @@ export const ADSENSE_SLOT = "";
 // VERIFY THE GENERATED SNIPPET against what the portal shows before relying on
 // it — engine/template.mjs reproduces Grow's standard loader, and if Grow ever
 // changes that format, the portal is the source of truth, not this repo.
-export const GROW_SITE_ID = "";
+export const GROW_SITE_ID = "U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=";
 
 // Bing Webmaster Tools site-ownership verification (empty until wired up).
 export const BING_VERIFY = "5A4EFD6B7BD09C4C115B7ACCF3688E1C";
