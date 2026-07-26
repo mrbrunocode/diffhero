@@ -202,7 +202,7 @@ export const diffcheckerAlternative = {
       <li>Merge changes — 10 uses/month</li>
       <li>Export as PDF — 5 uses/month</li>
     </ul>
-    <p>Lifting those limits means Diffchecker Pro, listed at $15/month. Folder and batch comparison, the desktop app, offline use, and the Git and iManage integrations are paid-only regardless.</p>
+    <p>Lifting those limits means Diffchecker Pro, listed at $15/month. Folder and batch comparison, the desktop app, and offline use are paid-only regardless — and the integrations go further still: Git tooling is a Pro feature, but iManage requires stepping up to their Legal ($20/month) or Enterprise ($40/month) tier, not Pro.</p>
     <p>In ${C.NAME} every one of the metered features above is simply on, with no counter, no account, and no monthly reset: <a href="/diff/code-diff">syntax highlighting across ~17 languages</a>, split and unified views, character-level detail, ignore-whitespace and ignore-case, <a href="/diff/merge-conflict-resolver">3-way merge</a>, and print-to-PDF plus <code>.diff</code> download.</p>
 
     <h2>Where your text actually goes</h2>
@@ -214,7 +214,7 @@ export const diffcheckerAlternative = {
     <ul>
       <li><strong>Comparing folders or many files at once.</strong> ${C.NAME} compares two inputs. Diffchecker does folder and batch comparison; ${C.NAME} has no equivalent.</li>
       <li><strong>You want a real desktop application.</strong> ${C.NAME} is a web page. It works offline once loaded and can be installed to your dock, but it isn't a native app with filesystem access.</li>
-      <li><strong>Integrations.</strong> If you need diffing wired into Git tooling or iManage, that's a Diffchecker Pro feature with no counterpart here.</li>
+      <li><strong>Integrations.</strong> If you need diffing wired into Git tooling, that's a Diffchecker Pro feature with no counterpart here — and iManage integration goes further still, requiring their Legal or Enterprise tier.</li>
       <li><strong>Rich document comparison.</strong> Diffchecker handles Word/PDF/spreadsheet comparison more thoroughly. ${C.NAME} reads <code>.txt</code>, <code>.pdf</code> and <code>.docx</code> as text and compares <a href="/diff/csv-table-diff">CSV as a table</a>, but it isn't a full redline tool.</li>
     </ul>
 
