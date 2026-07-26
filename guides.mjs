@@ -509,6 +509,18 @@ export const GUIDES = {
     </ul>
     <p>Nothing is uploaded — useful for coursework or anything you'd rather not paste into an online service that stores it.</p>`),
 
+  "prompt-diff": g(`
+    <h2>Why prompt edits deserve a real diff, not a re-read</h2>
+    <p>A system prompt or a long instruction block can run to hundreds of words, and the change that actually matters — a swapped word, a tightened constraint, a dropped example — is easy to miss re-reading the whole thing top to bottom. A word-level diff puts the exact change in front of you instead, the same way it would for a line of code.</p>
+    <h3>Where this earns its keep</h3>
+    <ul>
+      <li><b>Tracking prompt iterations:</b> see precisely what an edit changed between a prompt that worked and one that didn't, instead of guessing which tweak mattered.</li>
+      <li><b>Reviewing a teammate's prompt change:</b> paste the before and after to review a pull-request-style edit to a shared system prompt, the same way you'd review a code diff.</li>
+      <li><b>Comparing model-specific variants:</b> when the same prompt gets tuned slightly differently for two models, a diff shows exactly where the versions diverge.</li>
+    </ul>
+    <h3>Structure is preserved, not stripped</h3>
+    <p>This is a plain text diff, so anything inside the prompt — XML tags delimiting a document or instructions, markdown formatting, fenced code blocks, a JSON example — is compared exactly as written, not parsed or reformatted. Turn on <b>ignore whitespace</b> if reflowed line breaks from copy-pasting are cluttering the result. Everything runs in your browser, so an unreleased product's system prompt is never uploaded anywhere.</p>`),
+
   "pdf-diff": g(`
     <h2>Comparing the text of two PDFs</h2>
     <p>PDFs aren't plain text, so a normal diff can't read them. This one extracts the text from each PDF in your browser and compares that — so you can see what changed between two versions of a report, an invoice, a statement, or a signed document.</p>

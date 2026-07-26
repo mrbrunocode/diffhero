@@ -641,6 +641,21 @@ export const PAGES = [
     ],
   },
   {
+    slug: "prompt-diff",
+    eyebrow: "Prompt Diff",
+    title: "Prompt Diff — Compare Two AI Prompt Versions",
+    description:
+      "Paste two versions of an AI prompt or system prompt and see exactly what changed, word by word. Free, browser-only, nothing uploaded.",
+    intro:
+      "Paste an earlier and a revised version of a prompt — a system prompt, a few-shot example set, an instruction block — to see precisely what changed between them, highlighted word by word, so you can track what an edit actually did to a prompt's wording instead of re-reading the whole thing side by side.",
+    format: "text",
+    faq: [
+      { q: "Why does this matter for prompt engineering specifically?", a: "A single reworded sentence in a system prompt can change a model's behavior in ways that are easy to miss by eye when the prompt is long — a word-level diff makes the exact change visible instead of relying on spotting it in a wall of text." },
+      { q: "Does it handle a prompt with example blocks or XML tags in it?", a: "Yes — it's a plain text diff, so any structure inside the prompt (XML tags, markdown, fenced code, JSON examples) is preserved and compared exactly as written, tags included." },
+      { q: "Is my prompt uploaded anywhere?", a: "No — the comparison runs entirely in your browser, so a proprietary system prompt or an unreleased product's instructions never leave your device." },
+    ],
+  },
+  {
     slug: "pdf-diff",
     eyebrow: "PDF Diff",
     title: "PDF Diff — Compare Two PDF Files Online",
@@ -1027,6 +1042,10 @@ export const GROUPS = [
   {
     name: "Documents",
     slugs: ["contract-diff", "resume-diff", "essay-diff", "pdf-diff", "word-diff", "subtitle-diff"],
+  },
+  {
+    name: "AI & prompts",
+    slugs: ["prompt-diff"],
   },
   {
     name: "Inspect",

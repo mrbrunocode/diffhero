@@ -65,6 +65,7 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [Contract Diff](https://diffhero.app/diff/contract-diff): Paste two versions of a contract or legal document and see every added, removed or changed clause — with the exact words highlighted. Free, nothing uploaded.
 - [Resume Diff](https://diffhero.app/diff/resume-diff): Paste two versions of a resume or CV and see exactly what changed — wording, dates, bullet points — highlighted word by word. Free, nothing uploaded.
 - [Essay Diff](https://diffhero.app/diff/essay-diff): Paste two drafts of an essay or article and see exactly which sentences and words changed between them. Free, browser-only, nothing uploaded.
+- [Prompt Diff](https://diffhero.app/diff/prompt-diff): Paste two versions of an AI prompt or system prompt and see exactly what changed, word by word. Free, browser-only, nothing uploaded.
 - [PDF Diff](https://diffhero.app/diff/pdf-diff): Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.
 - [Word Diff](https://diffhero.app/diff/word-diff): Drop two Word (.docx) files in and see exactly what changed between them, word by word. Free, browser-only — nothing is uploaded, only read locally.
 - [Private Diff Checker](https://diffhero.app/diff/private-diff-checker): A diff checker that never uploads what you paste — the entire comparison runs client-side in your browser. Free, no signup, no server round-trip.

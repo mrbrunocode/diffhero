@@ -159,6 +159,10 @@
     "hash": "3ab11b4df8dab6ab",
     "date": "2026-07-24"
   },
+  "diff/prompt-diff": {
+    "hash": "a04970f392b6c676",
+    "date": "2026-07-26"
+  },
   "diff/protobuf-diff": {
     "hash": "8ce8ed0902acde20",
     "date": "2026-07-25"
