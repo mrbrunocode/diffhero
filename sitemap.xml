@@ -19,6 +19,7 @@
   <url><loc>https://diffhero.app/diff/compare-two-text-files</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/online-diff-checker</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/code-diff</loc><lastmod>2026-07-18</lastmod></url>
+  <url><loc>https://diffhero.app/diff/config-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/merge-conflict-resolver</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/json-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/compare-two-lists</loc><lastmod>2026-07-18</lastmod></url>
@@ -29,30 +30,9 @@
   <url><loc>https://diffhero.app/diff/sql-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/markdown-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/html-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/python-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/javascript-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/typescript-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/go-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/java-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/php-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/csharp-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/rust-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/ruby-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/css-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/kotlin-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/swift-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/zig-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/elixir-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/gleam-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/solidity-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/julia-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/dockerfile-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/docker-compose-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/env-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/package-json-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/terraform-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/nginx-config-diff</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/ini-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/contract-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/resume-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/essay-diff</loc><lastmod>2026-07-18</lastmod></url>
@@ -64,6 +44,5 @@
   <url><loc>https://diffhero.app/diff/git-diff-viewer</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/subtitle-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/invisible-character-checker</loc><lastmod>2026-07-18</lastmod></url>
-  <url><loc>https://diffhero.app/diff/protobuf-diff</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://diffhero.app/diff/image-diff</loc><lastmod>2026-07-18</lastmod></url>
 </urlset>

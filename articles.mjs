@@ -149,7 +149,7 @@ the incoming branch's version
     <h2>The whitespace trap: know your format</h2>
     <p>The single most important question when diffing config is whether whitespace matters, because it decides whether "ignore whitespace" is a helpful de-noiser or a dangerous blindfold.</p>
     <ul>
-      <li><strong>YAML</strong> (including <a href="/${D}/docker-compose-diff">docker-compose</a> and Kubernetes manifests): indentation <em>is</em> structure. A change in leading spaces can re-nest a key under a different parent — a real, easy-to-miss semantic change. <strong>Never</strong> ignore whitespace when diffing <a href="/${D}/yaml-diff">YAML</a>, and turn on "show invisibles" to catch a stray tab (YAML forbids tabs for indentation).</li>
+      <li><strong>YAML</strong> (including <a href="/${D}/config-diff">docker-compose</a> and Kubernetes manifests): indentation <em>is</em> structure. A change in leading spaces can re-nest a key under a different parent — a real, easy-to-miss semantic change. <strong>Never</strong> ignore whitespace when diffing <a href="/${D}/yaml-diff">YAML</a>, and turn on "show invisibles" to catch a stray tab (YAML forbids tabs for indentation).</li>
       <li><strong>JSON</strong>: whitespace is insignificant, so ignoring it is safe and useful — but key <em>order</em> isn't significant either, which a text diff doesn't know. Pretty-print both sides consistently first, or reordered keys will read as changes.</li>
       <li><strong>INI, TOML, .env, nginx</strong>: mostly whitespace-tolerant, but each has its own quirks — quoting rules, comment styles, and directives whose order matters.</li>
     </ul>
@@ -158,9 +158,9 @@ the incoming branch's version
     <p>Different config files fail in different ways, so know the high-signal changes for each:</p>
     <ul>
       <li><a href="/${D}/env-diff"><strong>.env files</strong></a>: the classic breaker is a <em>missing</em> key — a variable present in one environment and absent in the other. Diff staging against production, or <code>.env</code> against <code>.env.example</code>, to catch it. (And because these hold secrets, use a comparison that runs locally and never uploads them.)</li>
-      <li><a href="/${D}/dockerfile-diff"><strong>Dockerfiles</strong></a>: watch the base image tag (<code>node:20</code> vs <code>node:20-alpine</code> is a different OS) and instruction <em>order</em>, which changes what gets cached and rebuilt.</li>
-      <li><a href="/${D}/nginx-config-diff"><strong>nginx</strong></a>: the order and specificity of <code>location</code> blocks decides which one handles a request; a reordered block can silently reroute traffic.</li>
-      <li><a href="/${D}/terraform-diff"><strong>Terraform</strong></a>: some argument changes update a resource in place; others force it to be destroyed and recreated. Know which before you apply.</li>
+      <li><a href="/${D}/config-diff"><strong>Dockerfiles</strong></a>: watch the base image tag (<code>node:20</code> vs <code>node:20-alpine</code> is a different OS) and instruction <em>order</em>, which changes what gets cached and rebuilt.</li>
+      <li><a href="/${D}/config-diff"><strong>nginx</strong></a>: the order and specificity of <code>location</code> blocks decides which one handles a request; a reordered block can silently reroute traffic.</li>
+      <li><a href="/${D}/config-diff"><strong>Terraform</strong></a>: some argument changes update a resource in place; others force it to be destroyed and recreated. Know which before you apply.</li>
     </ul>
 
     <h2>Keep secrets out of harm's way</h2>
@@ -188,7 +188,7 @@ the incoming branch's version
     <p>A word-level diff runs a second comparison <em>inside</em> each changed line, highlighting just the tokens that moved. This is what lets you see that "the quick brown fox" became "the quick red fox" with only one word touched, rather than the whole line lighting up. For editing prose, reviewing a reworded sentence, or spotting a one-character code change buried in a long line, word- or character-level detail is the difference between the tool pointing at the change and you hunting for it. When you <a href="/${D}/text-compare">compare two blocks of text</a>, it's usually the view you want.</p>
 
     <h2>Whitespace-aware vs whitespace-blind</h2>
-    <p>Cutting across all of this is the whitespace question. "Ignore whitespace" tells the diff to treat spacing and indentation changes as nothing — invaluable when a formatter or a re-wrap has churned a file without changing meaning. But it's a genuine trap in whitespace-significant formats: in <a href="/${D}/python-diff">Python</a> and <a href="/${D}/yaml-diff">YAML</a>, indentation <em>is</em> the logic, so ignoring it can hide a change that moves a statement into or out of a block. The rule of thumb: ignore whitespace to cut formatting noise in languages where it's cosmetic; keep it on where indentation carries meaning.</p>
+    <p>Cutting across all of this is the whitespace question. "Ignore whitespace" tells the diff to treat spacing and indentation changes as nothing — invaluable when a formatter or a re-wrap has churned a file without changing meaning. But it's a genuine trap in whitespace-significant formats: in <a href="/${D}/code-diff">Python</a> and <a href="/${D}/yaml-diff">YAML</a>, indentation <em>is</em> the logic, so ignoring it can hide a change that moves a statement into or out of a block. The rule of thumb: ignore whitespace to cut formatting noise in languages where it's cosmetic; keep it on where indentation carries meaning.</p>
 
     <h2>Structure-aware: when text order lies</h2>
     <p>Sometimes even a perfect text diff gives the wrong answer, because the meaning doesn't live in the line order. Two examples:</p>

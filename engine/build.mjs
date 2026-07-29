@@ -372,7 +372,8 @@ function homeDocument() {
   // that used to sit under the fold.
   const body = `${home.bodyHtml}
   ${adSlot()}
-  ${home.belowHtml}`;
+  ${home.belowHtml}
+  ${faqHtml(home.faq)}`;
   return renderDocument({
     title: home.title,
     description: home.description || C.DESCRIPTION,
@@ -380,6 +381,7 @@ function homeDocument() {
     depth: 0,
     layout: "app",
     rail: toolRail(null),
+    faq: home.faq,
     bodyHtml: body,
   });
 }
@@ -405,8 +407,40 @@ ${urls}
 `;
 }
 
+/*
+ * Cloudflare prepends a "Managed content" block to whatever we serve here,
+ * and that block disallows the *training* crawlers account-wide (GPTBot,
+ * ClaudeBot, CCBot, Google-Extended, Amazonbot, Applebot-Extended,
+ * Bytespider, meta-externalagent). It does NOT name the search/citation
+ * crawlers, so they fall through to `User-agent: *` and are already allowed.
+ *
+ * These explicit allows are therefore belt-and-braces, not a fix for a block
+ * — stated plainly because a previous session mistook the absence of these
+ * lines for the reason diffhero gets no ChatGPT referrals. It isn't; see the
+ * 2026-07-29 audit. The reason to name them anyway is that AI-assistant
+ * referral is the only channel in this family that delivers engaged humans
+ * (countlink: 29% of sessions at 38s avg engagement vs 3s for direct), so the
+ * policy should be unambiguous rather than inherited from a wildcard.
+ *
+ * Deliberately NOT re-listing GPTBot/ClaudeBot as allowed: the same token in
+ * two conflicting groups in one served file is undefined behaviour across
+ * parsers. Cloudflare's block wins and we leave it alone.
+ */
 function robots() {
   return `User-agent: *
+Allow: /
+
+# Search and citation crawlers — these send traffic or get cited.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: ${C.SITE_URL}/sitemap.xml

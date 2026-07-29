@@ -27,6 +27,7 @@
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/env-diff","description":"Compare two .env files and see exactly which variables were added, removed or changed — without ever uploading real secrets. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"ENV Diff","item":"https://diffhero.app/diff/env-diff"}]}</script>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to paste real secrets?","acceptedAnswer":{"@type":"Answer","text":"The comparison runs entirely client-side with no network request, so pasted values never leave your browser. For maximum caution, you can still redact values and compare just the variable names."}},{"@type":"Question","name":"Does it show only the changed keys?","acceptedAnswer":{"@type":"Answer","text":"Switch to Unified view and use the change navigator to jump straight between added, removed and edited lines, skipping the variables that are identical on both sides."}},{"@type":"Question","name":"Can it ignore quoting differences?","acceptedAnswer":{"@type":"Answer","text":"Not automatically — a value that gained or lost quotes shows as changed, since that can matter for how it's parsed. Keep quoting consistent between the two files for the cleanest diff."}}]}</script>
 
 <script data-grow-initializer="">
@@ -59,7 +60,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <div class="shell shell--app">
 <nav class="rail" aria-label="All diff tools">
   <div class="rail-in">
-    <p class="rail-title"><a href="/">51 diff tools</a></p>
+    <p class="rail-title"><a href="/">30 diff tools</a></p>
       <section class="rail-group">
         <p class="rail-head" id="rail-general">General</p>
         <ul class="rail-list" aria-labelledby="rail-general">
@@ -87,7 +88,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
           <li><a href="/diff/xml-diff">XML Diff</a></li>
           <li><a href="/diff/yaml-diff">YAML Diff</a></li>
           <li><a href="/diff/sql-diff">SQL Diff</a></li>
-          <li><a href="/diff/protobuf-diff">Protobuf Diff</a></li>
         </ul>
       </section>
       <section class="rail-group">
@@ -99,36 +99,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
         </ul>
       </section>
       <section class="rail-group">
-        <p class="rail-head" id="rail-languages">Languages</p>
-        <ul class="rail-list" aria-labelledby="rail-languages">
-          <li><a href="/diff/python-diff">Python Diff</a></li>
-          <li><a href="/diff/javascript-diff">JavaScript Diff</a></li>
-          <li><a href="/diff/typescript-diff">TypeScript Diff</a></li>
-          <li><a href="/diff/go-diff">Go Diff</a></li>
-          <li><a href="/diff/java-diff">Java Diff</a></li>
-          <li><a href="/diff/php-diff">PHP Diff</a></li>
-          <li><a href="/diff/csharp-diff">C# Diff</a></li>
-          <li><a href="/diff/rust-diff">Rust Diff</a></li>
-          <li><a href="/diff/ruby-diff">Ruby Diff</a></li>
-          <li><a href="/diff/kotlin-diff">Kotlin Diff</a></li>
-          <li><a href="/diff/swift-diff">Swift Diff</a></li>
-          <li><a href="/diff/zig-diff">Zig Diff</a></li>
-          <li><a href="/diff/elixir-diff">Elixir Diff</a></li>
-          <li><a href="/diff/gleam-diff">Gleam Diff</a></li>
-          <li><a href="/diff/solidity-diff">Solidity Diff</a></li>
-          <li><a href="/diff/julia-diff">Julia Diff</a></li>
-        </ul>
-      </section>
-      <section class="rail-group">
         <p class="rail-head" id="rail-config-devops">Config &amp; DevOps</p>
         <ul class="rail-list is-here" aria-labelledby="rail-config-devops">
-          <li><a href="/diff/dockerfile-diff">Dockerfile Diff</a></li>
-          <li><a href="/diff/docker-compose-diff">docker-compose Diff</a></li>
+          <li><a href="/diff/config-diff">Config Diff</a></li>
           <li><a href="/diff/env-diff" aria-current="page">ENV Diff</a></li>
           <li><a href="/diff/package-json-diff">package.json Diff</a></li>
-          <li><a href="/diff/terraform-diff">Terraform Diff</a></li>
-          <li><a href="/diff/nginx-config-diff">Nginx Config Diff</a></li>
-          <li><a href="/diff/ini-diff">INI Diff</a></li>
           <li><a href="/diff/log-diff">Log Diff</a></li>
         </ul>
       </section>
@@ -264,16 +239,16 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <h2>Related tools</h2>
     <ul class="related-list">
       <li><a href="/diff/package-json-diff">package.json Diff</a></li>
-      <li><a href="/diff/docker-compose-diff">docker-compose Diff</a></li>
-      <li><a href="/diff/terraform-diff">Terraform Diff</a></li>
-      <li><a href="/diff/dockerfile-diff">Dockerfile Diff</a></li>
-      <li><a href="/diff/nginx-config-diff">Nginx Config Diff</a></li>
-      <li><a href="/diff/julia-diff">Julia Diff</a></li>
-      <li><a href="/diff/ini-diff">INI Diff</a></li>
-      <li><a href="/diff/solidity-diff">Solidity Diff</a></li>
+      <li><a href="/diff/css-diff">CSS Diff</a></li>
       <li><a href="/diff/contract-diff">Contract Diff</a></li>
-      <li><a href="/diff/gleam-diff">Gleam Diff</a></li>
-      <li><a class="related-all" href="/">All 51 tools →</a></li>
+      <li><a href="/diff/html-diff">HTML Diff</a></li>
+      <li><a href="/diff/resume-diff">Resume Diff</a></li>
+      <li><a href="/diff/markdown-diff">Markdown Diff</a></li>
+      <li><a href="/diff/essay-diff">Essay Diff</a></li>
+      <li><a href="/diff/sql-diff">SQL Diff</a></li>
+      <li><a href="/diff/prompt-diff">Prompt Diff</a></li>
+      <li><a href="/diff/yaml-diff">YAML Diff</a></li>
+      <li><a class="related-all" href="/">All 30 tools →</a></li>
     </ul>
   </nav>
     </div>

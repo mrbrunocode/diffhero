@@ -77,6 +77,38 @@ export const PAGES = [
       { q: "Does it work for my programming language?", a: "Yes. Diffhero compares lines and words of text, so it is completely language-agnostic — Python, JavaScript, Go, Rust, SQL, anything. There is nothing to configure per language." },
       { q: "Is it safe to paste proprietary code?", a: "Your code is never transmitted. All diffing happens locally in your browser, so pasting internal or client code carries no upload risk — check your dev tools' Network tab to confirm nothing is sent." },
       { q: "Can it ignore reformatting noise?", a: "Turn on \"Ignore whitespace\" so re-indentation and trailing spaces don't drown out the real changes you care about." },
+      { q: "Is Python's indentation handled properly?", a: "Yes — the line-by-line view lines up directly with the logic that changed, which is what you want for indentation-sensitive languages like Python and YAML." },
+      { q: "Can I diff a schema or contract where field order matters?", a: "Yes, and for those a plain line-level diff is the safer choice precisely because it hides nothing. A renumbered Protobuf field tag or a reordered Solidity storage variable can silently break wire compatibility or change gas cost — you want to see the literal lines, not a semantically \"tidied\" view." },
+    ],
+  },
+  /*
+   * Consolidation target for six per-format config pages (Dockerfile,
+   * docker-compose, nginx, Terraform, Protobuf, INI), removed 2026-07-29.
+   *
+   * All six were `format: "text"` — the identical tool with different prose —
+   * and Search Console had 51 of diffhero's 55 URLs sitting in "Discovered –
+   * currently not indexed" with zero Google organic sessions. Splitting one
+   * tool across dozens of near-identical URLs is what triggers that judgement,
+   * so the crawl budget now points at one page per genuine intent instead.
+   *
+   * Note this was NOT a thin-content cull: those pages measured 93–95% unique
+   * prose. They were merged because the *intent* was one intent, and their
+   * format-specific detail is preserved in the section below.
+   */
+  {
+    slug: "config-diff",
+    eyebrow: "Config Diff",
+    title: "Config File Diff — Compare Dockerfiles, Terraform, nginx & INI",
+    description:
+      "Compare two config files — Dockerfile, docker-compose.yml, Terraform, nginx.conf, .proto or .ini — and see exactly which directives changed. Client-side, nothing uploaded.",
+    intro:
+      "Paste the old and new version of a config file to see precisely which lines changed before you rebuild, reload or redeploy. Nothing is uploaded, so private module names, hostnames and service definitions stay on your device.",
+    format: "text",
+    faq: [
+      { q: "Which config formats does this handle?", a: "Any text-based config: Dockerfile, docker-compose.yml, Terraform .tf, nginx.conf, .proto schemas, and any key=value or [section]-style .ini/.conf/.cfg file. The diff is on the text, so the format doesn't need to be declared." },
+      { q: "Why not use a format-aware diff?", a: "For config, a literal line-level diff is usually what you want — it hides nothing. A semantically \"tidied\" view can mask exactly the change that matters, like a renumbered Protobuf field tag or a reordered block." },
+      { q: "Is my config uploaded anywhere?", a: "No. The comparison runs entirely in your browser, so private infrastructure details — internal hostnames, resource names, environment values — never leave your device." },
+      { q: "Does indentation matter for docker-compose?", a: "Yes, it's YAML, so indentation carries meaning — and the line-by-line view maps directly onto that. Leave \"Ignore whitespace\" off when indentation itself is what you're checking." },
     ],
   },
   {
@@ -234,141 +266,6 @@ export const PAGES = [
     ],
   },
   {
-    slug: "python-diff",
-    eyebrow: "Python Diff",
-    title: "Python Diff — Compare Two Python Files",
-    description:
-      "Compare two Python files or snippets and highlight every changed line and token. Client-side and language-agnostic — your code never leaves the browser.",
-    intro:
-      "Paste two versions of a Python file to see inserted, deleted and modified lines clearly marked, with changed tokens highlighted inline. Because Python is indentation-sensitive, the line-by-line view lines up directly with the logic that changed.",
-    format: "text",
-    faq: [
-      { q: "Will it respect Python indentation?", a: "Yes — it compares lines exactly as written, including leading whitespace, so indentation changes (which matter in Python) are visible. Keep \"Ignore whitespace\" off to see them." },
-      { q: "Is my code uploaded?", a: "No. All diffing runs locally in your browser, so pasting Python from a private or work project carries no upload risk." },
-      { q: "Can it ignore comment-only changes?", a: "Not automatically — it diffs the raw text. A changed comment shows as a changed line, which is usually what you want when reviewing edits." },
-    ],
-  },
-  {
-    slug: "javascript-diff",
-    eyebrow: "JavaScript Diff",
-    title: "JavaScript Diff — Compare Two JS Files",
-    description:
-      "Compare two JavaScript files or snippets and see exactly what changed, with changed tokens highlighted. Works for TypeScript and JSX too. Nothing uploaded.",
-    intro:
-      "Paste the old and new version of a JavaScript file to see a clean diff with the changed tokens highlighted. It works just as well for TypeScript, JSX and TSX, since it compares the text rather than parsing the language.",
-    format: "text",
-    faq: [
-      { q: "Does it work for TypeScript and JSX?", a: "Yes. Diffhero compares text, so TypeScript, JSX and TSX all work exactly the same as plain JavaScript — there's nothing to switch." },
-      { q: "Can it hide reformatting from Prettier?", a: "Turn on \"Ignore whitespace\" to stop re-indentation and spacing changes from cluttering the diff, so you see the substantive edits under the formatting." },
-      { q: "Is pasted JS sent to a server?", a: "Never — the comparison is done entirely in your browser, so bundled or proprietary JavaScript stays on your device." },
-    ],
-  },
-  {
-    slug: "typescript-diff",
-    eyebrow: "TypeScript Diff",
-    title: "TypeScript Diff — Compare Two TS or TSX Files",
-    description:
-      "Compare two TypeScript files and highlight every changed line and token, including types and generics. Works for TSX. Client-side, nothing uploaded.",
-    intro:
-      "Paste two versions of a TypeScript file to see exactly what changed — type annotations, generics, interfaces and logic — with the changed tokens highlighted inline. TSX works the same way, since the diff is on the text.",
-    format: "text",
-    faq: [
-      { q: "Does it handle type annotations and generics?", a: "Yes — they're just text to the diff, so a changed type, a new generic parameter or an edited interface all show up like any other change, with the specific tokens highlighted." },
-      { q: "Is TSX supported?", a: "Yes. TSX, JSX, TS and JS all diff identically because Diffhero compares the source text rather than parsing the language." },
-      { q: "Is my code private?", a: "Completely — the comparison runs in your browser and nothing is uploaded, so work or client code is safe to paste." },
-    ],
-  },
-  {
-    slug: "go-diff",
-    eyebrow: "Go Diff",
-    title: "Go Diff — Compare Two Go Files",
-    description:
-      "Compare two Go source files and highlight every changed line and token. Client-side and language-agnostic — your code never leaves the browser.",
-    intro:
-      "Paste two versions of a Go file to see added, removed and modified lines clearly marked, with the exact changed tokens highlighted. Useful for reviewing a change before committing, or seeing what gofmt actually did.",
-    format: "text",
-    faq: [
-      { q: "Will gofmt changes clutter the diff?", a: "If both files are already gofmt-formatted, the diff stays clean. If one isn't, turn on \"Ignore whitespace\" to focus on the substantive changes rather than formatting." },
-      { q: "Does it understand Go syntax?", a: "No — it's a text diff, which is exactly what you want for reviewing edits. That also means it works for any language, not just Go." },
-      { q: "Is my Go code uploaded?", a: "No. Everything runs locally in your browser, so private or proprietary Go stays on your device." },
-    ],
-  },
-  {
-    slug: "java-diff",
-    eyebrow: "Java Diff",
-    title: "Java Diff — Compare Two Java Files",
-    description:
-      "Compare two Java source files and highlight every changed line and token. Free, browser-only, works for Kotlin and other JVM languages too. Nothing uploaded.",
-    intro:
-      "Paste two versions of a Java file to see a clean line-by-line diff with the changed tokens highlighted. It works just as well for Kotlin, Scala and other JVM-language sources, since it compares the text.",
-    format: "text",
-    faq: [
-      { q: "Does it work for Kotlin and Scala too?", a: "Yes — Diffhero compares text, so any JVM language (or any language at all) diffs the same way, with no per-language setting." },
-      { q: "Can it ignore import reordering?", a: "Not automatically — reordered imports show as changes. Sort imports consistently first if you don't want to see those." },
-      { q: "Is my code sent to a server?", a: "No — the comparison happens entirely in your browser, so enterprise or client Java stays on your device." },
-    ],
-  },
-  {
-    slug: "php-diff",
-    eyebrow: "PHP Diff",
-    title: "PHP Diff — Compare Two PHP Files",
-    description:
-      "Compare two PHP files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic — nothing uploaded.",
-    intro:
-      "Paste two versions of a PHP file to see inserted, deleted and modified lines clearly marked, with the changed tokens highlighted inline. Handy for reviewing a patch or a plugin change before you deploy it.",
-    format: "text",
-    faq: [
-      { q: "Does it handle mixed HTML and PHP?", a: "Yes — it compares the raw text, so a file that mixes HTML markup and PHP tags diffs cleanly, with changes highlighted wherever they occur." },
-      { q: "Can it ignore formatting differences?", a: "Turn on \"Ignore whitespace\" so re-indentation and spacing changes don't obscure the real edits." },
-      { q: "Is my PHP uploaded?", a: "No — everything runs in your browser, so proprietary or client PHP never leaves your device." },
-    ],
-  },
-  {
-    slug: "csharp-diff",
-    eyebrow: "C# Diff",
-    title: "C# Diff — Compare Two C# Files",
-    description:
-      "Compare two C# files or snippets and see exactly what changed, with changed tokens highlighted. Client-side and language-agnostic, nothing uploaded.",
-    intro:
-      "Paste two versions of a C# file to see inserted, deleted and modified lines clearly marked, with changed tokens highlighted inline. Works for .cs files, Razor components, or a single method you're reviewing before a PR.",
-    format: "text",
-    faq: [
-      { q: "Does it work for Razor or .cshtml too?", a: "Yes — it compares raw text, so mixed C#/HTML in Razor files diffs the same way as plain .cs files." },
-      { q: "Can it ignore using-directive reordering?", a: "Not automatically — reordered \"using\" statements show as changes. Sort them consistently first if you don't want to see those." },
-      { q: "Is my C# code uploaded?", a: "No — the comparison runs entirely in your browser, so proprietary or enterprise C# stays on your device." },
-    ],
-  },
-  {
-    slug: "rust-diff",
-    eyebrow: "Rust Diff",
-    title: "Rust Diff — Compare Two Rust Files",
-    description:
-      "Compare two Rust files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.",
-    intro:
-      "Paste two versions of a .rs file to see exactly what changed — a signature, a lifetime, a match arm — with the changed tokens highlighted inline. Handy for reviewing a diff before rustfmt and CI see it.",
-    format: "text",
-    faq: [
-      { q: "Will rustfmt changes clutter the diff?", a: "If both files are already rustfmt-formatted, the diff stays clean. If not, turn on \"Ignore whitespace\" to focus on substantive changes." },
-      { q: "Does it understand borrow-checker semantics?", a: "No — it's a text diff, not a compiler. That's exactly what you want for reviewing what a change touches, before you run cargo check." },
-      { q: "Is my Rust code uploaded?", a: "No. Everything runs locally in your browser, so private crates and proprietary code never leave your device." },
-    ],
-  },
-  {
-    slug: "ruby-diff",
-    eyebrow: "Ruby Diff",
-    title: "Ruby Diff — Compare Two Ruby Files",
-    description:
-      "Compare two Ruby files or snippets and see exactly what changed, with changed tokens highlighted. Client-side, nothing uploaded.",
-    intro:
-      "Paste two versions of a .rb file to see added, removed and modified lines clearly marked, with the changed tokens highlighted. Because Ruby is indentation-flexible, the line-by-line view lines up with what actually changed in the logic.",
-    format: "text",
-    faq: [
-      { q: "Does it work for Rails files too?", a: "Yes — models, controllers, views (including ERB) and config files all diff the same way, since it compares raw text." },
-      { q: "Can it ignore RuboCop-style reformatting?", a: "Turn on \"Ignore whitespace\" so re-indentation and spacing changes from an autoformatter don't obscure the real edits." },
-      { q: "Is my Ruby code uploaded?", a: "No — the comparison happens entirely in your browser, so private gems and app code stay on your device." },
-    ],
-  },
-  {
     slug: "css-diff",
     eyebrow: "CSS Diff",
     title: "CSS Diff — Compare Two Stylesheets",
@@ -381,141 +278,6 @@ export const PAGES = [
       { q: "Does it work for SCSS or LESS too?", a: "Yes — it compares raw text, so SCSS, LESS and plain CSS all diff the same way, including variables and nesting." },
       { q: "Can it ignore vendor-prefix changes?", a: "Not automatically — an added or removed -webkit-/-moz- prefix shows as a change, since that can be a meaningful edit. Turn on \"Ignore whitespace\" for formatting-only noise." },
       { q: "Is my stylesheet uploaded?", a: "No. Everything runs in your browser, so proprietary design tokens and brand colors never leave your device." },
-    ],
-  },
-  {
-    slug: "kotlin-diff",
-    eyebrow: "Kotlin Diff",
-    title: "Kotlin Diff — Compare Two Kotlin Files",
-    description:
-      "Compare two Kotlin files or snippets and highlight every changed line and token. Client-side and language-agnostic, nothing uploaded.",
-    intro:
-      "Paste two versions of a .kt file to see exactly what changed — a data class, a coroutine, a null-safety check — with the changed tokens highlighted inline. Works for plain Kotlin or Android/Compose source.",
-    format: "text",
-    faq: [
-      { q: "Does it work for Jetpack Compose files?", a: "Yes — Compose is just Kotlin, so .kt files with composables diff exactly the same way as any other Kotlin source." },
-      { q: "Can it ignore ktlint-style reformatting?", a: "Turn on \"Ignore whitespace\" if one file has been run through a formatter and the other hasn't, so you see the substantive edits only." },
-      { q: "Is my Kotlin code uploaded?", a: "No — the comparison runs entirely client-side, so private Android or backend source stays on your device." },
-    ],
-  },
-  {
-    slug: "swift-diff",
-    eyebrow: "Swift Diff",
-    title: "Swift Diff — Compare Two Swift Files",
-    description:
-      "Compare two Swift files or snippets and highlight every changed line and token. Client-side, works for SwiftUI views too. Nothing uploaded.",
-    intro:
-      "Paste two versions of a .swift file to see exactly what changed — a property wrapper, an optional-binding tweak, a SwiftUI view's body — with the changed tokens highlighted inline. Works the same for UIKit and SwiftUI source.",
-    format: "text",
-    faq: [
-      { q: "Does it handle optionals and property wrappers?", a: "Yes — they're compared as text, so a changed `?`/`!` or an added `@State`/`@Published` wrapper shows up like any other token change." },
-      { q: "Does it work for SwiftUI view bodies?", a: "Yes, a SwiftUI `.swift` file diffs the same as any other Swift source — useful for reviewing a view's body before a PR without opening Xcode." },
-      { q: "Is my Swift code uploaded?", a: "No. The comparison runs entirely in your browser, so App Store-bound or private source stays on your device." },
-    ],
-  },
-  {
-    slug: "zig-diff",
-    eyebrow: "Zig Diff",
-    title: "Zig Diff — Compare Two Zig Files",
-    description:
-      "Compare two Zig files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing comptime and allocator changes.",
-    intro:
-      "Paste two versions of a .zig file to see exactly what changed — a comptime block, an allocator swap, an added error union — with the changed tokens highlighted. Zig has no hidden control flow, so a line-level diff maps directly onto what actually changed at runtime.",
-    format: "text",
-    faq: [
-      { q: "Does it understand comptime?", a: "No — it's a text diff, not a Zig compiler. That's fine for review purposes: an edited `comptime` block or a changed allocator argument shows as a normal line/token change." },
-      { q: "Does it work across Zig versions?", a: "Yes, since Zig's syntax has changed release to release (it's still pre-1.0), comparing a file before and after a version migration works exactly like any other text diff." },
-      { q: "Is my Zig source uploaded?", a: "No. Everything runs client-side, so unreleased systems code stays on your device." },
-    ],
-  },
-  {
-    slug: "elixir-diff",
-    eyebrow: "Elixir Diff",
-    title: "Elixir Diff — Compare Two Elixir Files",
-    description:
-      "Compare two Elixir files or snippets and highlight every changed line and token. Client-side — works for Phoenix and LiveView modules too.",
-    intro:
-      "Paste two versions of a .ex or .exs file to see exactly what changed — a pattern-matched function clause, a pipe (|>) chain, a GenServer callback — with the changed tokens highlighted inline. Works the same for plain Elixir, Phoenix controllers, or LiveView modules.",
-    format: "text",
-    faq: [
-      { q: "Does it handle multiple function clauses with pattern matching?", a: "Yes — each clause is just a line (or block) of text, so an added or reordered pattern-matched clause shows up as an insertion or move, same as any other language." },
-      { q: "Does it work for LiveView .heex templates?", a: "Yes, .heex is text like any other source file, so template markup changes diff the same way as .ex module changes." },
-      { q: "Is my Elixir code uploaded?", a: "No. The comparison runs entirely in your browser, so private Phoenix apps stay on your device." },
-    ],
-  },
-  {
-    slug: "gleam-diff",
-    eyebrow: "Gleam Diff",
-    title: "Gleam Diff — Compare Two Gleam Files",
-    description:
-      "Compare two Gleam files or snippets and highlight every changed line and token. Free, client-side diff for the type-safe language on the BEAM.",
-    intro:
-      "Paste two versions of a .gleam file to see exactly what changed — a type signature, a case expression, a new custom type variant — with the changed tokens highlighted. Since Gleam has no null and no exceptions, most meaningful diffs are in the type signatures and case-match arms, which a plain text diff surfaces clearly.",
-    format: "text",
-    faq: [
-      { q: "Does it understand Gleam's type system?", a: "No — it's a text diff, so it doesn't check types. It still shows exactly which type signature or case-match arm changed, which is what a code review actually needs." },
-      { q: "Does it work for gleam.toml too?", a: "Yes, any plain-text file works — paste the manifest to see dependency or version changes the same way." },
-      { q: "Is my Gleam source uploaded?", a: "No. Everything runs in your browser, so unreleased source stays private." },
-    ],
-  },
-  {
-    slug: "solidity-diff",
-    eyebrow: "Solidity Diff",
-    title: "Solidity Diff — Compare Two Smart Contract Files",
-    description:
-      "Compare two Solidity (.sol) smart contract files and highlight every changed line and token — including changes that affect an audit. Nothing uploaded.",
-    intro:
-      "Paste the old and new version of a .sol contract to see precisely which functions, modifiers, or storage variables changed before a re-audit or a deploy. Because even a reordered storage variable or a tightened `require` can change a contract's behavior or gas cost, a full, unhidden line-by-line diff matters more here than in most languages.",
-    format: "text",
-    faq: [
-      { q: "Should I collapse unchanged lines for an audit?", a: "Turn that option off for contract review — an audit needs to see the full file in context, not just the changed hunks, since storage layout order matters for upgradeable contracts." },
-      { q: "Does it catch storage-layout-breaking reorders?", a: "It shows the reorder as a line move, but doesn't itself flag storage-slot incompatibility — that judgment call is still yours (or your audit tool's) to make from the diff." },
-      { q: "Is my contract source uploaded anywhere?", a: "No. The comparison runs entirely client-side, so unaudited or pre-launch contract code never leaves your device." },
-    ],
-  },
-  {
-    slug: "julia-diff",
-    eyebrow: "Julia Diff",
-    title: "Julia Diff — Compare Two Julia Files",
-    description:
-      "Compare two Julia files or snippets and highlight every changed line and token. Free, client-side — useful for reviewing multiple-dispatch method changes.",
-    intro:
-      "Paste two versions of a .jl file to see exactly what changed — a new method for an existing function, a type annotation, a broadcasted operation — with the changed tokens highlighted inline. Julia's multiple dispatch means the same function name can gain or lose methods without the call site changing at all, so seeing the exact method signature that changed is what matters most in review.",
-    format: "text",
-    faq: [
-      { q: "Does it show which dispatch method changed?", a: "It shows the exact line(s) that changed — for a new or edited method that's the method signature itself, which is the part of a Julia diff that actually matters." },
-      { q: "Does it work for Jupyter-exported .jl scripts?", a: "Yes, any plain-text .jl file diffs the same way, whether hand-written or exported from a notebook." },
-      { q: "Is my Julia code uploaded?", a: "No. Everything runs locally in your browser, so research or proprietary numerical code stays on your device." },
-    ],
-  },
-  {
-    slug: "dockerfile-diff",
-    eyebrow: "Dockerfile Diff",
-    title: "Dockerfile Diff — Compare Two Dockerfiles",
-    description:
-      "Compare two Dockerfiles and see exactly which instructions, base images or layers changed, line by line. Free, client-side, nothing uploaded.",
-    intro:
-      "Paste the old and new Dockerfile to see precisely which FROM, RUN, COPY or ENV lines changed before you rebuild. Useful for reviewing a base-image bump or a multi-stage build refactor without pulling the branch locally.",
-    format: "text",
-    faq: [
-      { q: "Does it understand Dockerfile syntax?", a: "No — it's a text diff, so it doesn't parse instructions. That's enough for reviewing a change: added, removed and changed lines are exactly what a Dockerfile review needs." },
-      { q: "Is my Dockerfile uploaded?", a: "No. The comparison runs entirely in your browser, so internal build configs and private image names stay on your device." },
-      { q: "Can it ignore reformatted comments?", a: "Turn on \"Ignore whitespace\" if reformatted comments or re-indented instructions are cluttering the diff." },
-    ],
-  },
-  {
-    slug: "docker-compose-diff",
-    eyebrow: "docker-compose Diff",
-    title: "docker-compose.yml Diff — Compare Files",
-    description:
-      "Compare two docker-compose.yml files and see exactly which services, ports or volumes changed. Free, browser-only, nothing uploaded.",
-    intro:
-      "Paste the old and new docker-compose.yml to see precisely which service definitions, ports, volumes or environment blocks changed before you redeploy. Because it's YAML, indentation carries meaning — the line-by-line view maps directly onto that.",
-    format: "text",
-    faq: [
-      { q: "Is this different from the general YAML diff?", a: "Same engine, tuned for the docker-compose use case — reviewing a service, port or volume change before a redeploy — rather than generic YAML." },
-      { q: "Does it validate the compose file?", a: "No — it's a text diff and doesn't check compose schema. Run \"docker compose config\" for validation; use this to review what changed." },
-      { q: "Is my compose file uploaded?", a: "No. Everything runs in your browser, so internal service names, image tags and volume paths never leave your device." },
     ],
   },
   {
@@ -546,51 +308,6 @@ export const PAGES = [
       { q: "Does it flag version bumps clearly?", a: "Yes — a version string change on a dependency line shows up as a word-level highlight, so a patch bump versus a major bump is easy to spot at a glance." },
       { q: "Will key reordering show as a change?", a: "Diffhero pretty-prints both sides with the same formatting before comparing, so inconsistent indentation is normalised — but it preserves key order, so a genuine reorder still shows as changed." },
       { q: "Is my package.json uploaded?", a: "No. Everything runs in your browser, so private dependency names and internal package scopes never leave your device." },
-    ],
-  },
-  {
-    slug: "terraform-diff",
-    eyebrow: "Terraform Diff",
-    title: "Terraform Diff — Compare Two .tf Files",
-    description:
-      "Compare two Terraform files and see exactly which resources, variables or blocks changed before you plan or apply. Free, client-side.",
-    intro:
-      "Paste the old and new version of a .tf file to review what changed — a resource block, a variable default, a provider version — before running terraform plan. Nothing is uploaded, so private module and resource names stay local.",
-    format: "text",
-    faq: [
-      { q: "Does this replace terraform plan?", a: "No — this diffs the source files themselves, not the planned infrastructure changes. Use it for a quick source review before you run plan, not as a substitute for it." },
-      { q: "Can it ignore HCL formatting differences?", a: "Turn on \"Ignore whitespace\" if one file was run through terraform fmt and the other wasn't, so re-alignment doesn't obscure the real changes." },
-      { q: "Is my Terraform code uploaded?", a: "No — the comparison runs entirely client-side, so internal module names, resource IDs and provider configs never leave your browser." },
-    ],
-  },
-  {
-    slug: "nginx-config-diff",
-    eyebrow: "Nginx Config Diff",
-    title: "Nginx Config Diff — Compare Two nginx.conf Files",
-    description:
-      "Compare two Nginx configuration files and see exactly which directives, server blocks or locations changed. Free, browser-only, nothing uploaded.",
-    intro:
-      "Paste the old and new nginx.conf (or a single server block) to see precisely which directives changed before you reload. A fast way to review a proxy, TLS or routing change without diffing on the server itself.",
-    format: "text",
-    faq: [
-      { q: "Does it validate Nginx syntax?", a: "No — it's a text diff, so it won't catch a syntax error. Run nginx -t on the actual file for that; use this to review what changed between two versions." },
-      { q: "Can I compare a single server block?", a: "Yes — paste just the block you care about on each side rather than the whole file, if that's a cleaner comparison for your use case." },
-      { q: "Is my config uploaded?", a: "No. Everything runs in your browser, so internal hostnames, upstream addresses and TLS paths never leave your device." },
-    ],
-  },
-  {
-    slug: "ini-diff",
-    eyebrow: "INI Diff",
-    title: "INI / Config File Diff — Compare Two Config Files",
-    description:
-      "Compare two INI or config files and see exactly which sections and key-value pairs changed. Free, line-based, nothing uploaded.",
-    intro:
-      "Paste two .ini, .conf or .cfg files to see which sections were added, removed, or had a value changed. Works for any key=value or [section]-style config, from app settings to service files.",
-    format: "text",
-    faq: [
-      { q: "What config formats does it work with?", a: "Any line-based key-value or bracketed-section format — INI, .conf, .cfg, Windows-style config, systemd unit files and similar all diff cleanly as text." },
-      { q: "Can it ignore comment-line changes?", a: "Not automatically — a changed comment shows as a changed line, which is usually useful when reviewing what someone actually edited." },
-      { q: "Is my config file uploaded?", a: "No — the comparison happens entirely in your browser, so internal service names, ports and credentials in the file never leave your device." },
     ],
   },
   {
@@ -760,22 +477,6 @@ export const PAGES = [
       { q: "What invisible characters does it reveal?", a: "Non-breaking spaces (U+00A0, plus the narrow and figure variants), zero-width space/joiner/non-joiner (U+200B–U+200D), word joiner, the byte-order mark (U+FEFF), soft hyphens and tabs. Each renders as a distinct visible symbol with a tooltip naming it." },
       { q: "Where do these characters come from?", a: "The usual suspects: copying from Word or Google Docs (curly quotes, non-breaking spaces), copying from web pages (non-breaking spaces in prices and names), and text produced by chat AI tools (zero-width characters). Keyboards can also type them — Option+Space on a Mac inserts a non-breaking space." },
       { q: "How do I remove them once found?", a: "Open Find & replace under the tool, paste the offending character into Find (copy it straight from your text), leave Replace empty, and apply to both sides. For non-breaking spaces, replace with a normal space instead so words don't merge." },
-    ],
-  },
-  {
-    slug: "protobuf-diff",
-    eyebrow: "Protobuf Diff",
-    title: "Protobuf Diff — Compare Two .proto Schema Files",
-    description:
-      "Compare two Protocol Buffers (.proto) schema files and see exactly which fields, tags, or messages changed — including changes that break wire compatibility. Nothing uploaded.",
-    intro:
-      "Paste the old and new version of a .proto file to see precisely which message, field, or tag number changed before you ship a schema update. Protobuf's wire format depends on field numbers staying stable — a renumbered or removed field tag can silently break compatibility between an old client and a new server even though the .proto file still \"looks\" similar, so seeing the exact line that changed matters more here than the file's surface syntax.",
-    format: "text",
-    faq: [
-      { q: "Can this tell me if a schema change breaks wire compatibility?", a: "It shows you exactly which lines changed — a reused or renumbered field tag, a field removed instead of marked reserved, a changed type on an existing tag — but it's a text diff, not a protobuf compiler, so judging whether a specific change is breaking is still yours to make from what it highlights." },
-      { q: "What should I look for in the diff to catch a breaking change?", a: "Field tag numbers (the `= 1`, `= 2` at the end of each field) that were reused or renumbered, a field deleted without being added to `reserved`, and a field's type changed to one that isn't wire-compatible with the old type — all show up as ordinary changed lines." },
-      { q: "Does it work for proto2 and proto3?", a: "Yes — both are plain text, so a `.proto` file compares the same way regardless of syntax version." },
-      { q: "Is my schema uploaded anywhere?", a: "No. The comparison runs entirely in your browser, so an unreleased API schema never leaves your device." },
     ],
   },
   {
@@ -1021,23 +722,21 @@ export const GROUPS = [
   },
   {
     name: "Data",
-    slugs: ["json-diff", "csv-diff", "csv-table-diff", "xml-diff", "yaml-diff", "sql-diff", "protobuf-diff"],
+    slugs: ["json-diff", "csv-diff", "csv-table-diff", "xml-diff", "yaml-diff", "sql-diff"],
   },
   {
     name: "Markup & styles",
     slugs: ["markdown-diff", "html-diff", "css-diff"],
   },
-  {
-    name: "Languages",
-    slugs: [
-      "python-diff", "javascript-diff", "typescript-diff", "go-diff", "java-diff", "php-diff",
-      "csharp-diff", "rust-diff", "ruby-diff", "kotlin-diff", "swift-diff", "zig-diff",
-      "elixir-diff", "gleam-diff", "solidity-diff", "julia-diff",
-    ],
-  },
+  // The "Languages" group (16 slugs, python-diff … julia-diff) was removed
+  // 2026-07-29 and folded into code-diff, which those pages' own descriptions
+  // already admitted was the same thing — every one of them was
+  // `format: "text"` and described itself as "language-agnostic". Six config
+  // pages went the same way into config-diff. See the comment beside the
+  // config-diff entry in PAGES for the indexation reasoning.
   {
     name: "Config & DevOps",
-    slugs: ["dockerfile-diff", "docker-compose-diff", "env-diff", "package-json-diff", "terraform-diff", "nginx-config-diff", "ini-diff", "log-diff"],
+    slugs: ["config-diff", "env-diff", "package-json-diff", "log-diff"],
   },
   {
     name: "Documents",

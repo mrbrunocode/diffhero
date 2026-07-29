@@ -29,6 +29,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://diffhero.app/guides/diffing-config-files-safely"}]}</script>
 
 
+
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
@@ -86,7 +87,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <section class="rail-group">
       <p class="rail-head" id="rail-tools">Tools</p>
       <ul class="rail-list is-here" aria-labelledby="rail-tools">
-        <li><a href="/">All 51 diff tools →</a></li>
+        <li><a href="/">All 30 diff tools →</a></li>
       </ul>
     </section>
   </div>
@@ -109,7 +110,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <h2 id="the-whitespace-trap-know-your-format">The whitespace trap: know your format</h2>
     <p>The single most important question when diffing config is whether whitespace matters, because it decides whether "ignore whitespace" is a helpful de-noiser or a dangerous blindfold.</p>
     <ul>
-      <li><strong>YAML</strong> (including <a href="/diff/docker-compose-diff">docker-compose</a> and Kubernetes manifests): indentation <em>is</em> structure. A change in leading spaces can re-nest a key under a different parent — a real, easy-to-miss semantic change. <strong>Never</strong> ignore whitespace when diffing <a href="/diff/yaml-diff">YAML</a>, and turn on "show invisibles" to catch a stray tab (YAML forbids tabs for indentation).</li>
+      <li><strong>YAML</strong> (including <a href="/diff/config-diff">docker-compose</a> and Kubernetes manifests): indentation <em>is</em> structure. A change in leading spaces can re-nest a key under a different parent — a real, easy-to-miss semantic change. <strong>Never</strong> ignore whitespace when diffing <a href="/diff/yaml-diff">YAML</a>, and turn on "show invisibles" to catch a stray tab (YAML forbids tabs for indentation).</li>
       <li><strong>JSON</strong>: whitespace is insignificant, so ignoring it is safe and useful — but key <em>order</em> isn't significant either, which a text diff doesn't know. Pretty-print both sides consistently first, or reordered keys will read as changes.</li>
       <li><strong>INI, TOML, .env, nginx</strong>: mostly whitespace-tolerant, but each has its own quirks — quoting rules, comment styles, and directives whose order matters.</li>
     </ul>
@@ -118,9 +119,9 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>Different config files fail in different ways, so know the high-signal changes for each:</p>
     <ul>
       <li><a href="/diff/env-diff"><strong>.env files</strong></a>: the classic breaker is a <em>missing</em> key — a variable present in one environment and absent in the other. Diff staging against production, or <code>.env</code> against <code>.env.example</code>, to catch it. (And because these hold secrets, use a comparison that runs locally and never uploads them.)</li>
-      <li><a href="/diff/dockerfile-diff"><strong>Dockerfiles</strong></a>: watch the base image tag (<code>node:20</code> vs <code>node:20-alpine</code> is a different OS) and instruction <em>order</em>, which changes what gets cached and rebuilt.</li>
-      <li><a href="/diff/nginx-config-diff"><strong>nginx</strong></a>: the order and specificity of <code>location</code> blocks decides which one handles a request; a reordered block can silently reroute traffic.</li>
-      <li><a href="/diff/terraform-diff"><strong>Terraform</strong></a>: some argument changes update a resource in place; others force it to be destroyed and recreated. Know which before you apply.</li>
+      <li><a href="/diff/config-diff"><strong>Dockerfiles</strong></a>: watch the base image tag (<code>node:20</code> vs <code>node:20-alpine</code> is a different OS) and instruction <em>order</em>, which changes what gets cached and rebuilt.</li>
+      <li><a href="/diff/config-diff"><strong>nginx</strong></a>: the order and specificity of <code>location</code> blocks decides which one handles a request; a reordered block can silently reroute traffic.</li>
+      <li><a href="/diff/config-diff"><strong>Terraform</strong></a>: some argument changes update a resource in place; others force it to be destroyed and recreated. Know which before you apply.</li>
     </ul>
 
     <h2 id="keep-secrets-out-of-harm-s-way">Keep secrets out of harm's way</h2>

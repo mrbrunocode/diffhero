@@ -23,6 +23,48 @@ export const home = {
   // box. So this opens on the diff panes, with the claim compressed into one
   // dense strip above them. The static sample is gone: the live tool sits in
   // exactly the place it used to occupy, and does the same job for real.
+  /*
+   * Homepage FAQ, added 2026-07-29.
+   *
+   * Two reasons, both measured rather than assumed. (1) A pre-deploy sweep found
+   * the homepage had WebApplication + BreadcrumbList JSON-LD but no FAQPage —
+   * and short, self-contained question/answer pairs are the single most
+   * extractable shape for AI answer engines, which are the only channel in this
+   * family currently delivering engaged humans. (2) AdSense reviewers assess the
+   * homepage hardest, and the page was a tool plus a how-to with no substantive
+   * prose answering what the thing actually is.
+   *
+   * renderDocument() turns this into FAQPage JSON-LD and visible markup, so keep
+   * answers factual and standalone — each one has to make sense quoted alone,
+   * with no surrounding context.
+   */
+  faq: [
+    {
+      q: "Is Diffhero free, and is there a usage limit?",
+      a: "It is free with no usage limit, no account and no paid tier. There is nothing metered — syntax highlighting, character-level diffing, 3-way merge and image comparison are all available on every visit.",
+    },
+    {
+      q: "Is my text or code uploaded to a server?",
+      a: "No. The entire comparison runs in your browser using JavaScript, so nothing you paste is transmitted anywhere. You can confirm this yourself by opening your browser's dev tools and watching the Network tab while you diff.",
+    },
+    {
+      q: "What can Diffhero compare?",
+      a: "Plain text and prose, source code in any language, JSON, CSV and tabular data, YAML and XML, config files, PDFs and Word documents (the text is extracted locally), and images pixel-by-pixel.",
+    },
+    {
+      q: "How does it decide what changed?",
+      a: "It aligns the two inputs with a longest-common-subsequence match over lines, then runs a second word-level pass inside each changed line. That is why you see the precise words that differ rather than just \"this whole line is different\".",
+    },
+    {
+      q: "Can I compare two files rather than pasting text?",
+      a: "Yes — drag a file onto either pane. The file is read locally in your browser and never uploaded, which means you can compare files you would not be allowed to upload to a website at all.",
+    },
+    {
+      q: "How is this different from Diffchecker?",
+      a: "The main practical difference is metering: Diffchecker's free tier limits syntax highlighting to a handful of uses per month and reserves several formats for paid tiers. Diffhero has no tiers, so nothing is held back.",
+    },
+  ],
+
   bodyHtml: `
   <div class="toolhead toolhead--home">
     <div class="toolhead-id">
@@ -61,7 +103,7 @@ export const home = {
     <ul>
       <li><strong>Code</strong> in any language, with syntax highlighting and whitespace handling that respects indentation-sensitive languages like Python and YAML.</li>
       <li><strong>Structured data</strong> — <a href="/${C.COLLECTION_DIR}/json-diff">JSON</a>, <a href="/${C.COLLECTION_DIR}/csv-diff">CSV</a>, <a href="/${C.COLLECTION_DIR}/xml-diff">XML</a>, <a href="/${C.COLLECTION_DIR}/yaml-diff">YAML</a> — where key order and formatting can hide the real change.</li>
-      <li><strong>Config and DevOps</strong> files — <a href="/${C.COLLECTION_DIR}/dockerfile-diff">Dockerfiles</a>, <a href="/${C.COLLECTION_DIR}/env-diff">.env</a>, <a href="/${C.COLLECTION_DIR}/terraform-diff">Terraform</a>, <a href="/${C.COLLECTION_DIR}/nginx-config-diff">nginx</a> — where a one-line change has outsized effects.</li>
+      <li><strong>Config and DevOps</strong> files — <a href="/${C.COLLECTION_DIR}/config-diff">Dockerfiles, Terraform and nginx</a>, <a href="/${C.COLLECTION_DIR}/env-diff">.env</a> — where a one-line change has outsized effects.</li>
       <li><strong>Documents</strong> — <a href="/${C.COLLECTION_DIR}/pdf-diff">PDF</a>, <a href="/${C.COLLECTION_DIR}/word-diff">Word</a>, <a href="/${C.COLLECTION_DIR}/contract-diff">contracts</a> and <a href="/${C.COLLECTION_DIR}/resume-diff">résumés</a> — with text extracted from the file in your browser.</li>
     </ul>
 
@@ -223,7 +265,7 @@ export const diffcheckerAlternative = {
       <li>You want the useful options — syntax highlighting, unified view, character detail — without a monthly counter.</li>
       <li>The content is sensitive and you'd rather it never reach a server.</li>
       <li>You want to send someone a comparison: <a href="/diff/online-diff-checker">the share link encodes both sides in the URL</a>, no account on either end.</li>
-      <li>You're diffing a specific format and want the gotchas spelled out — <a href="/diff/python-diff">why ignoring whitespace breaks Python diffs</a>, <a href="/diff/json-diff">how JSON key order trips up comparisons</a>, <a href="/diff/csv-diff">why re-sorted CSV rows all look changed</a>.</li>
+      <li>You're diffing a specific format and want the gotchas spelled out — <a href="/diff/code-diff">why ignoring whitespace breaks Python diffs</a>, <a href="/diff/json-diff">how JSON key order trips up comparisons</a>, <a href="/diff/csv-diff">why re-sorted CSV rows all look changed</a>.</li>
     </ul>
 
     <h2>Both are free to try</h2>

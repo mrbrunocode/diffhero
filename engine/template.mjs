@@ -253,6 +253,42 @@ export function renderDocument(o) {
         ],
   };
 
+  /*
+   * Site-level entity schema, homepage only.
+   *
+   * WebApplication (above) describes the *tool*; it does not tell a search or
+   * answer engine who publishes the site. Without an Organization node there is
+   * no entity to attach a brand to, which matters more for AI answer engines
+   * than for classic blue links — they reason over entities, and an unattributed
+   * domain is a weak citation candidate. Emitted only on "/" because
+   * site-level identity belongs on one canonical URL, not repeated per page.
+   *
+   * Added 2026-07-29 after a pre-deploy sweep found the homepage carried
+   * WebApplication + BreadcrumbList but no Organization, WebSite or FAQPage.
+   */
+  const siteEntity = !isHome ? "" : [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": `${C.SITE_URL}/#organization`,
+      name: C.NAME,
+      url: `${C.SITE_URL}/`,
+      logo: ogImage,
+      description: C.DESCRIPTION,
+      founder: { "@type": "Person", name: C.AUTHOR_NAME, url: C.AUTHOR_URL },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${C.SITE_URL}/#website`,
+      name: C.NAME,
+      url: `${C.SITE_URL}/`,
+      description: C.DESCRIPTION,
+      publisher: { "@id": `${C.SITE_URL}/#organization` },
+      inLanguage: "en",
+    },
+  ].map((n) => `<script type="application/ld+json">${JSON.stringify(n)}</script>`).join("\n");
+
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -279,6 +315,7 @@ ${C.BING_VERIFY ? `<meta name="msvalidate.01" content="${C.BING_VERIFY}">\n` : "
 ${analytics()}
 <script type="application/ld+json">${JSON.stringify(webApp)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>
+${siteEntity}
 ${faqSchema(faq)}
 ${adsenseLoader()}
 ${growScript()}

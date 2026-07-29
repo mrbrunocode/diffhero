@@ -12,3 +12,45 @@
 /de/*   /   301
 /es     /   301
 /de     /   301
+
+# ── Page consolidation, 2026-07-29 ────────────────────────────────────────
+# Search Console: 51 of 55 URLs stuck in "Discovered – currently not indexed",
+# and zero Google organic sessions in the 28 days to 28 Jul. 48 of the 51
+# collection pages were `format: "text"` — one tool behind dozens of prose
+# wrappers — which is precisely what makes Google decline to spend crawl
+# budget. 22 pages were folded into two survivors, each redirect pointing at
+# the page that genuinely absorbed the content.
+#
+# Not a thin-content cull: these pages measured 93–95% unique prose. They were
+# merged because the intent was one intent, and their specifics live on in the
+# target pages' "by language" / "by format" sections.
+
+# 16 per-language pages → code-diff. Their own descriptions said
+# "language-agnostic"; the tool never had per-language behaviour to lose.
+/diff/python-diff      /diff/code-diff 301
+/diff/javascript-diff  /diff/code-diff 301
+/diff/typescript-diff  /diff/code-diff 301
+/diff/go-diff          /diff/code-diff 301
+/diff/java-diff        /diff/code-diff 301
+/diff/php-diff         /diff/code-diff 301
+/diff/csharp-diff      /diff/code-diff 301
+/diff/rust-diff        /diff/code-diff 301
+/diff/ruby-diff        /diff/code-diff 301
+/diff/kotlin-diff      /diff/code-diff 301
+/diff/swift-diff       /diff/code-diff 301
+/diff/zig-diff         /diff/code-diff 301
+/diff/elixir-diff      /diff/code-diff 301
+/diff/gleam-diff       /diff/code-diff 301
+/diff/solidity-diff    /diff/code-diff 301
+/diff/julia-diff       /diff/code-diff 301
+
+# 6 config formats → config-diff, a new page carrying all six formats'
+# specifics. env-diff and package-json-diff deliberately survive: the first is
+# a distinct secrets-comparison intent, the second is the only other `format:
+# "json"` page besides json-diff.
+/diff/dockerfile-diff     /diff/config-diff 301
+/diff/docker-compose-diff /diff/config-diff 301
+/diff/nginx-config-diff   /diff/config-diff 301
+/diff/terraform-diff      /diff/config-diff 301
+/diff/protobuf-diff       /diff/config-diff 301
+/diff/ini-diff            /diff/config-diff 301

@@ -25,9 +25,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/code-diff","description":"Compare two versions of a code snippet and see inserted, deleted and modified lines — with changed tokens highlighted. No signup, runs client-side, any language.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/code-diff","description":"Compare two versions of a code snippet and see inserted, deleted and modified lines — with changed tokens highlighted. No signup, runs client-side, any language.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-29"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Code Diff","item":"https://diffhero.app/diff/code-diff"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work for my programming language?","acceptedAnswer":{"@type":"Answer","text":"Yes. Diffhero compares lines and words of text, so it is completely language-agnostic — Python, JavaScript, Go, Rust, SQL, anything. There is nothing to configure per language."}},{"@type":"Question","name":"Is it safe to paste proprietary code?","acceptedAnswer":{"@type":"Answer","text":"Your code is never transmitted. All diffing happens locally in your browser, so pasting internal or client code carries no upload risk — check your dev tools' Network tab to confirm nothing is sent."}},{"@type":"Question","name":"Can it ignore reformatting noise?","acceptedAnswer":{"@type":"Answer","text":"Turn on \"Ignore whitespace\" so re-indentation and trailing spaces don't drown out the real changes you care about."}}]}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work for my programming language?","acceptedAnswer":{"@type":"Answer","text":"Yes. Diffhero compares lines and words of text, so it is completely language-agnostic — Python, JavaScript, Go, Rust, SQL, anything. There is nothing to configure per language."}},{"@type":"Question","name":"Is it safe to paste proprietary code?","acceptedAnswer":{"@type":"Answer","text":"Your code is never transmitted. All diffing happens locally in your browser, so pasting internal or client code carries no upload risk — check your dev tools' Network tab to confirm nothing is sent."}},{"@type":"Question","name":"Can it ignore reformatting noise?","acceptedAnswer":{"@type":"Answer","text":"Turn on \"Ignore whitespace\" so re-indentation and trailing spaces don't drown out the real changes you care about."}},{"@type":"Question","name":"Is Python's indentation handled properly?","acceptedAnswer":{"@type":"Answer","text":"Yes — the line-by-line view lines up directly with the logic that changed, which is what you want for indentation-sensitive languages like Python and YAML."}},{"@type":"Question","name":"Can I diff a schema or contract where field order matters?","acceptedAnswer":{"@type":"Answer","text":"Yes, and for those a plain line-level diff is the safer choice precisely because it hides nothing. A renumbered Protobuf field tag or a reordered Solidity storage variable can silently break wire compatibility or change gas cost — you want to see the literal lines, not a semantically \"tidied\" view."}}]}</script>
 
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
@@ -59,7 +60,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <div class="shell shell--app">
 <nav class="rail" aria-label="All diff tools">
   <div class="rail-in">
-    <p class="rail-title"><a href="/">51 diff tools</a></p>
+    <p class="rail-title"><a href="/">30 diff tools</a></p>
       <section class="rail-group">
         <p class="rail-head" id="rail-general">General</p>
         <ul class="rail-list is-here" aria-labelledby="rail-general">
@@ -87,7 +88,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
           <li><a href="/diff/xml-diff">XML Diff</a></li>
           <li><a href="/diff/yaml-diff">YAML Diff</a></li>
           <li><a href="/diff/sql-diff">SQL Diff</a></li>
-          <li><a href="/diff/protobuf-diff">Protobuf Diff</a></li>
         </ul>
       </section>
       <section class="rail-group">
@@ -99,36 +99,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
         </ul>
       </section>
       <section class="rail-group">
-        <p class="rail-head" id="rail-languages">Languages</p>
-        <ul class="rail-list" aria-labelledby="rail-languages">
-          <li><a href="/diff/python-diff">Python Diff</a></li>
-          <li><a href="/diff/javascript-diff">JavaScript Diff</a></li>
-          <li><a href="/diff/typescript-diff">TypeScript Diff</a></li>
-          <li><a href="/diff/go-diff">Go Diff</a></li>
-          <li><a href="/diff/java-diff">Java Diff</a></li>
-          <li><a href="/diff/php-diff">PHP Diff</a></li>
-          <li><a href="/diff/csharp-diff">C# Diff</a></li>
-          <li><a href="/diff/rust-diff">Rust Diff</a></li>
-          <li><a href="/diff/ruby-diff">Ruby Diff</a></li>
-          <li><a href="/diff/kotlin-diff">Kotlin Diff</a></li>
-          <li><a href="/diff/swift-diff">Swift Diff</a></li>
-          <li><a href="/diff/zig-diff">Zig Diff</a></li>
-          <li><a href="/diff/elixir-diff">Elixir Diff</a></li>
-          <li><a href="/diff/gleam-diff">Gleam Diff</a></li>
-          <li><a href="/diff/solidity-diff">Solidity Diff</a></li>
-          <li><a href="/diff/julia-diff">Julia Diff</a></li>
-        </ul>
-      </section>
-      <section class="rail-group">
         <p class="rail-head" id="rail-config-devops">Config &amp; DevOps</p>
         <ul class="rail-list" aria-labelledby="rail-config-devops">
-          <li><a href="/diff/dockerfile-diff">Dockerfile Diff</a></li>
-          <li><a href="/diff/docker-compose-diff">docker-compose Diff</a></li>
+          <li><a href="/diff/config-diff">Config Diff</a></li>
           <li><a href="/diff/env-diff">ENV Diff</a></li>
           <li><a href="/diff/package-json-diff">package.json Diff</a></li>
-          <li><a href="/diff/terraform-diff">Terraform Diff</a></li>
-          <li><a href="/diff/nginx-config-diff">Nginx Config Diff</a></li>
-          <li><a href="/diff/ini-diff">INI Diff</a></li>
           <li><a href="/diff/log-diff">Log Diff</a></li>
         </ul>
       </section>
@@ -244,6 +219,27 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li>Use <b>Ignore whitespace</b> when a reformat or re-indent is obscuring the real logic change — but leave it <i>off</i> for whitespace-sensitive languages like Python or YAML, where indentation is meaningful.</li>
       <li><b>Show invisibles</b> reveals tabs-vs-spaces and trailing whitespace, a common source of "identical but not equal" confusion.</li>
     </ul>
+    <h3>The small tokens that matter, by language</h3>
+    <p>The diff is the same whatever you paste. What changes is which one-character edits carry real behaviour, and are therefore worth slowing down for:</p>
+    <ul>
+      <li><b>Python</b> — tabs vs spaces, trailing whitespace and blank-line changes, and above all a dedent that silently pulls a line out of a block. Never ignore whitespace here.</li>
+      <li><b>JavaScript</b> — semicolon and comma changes, quote style, and arrow-vs-<code>function</code> rewrites that change what <code>this</code> binds to.</li>
+      <li><b>TypeScript</b> — type annotations and interfaces, <code>import type</code> changes, and Prettier noise drowning the real edit. TSX diffs identically.</li>
+      <li><b>Go</b> — error-handling blocks, import grouping and ordering, and a changed receiver name or pointer-vs-value method: small tokens, real behaviour. Useful for seeing what <code>gofmt</code> actually did.</li>
+      <li><b>Java</b> — modifier and type changes, annotations, and imports. Covers Kotlin and Scala sources too.</li>
+      <li><b>Kotlin</b> — nullability (<code>?</code>), <code>val</code> vs <code>var</code>, and scope-function swaps. Android and Jetpack Compose sources are just Kotlin.</li>
+      <li><b>Swift</b> — optionals, <code>let</code> vs <code>var</code>, and access control. The same for UIKit and SwiftUI.</li>
+      <li><b>C#</b> — nullable reference annotations, <code>using</code> directives and namespaces, expression-bodied vs block members.</li>
+      <li><b>Rust</b> — ownership markers, lifetimes and generics, and <code>Result</code>/<code>Option</code> handling. Handy before <code>rustfmt</code> and CI see it.</li>
+      <li><b>Ruby</b> — symbol vs string, block style, and implicit returns.</li>
+      <li><b>PHP</b> — mixed PHP and HTML, quote style and string interpolation, array syntax.</li>
+      <li><b>Elixir</b> — pattern-match clauses, pipe order, atoms vs strings. The same for Phoenix controllers and LiveView modules.</li>
+      <li><b>Zig</b> — error unions, <code>comptime</code> blocks, optionals. No hidden control flow, so a line-level diff maps straight onto runtime behaviour.</li>
+      <li><b>Gleam</b> — custom types and constructors, <code>case</code> arms, pipe order. With no null and no exceptions, the meaningful diffs sit in signatures and match arms.</li>
+      <li><b>Julia</b> — type annotations in signatures, broadcasting dots, and 1-based indexing edits. Multiple dispatch means a function can gain or lose methods without any call site changing.</li>
+      <li><b>Solidity</b> — visibility and mutability, modifiers, arithmetic, and the compiler pragma. Before a re-audit or deploy: even a tightened <code>require</code> or a reordered storage variable can change behaviour or gas cost.</li>
+    </ul>
+    <p>For infrastructure and service configuration rather than application source, see the <a href="/diff/config-diff">config diff</a> page.</p>
     <p>Your code is never transmitted — all diffing happens locally, so pasting internal or client code carries no upload risk.</p>
   </section>
       
@@ -254,6 +250,8 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <div class="faq-item"><h3>Does it work for my programming language?</h3><dd>Yes. Diffhero compares lines and words of text, so it is completely language-agnostic — Python, JavaScript, Go, Rust, SQL, anything. There is nothing to configure per language.</dd></div>
       <div class="faq-item"><h3>Is it safe to paste proprietary code?</h3><dd>Your code is never transmitted. All diffing happens locally in your browser, so pasting internal or client code carries no upload risk — check your dev tools' Network tab to confirm nothing is sent.</dd></div>
       <div class="faq-item"><h3>Can it ignore reformatting noise?</h3><dd>Turn on &quot;Ignore whitespace&quot; so re-indentation and trailing spaces don't drown out the real changes you care about.</dd></div>
+      <div class="faq-item"><h3>Is Python's indentation handled properly?</h3><dd>Yes — the line-by-line view lines up directly with the logic that changed, which is what you want for indentation-sensitive languages like Python and YAML.</dd></div>
+      <div class="faq-item"><h3>Can I diff a schema or contract where field order matters?</h3><dd>Yes, and for those a plain line-level diff is the safer choice precisely because it hides nothing. A renumbered Protobuf field tag or a reordered Solidity storage variable can silently break wire compatibility or change gas cost — you want to see the literal lines, not a semantically &quot;tidied&quot; view.</dd></div>
     </dl>
   </section>
       
@@ -263,17 +261,17 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   <nav class="related" aria-label="More tools">
     <h2>Related tools</h2>
     <ul class="related-list">
-      <li><a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a></li>
+      <li><a href="/diff/config-diff">Config Diff</a></li>
       <li><a href="/diff/online-diff-checker">Diff Checker</a></li>
-      <li><a href="/diff/json-diff">JSON Diff</a></li>
+      <li><a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a></li>
       <li><a href="/diff/compare-two-text-files">Compare Two Files</a></li>
-      <li><a href="/diff/compare-two-lists">Compare Lists</a></li>
+      <li><a href="/diff/json-diff">JSON Diff</a></li>
       <li><a href="/diff/text-compare">Text Compare</a></li>
-      <li><a href="/diff/csv-diff">CSV Diff</a></li>
+      <li><a href="/diff/compare-two-lists">Compare Lists</a></li>
       <li><a href="/diff/image-diff">Image Diff</a></li>
-      <li><a href="/diff/csv-table-diff">CSV Table Diff</a></li>
-      <li><a href="/diff/protobuf-diff">Protobuf Diff</a></li>
-      <li><a class="related-all" href="/">All 51 tools →</a></li>
+      <li><a href="/diff/csv-diff">CSV Diff</a></li>
+      <li><a href="/diff/invisible-character-checker">Invisible Characters</a></li>
+      <li><a class="related-all" href="/">All 30 tools →</a></li>
     </ul>
   </nav>
     </div>

@@ -27,7 +27,9 @@
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/","description":"A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-18"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"}]}</script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://diffhero.app/#organization","name":"Diffhero","url":"https://diffhero.app/","logo":"https://diffhero.app/assets/og-image.png","description":"A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.","founder":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://diffhero.app/#website","name":"Diffhero","url":"https://diffhero.app/","description":"A free diff checker for text and code. See what changed between two versions, with the exact words highlighted. No signup, nothing uploaded.","publisher":{"@id":"https://diffhero.app/#organization"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Diffhero free, and is there a usage limit?","acceptedAnswer":{"@type":"Answer","text":"It is free with no usage limit, no account and no paid tier. There is nothing metered — syntax highlighting, character-level diffing, 3-way merge and image comparison are all available on every visit."}},{"@type":"Question","name":"Is my text or code uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The entire comparison runs in your browser using JavaScript, so nothing you paste is transmitted anywhere. You can confirm this yourself by opening your browser's dev tools and watching the Network tab while you diff."}},{"@type":"Question","name":"What can Diffhero compare?","acceptedAnswer":{"@type":"Answer","text":"Plain text and prose, source code in any language, JSON, CSV and tabular data, YAML and XML, config files, PDFs and Word documents (the text is extracted locally), and images pixel-by-pixel."}},{"@type":"Question","name":"How does it decide what changed?","acceptedAnswer":{"@type":"Answer","text":"It aligns the two inputs with a longest-common-subsequence match over lines, then runs a second word-level pass inside each changed line. That is why you see the precise words that differ rather than just \"this whole line is different\"."}},{"@type":"Question","name":"Can I compare two files rather than pasting text?","acceptedAnswer":{"@type":"Answer","text":"Yes — drag a file onto either pane. The file is read locally in your browser and never uploaded, which means you can compare files you would not be allowed to upload to a website at all."}},{"@type":"Question","name":"How is this different from Diffchecker?","acceptedAnswer":{"@type":"Answer","text":"The main practical difference is metering: Diffchecker's free tier limits syntax highlighting to a handful of uses per month and reserves several formats for paid tiers. Diffhero has no tiers, so nothing is held back."}}]}</script>
 
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
@@ -59,7 +61,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <div class="shell shell--app">
 <nav class="rail" aria-label="All diff tools">
   <div class="rail-in">
-    <p class="rail-title"><a href="/">51 diff tools</a></p>
+    <p class="rail-title"><a href="/">30 diff tools</a></p>
       <section class="rail-group">
         <p class="rail-head" id="rail-general">General</p>
         <ul class="rail-list is-here" aria-labelledby="rail-general">
@@ -87,7 +89,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
           <li><a href="/diff/xml-diff">XML Diff</a></li>
           <li><a href="/diff/yaml-diff">YAML Diff</a></li>
           <li><a href="/diff/sql-diff">SQL Diff</a></li>
-          <li><a href="/diff/protobuf-diff">Protobuf Diff</a></li>
         </ul>
       </section>
       <section class="rail-group">
@@ -99,36 +100,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
         </ul>
       </section>
       <section class="rail-group">
-        <p class="rail-head" id="rail-languages">Languages</p>
-        <ul class="rail-list is-here" aria-labelledby="rail-languages">
-          <li><a href="/diff/python-diff">Python Diff</a></li>
-          <li><a href="/diff/javascript-diff">JavaScript Diff</a></li>
-          <li><a href="/diff/typescript-diff">TypeScript Diff</a></li>
-          <li><a href="/diff/go-diff">Go Diff</a></li>
-          <li><a href="/diff/java-diff">Java Diff</a></li>
-          <li><a href="/diff/php-diff">PHP Diff</a></li>
-          <li><a href="/diff/csharp-diff">C# Diff</a></li>
-          <li><a href="/diff/rust-diff">Rust Diff</a></li>
-          <li><a href="/diff/ruby-diff">Ruby Diff</a></li>
-          <li><a href="/diff/kotlin-diff">Kotlin Diff</a></li>
-          <li><a href="/diff/swift-diff">Swift Diff</a></li>
-          <li><a href="/diff/zig-diff">Zig Diff</a></li>
-          <li><a href="/diff/elixir-diff">Elixir Diff</a></li>
-          <li><a href="/diff/gleam-diff">Gleam Diff</a></li>
-          <li><a href="/diff/solidity-diff">Solidity Diff</a></li>
-          <li><a href="/diff/julia-diff">Julia Diff</a></li>
-        </ul>
-      </section>
-      <section class="rail-group">
         <p class="rail-head" id="rail-config-devops">Config &amp; DevOps</p>
         <ul class="rail-list is-here" aria-labelledby="rail-config-devops">
-          <li><a href="/diff/dockerfile-diff">Dockerfile Diff</a></li>
-          <li><a href="/diff/docker-compose-diff">docker-compose Diff</a></li>
+          <li><a href="/diff/config-diff">Config Diff</a></li>
           <li><a href="/diff/env-diff">ENV Diff</a></li>
           <li><a href="/diff/package-json-diff">package.json Diff</a></li>
-          <li><a href="/diff/terraform-diff">Terraform Diff</a></li>
-          <li><a href="/diff/nginx-config-diff">Nginx Config Diff</a></li>
-          <li><a href="/diff/ini-diff">INI Diff</a></li>
           <li><a href="/diff/log-diff">Log Diff</a></li>
         </ul>
       </section>
@@ -258,7 +234,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <ul>
       <li><strong>Code</strong> in any language, with syntax highlighting and whitespace handling that respects indentation-sensitive languages like Python and YAML.</li>
       <li><strong>Structured data</strong> — <a href="/diff/json-diff">JSON</a>, <a href="/diff/csv-diff">CSV</a>, <a href="/diff/xml-diff">XML</a>, <a href="/diff/yaml-diff">YAML</a> — where key order and formatting can hide the real change.</li>
-      <li><strong>Config and DevOps</strong> files — <a href="/diff/dockerfile-diff">Dockerfiles</a>, <a href="/diff/env-diff">.env</a>, <a href="/diff/terraform-diff">Terraform</a>, <a href="/diff/nginx-config-diff">nginx</a> — where a one-line change has outsized effects.</li>
+      <li><strong>Config and DevOps</strong> files — <a href="/diff/config-diff">Dockerfiles, Terraform and nginx</a>, <a href="/diff/env-diff">.env</a> — where a one-line change has outsized effects.</li>
       <li><strong>Documents</strong> — <a href="/diff/pdf-diff">PDF</a>, <a href="/diff/word-diff">Word</a>, <a href="/diff/contract-diff">contracts</a> and <a href="/diff/resume-diff">résumés</a> — with text extracted from the file in your browser.</li>
     </ul>
 
@@ -280,6 +256,18 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
   </div>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to compare two files with Diffhero","step":[{"@type":"HowToStep","position":1,"text":"Paste or type the original version into the left box (or drag a file onto it)."},{"@type":"HowToStep","position":2,"text":"Paste the changed version into the right box."},{"@type":"HowToStep","position":3,"text":"See the result instantly: additions in green, deletions in red, and the exact changed words highlighted inline."},{"@type":"HowToStep","position":4,"text":"Switch between Split and Unified view, jump between changes with the arrows, or download a .diff."}]}</script>
+  
+  <section class="faq">
+    <h2>Common questions</h2>
+    <dl class="faq-grid">
+      <div class="faq-item"><h3>Is Diffhero free, and is there a usage limit?</h3><dd>It is free with no usage limit, no account and no paid tier. There is nothing metered — syntax highlighting, character-level diffing, 3-way merge and image comparison are all available on every visit.</dd></div>
+      <div class="faq-item"><h3>Is my text or code uploaded to a server?</h3><dd>No. The entire comparison runs in your browser using JavaScript, so nothing you paste is transmitted anywhere. You can confirm this yourself by opening your browser's dev tools and watching the Network tab while you diff.</dd></div>
+      <div class="faq-item"><h3>What can Diffhero compare?</h3><dd>Plain text and prose, source code in any language, JSON, CSV and tabular data, YAML and XML, config files, PDFs and Word documents (the text is extracted locally), and images pixel-by-pixel.</dd></div>
+      <div class="faq-item"><h3>How does it decide what changed?</h3><dd>It aligns the two inputs with a longest-common-subsequence match over lines, then runs a second word-level pass inside each changed line. That is why you see the precise words that differ rather than just &quot;this whole line is different&quot;.</dd></div>
+      <div class="faq-item"><h3>Can I compare two files rather than pasting text?</h3><dd>Yes — drag a file onto either pane. The file is read locally in your browser and never uploaded, which means you can compare files you would not be allowed to upload to a website at all.</dd></div>
+      <div class="faq-item"><h3>How is this different from Diffchecker?</h3><dd>The main practical difference is metering: Diffchecker's free tier limits syntax highlighting to a handful of uses per month and reserves several formats for paid tiers. Diffhero has no tiers, so nothing is held back.</dd></div>
+    </dl>
+  </section>
 </main>
 
 </div>

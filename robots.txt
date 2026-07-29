@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
+# Search and citation crawlers — these send traffic or get cited.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://diffhero.app/sitemap.xml

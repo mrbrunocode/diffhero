@@ -27,6 +27,7 @@
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/csv-diff","description":"Spot added, removed and changed rows between two CSV files, with the changed cells highlighted. Line-based comparison, entirely in your browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"CSV Diff","item":"https://diffhero.app/diff/csv-diff"}]}</script>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it compare row by row?","acceptedAnswer":{"@type":"Answer","text":"Yes — each line (row) is treated as a unit, so an inserted or deleted row shifts cleanly and only the genuinely different rows are highlighted, with the changed cell marked inline."}},{"@type":"Question","name":"Can it handle large exports?","acceptedAnswer":{"@type":"Answer","text":"It comfortably handles thousands of rows in-browser. Extremely large files (hundreds of thousands of rows) may pause briefly while diffing, since the whole comparison runs on your device."}},{"@type":"Question","name":"Will reordered rows show as changes?","acceptedAnswer":{"@type":"Answer","text":"Yes. A CSV diff is order-sensitive, so if rows are sorted differently they'll appear changed. Sort both files the same way first if you only care about added/removed records."}}]}</script>
 
 <script data-grow-initializer="">
@@ -59,7 +60,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <div class="shell shell--app">
 <nav class="rail" aria-label="All diff tools">
   <div class="rail-in">
-    <p class="rail-title"><a href="/">51 diff tools</a></p>
+    <p class="rail-title"><a href="/">30 diff tools</a></p>
       <section class="rail-group">
         <p class="rail-head" id="rail-general">General</p>
         <ul class="rail-list" aria-labelledby="rail-general">
@@ -87,7 +88,6 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
           <li><a href="/diff/xml-diff">XML Diff</a></li>
           <li><a href="/diff/yaml-diff">YAML Diff</a></li>
           <li><a href="/diff/sql-diff">SQL Diff</a></li>
-          <li><a href="/diff/protobuf-diff">Protobuf Diff</a></li>
         </ul>
       </section>
       <section class="rail-group">
@@ -99,36 +99,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
         </ul>
       </section>
       <section class="rail-group">
-        <p class="rail-head" id="rail-languages">Languages</p>
-        <ul class="rail-list" aria-labelledby="rail-languages">
-          <li><a href="/diff/python-diff">Python Diff</a></li>
-          <li><a href="/diff/javascript-diff">JavaScript Diff</a></li>
-          <li><a href="/diff/typescript-diff">TypeScript Diff</a></li>
-          <li><a href="/diff/go-diff">Go Diff</a></li>
-          <li><a href="/diff/java-diff">Java Diff</a></li>
-          <li><a href="/diff/php-diff">PHP Diff</a></li>
-          <li><a href="/diff/csharp-diff">C# Diff</a></li>
-          <li><a href="/diff/rust-diff">Rust Diff</a></li>
-          <li><a href="/diff/ruby-diff">Ruby Diff</a></li>
-          <li><a href="/diff/kotlin-diff">Kotlin Diff</a></li>
-          <li><a href="/diff/swift-diff">Swift Diff</a></li>
-          <li><a href="/diff/zig-diff">Zig Diff</a></li>
-          <li><a href="/diff/elixir-diff">Elixir Diff</a></li>
-          <li><a href="/diff/gleam-diff">Gleam Diff</a></li>
-          <li><a href="/diff/solidity-diff">Solidity Diff</a></li>
-          <li><a href="/diff/julia-diff">Julia Diff</a></li>
-        </ul>
-      </section>
-      <section class="rail-group">
         <p class="rail-head" id="rail-config-devops">Config &amp; DevOps</p>
         <ul class="rail-list" aria-labelledby="rail-config-devops">
-          <li><a href="/diff/dockerfile-diff">Dockerfile Diff</a></li>
-          <li><a href="/diff/docker-compose-diff">docker-compose Diff</a></li>
+          <li><a href="/diff/config-diff">Config Diff</a></li>
           <li><a href="/diff/env-diff">ENV Diff</a></li>
           <li><a href="/diff/package-json-diff">package.json Diff</a></li>
-          <li><a href="/diff/terraform-diff">Terraform Diff</a></li>
-          <li><a href="/diff/nginx-config-diff">Nginx Config Diff</a></li>
-          <li><a href="/diff/ini-diff">INI Diff</a></li>
           <li><a href="/diff/log-diff">Log Diff</a></li>
         </ul>
       </section>
@@ -270,10 +245,10 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       <li><a href="/diff/yaml-diff">YAML Diff</a></li>
       <li><a href="/diff/merge-conflict-resolver">Merge Conflict Resolver</a></li>
       <li><a href="/diff/sql-diff">SQL Diff</a></li>
-      <li><a href="/diff/code-diff">Code Diff</a></li>
+      <li><a href="/diff/config-diff">Config Diff</a></li>
       <li><a href="/diff/markdown-diff">Markdown Diff</a></li>
-      <li><a href="/diff/online-diff-checker">Diff Checker</a></li>
-      <li><a class="related-all" href="/">All 51 tools →</a></li>
+      <li><a href="/diff/code-diff">Code Diff</a></li>
+      <li><a class="related-all" href="/">All 30 tools →</a></li>
     </ul>
   </nav>
     </div>
