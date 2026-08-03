@@ -685,7 +685,7 @@ footer {
 .feature-row p { color: var(--text-secondary); font-size: var(--text-sm); }
 
 .howto { margin-top: var(--space-12); }
-.howto-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4); counter-reset: step; }
+.howto-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4); counter-reset: step; list-style: none; padding: 0; }
 .howto-step {
   counter-increment: step; position: relative; padding: var(--space-5) var(--space-5) var(--space-5) var(--space-12);
   background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: var(--text-secondary);

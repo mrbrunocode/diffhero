@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css?v=f12ce522">
+<link rel="stylesheet" href="../assets/style.css?v=d57a6de8">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use Image Diff","step":[{"@type":"HowToStep","position":1,"text":"Drop the original file onto Original image and the new one onto Changed image."},{"@type":"HowToStep","position":2,"text":"Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious."},{"@type":"HowToStep","position":3,"text":"Use Download diff image to save the highlighted comparison, for a bug report or a design review."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use Image Diff","step":[{"@type":"HowToStep","position":1,"text":"Drop the original file onto Original image and the new one onto Changed image — or click either box to pick a file."},{"@type":"HowToStep","position":2,"text":"Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a recoloured icon is obvious."},{"@type":"HowToStep","position":3,"text":"Adjust Sensitivity if compression noise is lighting up pixels you don't care about — raise it to ignore small differences, lower it to catch subtle ones."},{"@type":"HowToStep","position":4,"text":"Use Download diff image to save the highlighted comparison, for a bug report or a design review."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -194,10 +194,11 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
       
   <section class="howto">
     <h2>How to use Image Diff</h2>
-    <ol>
-      <li>Drop the original file onto Original image and the new one onto Changed image.</li>
-      <li>Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious.</li>
-      <li>Use Download diff image to save the highlighted comparison, for a bug report or a design review.</li>
+    <ol class="howto-grid">
+      <li class="howto-step"><p>Drop the original file onto Original image and the new one onto Changed image — or click either box to pick a file.</p></li>
+      <li class="howto-step"><p>Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a recoloured icon is obvious.</p></li>
+      <li class="howto-step"><p>Adjust Sensitivity if compression noise is lighting up pixels you don't care about — raise it to ignore small differences, lower it to catch subtle ones.</p></li>
+      <li class="howto-step"><p>Use Download diff image to save the highlighted comparison, for a bug report or a design review.</p></li>
     </ol>
   </section>
       

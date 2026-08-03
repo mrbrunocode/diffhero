@@ -183,13 +183,19 @@ function relatedLinks(currentSlug) {
 
 // Optional "How to use" block: visible ordered steps + HowTo JSON-LD, both from
 // the same `howto` string array so structured data can never drift from screen.
+// The .howto-grid / .howto-step markup below is what assets/style.css has
+// always been written against (numbered chips, two-up on desktop). The emitter
+// previously produced a bare <ol><li>, so that CSS was dead and the steps
+// rendered unstyled — it only ever had one user, so nobody saw it. Kept as a
+// real <ol> so the sequence stays meaningful without CSS and to screen readers;
+// the stylesheet suppresses the native markers in favour of its own counter.
 function howToHtml(steps, name) {
   if (!steps || !steps.length) return "";
   return `
   <section class="howto">
     <h2>How to use ${esc(name)}</h2>
-    <ol>
-      ${steps.map((s) => `<li>${esc(s)}</li>`).join("\n      ")}
+    <ol class="howto-grid">
+      ${steps.map((s) => `<li class="howto-step"><p>${esc(s)}</p></li>`).join("\n      ")}
     </ol>
   </section>`;
 }

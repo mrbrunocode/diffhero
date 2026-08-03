@@ -488,8 +488,9 @@ export const PAGES = [
       { q: "What image formats are supported?", a: "Anything your browser can decode natively — PNG, JPEG, WebP, GIF (first frame) and SVG all work, since the comparison operates on decoded pixel data, not the file format itself." },
     ],
     howto: [
-      "Drop the original file onto Original image and the new one onto Changed image.",
-      "Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious.",
+      "Drop the original file onto Original image and the new one onto Changed image — or click either box to pick a file.",
+      "Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a recoloured icon is obvious.",
+      "Adjust Sensitivity if compression noise is lighting up pixels you don't care about — raise it to ignore small differences, lower it to catch subtle ones.",
       "Use Download diff image to save the highlighted comparison, for a bug report or a design review.",
     ],
   },
