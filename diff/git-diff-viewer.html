@@ -25,7 +25,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/git-diff-viewer","description":"Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/git-diff-viewer","description":"Paste raw `git diff` / unified-diff output and see it rendered as a clean side-by-side or unified view, with word-level highlighting. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-08-03"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Git Diff Viewer","item":"https://diffhero.app/diff/git-diff-viewer"}]}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as a \"unified diff\"?","acceptedAnswer":{"@type":"Answer","text":"The format `git diff`, `diff -u`, and GitHub/GitLab patch downloads all produce: a `@@ ... @@` hunk header, context lines with a leading space, removed lines starting with `-`, and added lines starting with `+`. That's what gets parsed here."}},{"@type":"Question","name":"Does it handle a diff covering multiple files?","acceptedAnswer":{"@type":"Answer","text":"It reconstructs all hunks it finds, but multiple files get concatenated into one Original/Changed pair rather than kept separate — for a multi-file diff, it's cleanest to paste one file's section at a time."}},{"@type":"Question","name":"What if I don't have a real diff, just two files?","acceptedAnswer":{"@type":"Answer","text":"You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output."}},{"@type":"Question","name":"Is the pasted diff uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No — parsing and rendering both happen entirely in your browser."}}]}</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use Git Diff Viewer","step":[{"@type":"HowToStep","position":1,"text":"Paste the output of `git diff`, a GitHub or GitLab patch, or any unified-diff text into the box."},{"@type":"HowToStep","position":2,"text":"Click \"Parse into Original / Changed\" to reconstruct both sides of the patch from the diff text."},{"@type":"HowToStep","position":3,"text":"Read the rebuilt comparison in Split or Unified view, with word-level highlighting inside each changed line."},{"@type":"HowToStep","position":4,"text":"Use the Original / Changed / Both toggle to read either reconstructed side on its own."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -228,6 +228,15 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>You can also paste two file versions directly and let the tool generate the diff for you. Everything is rendered locally — the patch, and any code in it, never leaves your browser.</p>
   </section>
       
+  <section class="howto">
+    <h2>How to use Git Diff Viewer</h2>
+    <ol>
+      <li>Paste the output of `git diff`, a GitHub or GitLab patch, or any unified-diff text into the box.</li>
+      <li>Click &quot;Parse into Original / Changed&quot; to reconstruct both sides of the patch from the diff text.</li>
+      <li>Read the rebuilt comparison in Split or Unified view, with word-level highlighting inside each changed line.</li>
+      <li>Use the Original / Changed / Both toggle to read either reconstructed side on its own.</li>
+    </ol>
+  </section>
       
   <section class="faq">
     <h2>Common questions</h2>

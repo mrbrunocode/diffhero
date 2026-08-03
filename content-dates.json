@@ -48,8 +48,8 @@
     "date": "2026-07-24"
   },
   "diff/csv-table-diff": {
-    "hash": "a883826e506c1d10",
-    "date": "2026-07-24"
+    "hash": "9db2728ea4abf388",
+    "date": "2026-08-03"
   },
   "diff/env-diff": {
     "hash": "f5c170195adbc86d",
@@ -60,16 +60,16 @@
     "date": "2026-07-24"
   },
   "diff/git-diff-viewer": {
-    "hash": "3d32e0f0e263f7a2",
-    "date": "2026-07-24"
+    "hash": "b04c583f21848ea4",
+    "date": "2026-08-03"
   },
   "diff/html-diff": {
     "hash": "6c85c8d469ac3c82",
     "date": "2026-07-24"
   },
   "diff/image-diff": {
-    "hash": "c2531cbc5e9ac9fd",
-    "date": "2026-07-24"
+    "hash": "ade903accbc05924",
+    "date": "2026-08-03"
   },
   "diff/invisible-character-checker": {
     "hash": "feefae74d2ec9691",
@@ -88,11 +88,11 @@
     "date": "2026-07-24"
   },
   "diff/merge-conflict-resolver": {
-    "hash": "d9ab2950d1075b4c",
-    "date": "2026-07-24"
+    "hash": "89aa64bfbac29ede",
+    "date": "2026-08-03"
   },
   "diff/online-diff-checker": {
-    "hash": "2c04c9b86e8c039c",
+    "hash": "0b2e2dfbee6840ba",
     "date": "2026-08-03"
   },
   "diff/package-json-diff": {
@@ -100,8 +100,8 @@
     "date": "2026-07-24"
   },
   "diff/pdf-diff": {
-    "hash": "b71bf5cb83fbcda0",
-    "date": "2026-07-24"
+    "hash": "6f344db9fbca44f6",
+    "date": "2026-08-03"
   },
   "diff/private-diff-checker": {
     "hash": "3ab11b4df8dab6ab",

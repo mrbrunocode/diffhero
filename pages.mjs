@@ -27,6 +27,12 @@ export const PAGES = [
       { q: "How is this different from other diff checkers?", a: "Diffhero is genuinely free with no per-day limit, does word-level highlighting inside changed lines, offers both split and unified views, and never uploads your content — it all runs client-side." },
       { q: "Can I share a comparison?", a: "Yes — the \"Copy share link\" button encodes both sides into the URL, so anyone you send it to opens the same comparison. For anything sensitive, don't share the link." },
     ],
+    howto: [
+      "Paste or type the original version into the left box, and the changed version into the right.",
+      "Read the result: additions and deletions are colour-coded, and the exact changed words are highlighted inside each changed line.",
+      "Turn on \"Ignore whitespace\" or \"Ignore case\" if reformatting or capitalisation is drowning out the real edits.",
+      "Switch between Split and Unified view, and use the up and down arrows to jump between changes.",
+    ],
   },
   {
     slug: "code-diff",
@@ -91,6 +97,12 @@ export const PAGES = [
       { q: "What if both sides made the exact same edit?", a: "That's not treated as a conflict — if mine and theirs changed the same lines to the identical result, the merge takes it cleanly with no markers, same as a real merge tool would." },
       { q: "Is my code uploaded anywhere?", a: "No. The merge runs entirely in your browser — nothing from any of the three inputs is sent to a server." },
     ],
+    howto: [
+      "Paste the common ancestor of the file into Base (original) — the version both sides started from.",
+      "Paste your version into Mine, and the other version into Theirs.",
+      "Read the Merged result: non-overlapping changes from both sides are combined automatically, and genuine conflicts are marked for you to decide.",
+      "Resolve each marked conflict, then use Copy merged result to take the finished file back to your editor.",
+    ],
   },
   {
     slug: "json-diff",
@@ -152,6 +164,11 @@ export const PAGES = [
       { q: "Does it handle quoted fields with commas inside them?", a: "Yes — quoted CSV fields (e.g. \"Smith, John\") are parsed correctly as a single cell, not split on the comma inside the quotes." },
       { q: "What if the two files have different columns?", a: "The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read." },
       { q: "Is my data uploaded anywhere?", a: "No. Parsing and comparison both run entirely in your browser." },
+    ],
+    howto: [
+      "Paste the first export into Original CSV and the second into Changed CSV.",
+      "Read the comparison as an aligned table rather than raw text: added rows, removed rows and edited cells are marked in place.",
+      "Check that both exports use the same column order — a reordered header changes which cells line up.",
     ],
   },
   {
@@ -350,6 +367,12 @@ export const PAGES = [
       { q: "Is my PDF uploaded to a server?", a: "No. Text extraction runs entirely in your browser via pdf.js (fetched from a CDN the first time you drop a file, same as this page's fonts) — the PDF itself is read locally and never leaves your device." },
       { q: "What if a PDF is scanned images rather than real text?", a: "Extraction only works on PDFs with a real text layer. A scanned document with no OCR applied will extract as empty or garbled text — you'd need to run OCR first with a separate tool." },
     ],
+    howto: [
+      "Drag one PDF onto the left box and the other onto the right — the text is extracted locally in your browser, so neither file is uploaded.",
+      "Wait a moment for extraction on longer documents; the text appears in the boxes once it is done.",
+      "Read the highlighted comparison: added and removed passages are colour-coded, with changed words marked inline.",
+      "Turn on \"Ignore whitespace\" if the two PDFs wrap or space text differently, which is common between exports.",
+    ],
   },
   {
     slug: "word-diff",
@@ -412,6 +435,12 @@ export const PAGES = [
       { q: "What if I don't have a real diff, just two files?", a: "You don't need this page at all then — paste the two versions directly into the Original/Changed boxes on any regular diff page instead; this page exists specifically for when you already have diff-formatted output." },
       { q: "Is the pasted diff uploaded anywhere?", a: "No — parsing and rendering both happen entirely in your browser." },
     ],
+    howto: [
+      "Paste the output of `git diff`, a GitHub or GitLab patch, or any unified-diff text into the box.",
+      "Click \"Parse into Original / Changed\" to reconstruct both sides of the patch from the diff text.",
+      "Read the rebuilt comparison in Split or Unified view, with word-level highlighting inside each changed line.",
+      "Use the Original / Changed / Both toggle to read either reconstructed side on its own.",
+    ],
   },
   {
     slug: "subtitle-diff",
@@ -457,6 +486,11 @@ export const PAGES = [
       { q: "What if the two images are different sizes?", a: "The comparison canvas is sized to the larger of the two images; any area only one image covers counts as fully different, so a resized or cropped image will show a highlighted border or region rather than failing outright." },
       { q: "Are my images uploaded anywhere?", a: "No. Both images are decoded and compared entirely on an in-browser <canvas> element — nothing is sent to a server, and the comparison works offline once the page has loaded." },
       { q: "What image formats are supported?", a: "Anything your browser can decode natively — PNG, JPEG, WebP, GIF (first frame) and SVG all work, since the comparison operates on decoded pixel data, not the file format itself." },
+    ],
+    howto: [
+      "Drop the original file onto Original image and the new one onto Changed image.",
+      "Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious.",
+      "Use Download diff image to save the highlighted comparison, for a bug report or a design review.",
     ],
   },
 ];

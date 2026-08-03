@@ -25,7 +25,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/merge-conflict-resolver","description":"Paste a base version plus two changed versions (mine/theirs) and get an automatic 3-way merge, with real conflicts clearly marked. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/merge-conflict-resolver","description":"Paste a base version plus two changed versions (mine/theirs) and get an automatic 3-way merge, with real conflicts clearly marked. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-08-03"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Merge Conflict Resolver","item":"https://diffhero.app/diff/merge-conflict-resolver"}]}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from a 2-way diff?","acceptedAnswer":{"@type":"Answer","text":"A 2-way diff only ever compares two texts. This tool takes three — a common Base plus two edited versions — and merges them the way a real version-control merge does: changes that don't overlap combine automatically, and only lines both sides actually changed differently get flagged as conflicts."}},{"@type":"Question","name":"What do the conflict markers mean?","acceptedAnswer":{"@type":"Answer","text":"Where both sides edited the same lines differently, the merged result shows `<<<<<<< mine`, your version, `=======`, their version, then `>>>>>>> theirs` — identical to the markers Git itself uses. Edit the merged result directly to pick a side or combine them by hand."}},{"@type":"Question","name":"What if both sides made the exact same edit?","acceptedAnswer":{"@type":"Answer","text":"That's not treated as a conflict — if mine and theirs changed the same lines to the identical result, the merge takes it cleanly with no markers, same as a real merge tool would."}},{"@type":"Question","name":"Is my code uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The merge runs entirely in your browser — nothing from any of the three inputs is sent to a server."}}]}</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use Merge Conflict Resolver","step":[{"@type":"HowToStep","position":1,"text":"Paste the common ancestor of the file into Base (original) — the version both sides started from."},{"@type":"HowToStep","position":2,"text":"Paste your version into Mine, and the other version into Theirs."},{"@type":"HowToStep","position":3,"text":"Read the Merged result: non-overlapping changes from both sides are combined automatically, and genuine conflicts are marked for you to decide."},{"@type":"HowToStep","position":4,"text":"Resolve each marked conflict, then use Copy merged result to take the finished file back to your editor."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -188,6 +188,15 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>The conflicted code stays in your browser, which is the right default for work-in-progress from a private repo.</p>
   </section>
       
+  <section class="howto">
+    <h2>How to use Merge Conflict Resolver</h2>
+    <ol>
+      <li>Paste the common ancestor of the file into Base (original) — the version both sides started from.</li>
+      <li>Paste your version into Mine, and the other version into Theirs.</li>
+      <li>Read the Merged result: non-overlapping changes from both sides are combined automatically, and genuine conflicts are marked for you to decide.</li>
+      <li>Resolve each marked conflict, then use Copy merged result to take the finished file back to your editor.</li>
+    </ol>
+  </section>
       
   <section class="faq">
     <h2>Common questions</h2>

@@ -25,7 +25,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/csv-table-diff","description":"Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/csv-table-diff","description":"Compare two CSV files rendered as an actual aligned table — added and removed rows, and the exact cell that changed within an edited row. Free, browser-only.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-08-03"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"CSV Table Diff","item":"https://diffhero.app/diff/csv-table-diff"}]}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from the regular CSV Diff page?","acceptedAnswer":{"@type":"Answer","text":"The regular CSV Diff treats each row as a line of text and highlights changed words inline. This page parses the CSV into actual columns and renders a real table, so a changed cell is outlined in its own column rather than just highlighted as text in a line."}},{"@type":"Question","name":"Does it handle quoted fields with commas inside them?","acceptedAnswer":{"@type":"Answer","text":"Yes — quoted CSV fields (e.g. \"Smith, John\") are parsed correctly as a single cell, not split on the comma inside the quotes."}},{"@type":"Question","name":"What if the two files have different columns?","acceptedAnswer":{"@type":"Answer","text":"The table uses the first file's header row for column count and labels; extra or missing columns in the second file may not align cleanly. For very different schemas, the regular text-based CSV Diff may be easier to read."}},{"@type":"Question","name":"Is my data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and comparison both run entirely in your browser."}}]}</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use CSV Table Diff","step":[{"@type":"HowToStep","position":1,"text":"Paste the first export into Original CSV and the second into Changed CSV."},{"@type":"HowToStep","position":2,"text":"Read the comparison as an aligned table rather than raw text: added rows, removed rows and edited cells are marked in place."},{"@type":"HowToStep","position":3,"text":"Check that both exports use the same column order — a reordered header changes which cells line up."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -182,6 +182,14 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>Make sure both files share the same header row so columns align. For files that are meant to stay in a fixed order and where you only care about added/removed rows, the plain CSV Diff is lighter. Everything is parsed and compared locally — no upload of what may be sensitive tabular data.</p>
   </section>
       
+  <section class="howto">
+    <h2>How to use CSV Table Diff</h2>
+    <ol>
+      <li>Paste the first export into Original CSV and the second into Changed CSV.</li>
+      <li>Read the comparison as an aligned table rather than raw text: added rows, removed rows and edited cells are marked in place.</li>
+      <li>Check that both exports use the same column order — a reordered header changes which cells line up.</li>
+    </ol>
+  </section>
       
   <section class="faq">
     <h2>Common questions</h2>

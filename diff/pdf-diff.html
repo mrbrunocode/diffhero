@@ -25,7 +25,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/pdf-diff","description":"Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/pdf-diff","description":"Drop two PDF files in and see exactly what changed between them, text and word highlighted. Free, browser-only — the PDFs are never uploaded, only read locally.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-08-03"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"PDF Diff","item":"https://diffhero.app/diff/pdf-diff"}]}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it compare the visual layout, or just the text?","acceptedAnswer":{"@type":"Answer","text":"Just the text content, in reading order — page position, fonts, and images aren't compared. For a contract or report where the wording is what matters, that's usually exactly what you want; for a design proof where layout matters, a visual diff tool would serve you better."}},{"@type":"Question","name":"Is my PDF uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Text extraction runs entirely in your browser via pdf.js (fetched from a CDN the first time you drop a file, same as this page's fonts) — the PDF itself is read locally and never leaves your device."}},{"@type":"Question","name":"What if a PDF is scanned images rather than real text?","acceptedAnswer":{"@type":"Answer","text":"Extraction only works on PDFs with a real text layer. A scanned document with no OCR applied will extract as empty or garbled text — you'd need to run OCR first with a separate tool."}}]}</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use PDF Diff","step":[{"@type":"HowToStep","position":1,"text":"Drag one PDF onto the left box and the other onto the right — the text is extracted locally in your browser, so neither file is uploaded."},{"@type":"HowToStep","position":2,"text":"Wait a moment for extraction on longer documents; the text appears in the boxes once it is done."},{"@type":"HowToStep","position":3,"text":"Read the highlighted comparison: added and removed passages are colour-coded, with changed words marked inline."},{"@type":"HowToStep","position":4,"text":"Turn on \"Ignore whitespace\" if the two PDFs wrap or space text differently, which is common between exports."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -220,6 +220,15 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>The files are read locally and never uploaded, which matters for statements and contracts that carry personal or financial detail.</p>
   </section>
       
+  <section class="howto">
+    <h2>How to use PDF Diff</h2>
+    <ol>
+      <li>Drag one PDF onto the left box and the other onto the right — the text is extracted locally in your browser, so neither file is uploaded.</li>
+      <li>Wait a moment for extraction on longer documents; the text appears in the boxes once it is done.</li>
+      <li>Read the highlighted comparison: added and removed passages are colour-coded, with changed words marked inline.</li>
+      <li>Turn on &quot;Ignore whitespace&quot; if the two PDFs wrap or space text differently, which is common between exports.</li>
+    </ol>
+  </section>
       
   <section class="faq">
     <h2>Common questions</h2>

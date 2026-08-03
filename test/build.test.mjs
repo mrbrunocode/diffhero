@@ -120,3 +120,33 @@ test("retired collection slugs redirect and are not resurrected", () => {
   assert.ok(existsSync(join(ROOT, "embed", "text-compare.html")),
     "the text-compare embed widget must survive the page consolidation");
 });
+
+// ── HowTo coverage (2026-08-03) ───────────────────────────────────────────
+// engine/build.mjs has always supported a `howto` array (visible ordered steps
+// + HowTo JSON-LD from the same source). It silently fell to ZERO pages when
+// text-compare — its only user — was consolidated away, so the feature existed
+// and emitted nothing. AI assistants and rich results both consume HowTo, so
+// this asserts the capability stays actually used, not merely available.
+test("HowTo steps are present and reach both the page and its JSON-LD", () => {
+  const withHowto = PAGES.filter((p) => Array.isArray(p.howto) && p.howto.length);
+  assert.ok(withHowto.length >= 6,
+    `expected several pages to carry how-to steps, found ${withHowto.length}`);
+  for (const p of withHowto) {
+    const html = readFileSync(join(ROOT, C.COLLECTION_DIR, `${p.slug}.html`), "utf8");
+    assert.match(html, /<section class="howto">/, `${p.slug} has howto data but renders no visible steps`);
+    assert.match(html, /"@type":"HowTo"/, `${p.slug} has howto data but emits no HowTo JSON-LD`);
+    // The whole point of the shared array is that schema can't drift from screen.
+    for (const step of p.howto) {
+      const escaped = step.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      assert.ok(html.includes(escaped), `${p.slug}: step is not rendered on the page — "${step.slice(0, 50)}…"`);
+    }
+  }
+});
+
+test("robots.txt names the user-triggered AI fetchers that send referrals", () => {
+  const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
+  for (const agent of ["OAI-SearchBot", "ChatGPT-User", "Claude-User", "PerplexityBot", "Perplexity-User"]) {
+    assert.match(robots, new RegExp(`^User-agent: ${agent}$`, "m"),
+      `robots.txt no longer names ${agent} — AI referral is this site's only engaged-traffic channel`);
+  }
+});

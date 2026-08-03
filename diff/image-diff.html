@@ -25,7 +25,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q907KGWEP4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/image-diff","description":"Drop two images in and see exactly which pixels changed, highlighted over the original. Free, browser-only — nothing is ever uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-07-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Diffhero","url":"https://diffhero.app/diff/image-diff","description":"Drop two images in and see exactly which pixels changed, highlighted over the original. Free, browser-only — nothing is ever uploaded.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Bruno FK","url":"https://brunofk.dev"},"datePublished":"2026-07-18","dateModified":"2026-08-03"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Diffhero","item":"https://diffhero.app/"},{"@type":"ListItem","position":2,"name":"Image Diff","item":"https://diffhero.app/diff/image-diff"}]}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as a \"different\" pixel?","acceptedAnswer":{"@type":"Answer","text":"Each pixel's red, green, blue and alpha values are compared between the two images; if the combined difference passes a small threshold (to absorb harmless compression noise), it's marked as changed and highlighted in the result."}},{"@type":"Question","name":"What if the two images are different sizes?","acceptedAnswer":{"@type":"Answer","text":"The comparison canvas is sized to the larger of the two images; any area only one image covers counts as fully different, so a resized or cropped image will show a highlighted border or region rather than failing outright."}},{"@type":"Question","name":"Are my images uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Both images are decoded and compared entirely on an in-browser <canvas> element — nothing is sent to a server, and the comparison works offline once the page has loaded."}},{"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Anything your browser can decode natively — PNG, JPEG, WebP, GIF (first frame) and SVG all work, since the comparison operates on decoded pixel data, not the file format itself."}}]}</script>
@@ -33,7 +33,7 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
 <script data-grow-initializer="">
 !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpiZTY1ZGY2My0zODg3LTQwOTEtYjliMi0zNTgzODU3ZWIxZTY=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
 </script>
-
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to use Image Diff","step":[{"@type":"HowToStep","position":1,"text":"Drop the original file onto Original image and the new one onto Changed image."},{"@type":"HowToStep","position":2,"text":"Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious."},{"@type":"HowToStep","position":3,"text":"Use Download diff image to save the highlighted comparison, for a bug report or a design review."}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -192,6 +192,14 @@ gtag('js',new Date());gtag('config','G-Q907KGWEP4');</script>
     <p>Both images are loaded and compared entirely in your browser; they're never uploaded, so screenshots of private work stay private. For best results, compare images of the same dimensions.</p>
   </section>
       
+  <section class="howto">
+    <h2>How to use Image Diff</h2>
+    <ol>
+      <li>Drop the original file onto Original image and the new one onto Changed image.</li>
+      <li>Read the highlighted mask: every pixel that differs between the two images is marked, so a shifted element or a changed colour is obvious.</li>
+      <li>Use Download diff image to save the highlighted comparison, for a bug report or a design review.</li>
+    </ol>
+  </section>
       
   <section class="faq">
     <h2>Common questions</h2>

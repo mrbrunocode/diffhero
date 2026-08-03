@@ -443,6 +443,13 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+# The user-triggered fetcher, the sibling of ChatGPT-User above: it runs when
+# someone asks Perplexity to open a page, so it is a referral path, not a
+# training crawler. It was named on countlink.app but missing here — an
+# oversight, not a policy difference.
+User-agent: Perplexity-User
+Allow: /
+
 Sitemap: ${C.SITE_URL}/sitemap.xml
 `;
 }
