@@ -18,30 +18,6 @@ const g = (html) => `\n  <section class="guide">${html}\n  </section>`;
 // block writes its own; this helper only exists to keep the privacy point
 // consistent in wording where a page genuinely needs to make it.
 export const GUIDES = {
-  "text-compare": g(`
-    <h2>Comparing two blocks of text, line by line</h2>
-    <p>A text compare is the most general form of diff: paste an original and a changed version, and it lines them up and highlights exactly what moved, what was added, and what was removed — down to the individual words within a changed line, not just "this line is different."</p>
-    <p>It's the right tool whenever you have two versions of the same prose and need to see precisely what changed: two drafts of an email or a policy, a document someone returned with edits, a block of config someone pasted into chat, or two copies of a list you suspect have quietly drifted apart.</p>
-    <h3>Getting a clean result</h3>
-    <ul>
-      <li><b>Ignore whitespace</b> when re-wrapping or re-indentation is drowning out the real edits — it collapses spacing noise so only substantive changes show.</li>
-      <li><b>Ignore case</b> when a difference in capitalisation isn't a change you care about.</li>
-      <li>Switch between <b>split</b> (side-by-side) and <b>unified</b> (one column) depending on whether you're eyeballing structure or reading changes in reading order.</li>
-    </ul>
-    <p>Everything runs in your browser — the two texts are never uploaded, so it's safe for anything confidential.</p>`),
-
-  "compare-two-text-files": g(`
-    <h2>Comparing two files without a desktop diff tool</h2>
-    <p>Sometimes you just have two files — <code>report-v1.txt</code> and <code>report-v2.txt</code>, two exports, two copies of the same document — and you want to know what changed without installing a diff app or firing up the command line. Drop both files in (or paste their contents) and the changed lines and words are highlighted immediately.</p>
-    <p>Because it accepts <code>.txt</code>, <code>.pdf</code> and <code>.docx</code>, you can compare files that aren't plain text at all — the text is extracted in your browser and diffed, so a Word document and a PDF of the "same" letter can be lined up side by side.</p>
-    <h3>When file comparison beats a manual read</h3>
-    <ul>
-      <li>Two exports from a system that "shouldn't" differ, to catch a silent change.</li>
-      <li>A document that came back from review with no tracked changes turned on.</li>
-      <li>Confirming a "final" file really is identical to the one you signed off on.</li>
-    </ul>
-    <p>Nothing is uploaded: the files are read and compared locally, which matters when they're contracts, drafts, or anything you'd rather not send to a server.</p>`),
-
   "online-diff-checker": g(`
     <h2>What a diff checker actually does</h2>
     <p>A diff checker takes two versions of some text and computes the smallest set of insertions and deletions that turns one into the other — then shows you that as highlights instead of making you hunt for changes by eye. It's the same idea behind the <code>diff</code> command and the review view on GitHub, without any setup.</p>
@@ -51,7 +27,19 @@ export const GUIDES = {
       <li><b>Word-level</b> highlighting within a changed line pinpoints the exact token that moved, so a one-character fix doesn't light up the whole line.</li>
       <li><b>Collapse unchanged</b> hides the untouched stretches so a small change in a large file isn't buried.</li>
     </ul>
-    <p>Reach for it any time you need to answer "what changed between these two?" — code, prose, config, data, or a copied-and-pasted block someone swears they didn't touch. It's browser-only, so nothing you paste leaves your machine.</p>`),
+    <p>Reach for it any time you need to answer "what changed between these two?" — code, prose, config, data, or a copied-and-pasted block someone swears they didn't touch.</p>
+    <h3>Comparing two blocks of text</h3>
+    <p>The most general case: paste an original and a changed version and it lines them up, highlighting what moved, what was added and what was removed — down to individual words within a changed line, not just "this line is different." It's the right tool whenever you have two versions of the same prose: two drafts of an email or a policy, a document someone returned with edits, a block of config pasted into chat, or two copies of a list you suspect have quietly drifted apart.</p>
+    <h3>Comparing two files</h3>
+    <p>Sometimes you just have two files — <code>report-v1.txt</code> and <code>report-v2.txt</code>, two exports, two copies of the same document — and you want to know what changed without installing a diff app or firing up the command line. Drag one file onto each side (or paste their contents) and the changed lines and words are highlighted immediately. Because it accepts <code>.txt</code>, <code>.pdf</code> and <code>.docx</code>, you can compare files that aren't plain text at all: the text is extracted in your browser and diffed, so a Word document and a PDF of the "same" letter can be lined up side by side.</p>
+    <p>That's the move for two exports from a system that "shouldn't" differ, a document that came back from review with no tracked changes turned on, or confirming a "final" file really is identical to the one you signed off on.</p>
+    <h3>Getting a clean result</h3>
+    <ul>
+      <li><b>Ignore whitespace</b> when re-wrapping or re-indentation is drowning out the real edits — it collapses spacing noise so only substantive changes show.</li>
+      <li><b>Ignore case</b> when a difference in capitalisation isn't a change you care about.</li>
+      <li>Switch between <b>split</b> (side-by-side) and <b>unified</b> (one column) depending on whether you're eyeballing structure or reading changes in reading order.</li>
+    </ul>
+    <p>It's browser-only, so nothing you paste or drop leaves your machine — which matters when the files are contracts, drafts, or anything you'd rather not send to a server.</p>`),
 
   "code-diff": g(`
     <h2>Diffing code snippets in any language</h2>

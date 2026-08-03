@@ -14,42 +14,6 @@
 
 export const PAGES = [
   {
-    slug: "text-compare",
-    eyebrow: "Text Compare",
-    title: "Text Compare — Find Text Differences",
-    description:
-      "Paste two versions of any text and see every added, removed and changed line — with the exact words highlighted — instantly. Free, browser-only, nothing uploaded.",
-    intro:
-      "Drop your original text on the left and the changed version on the right. Diffhero lines them up and highlights exactly what was added, removed or altered — down to the individual words inside a changed line — the moment you stop typing.",
-    format: "text",
-    faq: [
-      { q: "Is my text uploaded anywhere?", a: "No. The comparison runs entirely in your browser with JavaScript, so your text never leaves your device and it works offline once the page has loaded." },
-      { q: "How does it decide what changed?", a: "It aligns the two texts with a longest-common-subsequence match over lines, then runs a second word-level pass inside each changed line so you see the precise words that differ, not just the whole line." },
-      { q: "Can I ignore spacing or capitalisation?", a: "Yes. Toggle \"Ignore whitespace\" and \"Ignore case\" to treat lines that differ only in spacing or letter case as identical." },
-    ],
-    howto: [
-      "Paste or type the original text into the left box.",
-      "Paste or type the changed version into the right box.",
-      "Read the highlighted result: green marks additions, red marks deletions, and changed words are highlighted inline.",
-      "Switch between Split and Unified view, and use the up/down arrows to jump between changes.",
-    ],
-  },
-  {
-    slug: "compare-two-text-files",
-    eyebrow: "Compare Two Files",
-    title: "Compare Two Text Files Online — Drag, Drop, Diff",
-    description:
-      "Compare two text files in your browser — drag and drop both files and see every difference highlighted. Nothing is uploaded; the files never leave your device.",
-    intro:
-      "Drag one file onto each side (or paste their contents) and Diffhero shows exactly what changed between them, line by line and word by word. Because everything runs locally, you can safely compare files you could never upload to a website.",
-    format: "text",
-    faq: [
-      { q: "How do I load a file?", a: "Drag a file straight onto either box, or click into the box and paste its contents. The file is read locally in your browser — it is never uploaded anywhere." },
-      { q: "What file types work?", a: "Any plain-text file: .txt, source code, .csv, .json, .md, config files and more. Binary files (images, PDFs, office documents) can't be compared as text." },
-      { q: "Is there a file-size limit?", a: "No hard limit, but very large files (many tens of thousands of lines) may pause briefly while diffing, since the whole comparison runs on your device." },
-    ],
-  },
-  {
     slug: "online-diff-checker",
     eyebrow: "Diff Checker",
     title: "Online Diff Checker — Compare Text & Code Free",
@@ -714,7 +678,7 @@ export function renderTool(p = {}) {
 export const GROUPS = [
   {
     name: "General",
-    slugs: ["text-compare", "compare-two-text-files", "online-diff-checker", "code-diff", "compare-two-lists", "private-diff-checker"],
+    slugs: ["online-diff-checker", "code-diff", "compare-two-lists", "private-diff-checker"],
   },
   {
     name: "Merge & patch",

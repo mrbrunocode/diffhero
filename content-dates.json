@@ -12,8 +12,8 @@
     "date": "2026-07-29"
   },
   "/embed": {
-    "hash": "1c36eaeaada6ccb9",
-    "date": "2026-07-25"
+    "hash": "d3c4492b0be9a539",
+    "date": "2026-08-03"
   },
   "/privacy": {
     "hash": "7bac74d179ba3ef2",
@@ -29,10 +29,6 @@
   },
   "diff/compare-two-lists": {
     "hash": "2dc1635b1991fd7e",
-    "date": "2026-07-24"
-  },
-  "diff/compare-two-text-files": {
-    "hash": "6c6a465d12b46ae9",
     "date": "2026-07-24"
   },
   "diff/config-diff": {
@@ -96,8 +92,8 @@
     "date": "2026-07-24"
   },
   "diff/online-diff-checker": {
-    "hash": "ba2b509495127b5c",
-    "date": "2026-07-24"
+    "hash": "2c04c9b86e8c039c",
+    "date": "2026-08-03"
   },
   "diff/package-json-diff": {
     "hash": "efc243cd593108a0",
@@ -125,10 +121,6 @@
   },
   "diff/subtitle-diff": {
     "hash": "dfbeffc641d911f5",
-    "date": "2026-07-24"
-  },
-  "diff/text-compare": {
-    "hash": "6b6e20464493ce04",
     "date": "2026-07-24"
   },
   "diff/word-diff": {

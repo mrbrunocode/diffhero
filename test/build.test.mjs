@@ -35,10 +35,16 @@ test("sitemap.xml lists every page slug exactly once", () => {
 test("generated page contains its own title and FAQ text", () => {
   // Spot-check one page rather than every one (redundant with pages-content
   // tests) to catch a template-level regression (e.g. FAQ not rendered at all).
+  // Compare against the *escaped* copy: the template HTML-escapes on the way
+  // out, so a title containing & or a quote never appears verbatim in the file.
+  // (This assertion silently depended on PAGES[0] having no such character
+  // until online-diff-checker — "Compare Text & Code Free" — became first.)
+  const esc = (s = "") =>
+    String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const p = PAGES[0];
   const html = readFileSync(join(ROOT, C.COLLECTION_DIR, `${p.slug}.html`), "utf8");
-  assert.ok(html.includes(p.title), "generated page missing its own <title>/heading text");
-  assert.ok(html.includes(p.faq[0].q), "generated page missing its first FAQ question");
+  assert.ok(html.includes(esc(p.title)), "generated page missing its own <title>/heading text");
+  assert.ok(html.includes(esc(p.faq[0].q)), "generated page missing its first FAQ question");
 });
 
 // ── Shell / layout ────────────────────────────────────────────────────────
@@ -92,4 +98,25 @@ test("no page falls back to the old centred-column skeleton", () => {
     assert.ok(!/class="hero/.test(html), `${f} still renders a .hero block`);
     assert.match(html, /<header class="topbar">/, `${f} is missing the top bar`);
   }
+});
+
+// ── Consolidation guard (2026-08-03) ──────────────────────────────────────
+// Retired collection URLs were all advertised in sitemap.xml at some point, so
+// they must 301 rather than 404 — a sitemap URL turning into a hard 404 throws
+// away whatever equity it had and lands anyone who linked it on an error page.
+// This also catches a retired slug being accidentally re-added to PAGES.
+test("retired collection slugs redirect and are not resurrected", () => {
+  const retired = ["text-compare", "compare-two-text-files"];
+  const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
+  const redirects = readFileSync(join(ROOT, "_redirects"), "utf8");
+  for (const slug of retired) {
+    assert.ok(!PAGES.some((p) => p.slug === slug), `${slug} was retired but is back in PAGES`);
+    assert.ok(!sitemap.includes(`/${C.COLLECTION_DIR}/${slug}<`), `${slug} is retired but still in sitemap.xml`);
+    assert.match(redirects, new RegExp(`^/${C.COLLECTION_DIR}/${slug}\\s+\\S+\\s+301`, "m"),
+      `${slug} needs a 301, not a hard 404`);
+  }
+  // The embed widget keeps its own slug namespace: /embed/text-compare is
+  // live on other people's pages and must not be caught by the redirect above.
+  assert.ok(existsSync(join(ROOT, "embed", "text-compare.html")),
+    "the text-compare embed widget must survive the page consolidation");
 });

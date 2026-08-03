@@ -44,6 +44,22 @@
 /diff/solidity-diff    /diff/code-diff 301
 /diff/julia-diff       /diff/code-diff 301
 
+# ── Generic-synonym consolidation, 2026-08-03 ─────────────────────────────
+# AdSense rejected diffhero.app for "Low value content" on 1 Aug, eight days
+# after the enrichment pass — so more prose per page was not the answer.
+# text-compare, compare-two-text-files and online-diff-checker were three URLs
+# for one tool: all `format: "text"`, no behavioural difference between them,
+# distinguished only by which synonym the copy leaned on. That is the doorway
+# pattern Google's quality guidance names directly.
+#
+# online-diff-checker survives (highest-intent head term, and the page the
+# articles already link to as "diff checker"); it absorbed both retired pages'
+# guide prose, so the file-drag and prose-comparison specifics are still there.
+# /embed/text-compare is untouched — live iframes on other people's sites must
+# keep working, and it's noindex anyway.
+/diff/text-compare           /diff/online-diff-checker 301
+/diff/compare-two-text-files /diff/online-diff-checker 301
+
 # 6 config formats → config-diff, a new page carrying all six formats'
 # specifics. env-diff and package-json-diff deliberately survive: the first is
 # a distinct secrets-comparison intent, the second is the only other `format:

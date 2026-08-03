@@ -291,7 +291,7 @@ export const embed = {
     <pre class="embed-code"><code>&lt;iframe src="${C.SITE_URL}/embed/text-compare" width="100%" height="460"
         style="border:1px solid #ddd;border-radius:8px"
         title="Diff checker by ${C.NAME}" loading="lazy"&gt;&lt;/iframe&gt;
-&lt;p style="font-size:13px"&gt;&lt;a href="${C.SITE_URL}/${C.COLLECTION_DIR}/text-compare"&gt;Diff checker&lt;/a&gt;
+&lt;p style="font-size:13px"&gt;&lt;a href="${C.SITE_URL}/${C.COLLECTION_DIR}/online-diff-checker"&gt;Diff checker&lt;/a&gt;
    by &lt;a href="${C.SITE_URL}"&gt;${C.NAME}&lt;/a&gt;&lt;/p&gt;</code></pre>
     <p><a href="/embed/text-compare" target="_blank" rel="noopener">Preview the widget →</a></p>
 

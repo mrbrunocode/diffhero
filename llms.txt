@@ -24,8 +24,6 @@ Diffhero is a static web app: no signup, no backend, no per-visitor cost. Everyt
 - [How to compare two documents when Track Changes wasn't on](https://diffhero.app/guides/comparing-documents-without-track-changes): Someone edited your document and never turned on Track Changes. Here's how to find exactly what changed between two versions of a contract, résumé or report.
 
 ## diff
-- [Text Compare](https://diffhero.app/diff/text-compare): Paste two versions of any text and see every added, removed and changed line — with the exact words highlighted — instantly. Free, browser-only, nothing uploaded.
-- [Compare Two Files](https://diffhero.app/diff/compare-two-text-files): Compare two text files in your browser — drag and drop both files and see every difference highlighted. Nothing is uploaded; the files never leave your device.
 - [Diff Checker](https://diffhero.app/diff/online-diff-checker): A free online diff checker: paste two versions of text or code and instantly see the differences, with word-level highlighting, split and unified views. No signup.
 - [Code Diff](https://diffhero.app/diff/code-diff): Compare two versions of a code snippet and see inserted, deleted and modified lines — with changed tokens highlighted. No signup, runs client-side, any language.
 - [Config Diff](https://diffhero.app/diff/config-diff): Compare two config files — Dockerfile, docker-compose.yml, Terraform, nginx.conf, .proto or .ini — and see exactly which directives changed. Client-side, nothing uploaded.
